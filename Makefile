@@ -3,25 +3,22 @@
 NAME = minishell
 
 CC = @cc
-CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 # -fsanitize=address
 # -fsanitize=thread
 
-SRC =	main.c	\
-		mutex_utils.c	\
-		routine.c	\
-		threads.c	\
-		time.c	\
-		utils.c	\
-		utils2.c	\
+SRC =	main.c prompt.c frees.c signals.c
+SRC_utils = error.c
+SRC_other = print_env.c
 
-lib = lib
-LIB = $(lib)/lib.a
+
+lib = libft
+LIB = $(lib)/libft.a
 
 OBJ_DIR = obj
-SRCS = $(addprefix src/, $(SRC))
-OBJS = $(patsubst src/%, $(OBJ_DIR)/%, $(SRCS:%.c=%.o))
+SRCS = $(addprefix src/, $(SRC)) $(addprefix src/Other/, $(SRC_other)) $(addprefix src/Utils/, $(SRC_utils))
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_other:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_utils:%.c=%.o))
 
 # Reset
 Color_Off='\033[0m'       # Text Reset
@@ -107,7 +104,7 @@ $(LIB):
 	@make -s -C $(lib)
 
 $(NAME): $(LIB) $(OBJS)
-	@$(CC) $(CFLAGS) $(SRCS) $(LIB) -lpthread -o $(NAME)
+	@$(CC) $(CFLAGS) $(SRCS) -lreadline $(LIB) -o $(NAME)
 	$(MSG1)
 	${HOWTO}
 
