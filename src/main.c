@@ -6,11 +6,24 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/10/27 17:33:08 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/03 17:22:05 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	parse(t_minishell *ms)
+{
+	ms->main_arr = ms_split(ms->input);
+}
+
+void	minishell(t_minishell *ms)
+{
+	parse(ms);
+	int i = 0;
+	while (ms->main_arr[i])
+		printf("main: %s\n", ms->main_arr[i++]);
+}
 
 int	main(int argc, char *argv[], char **env)
 {
@@ -26,15 +39,22 @@ int	main(int argc, char *argv[], char **env)
 	{
 		ms->prompt = ft_strdup("minishell$> ");
 		ms->input = readline(ms->prompt);
-		add_history(ms->input);
+		if (ft_strlen(ms->input) != 0)
+			add_history(ms->input);
 		signal_D(ms);
+		minishell(ms);
+		free_arr(ms->main_arr);
 		free(ms->prompt);
 		free(ms->input);
-		//printf("input: %s\n", ms->input);
 	}
 	//minishell(env);
 	return (0);
 }
+
+// add single and double quotes to parser
+// fix parser error ex: ./minishell ls|echo s < a<b
+// output: ls | echo s < a<b
+// should be: ls | echo s < a < b
 
 // Add color and symbols to the prompt
 // My idea is to use ioctl to get the rows of the terminal and when the user types past it the program puts the users cursor one line down using \x1b (https://notes.burke.libbey.me/ansi-escape-codes/)

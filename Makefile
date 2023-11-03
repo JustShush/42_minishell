@@ -10,7 +10,7 @@ CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 SRC =	main.c prompt.c frees.c signals.c
 SRC_utils = error.c
-SRC_other = print_env.c
+SRC_other = ms_split.c print_env.c
 
 
 lib = libft

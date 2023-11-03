@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/10/27 17:19:25 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/03 16:32:25 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ typedef struct s_minishell
 	char	*prompt;
 	char	*input;
 	char	**history;
+	char	**main_arr;
 }	t_minishell;
 
 
 // in frees.c
 
 void	free_ms(t_minishell *ms);
+void	free_arr(char **arr);
 // -------------------
 
 // in prompt.c
@@ -53,6 +55,9 @@ void	signal_D(t_minishell *ms);
 // -------------------
 
 // ---- Other DIR ----
+// in ms_split.c
+
+char	**ms_split(char *str);
 // in print_env.c
 
 void	print_env(char **env);
