@@ -12,14 +12,14 @@
 
 #include "../inc/minishell.h"
 
-void	parse(t_minishell *ms)
+void	parser(t_minishell *ms)
 {
 	ms->main_arr = ms_split(ms->input);
 }
 
 void	minishell(t_minishell *ms)
 {
-	parse(ms);
+	parser(ms);
 	int i = 0;
 	while (ms->main_arr[i])
 		printf("main: %s\n", ms->main_arr[i++]);

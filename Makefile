@@ -10,15 +10,16 @@ CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 
 SRC =	main.c prompt.c frees.c signals.c
 SRC_utils = error.c
-SRC_other = ms_split.c print_env.c
+SRC_other = print_env.c
+SRC_parser = ms_split.c parser_utils.c
 
 
 lib = libft
 LIB = $(lib)/libft.a
 
 OBJ_DIR = obj
-SRCS = $(addprefix src/, $(SRC)) $(addprefix src/Other/, $(SRC_other)) $(addprefix src/Utils/, $(SRC_utils))
-OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_other:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_utils:%.c=%.o))
+SRCS = $(addprefix src/, $(SRC)) $(addprefix src/Other/, $(SRC_other)) $(addprefix src/Parser/, $(SRC_parser)) $(addprefix src/Utils/, $(SRC_utils))
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_other:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_parser:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_utils:%.c=%.o))
 
 # Reset
 Color_Off='\033[0m'       # Text Reset

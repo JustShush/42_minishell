@@ -75,23 +75,17 @@ char	*split_temp(char *str, int word_len)
 
 int	get_wordl(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	if (str[i] && str[i] == '|')
-		i++;
-	else if (str[i] && str[i] == '$')
-		i++;
-	else if (str[i] && (str[i] == '<' || str[i] == '>')) {
-		i++;
-		if (str[i] && (str[i] == '<' || str[i] == '|'))
-			i++;
-		else if (str[i] && (str[i] == '>' || str[i] == '|'))
-			i++;
-	}
-	else
-		while (str[i] && str[i] != ' ' && str[i] != '\t' && str[i] != '|' && str[i] != '$')
-			i++;
+	if (str[i] && (str[i] == '\'' || str[i] == '\"'))
+		return (quotes(str, str[i], i));
+	if (str[i] && (str[i] == '>' || str[i] == '<' || str[i] == '|'))
+		return (others(str, i));
+	if (str[i] && str[i] == '$')
+		return (dolar(str, i));
+	if (str[i] && (str[i] != ' ' || str[i] != '\t'))
+		return (space_tab(str, i));
 	return (i);
 }
 

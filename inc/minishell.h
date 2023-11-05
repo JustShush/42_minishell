@@ -54,6 +54,15 @@ void	signal_init(void);
 void	signal_D(t_minishell *ms);
 // -------------------
 
+// ---- Parser DIR ----
+// in parser_utils.c
+
+int		quotes(char *str, char c, int i);
+int		space_tab(char *str, int i);
+int		dolar(char *str, int i);
+int		others(char *str, int i);
+// -------------------
+
 // ---- Other DIR ----
 // in ms_split.c
 
