@@ -6,20 +6,15 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/03 17:22:05 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/06 14:49:37 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	parser(t_minishell *ms)
-{
-	ms->main_arr = ms_split(ms->input);
-}
-
 void	minishell(t_minishell *ms)
 {
-	parser(ms);
+	ms->main_arr = ms_split(ms->input);
 	int i = 0;
 	while (ms->main_arr[i])
 		printf("main: %s\n", ms->main_arr[i++]);
