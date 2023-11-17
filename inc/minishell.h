@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/03 16:32:25 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/17 11:21:32 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,45 +37,46 @@ typedef struct s_minishell
 }	t_minishell;
 
 
-// in frees.c
+//! in frees.c
 
 void	free_ms(t_minishell *ms);
 void	free_arr(char **arr);
-// -------------------
 
-// in prompt.c
+//! in prompt.c
 
 char	*prompt(void);
-// -------------------
 
-// in signals.c
+//! in signals.c
 
 void	signal_init(void);
 void	signal_D(t_minishell *ms);
-// -------------------
 
-// ---- Parser DIR ----
-// in parser_utils.c
+//* ---- Parser DIR ----
+//! in parser_utils.c
 
 int		quotes(char *str, char c, int i);
 int		space_tab(char *str, int i);
 int		dolar(char *str, int i);
 int		others(char *str, int i);
-// -------------------
 
-// ---- Other DIR ----
-// in ms_split.c
+//* ---- Other DIR ----
+//! in ms_split.c
 
 char	**ms_split(char *str);
-// in print_env.c
+//! in print_env.c
 
 void	print_env(char **env);
-// -------------------
 
-// ---- Utils DIR ----
-// in error.c
+//* ---- Utils DIR ----
+//! in arr_size.c
 
+int	arr_size(char **arr);
+//! in error.c
+
+/**
+ * @param op type of error msg
+ * @param arg (optional) addicional msg
+ */
 void	error(int op, char *arg);
-// -------------------
 
 #endif
