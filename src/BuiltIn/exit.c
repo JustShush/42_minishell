@@ -14,5 +14,5 @@
 
 void	ft_exit()
 {
-	
+    
 }

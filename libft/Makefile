@@ -14,6 +14,7 @@ SRC = ft_atoi.c \
 	  ft_isascii.c \
 	  ft_isdigit.c \
 	  ft_isprint.c \
+	  ft_isspace.c \
 	  ft_itoa.c \
 	  ft_memchr.c \
 	  ft_memcmp.c \
@@ -71,8 +72,8 @@ MSG2 = @echo "\033[93m Cleaned ${NAME} Successfully ✔︎ \e[0m"
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@ar -rcs $(NAME) $(OBJ)
+$(NAME): $(OBJ) $(B_OBJ)
+	@ar -rcs $(NAME) $(OBJ) $(B_OBJ)
 	$(MSG1)
 
 bonus: $(B_OBJ)

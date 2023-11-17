@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:57:51 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/17 13:17:36 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/17 16:28:20 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,7 @@ char		*get_next_line(int fd);
 size_t		ft_strlen_gnl(const char *str);
 char		*ctrl_l(char *buffer);
 
+// Other
 int			ft_strcmp(char *s1, char *s2);
 
 #endif

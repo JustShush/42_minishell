@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/17 13:09:50 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/17 17:24:51 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,26 @@ void	minishell(t_minishell *ms)
 	check_cmd(ms);
 }
 
+t_list	**env_init(char **envp)
+{
+	int		i;
+	char	*buf;
+	t_list	*node;
+	t_list	**env;
+
+	i = 0;
+	env = (t_list **)malloc(sizeof(env));
+	*env = NULL;
+	while (envp[i])
+	{
+		buf = ft_strdup(envp[i]);
+		node = ft_lstnew(buf);
+		ft_lstadd_back(env, node);
+		i++;
+	}
+	return (env);
+}
+
 int	main(int argc, char *argv[], char **env)
 {
 	t_minishell *ms;
@@ -30,9 +50,10 @@ int	main(int argc, char *argv[], char **env)
 	ms = malloc(sizeof(t_minishell));
 	(void)argc;
 	(void)argv;
-	(void)env;
+	//(void)env;
 	//print_env(env);
 	signal_init();
+	ms->env = env_init(env);
 	while (1)
 	{
 		ms->prompt = ft_strdup("minishell$> ");
@@ -60,3 +81,10 @@ int	main(int argc, char *argv[], char **env)
 // ideas for the prompt:
 // \033[1;36mMinishell\033[0m \033[1;33m✗\033[0m
 // \033[1;33mMinishell\033[0m$>
+
+/**
+ ** Easy Fix!
+ * Before parsing everything create a new array that subs all vars for the actual value of the var
+ * 
+ * Create a diff arr just for the commands and flags of those commands
+*/
