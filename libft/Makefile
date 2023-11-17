@@ -49,6 +49,7 @@ SRC = ft_atoi.c \
 	  ft_printnbr.c \
 	  ft_print_ptr.c \
 	  ft_printstr.c \
+	  ft_strcmp.c \
 
 B_SRC = ft_lstnew_bonus.c \
 		ft_lstadd_front_bonus.c \

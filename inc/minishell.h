@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/17 11:21:32 by marvin           ###   ########.fr       */
+/*   Updated: 2023/11/17 13:38:18 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,16 @@ char	*prompt(void);
 void	signal_init(void);
 void	signal_D(t_minishell *ms);
 
+//* ---- BuiltIn DIR ----
+
+void	cd();
+void	echo();
+void	env();
+void	ft_exit();
+void	export();
+void	pwd(void);
+void	unset();
+
 //* ---- Parser DIR ----
 //! in parser_utils.c
 
@@ -70,7 +80,8 @@ void	print_env(char **env);
 //* ---- Utils DIR ----
 //! in arr_size.c
 
-int	arr_size(char **arr);
+int		arr_size(char **arr);
+void	check_cmd(t_minishell *ms);
 //! in error.c
 
 /**

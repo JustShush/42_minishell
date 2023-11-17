@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/17 12:51:34 by mde-avel         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:09:50 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,9 @@ void	minishell(t_minishell *ms)
 	int i = 0;
 	while (ms->main_arr[i])
 		printf("main: %s\n", ms->main_arr[i++]);
+	if (!ms->main_arr)
+		return ;
+	check_cmd(ms);
 }
 
 int	main(int argc, char *argv[], char **env)

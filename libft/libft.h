@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:57:51 by dimarque          #+#    #+#             */
-/*   Updated: 2023/08/09 11:34:03 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/17 13:17:36 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,5 +96,7 @@ int			ft_printstr(char *str);
 char		*get_next_line(int fd);
 size_t		ft_strlen_gnl(const char *str);
 char		*ctrl_l(char *buffer);
+
+int			ft_strcmp(char *s1, char *s2);
 
 #endif
