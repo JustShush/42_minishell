@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-void	unset()
+void	unset(void)
 {
 
 }

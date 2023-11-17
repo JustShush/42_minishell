@@ -12,11 +12,6 @@
 
 #include "../../inc/minishell.h"
 
-int	ft_isspace(char c)
-{
-	return ((c == ' ' || c == '\t'));
-}
-
 // 0 if not one of the options
 int	parser_op(char c)
 {

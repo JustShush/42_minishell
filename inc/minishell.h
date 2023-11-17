@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/17 17:41:31 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/17 18:11:20 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,42 +54,51 @@ typedef struct s_minishell
 	t_cmdlist	*cmdlist;
 }	t_minishell;
 
+//* ---- src DIR ----
+
+//! in main.c
+void	minishell(t_minishell *ms);
+t_list	**env_init(char **envp);
 
 //! in frees.c
 void	free_ms(t_minishell *ms);
 void	free_arr(char **arr);
 
 //! in prompt.c
-char	*prompt(void);
+//char	*prompt(void);
 
 //! in signals.c
+void	signal_C(int signum);
 void	signal_init(void);
 void	signal_D(t_minishell *ms);
 
 //* ---- BuiltIn DIR ----
 
 //! in cd.c
-char	*var_str(t_list *env, char *var);
-void	go_home(t_minishell *ms);
 void	cd(t_minishell *ms, char **path);
 
 //! in echo.c
-void	echo();
+void	echo(void);
 
 //! in env.c
-void	env();
+void	env(void);
 
 //! in exit.c
-void	ft_exit();
+void	ft_exit(void);
 
 //! in export.c
-void	ft_export();
+void	ft_export(void);
 
 //! in pwd.c
 void	pwd(void);
 
 //! in unset.c
-void	unset();
+void	unset(void);
+
+//* ---- Other DIR ----
+
+//! in print_env.c
+void	print_env(char **env);
 
 //* ---- Parser DIR ----
 
@@ -102,19 +111,15 @@ int		space_tab(char *str, int i);
 int		dolar(char *str, int i);
 int		others(char *str, int i);
 
-//* ---- Other DIR ----
-
-//! in print_env.c
-
-void	print_env(char **env);
-
 //* ---- Utils DIR ----
+
 //! in arr_size.c
-
 int		arr_size(char **arr);
-void	check_cmd(t_minishell *ms);
-//! in error.c
 
+//! in check_cmd.c
+void	check_cmd(t_minishell *ms);
+
+//! in error.c
 /**
  * @param op type of error msg
  * @param arg (optional) addicional msg

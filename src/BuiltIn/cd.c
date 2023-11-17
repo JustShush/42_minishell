@@ -65,7 +65,7 @@ void	cd(t_minishell *ms, char **path)
 		go_home(ms);
 	else if (chdir(path[1]) != 0)
 	{
-		perror("Minishell: cd");
+		perror("Minishell$> cd");
 		return ;
 	}
 
@@ -77,10 +77,11 @@ void	cd(t_minishell *ms, char **path)
 	}
 	if (execve(path, ms->main_arr, ms->env) == -1)
 	{
+		access(old_pwd, F_OK)
 		printf("Minishell$> cd: %s: No such file or directory\n", ms->main_arr[1]);
 		free(cwd);
 	} */
 }
 
 //* if there is no loc go back to home. DONE!
-// TODO: check if loc is a valid dir
+// TODO: check if path is a valid dir

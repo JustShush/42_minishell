@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-void	echo()
+void	echo(void)
 {
 	
 }

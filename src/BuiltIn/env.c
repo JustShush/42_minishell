@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-void	env()
+void	env(void)
 {
 	
 }

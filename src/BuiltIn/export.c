@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-void	ft_export()
+void	ft_export(void)
 {
 	
 }
