@@ -54,7 +54,6 @@ void	cd(t_minishell *ms, char **path)
 	char	old_pwd[PATH_MAX + 1];
 	char	*tmp;
 	char	*new_path;
-	int		
 
 	getcwd(old_pwd, sizeof(old_pwd));
 	if (path && arr_size(path) > 2)
