@@ -13,23 +13,6 @@
 
 #include "../../inc/minishell.h"
 
-// equivalent to 'env | grep var'
-char	*var_str(t_list *env, char *var)
-{
-	t_list	*tmp;
-
-	tmp = env;
-	while (tmp->content)
-	{
-		if (ft_strncmp((char *)tmp->content, var, ft_strlen(var)) == 0)
-			break ;
-		tmp = tmp->next;
-	}
-	if (!tmp)
-		return (NULL);
-	return (tmp->content);
-}
-
 void	go_home(t_minishell *ms)
 {
 	char	*home;

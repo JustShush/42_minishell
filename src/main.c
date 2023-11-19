@@ -6,16 +6,26 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/17 17:24:51 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/19 15:26:49 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+int	g_exit = 0;
+
 void	minishell(t_minishell *ms)
 {
+	int	i;
+
+	i = 0;
 	ms->main_arr = ms_split(ms->input);
-	int i = 0;
+	env_var(ms, ms->env, ms->main_arr);
+	while (ms->main_arr[i]) {
+		//if ()
+		i++;
+	}
+	i = 0;
 	while (ms->main_arr[i])
 		printf("main: %s\n", ms->main_arr[i++]);
 	if (!ms->main_arr)
@@ -84,7 +94,7 @@ int	main(int argc, char *argv[], char **env)
 
 /**
  ** Easy Fix!
- * Before parsing everything create a new array that subs all vars for the actual value of the var
+ * Before parsing everything create a new array that subs all vars for the actual value of the var (replacer)
  * 
  * Create a diff arr just for the commands and flags of those commands
 */

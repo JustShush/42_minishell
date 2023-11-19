@@ -12,7 +12,8 @@
 
 #include "../../inc/minishell.h"
 
-void	env(void)
+void	env(t_minishell *ms)
 {
-	
+	(void)ms;
+	//print_env(ms->env);
 }
