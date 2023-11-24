@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:57:51 by dimarque          #+#    #+#             */
-/*   Updated: 2023/08/09 11:34:03 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:48:36 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int			ft_isalpha(int c);
 int			ft_isascii(int c);
 int			ft_isdigit(int c);
 int			ft_isprint(int arg);
+int			ft_isspace(char c);
 void		*ft_memchr(const void *str, int c, size_t n);
 int			ft_memcmp(const void *s1, const void *s2, size_t n);
 void		*ft_memcpy(void *dest, const void *src, size_t n);
@@ -46,7 +47,7 @@ void		*ft_memset(void *b, int c, size_t len);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strdup(const char *str);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
-size_t		ft_strlcpy(char *dest, const char *src, size_t size);
+unsigned int ft_strlcpy(char *dest, const char *src, size_t size);
 size_t		ft_strlen(const char *str);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strnstr(const char *big, const char *little, size_t len);
@@ -96,5 +97,8 @@ int			ft_printstr(char *str);
 char		*get_next_line(int fd);
 size_t		ft_strlen_gnl(const char *str);
 char		*ctrl_l(char *buffer);
+
+// Other
+int			ft_strcmp(char *s1, char *s2);
 
 #endif

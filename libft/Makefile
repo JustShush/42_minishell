@@ -14,6 +14,7 @@ SRC = ft_atoi.c \
 	  ft_isascii.c \
 	  ft_isdigit.c \
 	  ft_isprint.c \
+	  ft_isspace.c \
 	  ft_itoa.c \
 	  ft_memchr.c \
 	  ft_memcmp.c \
@@ -49,6 +50,7 @@ SRC = ft_atoi.c \
 	  ft_printnbr.c \
 	  ft_print_ptr.c \
 	  ft_printstr.c \
+	  ft_strcmp.c \
 
 B_SRC = ft_lstnew_bonus.c \
 		ft_lstadd_front_bonus.c \
@@ -70,8 +72,8 @@ MSG2 = @echo "\033[93m Cleaned ${NAME} Successfully ✔︎ \e[0m"
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@ar -rcs $(NAME) $(OBJ)
+$(NAME): $(OBJ) $(B_OBJ)
+	@ar -rcs $(NAME) $(OBJ) $(B_OBJ)
 	$(MSG1)
 
 bonus: $(B_OBJ)
