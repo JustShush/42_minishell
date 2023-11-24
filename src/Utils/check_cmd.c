@@ -33,7 +33,7 @@ void	builtIn(t_minishell *ms, char **cmd_flags)
 	else if (ft_strcmp(cmd_flags[0], "env") == 0)
 		env();
 	else if (ft_strcmp(cmd_flags[0], "exit") == 0)
-		ft_exit();
+		ft_exit(ms, cmd_flags);
 	else if (ft_strcmp(cmd_flags[0], "export") == 0)
 		ft_export();
 	else if (ft_strcmp(cmd_flags[0], "pwd") == 0)
