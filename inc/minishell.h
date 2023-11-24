@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/17 20:12:15 by mde-avel         ###   ########.fr       */
+/*   Updated: 2023/11/24 16:32:29 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_minishell
 	char	*input;
 	char	**history;
 	char	**main_arr;
+	int		exit;
 	t_list	**env;
 	t_cmdlist	*cmdlist;
 }	t_minishell;
@@ -86,7 +87,7 @@ void	echo(void);
 void	env(void);
 
 //! in exit.c
-void	ft_exit(void);
+void	ft_exit(t_minishell *ms);
 
 //! in export.c
 void	ft_export(void);
