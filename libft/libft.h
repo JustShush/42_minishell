@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:57:51 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/17 18:13:33 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:48:36 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void		*ft_memset(void *b, int c, size_t len);
 char		*ft_strchr(const char *s, int c);
 char		*ft_strdup(const char *str);
 size_t		ft_strlcat(char *dst, const char *src, size_t size);
-size_t		ft_strlcpy(char *dest, const char *src, size_t size);
+unsigned int ft_strlcpy(char *dest, const char *src, size_t size);
 size_t		ft_strlen(const char *str);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 char		*ft_strnstr(const char *big, const char *little, size_t len);

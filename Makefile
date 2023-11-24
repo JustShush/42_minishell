@@ -15,7 +15,6 @@ SRC_parser = ms_split.c parser_utils.c
 SRC_replacer = env_replace.c env_split_utils.c env_split.c env_split2.c
 SRC_builtin = cd.c echo.c env.c exit.c export.c pwd.c unset.c
 
-
 lib = libft
 LIB = $(lib)/libft.a
 
@@ -101,12 +100,15 @@ MSG2 = @echo ${IYellow}"Cleaned Successfully ✔︎"${Color_Off}
 MSG3 = @echo ${ICyan}"Cleaned ${NAME} Successfully ✔︎"${Color_Off}
 HOWTO = @echo ${IRed}"To run the program do: ./${NAME}"${Color_Off}
 
+CTRL_L = clear -x # This is the same as CTRL + L cleaning the terminal without deleting everything just pussing up
+
 all: $(NAME)
 
 $(LIB):
 	@make -s -C $(lib)
 
 $(NAME): $(LIB) $(OBJS)
+	@$(CTRL_L)
 	@$(CC) $(CFLAGS) $(SRCS) -lreadline $(LIB) -o $(NAME)
 	$(MSG1)
 	${HOWTO}
@@ -115,6 +117,7 @@ $(OBJ_DIR)/%.o: $(SRCS)
 		@mkdir -p $(OBJ_DIR)
 		@$(CC) $(CFLAGS) -o $@ -c $<
 clean:
+	@$(CTRL_L)
 	@/bin/rm -rf $(OBJ_DIR)
 	@make clean --no-print-directory -C $(lib)
 	$(MSG2)

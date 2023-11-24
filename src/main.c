@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/23 18:50:44 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/24 13:53:17 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,8 @@
 
 void	minishell(t_minishell *ms)
 {
-	int	i;
-
-	i = 0;
 	ms->main_arr = ms_split(ms, ms->input);
 	env_var(ms);
-	while (ms->main_arr[i]) {
-		//if ()
-		i++;
-	}
-	i = 0;
-	while (ms->main_arr[i])
-		printf("main: %s\n", ms->main_arr[i++]);
 	if (!ms->main_arr)
 		return ;
 	check_cmd(ms);

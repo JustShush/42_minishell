@@ -141,7 +141,7 @@ int	env_var(t_minishell *ms)
 		free(ms->main_arr[i]);
 		ms->main_arr[i] = replacer(ms, buf, 0);
 		if (!ms->main_arr[i])
-			error(ms, 2, NULL);
+			error(ms, 2, "env_var");
 		free(buf);
 		i++;
 	}

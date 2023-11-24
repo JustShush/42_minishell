@@ -44,7 +44,7 @@ int	var_init(t_minishell *ms)
 	ms->main_arr = ms_split(ms, ms->input);
 	if (env_var(ms))
 		return (1);
-	arr_print(NULL, ms->main_arr);
+	arr_print("main-arr", ms->main_arr);
 	ms->cmd_count = cmd_count(ms->main_arr);
 	ms->cmdlist = cmd_list_init(ms);
 	return (0);

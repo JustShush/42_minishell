@@ -107,13 +107,13 @@ char	**var_split(char *str)
 	size = var_split_size(str);
 	buff = malloc(sizeof(char *) * (size + 1));
 	if (!buff)
-		return (NULL);
+		error(NULL, 2, "var_split");
 	while (i < size)
 	{
 		word_len = var_split_word_size(str, pos);
 		buff[i++] = var_split_temp(str, word_len, pos);
 		if (!buff[i])
-			return (NULL);
+			error(NULL, 3, "var_split buff[i]");
 		pos += var_split_word_size(str, pos);
 	}
 	buff[i] = 0;

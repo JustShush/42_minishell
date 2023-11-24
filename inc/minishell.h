@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/23 20:49:56 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/24 12:46:43 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,6 +171,7 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
 
 //! in error.c
 /**
+ * My function to handle all errors
  * @param op type of error msg
  * @param arg (optional) addicional msg
  */
