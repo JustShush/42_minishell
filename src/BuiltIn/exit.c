@@ -15,10 +15,7 @@
 void	ft_exit(t_minishell *ms)
 {
 	free_ms(ms);
-	if (ms->exit >= 0 && ms->exit <= 255)
-	{
-		perror("Minishell$> exit");
-		exit(ms->exit);
-	}
+	perror("Minishell$> exit");
+	exit(0);
 }
 //should release all allocated memory
