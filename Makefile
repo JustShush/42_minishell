@@ -3,7 +3,7 @@
 NAME = minishell
 
 CC = @cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g
 
 # -fsanitize=address
 # -fsanitize=thread
@@ -123,3 +123,6 @@ fclean: clean
 	$(MSG3)
 
 re: fclean all
+
+val:
+	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=readline.supp ./minishell
