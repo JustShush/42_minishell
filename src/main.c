@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/17 17:24:51 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/23 19:01:17 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ int	main(int argc, char *argv[], char **env)
 	ms->env = env_init(env);
 	while (1)
 	{
-		ms->prompt = ft_strdup("minishell$> ");
+		ms->prompt = ft_strdup("Minishell$> ");
 		ms->input = readline(ms->prompt);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);

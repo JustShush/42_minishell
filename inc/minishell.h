@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/17 18:11:20 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/17 20:12:15 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ void	signal_D(t_minishell *ms);
 //* ---- BuiltIn DIR ----
 
 //! in cd.c
+char	*var_str(t_list *env, char *var);
+void	go_home(t_minishell *ms);
 void	cd(t_minishell *ms, char **path);
 
 //! in echo.c
@@ -103,6 +105,10 @@ void	print_env(char **env);
 //* ---- Parser DIR ----
 
 //! in ms_split.c
+int		parser_op(char c);
+int		countw(char *str);
+char	*split_temp(char *str, int word_len);
+int		get_wordl(char *str);
 char	**ms_split(char *str);
 
 //! in parser_utils.c
@@ -117,6 +123,8 @@ int		others(char *str, int i);
 int		arr_size(char **arr);
 
 //! in check_cmd.c
+int		IsBuiltIn(char *str);
+void	builtIn(t_minishell *ms, char **cmd_flags);
 void	check_cmd(t_minishell *ms);
 
 //! in error.c
