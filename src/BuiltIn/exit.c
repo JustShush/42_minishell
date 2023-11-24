@@ -12,10 +12,18 @@
 
 #include "../../inc/minishell.h"
 
-void	ft_exit(t_minishell *ms)
+void	ft_exit(t_minishell *ms, char **path)
 {
-	free_ms(ms);
-	perror("Minishell$> exit");
-	exit(0);
+	if (path && arr_size(path) > 1)
+	{
+		write(2, "Minishell$> exit: too many arguments\n", 37);
+		free_ms(ms);
+		exit(1);
+	}	
+	else
+	{
+		free_ms(ms);
+		exit(0);
+	}
 }
 //should release all allocated memory

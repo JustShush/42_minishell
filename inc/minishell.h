@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/24 16:32:29 by mde-avel         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:03:36 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,9 @@ void	minishell(t_minishell *ms);
 t_list	**env_init(char **envp);
 
 //! in frees.c
-void	free_ms(t_minishell *ms);
+void	free_list(t_list **list);
 void	free_arr(char **arr);
+void	free_ms(t_minishell *ms);
 
 //! in prompt.c
 //char	*prompt(void);
@@ -87,7 +88,7 @@ void	echo(void);
 void	env(void);
 
 //! in exit.c
-void	ft_exit(t_minishell *ms);
+void	ft_exit(t_minishell *ms, char **path);
 
 //! in export.c
 void	ft_export(void);
