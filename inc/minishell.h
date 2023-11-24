@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/24 12:46:43 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:36:35 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 # include <sys/ioctl.h>
 
-//extern int	g_global;
+extern int	g_global;
 
 typedef struct s_content
 {
@@ -64,8 +64,10 @@ void	minishell(t_minishell *ms);
 t_list	**env_init(char **envp);
 
 //! in frees.c
+void	free_main(t_minishell *ms, int argc, char *argv[]);
 void	free_ms(t_minishell *ms);
 void	free_arr(char **arr);
+void	free_cmd_list(t_cmdlist *cmdlist);
 
 //! in prompt.c
 //char	*prompt(void);
@@ -73,7 +75,9 @@ void	free_arr(char **arr);
 //! in signals.c
 void	signal_C(int signum);
 void	signal_init(void);
+void	signal_in_process(int signum);
 void	signal_D(t_minishell *ms);
+void	check_signal(void);
 
 //* ---- BuiltIn DIR ----
 
@@ -166,12 +170,14 @@ void	check_cmd(t_minishell *ms);
 //! in cmd_utils.c
 
 void	arr_print(char *str, char **arr);
+void	cmdlist_print(t_cmdlist **cmdlist);
 int		cmd_count(char **arr);
 char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
 
 //! in error.c
 /**
- * My function to handle all errors
+ * My function to handle all 
+ * @param ms Minishell Struct
  * @param op type of error msg
  * @param arg (optional) addicional msg
  */

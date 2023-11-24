@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:11:59 by dimarque          #+#    #+#             */
-/*   Updated: 2023/10/27 17:43:14 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:36:23 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,14 @@ void	signal_init(void)
 	signal(SIGQUIT, SIG_IGN);
 }
 
+void	signal_in_process(int signum)
+{
+	if (signum == SIGQUIT)
+		g_global = SIGQUIT;
+	if (signum == SIGINT)
+		g_global = SIGINT;
+}
+
 void	signal_D(t_minishell *ms)
 {
 	if (!(ms->input))
@@ -36,4 +44,15 @@ void	signal_D(t_minishell *ms)
 		write(2, "\033[1;31mexit!\033[0m\n", 17);
 		free_ms(ms);
 	}
+}
+
+void	check_signal(void)
+{
+	if (!g_global)
+		return ;
+	if (g_global == SIGQUIT)
+		ft_putstr_fd("\033[1;31mexit!\033[0m\n", STDERR_FILENO);
+	if (g_global == SIGINT)
+		printf("\n");
+	g_global = 0;
 }

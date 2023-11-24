@@ -6,13 +6,13 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/24 13:53:17 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/24 17:47:30 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-//int	g_global = 0;
+int	g_global = 0;
 
 void	minishell(t_minishell *ms)
 {
@@ -48,10 +48,6 @@ int	main(int argc, char *argv[], char **env)
 	t_minishell *ms;
 
 	ms = malloc(sizeof(t_minishell));
-	(void)argc;
-	(void)argv;
-	//(void)env;
-	//print_env(env);
 	signal_init();
 	ms->env = env_init(env);
 	while (1)
@@ -61,11 +57,12 @@ int	main(int argc, char *argv[], char **env)
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
 		signal_D(ms);
-		var_init(ms);
-		minishell(ms);
-		free_arr(ms->main_arr);
-		free(ms->prompt);
-		free(ms->input);
+		if (!var_init(ms))
+		{
+			minishell(ms);
+			free_cmd_list(ms->cmdlist);
+		}
+		free_main(ms, argc, argv);
 	}
 	//minishell(env);
 	return (0);

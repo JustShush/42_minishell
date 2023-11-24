@@ -25,7 +25,6 @@ int	IsBuiltIn(char *str)
 
 void	builtIn(t_minishell *ms, char **cmd_flags)
 {
-	//(void)ms;
 	if (ft_strcmp(cmd_flags[0], "cd") == 0)
 		cd(ms, cmd_flags);
 	else if (ft_strcmp(cmd_flags[0], "echo") == 0)
@@ -42,11 +41,34 @@ void	builtIn(t_minishell *ms, char **cmd_flags)
 		unset();
 }
 
+int	find_cmd_pos(char **main_arr, int pos)
+{
+	while (main_arr[pos] && main_arr[pos][0] && ft_strcmp(main_arr[pos], "|") \
+		!= 0)
+		pos++;
+	if (main_arr[pos] && main_arr[pos][0] && ft_strcmp(main_arr[pos], "|") == 0)
+		pos++;
+	return (pos);
+}
+
 void	check_cmd(t_minishell *ms)
 {
-	//printf("%s\n", ms->main_arr[0]);
-	if (IsBuiltIn(ms->main_arr[0]))
-		builtIn(ms, ms->main_arr);
+	int	cmd_run;
+	int	pos;
+
+	if (!ms->cmdlist)
+		error(ms, 3, "check_cmd");
+	cmdlist_print(ms->cmdlist);
+	pos = 0;
+	cmd_run = 0;
+	while (cmd_run < ms->cmd_count)
+	{
+		
+		pos = find_cmd_pos(ms->main_arr, pos);
+		cmd_run++;
+	}
+	/* if (IsBuiltIn(ms->main_arr[0]))
+		builtIn(ms, ms->main_arr); */
 	// check if is built-in
 	// if not then use pipex logic to get the cmd
 }
