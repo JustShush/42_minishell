@@ -6,21 +6,21 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/19 15:26:49 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/23 18:50:44 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	g_exit = 0;
+//int	g_global = 0;
 
 void	minishell(t_minishell *ms)
 {
 	int	i;
 
 	i = 0;
-	ms->main_arr = ms_split(ms->input);
-	env_var(ms, ms->env, ms->main_arr);
+	ms->main_arr = ms_split(ms, ms->input);
+	env_var(ms);
 	while (ms->main_arr[i]) {
 		//if ()
 		i++;
@@ -71,6 +71,7 @@ int	main(int argc, char *argv[], char **env)
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
 		signal_D(ms);
+		var_init(ms);
 		minishell(ms);
 		free_arr(ms->main_arr);
 		free(ms->prompt);

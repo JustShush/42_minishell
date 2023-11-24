@@ -1,12 +1,12 @@
 #include "../../inc/minishell.h"
 
-char	*dollar_cond(char *buf)
+char	*dollar_cond(t_minishell *ms, char *buf)
 {
 	char	*buf1;
 	char	*res;
 
 	res = NULL;
-	buf1 = ft_itoa(g_exit);
+	buf1 = ft_itoa(ms->exit);
 	res = ft_strjoin(buf, buf1);
 	free(buf1);
 	return (res);
@@ -64,4 +64,25 @@ char	*var_str(t_list *env, char *var)
 	if (!tmp)
 		return (NULL);
 	return (tmp->content);
+}
+
+int	empty_var(char **arr, t_list **env)
+{
+	char	*buf1;
+	char	*buf2;
+
+	if (arr_size(arr) == 1 && strchr_malloc(arr[0], '$') 
+		&& ft_strcmp(arr[0], "$") != 0 && ft_strcmp(arr[0], "$?") != 0)
+	{
+		buf1 = str_front_trim(arr[0], "$");
+		buf2 = var_iter(env, buf1);
+		free(buf1);
+		if (!buf2)
+		{
+			free(buf2);
+			return (1);
+		}
+		free(buf2);
+	}
+	return (0);
 }

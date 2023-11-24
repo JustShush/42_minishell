@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/19 17:42:17 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:49:56 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 
 # include <sys/ioctl.h>
 
-extern int	g_exit;
+//extern int	g_global;
 
 typedef struct s_content
 {
@@ -38,10 +38,9 @@ typedef struct s_content
 	char	**cmd_flags;
 }	t_content;
 
-
 typedef struct s_cmdlist
 {
-	t_content	*content;
+	char	**cmds;
 	struct s_cmdlist	*next;
 }	t_cmdlist;
 
@@ -52,6 +51,8 @@ typedef struct s_minishell
 	char	*input;
 	char	**history;
 	char	**main_arr;
+	int		exit;
+	int		cmd_count;
 	t_list	**env;
 	t_cmdlist	*cmdlist;
 }	t_minishell;
@@ -106,8 +107,11 @@ void	print_env(char **env);
 
 //! in ms_split.c
 
-int	parser_op(char c);
-char	**ms_split(char *str);
+int		parser_op(char c);
+int		countw(char *str);
+char	*split_temp(t_minishell *ms, char *str, int word_len);
+int		get_wordl(char *str);
+char	**ms_split(t_minishell *ms, char *str);
 
 //! in parser_utils.c
 int		quotes(char *str, char c, int i);
@@ -118,7 +122,7 @@ int		others(char *str, int i);
 //* --- Replacer DIR ----
 //! in env_replacer.c
 
-char	*replace_cond(char *str, char *buf1, t_list **env, int flag);
+char	*replace_cond(t_minishell *ms, char *str, char *buf1, int flag);
 
 /** Joins all substituted strings from the split str
  * @param string The string with all the vars
@@ -126,7 +130,7 @@ char	*replace_cond(char *str, char *buf1, t_list **env, int flag);
  * @param flag
  * @return The new string now with the value of the var.
 */
-char	*replacer(char *str, t_list **env, int flag);
+char	*replacer(t_minishell *ms, char *str, int flag);
 
 /**
  * This replaces all the Vars to their actuall value.
@@ -134,21 +138,22 @@ char	*replacer(char *str, t_list **env, int flag);
  * @param env env struct
  * @param arr Main Array with all the inputs
 */
-void	env_var(t_minishell *ms, t_list **env, char **arr);
+int	env_var(t_minishell *ms);
 
 //! in env_split_utils.c
 
-char	*dollar_cond(char *buf);
+char	*dollar_cond(t_minishell *ms, char *buf);
 char	*var_iter(t_list **env, char *var);
 char	*var_str(t_list *env, char *var);
+int		empty_var(char **arr, t_list **env);
 
 //! in env_split.c
 
 char	**var_split(char *str);
 
 //! in env_split2.c
-char	*replace_str(char *str, t_list **env);
-char	*replace_single(char *str, char *buf, t_list **env, int flag);
+char	*replace_str(t_minishell *ms, char *str);
+char	*replace_single(t_minishell *ms, char *str, char *buf, int flag);
 
 //* ---- Utils DIR ----
 
@@ -158,12 +163,22 @@ int		arr_size(char **arr);
 //! in check_cmd.c
 void	check_cmd(t_minishell *ms);
 
+//! in cmd_utils.c
+
+void	arr_print(char *str, char **arr);
+int		cmd_count(char **arr);
+char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
+
 //! in error.c
 /**
  * @param op type of error msg
  * @param arg (optional) addicional msg
  */
-void	error(int op, char *arg);
+void	error(t_minishell *ms, int op, char *arg);
+
+//! in inits.c
+
+int	var_init(t_minishell *ms);
 
 //! in quotes_utils.c
 

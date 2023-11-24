@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 17:29:03 by dimarque          #+#    #+#             */
-/*   Updated: 2022/11/04 17:55:29 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/23 17:28:03 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,15 @@
 
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	unsigned long	i;
-	const char		*a;
-	char			*b;
+	size_t	i;
 
-	a = (const char *)src;
-	b = (char *)dest;
-	i = -1;
+	i = 0;
 	if (!dest && !src)
 		return (NULL);
-	while (++i < n)
+	while (i < n)
 	{
-		*(b + i) = *(a + i);
+		((char *)dest)[i] = ((const char *)src)[i];
+		i++;
 	}
 	return (dest);
 }

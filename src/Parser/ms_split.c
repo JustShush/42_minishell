@@ -52,7 +52,7 @@ int	countw(char *str)
 	return (words);
 }
 
-char	*split_temp(char *str, int word_len)
+char	*split_temp(t_minishell *ms, char *str, int word_len)
 {
 	int		i;
 	char	*temp;
@@ -61,7 +61,7 @@ char	*split_temp(char *str, int word_len)
 	temp = NULL;
 	temp = malloc(sizeof(char) * (word_len + 1));
 	if (!temp)
-		error(1, NULL);
+		error(ms, 2, "split_temp");
 	while (*str && i < word_len)
 		temp[i++] = *str++;
 	temp[i] = '\0';
@@ -84,30 +84,26 @@ int	get_wordl(char *str)
 	return (i);
 }
 
-char	**ms_split(char *str)
+char	**ms_split(t_minishell *ms, char *str)
 {
-	char	**token;
-	int		word_len;
 	int		i;
-	int		j;
+	int		word_len;
+	char	**buff;
+	int		ms_words;
 
-	word_len = 0;
 	i = 0;
-	j = 0;
-	token = NULL;
-	token = malloc(sizeof(char *) * (countw(str) + 1));
-	if (!token)
-		return (0);
-	while (i < countw(str))
+	ms_words = countw(str);
+	buff = malloc(sizeof(char *) * (ms_words + 1));
+	if (!buff)
+		error(ms, 2, "ms_split");
+	while (i < ms_words)
 	{
-		while (*str && parser_op(str[i]) == 1)
+		while (*str && parser_op(*str) == 1)
 			str++;
 		word_len = get_wordl(str);
-		printf("cw: %d | wlen: %d\n", countw(str), word_len);
-		token[j++] = split_temp(str, word_len);
+		buff[i++] = split_temp(ms, str, word_len);
 		str = str + word_len;
-		word_len = 0;
 	}
-	token[j] = 0;
-	return (token);
+	buff[i] = 0;
+	return (buff);
 }

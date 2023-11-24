@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 13:17:11 by dimarque          #+#    #+#             */
-/*   Updated: 2022/11/11 14:13:06 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/11/23 20:48:55 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*res;
 
+	if (!s1 || !s2)
+		return (NULL);
 	res = malloc(sizeof(char) * (ft_strlen(s1) + (ft_strlen(s2) + 1)));
 	if (!res)
 		return (NULL);
