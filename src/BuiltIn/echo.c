@@ -42,9 +42,7 @@ void	echo(char **cmd_line)
 		i = 1;
 		while (cmd_line[i])
 		{
-			ft_printf("%s", cmd_line[i]);
-			if (cmd_line[i + 1] != NULL)
-				ft_printf(" ");
+			ft_printf("%s ", cmd_line[i]);
 			i++;
 		}
 		ft_printf("\n");
