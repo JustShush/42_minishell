@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/28 21:10:37 by mde-avel         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:53:45 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,13 +36,11 @@ typedef struct s_content
 	char	**cmd_flags;
 }	t_content;
 
-
 typedef struct s_cmdlist
 {
 	t_content	*content;
 	struct s_cmdlist	*next;
 }	t_cmdlist;
-
 
 typedef struct s_minishell
 {
@@ -86,7 +84,7 @@ int		check_option(char *opt);
 void	echo(char **cmd_line);
 
 //! in env.c
-void	env(void);
+void	env(t_minishell *ms, char **cmd_line);
 
 //! in exit.c
 void	ft_exit(t_minishell *ms, char **path);
