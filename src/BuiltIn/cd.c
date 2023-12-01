@@ -21,11 +21,13 @@ void	go_home(t_minishell *ms)
 	if (!home)
 	{
 		write(2, "Minishell$> cd: HOME is undefined\n", 34);
+		ms->exit = 1;
 		exit (1);
 	}
 	else if (chdir(home) != 0)
 	{
 		perror("Minishell$> cd: HOME");
+		ms->exit = 1;
 		exit (1);
 	}
 	if (home)
@@ -39,31 +41,21 @@ void	cd(t_minishell *ms, char **path)
 	getcwd(old_pwd, sizeof(old_pwd));
 	if (path && arr_size(path) > 2)
 	{
-		write(2, "Minishell: cd: too many arguments\n", 34);
+		write(2, "Minishell$> cd: too many arguments\n", 34);
+		ms->exit = 1;
 		ft_bzero(old_pwd, ft_strlen(old_pwd));
 		return ;
 	}
 	// if theres is no arg (ex: cd) just return to home
 	else if (!path || !path[1] || !path[1][0])
 		go_home(ms);
-	else if (chdir(path[1]) != 0)
+	else if (chdir(path[1]) == -1)
 	{
 		perror("Minishell$> cd");
+		ms->exit = 1;
 		return ;
 	}
-
-	/* // Use the chdir function to change the current working directory
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-	{
-		if (chdir(cwd) != 0)
-			perror("Minishell$> cd Error!");
-	}
-	if (execve(path, ms->main_arr, ms->env) == -1)
-	{
-		access(old_pwd, F_OK)
-		printf("Minishell$> cd: %s: No such file or directory\n", ms->main_arr[1]);
-		free(cwd);
-	} */
+	// Use the chdir function to change the current working directory
 }
 
 //* if there is no loc go back to home. DONE!

@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/24 13:53:17 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:21:13 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_list	**env_init(char **envp)
 	{
 		buf = ft_strdup(envp[i]);
 		node = ft_lstnew(buf);
+		node->n = i + 1;
 		ft_lstadd_back(env, node);
 		i++;
 	}
@@ -56,7 +57,7 @@ int	main(int argc, char *argv[], char **env)
 	ms->env = env_init(env);
 	while (1)
 	{
-		ms->prompt = ft_strdup("minishell$> ");
+		ms->prompt = ft_strdup("Minishell$> ");
 		ms->input = readline(ms->prompt);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);

@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/24 12:46:43 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:21:11 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ typedef struct s_cmdlist
 	struct s_cmdlist	*next;
 }	t_cmdlist;
 
-
 typedef struct s_minishell
 {
 	char	*prompt;
@@ -64,8 +63,9 @@ void	minishell(t_minishell *ms);
 t_list	**env_init(char **envp);
 
 //! in frees.c
-void	free_ms(t_minishell *ms);
+void	free_list(t_list **list);
 void	free_arr(char **arr);
+void	free_ms(t_minishell *ms);
 
 //! in prompt.c
 //char	*prompt(void);
@@ -78,16 +78,19 @@ void	signal_D(t_minishell *ms);
 //* ---- BuiltIn DIR ----
 
 //! in cd.c
+char	*var_str(t_list *env, char *var);
+void	go_home(t_minishell *ms);
 void	cd(t_minishell *ms, char **path);
 
 //! in echo.c
-void	echo(void);
+int		check_option(char *opt);
+void	echo(char **cmd_line);
 
 //! in env.c
-void	env(t_minishell *ms);
+void	env(t_minishell *ms, char **cmd_line);
 
 //! in exit.c
-void	ft_exit(void);
+void	ft_exit(t_minishell *ms, char **path);
 
 //! in export.c
 void	ft_export(void);
@@ -161,6 +164,8 @@ char	*replace_single(t_minishell *ms, char *str, char *buf, int flag);
 int		arr_size(char **arr);
 
 //! in check_cmd.c
+int		IsBuiltIn(char *str);
+void	builtIn(t_minishell *ms, char **cmd_flags);
 void	check_cmd(t_minishell *ms);
 
 //! in cmd_utils.c

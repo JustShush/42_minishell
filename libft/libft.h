@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:57:51 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/24 12:48:36 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:21:12 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 
 typedef struct s_list
 {
+	int				n;
 	void			*content;
 	struct s_list	*next;
 }					t_list;

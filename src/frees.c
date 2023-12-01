@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:04:11 by dimarque          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/11/24 15:39:23 by dimarque         ###   ########.fr       */
+=======
+/*   Updated: 2023/11/24 16:44:51 by mde-avel         ###   ########.fr       */
+>>>>>>> origin/builtin
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +50,18 @@ void	free_arr(char **arr)
 	while (arr[i])
 		free(arr[i++]);
 	free(arr);
+}
+
+void	free_ms(t_minishell *ms)
+{
+	if (ms->prompt)
+		free(ms->prompt);
+	if (ms->input)
+		free(ms->input);
+	if (ms->main_arr)
+		free_arr(ms->main_arr);
+	if (ms->env)
+		free_list(ms->env);
+	free(ms);
+	exit(0);
 }
