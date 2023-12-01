@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-//-n     do not output the trailing newline
+//-n     no newline after the output
 int	check_option(char *opt)
 {
 	if (ft_strncmp(opt, "-n", 2) == 0)
