@@ -111,10 +111,11 @@ char	**var_split(char *str)
 	while (i < size)
 	{
 		word_len = var_split_word_size(str, pos);
-		buff[i++] = var_split_temp(str, word_len, pos);
+		buff[i] = var_split_temp(str, word_len, pos);
 		if (!buff[i])
 			error(NULL, 3, "var_split buff[i]");
 		pos += var_split_word_size(str, pos);
+		i++;
 	}
 	buff[i] = 0;
 	return (buff);

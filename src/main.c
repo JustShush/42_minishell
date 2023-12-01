@@ -6,13 +6,13 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/01 11:21:13 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:11:05 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-//int	g_global = 0;
+int	g_global = 0;
 
 void	minishell(t_minishell *ms)
 {
@@ -44,17 +44,24 @@ t_list	**env_init(char **envp)
 	return (env);
 }
 
+void	free_main(t_minishell *ms, int argc, char *argv[])
+{
+	post_process_signal();
+	free_arr(ms->main_arr);
+	free(ms->prompt);
+	free(ms->input);
+	(void)argc;
+	(void)argv;
+}
+
 int	main(int argc, char *argv[], char **env)
 {
 	t_minishell *ms;
 
 	ms = malloc(sizeof(t_minishell));
-	(void)argc;
-	(void)argv;
-	//(void)env;
 	//print_env(env);
-	signal_init();
 	ms->env = env_init(env);
+	signal_init();
 	while (1)
 	{
 		ms->prompt = ft_strdup("Minishell$> ");
@@ -62,13 +69,13 @@ int	main(int argc, char *argv[], char **env)
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
 		signal_D(ms);
-		var_init(ms);
-		minishell(ms);
-		free_arr(ms->main_arr);
-		free(ms->prompt);
-		free(ms->input);
+		if (!var_init(ms))
+		{
+			minishell(ms);
+			free_cmd_list(ms->cmdlist);
+		}
+		free_main(ms, argc, argv);
 	}
-	//minishell(env);
 	return (0);
 }
 

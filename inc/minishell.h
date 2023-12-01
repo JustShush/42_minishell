@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/01 11:25:00 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/12/01 15:00:42 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 # include <stddef.h>
 # include <sys/ioctl.h>
 
-//extern int	g_global;
+extern int	g_global;
 
 typedef struct s_content
 {
@@ -65,6 +65,7 @@ t_list	**env_init(char **envp);
 
 //! in frees.c
 void	free_list(t_list **list);
+void	free_cmd_list(t_cmdlist *cmdlist);
 void	free_arr(char **arr);
 void	free_ms(t_minishell *ms);
 
@@ -73,8 +74,10 @@ void	free_ms(t_minishell *ms);
 
 //! in signals.c
 void	signal_C(int signum);
+void	signal_process_interrupt(int signum);
 void	signal_init(void);
 void	signal_D(t_minishell *ms);
+void	post_process_signal(void);
 
 //* ---- BuiltIn DIR ----
 
@@ -171,7 +174,8 @@ void	check_cmd(t_minishell *ms);
 
 //! in cmd_utils.c
 
-void	arr_print(char *str, char **arr);
+void	print_arr(char *str, char **arr);
+void	print_cmdlist(t_cmdlist *cmdlist);
 int		cmd_count(char **arr);
 char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
 
