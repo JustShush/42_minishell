@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/01 11:21:11 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:25:00 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 # include <limits.h> // PATH_MAX
 # include <signal.h>
 
+# include <stddef.h>
 # include <sys/ioctl.h>
 
 //extern int	g_global;

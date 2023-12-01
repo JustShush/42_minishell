@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:57:51 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/01 11:21:12 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/12/01 11:26:14 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # include <fcntl.h> // O_RDONLY
 # include <stdio.h>
 # include <stdlib.h>
+# include <stddef.h>
 
 typedef struct s_list
 {
