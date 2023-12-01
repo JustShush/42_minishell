@@ -1,3 +1,4 @@
+.vscode
 minishell
 # Ignore Obj folder
 obj/
