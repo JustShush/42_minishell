@@ -54,6 +54,7 @@ int	find_ident(t_list **env, char *ident, char *new_cont)
 	{
 		if (ft_strncmp((char *)(tmp)->content, ident, len) == 0)
 		{
+			free((tmp)->content);
 			(tmp)->content = new_cont;
 			free(ident);
 			return (2);
