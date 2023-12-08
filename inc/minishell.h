@@ -98,7 +98,7 @@ void	ft_exit(t_minishell *ms, char **path);
 
 //! in export.c
 int		ft_identifier(char	*s);
-int		find_ident(t_list **env, char *content, char *new_cont);
+int		find_ident_exp(t_list **env, char *content, char *new_cont);
 int		check_identifier(t_minishell *ms, char *content);
 void	ft_export(t_minishell *ms, char **cmd_line);
 
@@ -106,7 +106,7 @@ void	ft_export(t_minishell *ms, char **cmd_line);
 void	pwd(void);
 
 //! in unset.c
-void	unset(void);
+void	unset(t_minishell *ms, char **cmd_line);
 
 //* ---- Other DIR ----
 
