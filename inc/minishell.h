@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/01 15:00:42 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:09:37 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,10 @@ void	env(t_minishell *ms, char **cmd_line);
 void	ft_exit(t_minishell *ms, char **path);
 
 //! in export.c
-void	ft_export(void);
+int		ft_identifier(char	*s);
+int		find_ident(t_list **env, char *content, char *new_cont);
+int		check_identifier(t_minishell *ms, char *content);
+void	ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c
 void	pwd(void);
