@@ -39,7 +39,7 @@ void	builtIn(t_minishell *ms, char **cmd_flags)
 	else if (ft_strcmp(cmd_flags[0], "pwd") == 0)
 		pwd();
 	else if (ft_strcmp(cmd_flags[0], "unset") == 0)
-		unset();
+		unset(ms, cmd_flags);
 }
 
 void	check_cmd(t_minishell *ms)

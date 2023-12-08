@@ -17,7 +17,7 @@ int	ft_identifier(char	*s)
 	int	i;
 	int	flag;
 
-	if (s[0] >= '0' && s[0] <= '9')
+	if ((s[0] >= '0' && s[0] <= '9') || s[0] == '=')
 		return (0);
 	i = 0;
 	flag = 0;
@@ -38,7 +38,7 @@ int	ft_identifier(char	*s)
 	return (0);
 }
 
-int	find_ident(t_list **env, char *ident, char *new_cont)
+int	find_ident_exp(t_list **env, char *ident, char *new_cont)
 {
 	t_list	*tmp;
 	size_t	len;
@@ -70,10 +70,9 @@ int	check_identifier(t_minishell *ms, char *content)
 	char	**ident;
 
 	ident = ft_split(content, '=');
-	//printf("%sidentifier:%s %s\n", YELLOW, RESET, ident[0]);
 	if (ft_identifier(ident[0]) == 1)
 	{
-		if(find_ident(ms->env, ident[0], content) == 2)
+		if(find_ident_exp(ms->env, ident[0], content) == 2)
 		{
 			free_arr(ident);
 			return (2);
