@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/01 16:00:18 by mde-avel         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:09:39 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
+int	g_global = 0;
+
 void	minishell(t_minishell *ms)
 {
-	ms->main_arr = ms_split(ms->input);
-	int i = 0;
-	while (ms->main_arr[i])
-		printf("main: %s\n", ms->main_arr[i++]);
+	ms->main_arr = ms_split(ms, ms->input);
+	env_var(ms);
 	if (!ms->main_arr)
 		return ;
 	check_cmd(ms);
@@ -44,17 +44,24 @@ t_list	**env_init(char **envp)
 	return (env);
 }
 
+void	free_main(t_minishell *ms, int argc, char *argv[])
+{
+	post_process_signal();
+	free_arr(ms->main_arr);
+	free(ms->prompt);
+	free(ms->input);
+	(void)argc;
+	(void)argv;
+}
+
 int	main(int argc, char *argv[], char **env)
 {
 	t_minishell *ms;
 
 	ms = malloc(sizeof(t_minishell));
-	(void)argc;
-	(void)argv;
-	//(void)env;
 	//print_env(env);
-	signal_init();
 	ms->env = env_init(env);
+	signal_init();
 	while (1)
 	{
 		ms->prompt = ft_strdup("Minishell$> ");
@@ -62,12 +69,13 @@ int	main(int argc, char *argv[], char **env)
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
 		signal_D(ms);
-		minishell(ms);
-		free_arr(ms->main_arr);
-		free(ms->prompt);
-		free(ms->input);
+		if (!var_init(ms))
+		{
+			minishell(ms);
+			free_cmd_list(ms->cmdlist);
+		}
+		free_main(ms, argc, argv);
 	}
-	//minishell(env);
 	return (0);
 }
 
@@ -85,7 +93,7 @@ int	main(int argc, char *argv[], char **env)
 
 /**
  ** Easy Fix!
- * Before parsing everything create a new array that subs all vars for the actual value of the var
+ * Before parsing everything create a new array that subs all vars for the actual value of the var (replacer)
  * 
  * Create a diff arr just for the commands and flags of those commands
 */

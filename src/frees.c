@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:04:11 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/24 16:44:51 by mde-avel         ###   ########.fr       */
+/*   Updated: 2023/12/01 17:24:24 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,21 @@ void	free_list(t_list **list)
 		free(list);
 }
 
+void	free_cmd_list(t_cmdlist *cmdlist)
+{
+	t_cmdlist	*tmp;
+	t_cmdlist	*head;
+
+	head = cmdlist;
+	while (head)
+	{
+		tmp = head;
+		head = head->next;
+		free(tmp->cmds);
+		free(tmp);
+	}
+}
+
 void	free_arr(char **arr)
 {
 	int i;
@@ -34,7 +49,8 @@ void	free_arr(char **arr)
 	i = 0;
 	while (arr[i])
 		free(arr[i++]);
-	free(arr);
+	if (arr)
+		free(arr);
 }
 
 void	free_ms(t_minishell *ms)
@@ -43,10 +59,11 @@ void	free_ms(t_minishell *ms)
 		free(ms->prompt);
 	if (ms->input)
 		free(ms->input);
+	printf("%sSEG_FAULT%s of main_arr when signal_D \n", BRED, RESET);
 	if (ms->main_arr)
 		free_arr(ms->main_arr);
-	if (ms->env)
-		free_list(ms->env);
+	printf("%sSEG_FAULT SOLVED%s of main_arr in frees.c!\n", BGREEN, RESET);
+	free_list(ms->env);
 	free(ms);
 	exit(0);
 }

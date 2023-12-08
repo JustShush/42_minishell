@@ -9,18 +9,18 @@ CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
 # -fsanitize=thread
 
 SRC =	main.c prompt.c frees.c signals.c
-SRC_utils = arr_size.c check_cmd.c error.c
+SRC_utils = arr_size.c check_cmd.c cmd_utils.c error.c inits.c quotes_utils.c str_utils.c
 SRC_other = print_env.c
 SRC_parser = ms_split.c parser_utils.c
+SRC_replacer = env_replace.c env_split_utils.c env_split.c env_split2.c
 SRC_builtin = cd.c echo.c env.c exit.c export.c pwd.c unset.c
-
 
 lib = libft
 LIB = $(lib)/libft.a
 
 OBJ_DIR = obj
-SRCS = $(addprefix src/, $(SRC)) $(addprefix src/Other/, $(SRC_other)) $(addprefix src/Parser/, $(SRC_parser)) $(addprefix src/Utils/, $(SRC_utils)) $(addprefix src/BuiltIn/, $(SRC_builtin))
-OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_other:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_parser:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_utils:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_builtin:%.c=%.o))
+SRCS = $(addprefix src/, $(SRC)) $(addprefix src/Other/, $(SRC_other)) $(addprefix src/Parser/, $(SRC_parser)) $(addprefix src/Utils/, $(SRC_utils)) $(addprefix src/BuiltIn/, $(SRC_builtin)) $(addprefix src/replacer/, $(SRC_replacer))
+OBJS = $(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_other:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_parser:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_utils:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_builtin:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_replacer:%.c=%.o))
 
 # Reset
 Color_Off='\033[0m'       # Text Reset
@@ -100,12 +100,15 @@ MSG2 = @echo ${IYellow}"Cleaned Successfully ✔︎"${Color_Off}
 MSG3 = @echo ${ICyan}"Cleaned ${NAME} Successfully ✔︎"${Color_Off}
 HOWTO = @echo ${IRed}"To run the program do: ./${NAME}"${Color_Off}
 
+CTRL_L = clear -x # This is the same as CTRL + L cleaning the terminal without deleting everything just pussing up
+
 all: $(NAME)
 
 $(LIB):
 	@make -s -C $(lib)
 
 $(NAME): $(LIB) $(OBJS)
+	@$(CTRL_L)
 	@$(CC) $(CFLAGS) $(SRCS) -lreadline $(LIB) -o $(NAME)
 	$(MSG1)
 	${HOWTO}
@@ -114,6 +117,7 @@ $(OBJ_DIR)/%.o: $(SRCS)
 		@mkdir -p $(OBJ_DIR)
 		@$(CC) $(CFLAGS) -o $@ -c $<
 clean:
+	@$(CTRL_L)
 	@/bin/rm -rf $(OBJ_DIR)
 	@make clean --no-print-directory -C $(lib)
 	$(MSG2)
