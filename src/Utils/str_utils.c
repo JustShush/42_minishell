@@ -58,3 +58,17 @@ int	strcmp_nochr(char *s1, char *s2, char c)
 		return (1);
 	return (s1[i] - s2[i]);
 }
+
+char	*ft_strndup(char *str, int len)
+{
+	char	*res;
+
+	res = malloc(sizeof(char) * len + 1);
+	if (!res)
+	{
+		printf("Minishell: Malloc error!\n");
+		return (NULL);
+	}
+	ft_strlcpy(res, str, len + 1);
+	return (res);
+}

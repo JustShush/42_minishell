@@ -6,29 +6,54 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/08 12:09:39 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/12/22 15:53:35 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	g_global = 0;
+int g_global = 0;
 
-void	minishell(t_minishell *ms)
+char **ft_arrdup(t_minishell *ms, char **old)
 {
+	char **new;
+	int index;
+
+	index = 0;
+	new = malloc(sizeof(char *) * (arr_size(old) + 1));
+	if (!new)
+		error(ms, 2, NULL);
+	while (old && old[index])
+	{
+		new[index] = ft_strdup(old[index]);
+		index++;
+	}
+	new[index] = NULL;
+	return (new);
+}
+
+void minishell(t_minishell *ms)
+{
+	post_process_signal();
+	signal_D(ms);
+	/* char **new_arr;
 	ms->main_arr = ms_split(ms, ms->input);
-	env_var(ms);
+	//env_var(ms);
+	new_arr = replaced_arr(ms);
+	free_arr(ms->main_arr);
+	ms->main_arr = ft_arrdup(ms, new_arr);
+	free_arr(new_arr); */
 	if (!ms->main_arr)
-		return ;
+		return;
 	check_cmd(ms);
 }
 
-t_list	**env_init(char **envp)
+t_list **env_init(char **envp)
 {
-	int		i;
-	char	*buf;
-	t_list	*node;
-	t_list	**env;
+	int i;
+	char *buf;
+	t_list *node;
+	t_list **env;
 
 	i = 0;
 	env = (t_list **)malloc(sizeof(env));
@@ -44,7 +69,7 @@ t_list	**env_init(char **envp)
 	return (env);
 }
 
-void	free_main(t_minishell *ms, int argc, char *argv[])
+void free_main(t_minishell *ms, int argc, char *argv[])
 {
 	post_process_signal();
 	free_arr(ms->main_arr);
@@ -54,21 +79,24 @@ void	free_main(t_minishell *ms, int argc, char *argv[])
 	(void)argv;
 }
 
-int	main(int argc, char *argv[], char **env)
+int main(int argc, char *argv[], char **env)
 {
 	t_minishell *ms;
 
 	ms = malloc(sizeof(t_minishell));
-	//print_env(env);
+	if (!ms)
+		error(NULL, 2, NULL);
 	ms->env = env_init(env);
 	signal_init();
 	while (1)
 	{
+		signal_init();
 		ms->prompt = ft_strdup("Minishell$> ");
 		ms->input = readline(ms->prompt);
+		printf("input: %s\n", ms->input);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
-		signal_D(ms);
+		//signal_D(ms);
 		if (!var_init(ms))
 		{
 			minishell(ms);
@@ -94,6 +122,10 @@ int	main(int argc, char *argv[], char **env)
 /**
  ** Easy Fix!
  * Before parsing everything create a new array that subs all vars for the actual value of the var (replacer)
- * 
+ *
  * Create a diff arr just for the commands and flags of those commands
-*/
+ */
+
+/**
+ * program crashes when just inputting ENTER or any other thing, prob some problem freeing main_arr
+ */

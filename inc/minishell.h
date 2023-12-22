@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/08 12:09:37 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/12/21 15:49:52 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,7 @@ int	env_var(t_minishell *ms);
 //! in env_split_utils.c
 
 char	*dollar_cond(t_minishell *ms, char *buf);
-char	*var_iter(t_list **env, char *var);
+char	*var_iter(t_minishell *ms, char *var);
 char	*var_str(t_list *env, char *var);
 int		empty_var(char **arr, t_list **env);
 
@@ -169,6 +169,10 @@ char	*replace_single(t_minishell *ms, char *str, char *buf, int flag);
 
 //! in arr_size.c
 int		arr_size(char **arr);
+
+//! in arr_utils.c
+
+char	**ft_arrdup(t_minishell *ms, char **old);
 
 //! in check_cmd.c
 int		IsBuiltIn(char *str);
@@ -187,12 +191,13 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
  * My function to handle all errors
  * @param op type of error msg
  * @param arg (optional) addicional msg
+ * @note 1 malloc error, 2 malloc error, 3 custom error
  */
 void	error(t_minishell *ms, int op, char *arg);
 
 //! in inits.c
 
-int	var_init(t_minishell *ms);
+int		var_init(t_minishell *ms);
 
 //! in quotes_utils.c
 
@@ -203,9 +208,18 @@ int		closed_quotes(char *str, char c);
 
 //! in str_utils.c
 
-int	strlen_chr(char *str, char c);
-int	strchr_malloc(char *s, char c);
+int		strlen_chr(char *str, char c);
+int		strchr_malloc(char *s, char c);
 char	*str_front_trim(char *str, char *trim);
-int	strcmp_nochr(char *s1, char *s2, char c);
+int		strcmp_nochr(char *s1, char *s2, char c);
+char	*ft_strndup(char *str, int len);
+
+
+
+
+
+
+
+char	**replaced_arr(t_minishell *ms);
 
 #endif

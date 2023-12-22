@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:04:11 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/01 17:24:24 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/12/22 15:21:47 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void	free_arr(char **arr)
 	int i;
 
 	i = 0;
+	if (!arr)
+		return ;
 	while (arr[i])
 		free(arr[i++]);
 	if (arr)
@@ -60,7 +62,7 @@ void	free_ms(t_minishell *ms)
 	if (ms->input)
 		free(ms->input);
 	printf("%sSEG_FAULT%s of main_arr when signal_D \n", BRED, RESET);
-	if (ms->main_arr)
+	if (ms->main_arr && ms->main_arr[0])
 		free_arr(ms->main_arr);
 	printf("%sSEG_FAULT SOLVED%s of main_arr in frees.c!\n", BGREEN, RESET);
 	free_list(ms->env);

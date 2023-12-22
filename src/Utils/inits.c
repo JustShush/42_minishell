@@ -41,9 +41,15 @@ t_cmdlist	*cmd_list_init(t_minishell *ms)
 
 int	var_init(t_minishell *ms)
 {
+	char **new_arr;
+
 	ms->main_arr = ms_split(ms, ms->input);
-	if (env_var(ms))
+	if (!(ms->main_arr))
 		return (1);
+	new_arr = replaced_arr(ms);
+	free_arr(ms->main_arr);
+	ms->main_arr = ft_arrdup(ms, new_arr);
+	free_arr(new_arr);
 	//print_arr("main-arr", ms->main_arr);
 	ms->cmd_count = cmd_count(ms->main_arr);
 	ms->cmdlist = cmd_list_init(ms);
