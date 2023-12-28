@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/22 15:53:35 by dimarque         ###   ########.fr       */
+/*   Updated: 2023/12/28 19:02:21 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,20 +32,34 @@ char **ft_arrdup(t_minishell *ms, char **old)
 	return (new);
 }
 
-void minishell(t_minishell *ms)
+void	minishell(t_minishell *ms)
 {
-	post_process_signal();
-	signal_D(ms);
-	/* char **new_arr;
-	ms->main_arr = ms_split(ms, ms->input);
-	//env_var(ms);
-	new_arr = replaced_arr(ms);
-	free_arr(ms->main_arr);
-	ms->main_arr = ft_arrdup(ms, new_arr);
-	free_arr(new_arr); */
-	if (!ms->main_arr)
-		return;
-	check_cmd(ms);
+	int		pipe_fd[2];
+	int		cmds_run;
+	int		pos;
+	pid_t	pid;
+
+	cmds_run = 0;
+	pos = 0;
+	if (!ms->cmdlist)
+		return ;
+	signal(SIGQUIT, signal_process_interrupt);
+	while (cmds_run < ms->cmd_count)
+	{
+		if (pipe(pipe_fd) < 0)
+			pipe_error(ms, pipe_fd);
+		pid = fork();
+		if (pid < 0)
+			fork_error(ms, pipe_fd);
+		if (pid == 0)
+			child(ms, pipe_fd, cmds_run, pos);
+		else
+			parent(ms, pipe_fd, cmds_run, pos);
+		pos = find_cmd_pos(ms->main_arr, pos);
+		cmds_run++;
+	}
+	get_exit_status(ms, pid, cmds_run);
+	//check_cmd(ms);
 }
 
 t_list **env_init(char **envp)
@@ -72,6 +86,7 @@ t_list **env_init(char **envp)
 void free_main(t_minishell *ms, int argc, char *argv[])
 {
 	post_process_signal();
+	signal_D(ms);
 	free_arr(ms->main_arr);
 	free(ms->prompt);
 	free(ms->input);
@@ -96,7 +111,6 @@ int main(int argc, char *argv[], char **env)
 		printf("input: %s\n", ms->input);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
-		//signal_D(ms);
 		if (!var_init(ms))
 		{
 			minishell(ms);
@@ -120,12 +134,5 @@ int main(int argc, char *argv[], char **env)
 // \033[1;33mMinishell\033[0m$>
 
 /**
- ** Easy Fix!
- * Before parsing everything create a new array that subs all vars for the actual value of the var (replacer)
- *
- * Create a diff arr just for the commands and flags of those commands
- */
-
-/**
- * program crashes when just inputting ENTER or any other thing, prob some problem freeing main_arr
+ ** after any command the program exists by it self
  */

@@ -22,11 +22,11 @@ int	quotes(char *str, char c, int i)
 		if (!str[i])
 			return (i);
 		i++;
-		if (str[i] && (str[i] != ' ' && str[i] != '\t'))
+		if (str[i] && !parser_op(str[i]))
 			return (space_tab(str, i));
 		else if (str[i] && str[i] == '$')
-			return (dolar(str, i));
-		else if (str[i] && (str[i] == '\'' || str[i] == '\"'))
+			return (envar(str, i));
+		else if (str[i] && parser_op(str[i]) == 3)
 			return (quotes(str, str[i], i));
 	}
 	return (i);
@@ -34,26 +34,26 @@ int	quotes(char *str, char c, int i)
 
 int	space_tab(char *str, int i)
 {
-	if (str[i] && (str[i] != ' ' && str[i] != '\t'))
+	if (str[i] && !parser_op(str[i]))
 	{
-		while (str[i] && (str[i] != ' ' && str[i] != '\t'))
+		while (str[i] && !parser_op(str[i]))
 			i++;
 		if (str[i] && str[i] == '$')
-			return (dolar(str, i));
-		else if (str[i] && (str[i] == '\'' || str[i] == '\"'))
+			return (envar(str, i));
+		else if (str[i] && parser_op(str[i]) == 3)
 			return (quotes(str, str[i], i));
 	}
 	return (i);
 }
 
-int	dolar(char *str, int i)
+int	envar(char *str, int i)
 {
 	if (str[i] == '$')
 	{
 		i++;
-		if (str[i] && (str[i] == '\'' || str[i] == '\"'))
+		if (str[i] && parser_op(str[i]) == 3)
 			return (quotes(str, str[i], i));
-		else if (str[i] && (str[i] != ' ' && str[i] != '\t'))
+		else if (str[i] && !parser_op(str[i]))
 			return (space_tab(str, i));
 	}
 	return (i);

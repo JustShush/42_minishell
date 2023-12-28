@@ -3,8 +3,8 @@
 //Compares env variables with var.
 //Returns the value of var if it finds it in env.
 // var = HOME
-// env: HOME=/nfs/homes/ddiniz-m
-// return: /nfs/homes/ddiniz-m
+// env: HOME=/home/dmarque
+// return: /home/dmarque
 char	*var_cmp(char *env, char *var)
 {
 	char	*buf1;
