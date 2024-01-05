@@ -70,6 +70,11 @@ int	check_identifier(t_minishell *ms, char *content)
 	char	**ident;
 
 	ident = ft_split(content, '=');
+	if (!ident[1])
+	{
+		free_arr(ident);
+		return (3);
+	}
 	if (ft_identifier(ident[0]) == 1)
 	{
 		if(find_ident_exp(ms->env, ident[0], content) == 2)
@@ -85,6 +90,32 @@ int	check_identifier(t_minishell *ms, char *content)
 	return (0);
 }
 
+void	print_exp(t_list **lst)
+{
+	t_list	*tmp;
+	char	*exp;
+	char	pwd[PATH_MAX + 1];
+
+	tmp = *lst;
+	exp = "declare -x";
+	if (!tmp)
+	{
+		perror("Minishell$> export");
+		return ;
+	}
+	while (tmp)
+	{
+		if (ft_strncmp((char *)(tmp)->content, "PWD=", 4) == 0)
+		{
+			getcwd(pwd, sizeof(pwd));
+			ft_printf("%s%s%s PWD=%s\n", YELLOW, exp, RESET, pwd);
+		}
+		else
+			ft_printf("%s%s%s %s\n", YELLOW, exp, RESET, (tmp)->content);
+		tmp = (tmp)->next;
+	}
+}
+
 void	ft_export(t_minishell *ms, char **cmd_line)
 {
 	int		i;
@@ -93,6 +124,11 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 	t_list	*new;
 
 	i = 1;
+	if (!cmd_line[i])
+	{
+		print_exp(ms->env);
+		return ;
+	}
 	while (cmd_line[i])
 	{
 		content = ft_strdup(cmd_line[i]);
@@ -102,9 +138,16 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 		if (check == 1)
 		{
 			new = ft_lstnew(content);
-			new->n = i;
+			new->n = 1;
 			ft_lstadd_front(ms->env, new);
 		}
+		if (check == 3)
+		{
+			new = ft_lstnew(content);
+			new->n = 2;
+			ft_lstadd_front(ms->env, new);
+		}
+		printf ("check: %d\n",check);
 		i++;
 	}
 }

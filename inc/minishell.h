@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/08 12:09:37 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/05 00:01:26 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@ void	ft_exit(t_minishell *ms, char **path);
 int		ft_identifier(char	*s);
 int		find_ident_exp(t_list **env, char *content, char *new_cont);
 int		check_identifier(t_minishell *ms, char *content);
+void	print_exp(t_list **lst);
 void	ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c

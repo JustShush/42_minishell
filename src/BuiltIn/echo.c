@@ -19,6 +19,7 @@ int	check_option(char *opt)
 		return (1);
 	return (0);
 }
+//se for tudo -nnnnnnnnn é considerado a flag
 
 void	echo(char **cmd_line)
 {

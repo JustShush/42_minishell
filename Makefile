@@ -3,7 +3,7 @@
 NAME = minishell
 
 CC = @cc
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror -g
 
 # -fsanitize=address
 # -fsanitize=thread
@@ -129,4 +129,4 @@ fclean: clean
 re: fclean all
 
 val:
-	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=readline.supp ./minishell
+	@valgrind --leak-check=full --track-origins=yes --log-file="val_log" --show-leak-kinds=all --suppressions=readline.supp ./minishell

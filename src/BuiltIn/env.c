@@ -25,13 +25,16 @@ void	print_lst(t_list **lst)
 	}
 	while (tmp)
 	{
-		if (ft_strncmp((char *)(tmp)->content, "PWD=", 4) == 0)
+		if ((tmp)->n == 1)
 		{
-			getcwd(pwd, sizeof(pwd));
-			ft_printf("%s%d%s PWD=%s\n", YELLOW, (tmp)->n, RESET, pwd);
+			if (ft_strncmp((char *)(tmp)->content, "PWD=", 4) == 0)
+			{
+				getcwd(pwd, sizeof(pwd));
+				ft_printf("%s%d%s PWD=%s\n", YELLOW, (tmp)->n, RESET, pwd);
+			}
+			else
+				ft_printf("%s%d%s %s\n", YELLOW, (tmp)->n, RESET, (tmp)->content);
 		}
-		else
-			ft_printf("%s%d%s %s\n", YELLOW, (tmp)->n, RESET, (tmp)->content);
 		tmp = (tmp)->next;
 	}
 }
