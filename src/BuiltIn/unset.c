@@ -26,19 +26,14 @@ void	rm_first_last(t_list **env)
 	free(last);
 }
 
-void	find_ident_unset(t_list **env, char *ident)
+void	remove_node(t_list **env, char *ident, size_t len)
 {
 	t_list	*tmp;
 	t_list	*lst;
-	size_t	len;
-	char	*c;
 
 	lst = *env;
 	if (!lst)
 		perror("Minishell$> unset");
-	c = "=";
-	ident = ft_strjoin(ident, c);
-	len = ft_strlen(ident);
 	while (lst->next != NULL)
 	{
 		if (ft_strncmp((char *)(lst)->next->content, ident, len) == 0)
@@ -63,10 +58,22 @@ void	find_ident_unset(t_list **env, char *ident)
 		}
 		lst = lst->next;
 	}
-	free(ident);
 }
-/*export hi
-unset hii*/
+
+void	find_ident_unset(t_list **env, char *ident2)
+{
+	char	*ident1;
+	size_t	len;
+	char	*c;
+
+	len = ft_strlen(ident2);
+	remove_node(env, ident2, len);
+	c = "=";
+	ident1 = ft_strjoin(ident2, c);
+	remove_node(env, ident1, len + 1);
+	free(ident1);
+}
+
 void	unset(t_minishell *ms, char **cmd_line)
 {
 	int	i;

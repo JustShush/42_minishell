@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/05 00:01:26 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/01/11 20:10:50 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,9 @@ void	ft_export(t_minishell *ms, char **cmd_line);
 void	pwd(void);
 
 //! in unset.c
+void	rm_first_last(t_list **env);
+void	remove_node(t_list **env, char *ident, size_t len);
+void	find_ident_unset(t_list **env, char *ident2);
 void	unset(t_minishell *ms, char **cmd_line);
 
 //* ---- Other DIR ----
