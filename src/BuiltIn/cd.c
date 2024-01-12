@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "../../inc/minishell.h"
 
 void	change_dir(t_list **lst)
@@ -29,6 +28,7 @@ void	change_dir(t_list **lst)
 		{
 			getcwd(pwd, sizeof(pwd));
 			ident = ft_strjoin(ident, pwd);
+			ft_bzero(pwd, ft_strlen(pwd));
 			free((tmp)->content);
 			(tmp)->content = ident;
 			break ;
@@ -37,35 +37,53 @@ void	change_dir(t_list **lst)
 	}
 }
 
+int	find_home(t_list **lst)
+{
+	t_list	*tmp;
+
+	tmp = *lst;
+	if (!tmp)
+		return (0);
+	while (tmp)
+	{
+		if (ft_strncmp((char *)(tmp)->content, "HOME=", 4) == 0)
+			return(1);	
+		tmp = (tmp)->next;
+	}
+	return (0);
+}
+
 void	go_home(t_minishell *ms)
 {
 	char	*home;
 
-	home = ft_strtrim(var_str(*ms->env, "HOME="), "HOME=");
-	if (!home)
+	if (find_home(ms->env) == 0)
 	{
-		error_message(ms, "cd: HOME is undefined\n", NULL);
+		error_message(ms, "cd: HOME not set\n", NULL);
 		ms->exit = 1;
 	}
-	else if (chdir(home) == -1)
+	else
 	{
-		error_message(ms, "cd: No such file or directory\n", NULL);
-		ms->exit = 1;
-	}
-	if (home)
+		home = ft_strtrim(var_str(*ms->env, "HOME="), "HOME=");
+		if (chdir(home) == -1)
+		{
+			error_message(ms, "cd: No such file or directory\n", NULL);
+			ms->exit = 1;
+		}
 		free(home);
+	}		
 }
 
 void	cd(t_minishell *ms, char **path)
 {
-	char	old_pwd[PATH_MAX + 1];
+	//char	old_pwd[PATH_MAX + 1];
 
-	getcwd(old_pwd, sizeof(old_pwd));
+	//getcwd(old_pwd, sizeof(old_pwd));
 	if (path && arr_size(path) > 2)
 	{
 		error_message(ms, "cd: too many arguments\n", NULL);
 		ms->exit = 1;
-		ft_bzero(old_pwd, ft_strlen(old_pwd));
+		//ft_bzero(old_pwd, ft_strlen(old_pwd));
 	}
 	else if (!path || !path[1] || !path[1][0])
 		go_home(ms);

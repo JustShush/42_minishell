@@ -138,7 +138,7 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 			new->n = 2;
 			ft_lstadd_front(ms->env, new);
 		}
-		printf ("check: %d\n",check);
+		//printf ("check: %d\n",check);
 		i++;
 	}
 }
