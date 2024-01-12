@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-void	pwd(void)
+void	pwd(t_minishell *ms)
 {
 	int i;
 	char cwd[PATH_MAX + 1];
@@ -24,5 +24,9 @@ void	pwd(void)
 			cwd[i++] = 0;
 	}
 	else
-		perror("Minishell$> pwd() error!");
+	{
+		ft_printf("%s%s%s", RED, ms->prompt, RESET);
+		perror("pwd() error!");
+	}
+		
 }

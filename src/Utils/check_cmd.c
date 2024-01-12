@@ -25,7 +25,7 @@ int	IsBuiltIn(char *str)
 
 void	builtIn(t_minishell *ms, char **cmd_flags)
 {
-	//(void)ms;
+	ms->exit = 0;
 	if (ft_strcmp(cmd_flags[0], "cd") == 0)
 		cd(ms, cmd_flags);
 	else if (ft_strcmp(cmd_flags[0], "echo") == 0)
@@ -37,7 +37,7 @@ void	builtIn(t_minishell *ms, char **cmd_flags)
 	else if (ft_strcmp(cmd_flags[0], "export") == 0)
 		ft_export(ms, cmd_flags);
 	else if (ft_strcmp(cmd_flags[0], "pwd") == 0)
-		pwd();
+		pwd(ms);
 	else if (ft_strcmp(cmd_flags[0], "unset") == 0)
 		unset(ms, cmd_flags);
 }

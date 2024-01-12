@@ -33,7 +33,7 @@ void	remove_node(t_list **env, char *ident, size_t len)
 
 	lst = *env;
 	if (!lst)
-		perror("Minishell$> unset");
+		return ;
 	while (lst->next != NULL)
 	{
 		if (ft_strncmp((char *)(lst)->next->content, ident, len) == 0)
@@ -85,8 +85,8 @@ void	unset(t_minishell *ms, char **cmd_line)
 	{
 		if(ft_identifier(cmd_line[i]) == 0)
 		{
-			printf("Minishell$> unset: '%s': not a valid identifier\n", cmd_line[i]);
-			ms->exit = 2;
+			error_message(ms, "unset: not a valid identifier\n", cmd_line[i]);
+			ms->exit = 1;
 			break ;
 		}
 		find_ident_unset(ms->env, cmd_line[i]);

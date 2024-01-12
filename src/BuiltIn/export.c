@@ -85,7 +85,8 @@ int	check_identifier(t_minishell *ms, char *content)
 		free_arr(ident);
 		return (1);
 	}
-	printf("Minishell$> export: '%s': not a valid identifier\n", ident[0]);
+	error_message(ms, "export: not a valid identifier\n", content);
+	ms->exit = 1;
 	free_arr(ident);
 	return (0);
 }
@@ -99,10 +100,7 @@ void	print_exp(t_list **lst)
 	tmp = *lst;
 	exp = "declare -x";
 	if (!tmp)
-	{
-		perror("Minishell$> export");
 		return ;
-	}
 	while (tmp)
 	{
 		if (ft_strncmp((char *)(tmp)->content, "PWD=", 4) == 0)
@@ -151,6 +149,8 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 		i++;
 	}
 }
+
+//_= can't desapier
 
 //export A1=Desenhada A2=Banda 
 //export A1=Banana A2=Casca_de A3=Macaco_atira

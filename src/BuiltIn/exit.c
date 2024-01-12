@@ -16,9 +16,9 @@ void	ft_exit(t_minishell *ms, char **path)
 {
 	if (path && arr_size(path) > 1)
 	{
-		write(2, "Minishell$> exit: too many arguments\n", 37);
+		error_message(ms, "exit: Too many arguments.\n", NULL);
 		free_ms(ms);
-		exit(1);
+		exit(2);
 	}	
 	else
 	{

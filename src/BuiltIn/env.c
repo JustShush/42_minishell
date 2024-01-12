@@ -19,10 +19,7 @@ void	print_lst(t_list **lst)
 
 	tmp = *lst;
 	if (!tmp)
-	{
-		perror("Minishell$> env");
 		return ;
-	}
 	while (tmp)
 	{
 		if ((tmp)->n == 1)
@@ -43,13 +40,13 @@ void	env(t_minishell *ms, char **cmd_line)
 {
 	if (cmd_line[1])
 	{
-		printf("Minishell$> env: Too many arguments\n");
-		ms->exit = 2;
+		error_message(ms, "env: Too many arguments\n", NULL);
+		ms->exit = 127;
 		return ;
 	}
 	if (ms->env == NULL)
 	{
-		write(2, "No environment variables found.\n", 32);
+		error_message(ms, "env: No environment variables found.\n", NULL);
 		return ;
 	}
 	print_lst(ms->env);

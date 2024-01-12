@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/12 14:47:25 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/01/12 16:49:47 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	command_echo(char **cmd_line, int flag, int i);
 void	echo(char **cmd_line);
 
 //! in env.c
+void	print_lst(t_list **lst);
 void	env(t_minishell *ms, char **cmd_line);
 
 //! in exit.c
@@ -105,7 +106,7 @@ void	print_exp(t_list **lst);
 void	ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c
-void	pwd(void);
+void	pwd(t_minishell *ms);
 
 //! in unset.c
 void	rm_first_last(t_list **env);
@@ -194,6 +195,7 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
  * @param arg (optional) addicional msg
  */
 void	error(t_minishell *ms, int op, char *arg);
+void	error_message(t_minishell *ms, char *mess, char *plus);
 
 //! in inits.c
 
