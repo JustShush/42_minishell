@@ -95,7 +95,6 @@ void	print_exp(t_list **lst)
 {
 	t_list	*tmp;
 	char	*exp;
-	char	pwd[PATH_MAX + 1];
 
 	tmp = *lst;
 	exp = "declare -x";
@@ -103,13 +102,7 @@ void	print_exp(t_list **lst)
 		return ;
 	while (tmp)
 	{
-		if (ft_strncmp((char *)(tmp)->content, "PWD=", 4) == 0)
-		{
-			getcwd(pwd, sizeof(pwd));
-			ft_printf("%s%s%s PWD=%s\n", YELLOW, exp, RESET, pwd);
-		}
-		else
-			ft_printf("%s%s%s %s\n", YELLOW, exp, RESET, (tmp)->content);
+		ft_printf("%s%s%s %s\n", YELLOW, exp, RESET, (tmp)->content);
 		tmp = (tmp)->next;
 	}
 }

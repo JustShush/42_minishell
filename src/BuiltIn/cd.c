@@ -13,6 +13,30 @@
 
 #include "../../inc/minishell.h"
 
+void	change_dir(t_list **lst)
+{
+	t_list	*tmp;
+	char	pwd[PATH_MAX + 1];
+	char	*ident;
+
+	ident = "PWD=";
+	tmp = *lst;
+	if (!tmp)
+		return ;
+	while (tmp)
+	{
+		if (ft_strncmp((char *)(tmp)->content, ident, 4) == 0)
+		{
+			getcwd(pwd, sizeof(pwd));
+			ident = ft_strjoin(ident, pwd);
+			free((tmp)->content);
+			(tmp)->content = ident;
+			break ;
+		}	
+		tmp = (tmp)->next;
+	}
+}
+
 void	go_home(t_minishell *ms)
 {
 	char	*home;
@@ -22,14 +46,11 @@ void	go_home(t_minishell *ms)
 	{
 		error_message(ms, "cd: HOME is undefined\n", NULL);
 		ms->exit = 1;
-		exit (1);
 	}
-	else if (chdir(home) != 0)
+	else if (chdir(home) == -1)
 	{
-		ft_printf("%s%s%s", RED, ms->prompt, RESET);
-		perror("cd: HOME");
+		error_message(ms, "cd: No such file or directory\n", NULL);
 		ms->exit = 1;
-		exit (1);
 	}
 	if (home)
 		free(home);
@@ -45,7 +66,6 @@ void	cd(t_minishell *ms, char **path)
 		error_message(ms, "cd: too many arguments\n", NULL);
 		ms->exit = 1;
 		ft_bzero(old_pwd, ft_strlen(old_pwd));
-		return ;
 	}
 	else if (!path || !path[1] || !path[1][0])
 		go_home(ms);
@@ -53,8 +73,8 @@ void	cd(t_minishell *ms, char **path)
 	{
 		error_message(ms, "cd: No such file or directory\n", NULL);
 		ms->exit = 1;
-		return ;
 	}
+	change_dir(ms->env);
 }
 // if theres is no arg (ex: cd) just return to home
 // Use the chdir function to change the current working directory
