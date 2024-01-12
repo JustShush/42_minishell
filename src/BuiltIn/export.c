@@ -85,8 +85,8 @@ int	check_identifier(t_minishell *ms, char *content)
 		free_arr(ident);
 		return (1);
 	}
-	free_arr(ident);
 	printf("Minishell$> export: '%s': not a valid identifier\n", ident[0]);
+	free_arr(ident);
 	return (0);
 }
 

@@ -41,7 +41,7 @@ void	cd(t_minishell *ms, char **path)
 	getcwd(old_pwd, sizeof(old_pwd));
 	if (path && arr_size(path) > 2)
 	{
-		write(2, "Minishell$> cd: too many arguments\n", 34);
+		write(2, "Minishell$> cd: too many arguments\n", 35);
 		ms->exit = 1;
 		ft_bzero(old_pwd, ft_strlen(old_pwd));
 		return ;

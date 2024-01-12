@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:58:21 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/24 12:30:30 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/12 14:24:02 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,3 +31,5 @@ void	error(t_minishell *ms, int op, char *arg)
 		exit(EXIT_FAILURE);
 	}
 }
+
+// funcao error mangmant write->2

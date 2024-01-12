@@ -43,7 +43,7 @@ void	env(t_minishell *ms, char **cmd_line)
 {
 	if (cmd_line[1])
 	{
-		perror("Minishell$> env");
+		printf("Minishell$> env: Too many arguments\n");
 		ms->exit = 2;
 		return ;
 	}

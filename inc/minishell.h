@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/11 20:10:50 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/01/12 14:47:25 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ void	cd(t_minishell *ms, char **path);
 
 //! in echo.c
 int		check_option(char *opt);
+void	command_echo(char **cmd_line, int flag, int i);
 void	echo(char **cmd_line);
 
 //! in env.c
