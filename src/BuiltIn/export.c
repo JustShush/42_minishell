@@ -17,6 +17,8 @@ int	ft_identifier(char	*s)
 	int	i;
 	int	flag;
 
+	if (strcmp(s, "_") == 0)
+		return (2);
 	if ((s[0] >= '0' && s[0] <= '9') || s[0] == '=')
 		return (0);
 	i = 0;
@@ -85,6 +87,8 @@ int	check_identifier(t_minishell *ms, char *content)
 		free_arr(ident);
 		return (1);
 	}
+	else if (ft_identifier(ident[0]) == 2)
+		return (0);
 	error_message(ms, "export: not a valid identifier\n", content);
 	ms->exit = 1;
 	free_arr(ident);
@@ -138,12 +142,9 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 			new->n = 2;
 			ft_lstadd_front(ms->env, new);
 		}
-		//printf ("check: %d\n",check);
 		i++;
 	}
 }
-
-//_= can't desapier
 
 //export A1=Desenhada A2=Banda 
 //export A1=Banana A2=Casca_de A3=Macaco_atira

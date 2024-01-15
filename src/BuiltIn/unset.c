@@ -77,18 +77,22 @@ void	find_ident_unset(t_list **env, char *ident2)
 void	unset(t_minishell *ms, char **cmd_line)
 {
 	int	i;
+	int flag;
 
 	i = 1;
 	if (!cmd_line[i])
 		return ;
 	while (cmd_line[i])
 	{
-		if(ft_identifier(cmd_line[i]) == 0)
+		flag = ft_identifier(cmd_line[i]);
+		if(flag == 0)
 		{
 			error_message(ms, "unset: not a valid identifier\n", cmd_line[i]);
 			ms->exit = 1;
 			break ;
 		}
+		if(flag == 2)
+			break ;
 		find_ident_unset(ms->env, cmd_line[i]);
 		i++;
 	}
