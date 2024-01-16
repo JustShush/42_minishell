@@ -17,7 +17,7 @@ int	ft_identifier(char	*s)
 	int	i;
 	int	flag;
 
-	if (strcmp(s, "_") == 0)
+	if (ft_strcmp(s, "_") == 0)
 		return (2);
 	if ((s[0] >= '0' && s[0] <= '9') || s[0] == '=')
 		return (0);
