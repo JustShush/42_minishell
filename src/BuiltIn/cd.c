@@ -37,6 +37,21 @@ void	change_dir(t_list **lst)
 	}
 }
 
+void	home_to_dir(t_minishell *ms, char *path)
+{
+	size_t	len;
+	char *new_path;
+
+	len = ft_strlen(path) - 2;
+	new_path = ft_substr(path, 2, len);
+	if (chdir(new_path) == -1)
+	{
+		error_message(ms, "cd: No such file or directory\n", new_path);
+		ms->exit = 1;
+	}
+	free(new_path);
+}
+
 int	find_home(t_list **lst)
 {
 	t_list	*tmp;
@@ -74,21 +89,6 @@ void	go_home(t_minishell *ms)
 	}		
 }
 
-void	home_to_dir(t_minishell *ms, char *path)
-{
-	size_t	len;
-	char *new_path;
-
-	len = ft_strlen(path) - 2;
-	new_path = ft_substr(path, 2, len);
-	if (chdir(new_path) == -1)
-	{
-		error_message(ms, "cd: No such file or directory\n", NULL);
-		ms->exit = 1;
-	}
-	free(new_path);
-}
-
 void	cd(t_minishell *ms, char **path)
 {
 	if (path && arr_size(path) > 2)
@@ -99,12 +99,12 @@ void	cd(t_minishell *ms, char **path)
 	else if (!path || !path[1] || !path[1][0]|| path[1][0] == '~')
 	{
 		go_home(ms);
-		if (path[1][1] == '/')
+		if (path[1][1] == '/' && path[1][2])
 			home_to_dir(ms, path[1]);
 	}
 	else if (chdir(path[1]) == -1)
 	{
-		error_message(ms, "cd: No such file or directory\n", NULL);
+		error_message(ms, "cd: No such file or directory\n", path[1]);
 		ms->exit = 1;
 	}
 	change_dir(ms->env);

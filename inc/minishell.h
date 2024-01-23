@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/15 20:04:25 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/01/23 18:55:49 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,9 @@ void	post_process_signal(void);
 //* ---- BuiltIn DIR ----
 
 //! in cd.c
-char	*var_str(t_list *env, char *var);
+void	change_dir(t_list **lst);
+void	home_to_dir(t_minishell *ms, char *path);
+int		find_home(t_list **lst);
 void	go_home(t_minishell *ms);
 void	cd(t_minishell *ms, char **path);
 

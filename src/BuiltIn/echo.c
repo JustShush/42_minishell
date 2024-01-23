@@ -12,12 +12,26 @@
 
 #include "../../inc/minishell.h"
 
-/**
-echo -nnnfnnn -n coco
- */
 int	check_option(char *opt)
 {
-	if (ft_strncmp(opt, "-n", 2) == 0)
+	int 	i;
+	int		len;
+	char	*str;
+
+	if (!opt)
+		return (0);
+	if (ft_strcmp(opt, "-n") == 0)
+		return (1);
+	i = 1;
+	str = ft_strdup(opt);
+	len = (int)ft_strlen(opt);
+	str[0] = '-';
+	while (i < len)
+	{
+		str[i] = 'n';
+		i++;
+	}
+	if (ft_strcmp(opt, str) == 0)
 		return (1);
 	return (0);
 }
