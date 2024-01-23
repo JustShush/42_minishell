@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/23 18:55:49 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/01/23 21:04:39 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,8 @@ void	print_lst(t_list **lst);
 void	env(t_minishell *ms, char **cmd_line);
 
 //! in exit.c
+int		check_if_num(t_minishell *ms, char *arg);
+int		calc_exit(int n);
 void	ft_exit(t_minishell *ms, char **path);
 
 //! in export.c

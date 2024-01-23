@@ -12,18 +12,64 @@
 
 #include "../../inc/minishell.h"
 
-void	ft_exit(t_minishell *ms, char **path)
+// exit: occ: numeric argument required
+int	check_if_num(t_minishell *ms, char *arg)
 {
-	if (path && arr_size(path) > 1)
+	int i;
+
+	i = 0;
+	if (arg[i] == '-' || arg[i] == '+')
+		i++;
+	while (arg[i])
 	{
-		error_message(ms, "exit: Too many arguments.\n", NULL);
-		free_ms(ms);
-		exit(2);
-	}	
+		if (ft_isdigit(arg[i]) == 0)
+		{
+			error_message(ms, "exit: numeric argument required.\n", arg);
+			return (0);
+		}
+		i++;
+	}
+	return (1);
+}
+
+// changes exit nbr in a way, that it is in between 0 and 256
+int	calc_exit(int n)
+{
+	if (n >= 0 && n <= 255)
+		return (n);
+	else if (n > 255)
+	{
+		while (n > 255)
+			n = n - 256;
+	}
 	else
 	{
-		free_ms(ms);
-		exit(0);
+		while (n < 0)
+			n = n + 256;
 	}
+	return (n);
 }
-// exit: occ: numeric argument required
+
+void	ft_exit(t_minishell *ms, char **cmd_line)
+{
+	int nbr;
+
+	nbr = 0;
+	if (cmd_line && arr_size(cmd_line) == 1)
+		nbr = 0;
+	else if (cmd_line[1] && arr_size(cmd_line) == 2)
+	{
+		if (check_if_num(ms, cmd_line[1]) == 0)
+			nbr = 2;
+		else
+			nbr = ft_atoi(cmd_line[1]);
+	}
+	else if (cmd_line[2] && arr_size(cmd_line) > 2)
+	{
+		error_message(ms, "exit: too many arguments.\n", NULL);
+		nbr = 1;
+	}
+	nbr = calc_exit(nbr);	
+	free_ms(ms);
+	exit(nbr);
+}
