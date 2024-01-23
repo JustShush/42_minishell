@@ -12,7 +12,6 @@
 
 #include "../../inc/minishell.h"
 
-// exit: occ: numeric argument required
 int	check_if_num(t_minishell *ms, char *arg)
 {
 	int i;
@@ -31,7 +30,7 @@ int	check_if_num(t_minishell *ms, char *arg)
 	}
 	return (1);
 }
-
+// exit: occ: numeric argument required
 // changes exit nbr in a way, that it is in between 0 and 256
 int	calc_exit(int n)
 {
