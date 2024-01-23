@@ -13,13 +13,7 @@
 #include "../../inc/minishell.h"
 
 /**
- * The function "echo" prints the command line arguments, with an optional flag to suppress the newline
- * character.
- * 
- * @param opt A string representing an option passed to the function.
- * 
- * @return The function `check_option` returns an integer value. If the `opt` string starts with "-n",
- * it returns 1. Otherwise, it returns 0.
+echo -nnnfnnn -n coco
  */
 int	check_option(char *opt)
 {

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-
+//export hi hi hi
 int	ft_identifier(char	*s)
 {
 	int	i;

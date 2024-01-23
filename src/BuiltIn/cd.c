@@ -74,19 +74,34 @@ void	go_home(t_minishell *ms)
 	}		
 }
 
+void	home_to_dir(t_minishell *ms, char *path)
+{
+	size_t	len;
+	char *new_path;
+
+	len = ft_strlen(path) - 1;
+	new_path = ft_substr(path, 2, len);
+	if (chdir(new_path) == -1)
+	{
+		error_message(ms, "cd: No such file or directory\n", NULL);
+		ms->exit = 1;
+	}
+	free(new_path);
+}
+
 void	cd(t_minishell *ms, char **path)
 {
-	//char	old_pwd[PATH_MAX + 1];
-
-	//getcwd(old_pwd, sizeof(old_pwd));
 	if (path && arr_size(path) > 2)
 	{
 		error_message(ms, "cd: too many arguments\n", NULL);
 		ms->exit = 1;
-		//ft_bzero(old_pwd, ft_strlen(old_pwd));
 	}
-	else if (!path || !path[1] || !path[1][0])
+	else if (!path || !path[1] || !path[1][0]|| path[1][0] == '~')
+	{
 		go_home(ms);
+		if (path[1][1] == '/')
+			home_to_dir(ms, path[1]);
+	}
 	else if (chdir(path[1]) == -1)
 	{
 		error_message(ms, "cd: No such file or directory\n", NULL);
@@ -94,6 +109,7 @@ void	cd(t_minishell *ms, char **path)
 	}
 	change_dir(ms->env);
 }
+// cd ~ -> home
 // if theres is no arg (ex: cd) just return to home
 // Use the chdir function to change the current working directory
 //* if there is no loc go back to home. DONE!
