@@ -26,4 +26,4 @@ void	ft_exit(t_minishell *ms, char **path)
 		exit(0);
 	}
 }
-//should release all allocated memory
+// exit: occ: numeric argument required

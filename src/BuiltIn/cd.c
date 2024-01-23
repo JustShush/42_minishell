@@ -12,6 +12,7 @@
 
 #include "../../inc/minishell.h"
 
+//cd -      -> diretorio anterior
 void	change_dir(t_list **lst)
 {
 	t_list	*tmp;
