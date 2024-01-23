@@ -79,7 +79,7 @@ void	home_to_dir(t_minishell *ms, char *path)
 	size_t	len;
 	char *new_path;
 
-	len = ft_strlen(path) - 1;
+	len = ft_strlen(path) - 2;
 	new_path = ft_substr(path, 2, len);
 	if (chdir(new_path) == -1)
 	{
