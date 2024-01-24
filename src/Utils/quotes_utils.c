@@ -1,5 +1,25 @@
 #include "../../inc/minishell.h"
 
+int	quote_num(char *str)
+{
+	int	i;
+	int	n;
+
+	i = 0;
+	n = 0;
+	while (str[i])
+	{
+		if (parser_op(str[i]) == 3)
+		{
+			i = skip_quotes(str, i);
+			n += 2;
+		}
+		else
+			i++;
+	}
+	return (n);
+}
+
 int	skip_quotes(char *str, int pos)
 {
 	char	quote;
@@ -12,6 +32,34 @@ int	skip_quotes(char *str, int pos)
 		pos++;
 	}
 	return (pos);
+}
+
+//Removes quotes from str. Used for case echo "'$HOME'"
+char	*remove_quotes(char *str)
+
+{
+	int		i;
+	int		j;
+	char	*buf;
+	char	quote;
+
+	i = 0;
+	j = 0;
+	buf = calloc(sizeof(char), (ft_strlen(str) - quote_num(str) + 1));
+	while (str[i])
+	{
+		if (parser_op(str[i]) == 3)
+		{
+			quote = str[i++];
+			while (str[i] && str[i] != quote)
+				buf[j++] = str[i++];
+			if (str[i])
+				i++;
+		}
+		else
+			buf[j++] = str[i++];
+	}
+	return (buf);
 }
 
 char	*add_quotes(char *str, char c)
@@ -30,47 +78,4 @@ char	*add_quotes(char *str, char c)
 		buf[j++] = str[i++];
 	buf[j] = c;
 	return (buf);
-}
-
-//Removes quotes from str. Used for case echo "'$HOME'"
-char	*remove_quotes(char *str, char c)
-{
-	int		i;
-	int		j;
-	char	*buf;
-
-	i = 0;
-	j = 0;
-	i = skip_quotes(str, i);
-	buf = calloc(sizeof(char), i);
-	i = 0;
-	while (str[i])
-	{
-		while (str[i] && str[i] != c)
-			buf[j++] = str[i++];
-		if (str[i] && str[i] == c)
-			i++;
-	}
-	return (buf);
-}
-
-// Returns 1 if there are open quotes
-// Returns 0 if there are closed quotes
-int	closed_quotes(char *str, char c)
-{
-	int	i;
-
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	if (str[i] == c)
-	{
-		i++;
-		while (str[i] && str[i] != c)
-			i++;
-		i++;
-	}
-	if (i == (int)ft_strlen(str))
-		return (0);
-	return (1);
 }

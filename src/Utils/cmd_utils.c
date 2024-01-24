@@ -1,19 +1,5 @@
 #include "../../inc/minishell.h"
 
-void	print_arr(char *str, char **arr)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	if (!arr)
-		return ;
-	j = arr_size(arr);
-	printf("	%s:\n", str);
-	while (arr[i] && i < j)
-		printf("			%s\n", arr[i++]);
-}
-
 void	print_cmdlist(t_cmdlist *cmdlist)
 {
 	int			i;

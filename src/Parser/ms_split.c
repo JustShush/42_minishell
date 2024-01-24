@@ -26,6 +26,7 @@ int	parser_op(char c)
 	return (0);
 }
 
+// how many words are in str
 // spaces" "; pipes | ; dolar $; single '; double ";
 int	countw(char *str)
 {
@@ -44,9 +45,9 @@ int	countw(char *str)
 			i = others(str, i);
 		else if (str[i] && parser_op(str[i]) == 3)
 			i = quotes(str, str[i], i);
-		else if (str[i] && parser_op(str[i]) == 4)
-			i = dolar(str, i);
-		else if (str[i] && !parser_op(str[i])) // check if its not of the cases here ( \t><|$'")
+		else if (str[i] && str[i] == '$')
+			i = envar(str, i);
+		else if (str[i] && !parser_op(str[i]))
 			i = space_tab(str, i);
 	}
 	return (words);
@@ -68,6 +69,7 @@ char	*split_temp(t_minishell *ms, char *str, int word_len)
 	return (temp);
 }
 
+// Returns the length of str until the next whitespace or separating meta-char
 int	get_wordl(char *str)
 {
 	int	i;
@@ -78,12 +80,13 @@ int	get_wordl(char *str)
 	if (str[i] && parser_op(str[i]) == 2)
 		return (others(str, i));
 	if (str[i] && parser_op(str[i]) == 4)
-		return (dolar(str, i));
+		return (envar(str, i));
 	if (str[i] && !parser_op(str[i]))
 		return (space_tab(str, i));
 	return (i);
 }
 
+// Splits str into an array of char *
 char	**ms_split(t_minishell *ms, char *str)
 {
 	int		i;

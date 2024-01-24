@@ -20,12 +20,33 @@ int	redirect_in(t_minishell *ms, char *file, int heredoc, int child)
 	return (0);
 }
 
+int	redirect_out(t_minishell *ms, char *file, int append, int child)
+{
+	int		fd;
+	char	*file_buf;
+
+	file_buf = remove_quotes(file);
+	if (!append)
+		fd = open(file_buf, O_CREAT | O_RDWR | O_TRUNC, 0664);
+	else
+		fd = open(file_buf, O_CREAT | O_RDWR | O_APPEND, 0664);
+	if (fd < 0)
+		return (open_error(ms, file_buf, child));
+	else
+	{
+		dup2(fd, STDOUT_FILENO);
+		close(fd);
+	}
+	free(file_buf);
+	return (0);
+}
+
 void	reset_fds(t_minishell *ms)
 {
-	dup2(ms->fdout_buf, STDOUT_FILENO);
-	close(ms->fdout_buf);
-	dup2(ms->fdin_buf, STDIN_FILENO);
-	close(ms->fdin_buf);
+	dup2(ms->fdout, STDOUT_FILENO);
+	close(ms->fdout);
+	dup2(ms->fdin, STDIN_FILENO);
+	close(ms->fdin);
 }
 
 int	redirect(t_minishell *ms, char **main_arr, int pos, int child)
