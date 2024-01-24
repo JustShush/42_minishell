@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-//cd -      -> diretorio anterior
+//printf("dir: %s\n", pwd);
 void	change_dir(t_list **lst)
 {
 	t_list	*tmp;
@@ -97,7 +97,7 @@ void	cd(t_minishell *ms, char **path)
 		error_message(ms, "cd: too many arguments\n", NULL);
 		ms->exit = 1;
 	}
-	else if (!path || !path[1] || !path[1][0]|| path[1][0] == '~')
+	else if (!path || !path[1] || path[1][0] == '~')
 	{
 		go_home(ms);
 		if (path[1][1] == '/' && path[1][2])

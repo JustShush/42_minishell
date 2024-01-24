@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/12 14:27:31 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/01/24 00:19:46 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	main(int argc, char *argv[], char **env)
 	//print_env(env);
 	ms->env = env_init(env);
 	signal_init();
+	getcwd(ms->old_pwd, sizeof(ms->old_pwd));
 	while (1)
 	{
 		ms->prompt = ft_strdup("Minishell$> ");

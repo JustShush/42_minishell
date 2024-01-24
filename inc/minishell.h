@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/23 21:04:39 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/01/24 00:15:49 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct s_minishell
 	char	*input;
 	char	**history;
 	char	**main_arr;
+	char	old_pwd[PATH_MAX + 1];
 	int		exit;
 	int		cmd_count;
 	t_list	**env;
