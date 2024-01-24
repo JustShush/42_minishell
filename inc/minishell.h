@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/24 00:15:49 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:26:14 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	ft_exit(t_minishell *ms, char **path);
 
 //! in export.c
 int		ft_identifier(char	*s);
-int		find_ident_exp(t_list **env, char *content, char *new_cont);
+int		find_ident_exp(t_list **env, char *content, char *new_cont, int flag);
 int		check_identifier(t_minishell *ms, char *content);
 void	print_exp(t_list **lst);
 void	ft_export(t_minishell *ms, char **cmd_line);

@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
-//export hi hi hi
+
 int	ft_identifier(char	*s)
 {
 	int	i;
@@ -40,21 +40,22 @@ int	ft_identifier(char	*s)
 	return (0);
 }
 
-int	find_ident_exp(t_list **env, char *ident, char *new_cont)
+int	find_ident_exp(t_list **env, char *ident, char *new_cont, int flag)
 {
 	t_list	*tmp;
 	size_t	len;
-	char	*c;
 
 	tmp = *env;
 	if (!tmp)
 		perror("Minishell$> export");
-	c = "=";
-	ident = ft_strjoin(ident, c);
+	if (flag == 1)
+		ident = ft_strjoin(ident, "=");
+	else
+		ident = ft_strdup(new_cont);
 	len = ft_strlen(ident);
 	while (tmp)
 	{
-		if (ft_strncmp((char *)(tmp)->content, ident, len) == 0)
+		if ((tmp)->n == flag && ft_strncmp((char *)(tmp)->content, ident, len) == 0)
 		{
 			free((tmp)->content);
 			(tmp)->content = new_cont;
@@ -70,29 +71,38 @@ int	find_ident_exp(t_list **env, char *ident, char *new_cont)
 int	check_identifier(t_minishell *ms, char *content)
 {
 	char	**ident;
+	int		flag;
 
+	flag = 0;
 	ident = ft_split(content, '=');
-	if (!ident[1])
-	{
-		free_arr(ident);
-		return (3);
-	}
 	if (ft_identifier(ident[0]) == 1)
 	{
-		if(find_ident_exp(ms->env, ident[0], content) == 2)
+		if (!ft_strchr(content, '='))
 		{
-			free_arr(ident);
-			return (2);
+			if (find_ident_exp(ms->env, NULL, content, 2) == 2)
+				flag = 4;
+			else
+				flag = 3;
+		}		
+		else
+		{
+			if (ident[1])
+			{
+				if (find_ident_exp(ms->env, ident[0], content, 1) == 2)
+					flag = 2;	
+				else
+					flag = 1;
+			}
 		}
-		free_arr(ident);
-		return (1);
 	}
-	else if (ft_identifier(ident[0]) == 2)
-		return (0);
-	error_message(ms, "export: not a valid identifier\n", content);
-	ms->exit = 1;
+	else if (ft_identifier(ident[0]) == 0)
+	{
+		error_message(ms, "export: not a valid identifier\n", content);
+		ms->exit = 1;
+	}
 	free_arr(ident);
-	return (0);
+	printf("check flag: %d\n", flag);
+	return (flag);
 }
 
 void	print_exp(t_list **lst)
@@ -145,6 +155,7 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 		i++;
 	}
 }
-
+//export ho ho ho
+//export _=poop
 //export A1=Desenhada A2=Banda 
 //export A1=Banana A2=Casca_de A3=Macaco_atira

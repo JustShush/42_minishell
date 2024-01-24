@@ -53,7 +53,7 @@ void	ft_exit(t_minishell *ms, char **cmd_line)
 {
 	int nbr;
 
-	nbr = 0;
+	//nbr = 0;
 	if (cmd_line && arr_size(cmd_line) == 1)
 		nbr = 0;
 	else if (cmd_line[1] && arr_size(cmd_line) == 2)
