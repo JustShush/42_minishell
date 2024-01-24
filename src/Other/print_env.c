@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:25:18 by dimarque          #+#    #+#             */
-/*   Updated: 2023/10/27 11:28:17 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/24 12:10:59 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	print_env(char **env)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (env[i])

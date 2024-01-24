@@ -6,18 +6,18 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/28 19:02:21 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:14:04 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int g_global = 0;
+int	g_global = 0;
 
-char **ft_arrdup(t_minishell *ms, char **old)
+char	**ft_arrdup(t_minishell *ms, char **old)
 {
-	char **new;
-	int index;
+	char	**new;
+	int		index;
 
 	index = 0;
 	new = malloc(sizeof(char *) * (arr_size(old) + 1));
@@ -59,15 +59,15 @@ void	minishell(t_minishell *ms)
 		cmds_run++;
 	}
 	get_exit_status(ms, pid, cmds_run);
-	//check_cmd(ms);
 }
+	//check_cmd(ms);
 
-t_list **env_init(char **envp)
+t_list	**env_init(char **envp)
 {
-	int i;
-	char *buf;
-	t_list *node;
-	t_list **env;
+	int		i;
+	char	*buf;
+	t_list	*node;
+	t_list	**env;
 
 	i = 0;
 	env = (t_list **)malloc(sizeof(env));
@@ -83,10 +83,10 @@ t_list **env_init(char **envp)
 	return (env);
 }
 
-void free_main(t_minishell *ms, int argc, char *argv[])
+void	free_main(t_minishell *ms, int argc, char *argv[])
 {
 	post_process_signal();
-	signal_D(ms);
+	signal_d(ms);
 	free_arr(ms->main_arr);
 	free(ms->prompt);
 	free(ms->input);
@@ -94,9 +94,9 @@ void free_main(t_minishell *ms, int argc, char *argv[])
 	(void)argv;
 }
 
-int main(int argc, char *argv[], char **env)
+int	main(int argc, char *argv[], char **env)
 {
-	t_minishell *ms;
+	t_minishell	*ms;
 
 	ms = malloc(sizeof(t_minishell));
 	if (!ms)

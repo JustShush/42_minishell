@@ -19,7 +19,7 @@ void	ft_exit(t_minishell *ms, char **path)
 		write(2, "Minishell$> exit: too many arguments\n", 37);
 		free_ms(ms);
 		exit(1);
-	}	
+	}
 	else
 	{
 		free_ms(ms);

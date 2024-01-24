@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/28 19:00:00 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:13:56 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ void	free_ms(t_minishell *ms);
 //char	*prompt(void);
 
 //! in signals.c
-void	signal_C(int signum);
+void	signal_c(int signum);
 void	signal_process_interrupt(int signum);
 void	signal_init(void);
-void	signal_D(t_minishell *ms);
+void	signal_d(t_minishell *ms);
 void	post_process_signal(void);
 
 //* ---- BuiltIn DIR ----
@@ -196,8 +196,8 @@ char	**list_to_array(t_minishell *ms, t_list **list);
 void	print_arr(char *str, char **arr);
 
 //! in check_cmd.c
-int		IsBuiltIn(char *str);
-void	builtIn(t_minishell *ms, char **cmd_flags, int parent);
+int		isbuiltin(char *str);
+void	built_in(t_minishell *ms, char **cmd_flags, int parent);
 void	check_cmd(t_minishell *ms);
 
 //! in cmd_utils.c
@@ -212,7 +212,7 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
  * My function to handle all errors
  * @param op type of error msg
  * @param arg (optional) addicional msg
- * @note 1 malloc error, 2 malloc error, 3 custom error
+ * @note 2 malloc error, 3 custom error
  */
 void	error(t_minishell *ms, int op, char *arg);
 int		open_error(t_minishell *ms, char *filename, int child);

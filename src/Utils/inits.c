@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   inits.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/24 13:09:05 by dimarque          #+#    #+#             */
+/*   Updated: 2024/01/24 13:09:05 by dimarque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/minishell.h"
 
 //Creates cmdlist. Initializes cmd_arr
@@ -41,7 +53,7 @@ t_cmdlist	*cmd_list_init(t_minishell *ms)
 
 int	var_init(t_minishell *ms)
 {
-	char **new_arr;
+	char	**new_arr;
 
 	ms->main_arr = ms_split(ms, ms->input);
 	if (!(ms->main_arr))

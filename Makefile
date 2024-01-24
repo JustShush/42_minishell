@@ -16,7 +16,6 @@ SRC_parser = ms_split.c parser_utils.c
 SRC_replacer = replace_utils.c replace.c
 SRC_utils = arr_utils.c check_cmd.c cmd_utils.c error.c inits.c quotes_utils.c str_utils.c
 
-
 lib = libft
 LIB = $(lib)/libft.a
 
@@ -138,4 +137,4 @@ fclean: clean
 re: fclean all
 
 val:
-	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=readline.supp ./minishell
+	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=readline.supp --trace-children=yes ./minishell

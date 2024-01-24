@@ -26,7 +26,7 @@ void	get_exit_status(t_minishell *ms, pid_t pid, int cmds_run)
 {
 	int	status;
 
-	if (ms->cmd_count == 1 && IsBuiltIn(ms->cmdlist->cmds[0]) \
+	if (ms->cmd_count == 1 && isbuiltin(ms->cmdlist->cmds[0]) \
 		== 1)
 	{
 		wait(&status);
@@ -69,7 +69,7 @@ void	child(t_minishell *ms, int *pipe_fd, int cmds_run, int pos)
 		dup2(pipe_fd[1], STDOUT_FILENO);
 	close(pipe_fd[1]);
 	close(pipe_fd[0]);
-	if (ms->cmd_count == 1 && IsBuiltIn(cmd->cmds[0]))
+	if (ms->cmd_count == 1 && isbuiltin(cmd->cmds[0]))
 		free_ms(ms);
 	redirect(ms, ms->main_arr, pos, 1);
 	exec(ms, cmd->cmds);
@@ -86,12 +86,12 @@ void	parent(t_minishell *ms, int *pipe_fd, int cmds_run, int pos)
 		cmd = cmd->next;
 	if (ms->cmd_count == 1)
 	{
-		if (IsBuiltIn(cmd->cmds[0]) && redirect(ms, ms->main_arr, pos, 0) \
+		if (isbuiltin(cmd->cmds[0]) && redirect(ms, ms->main_arr, pos, 0) \
 			== 0)
 		{
 			close(pipe_fd[0]);
 			close(pipe_fd[1]);
-			builtIn(ms, cmd->cmds, 1);
+			built_in(ms, cmd->cmds, 1);
 		}
 	}
 	if (cmds_run > 0)
@@ -103,31 +103,3 @@ void	parent(t_minishell *ms, int *pipe_fd, int cmds_run, int pos)
 	close(pipe_fd[1]);
 	signal(SIGINT, signal_process_interrupt);
 }
-
-/* void	ms_pipex(t_minishell *ms)
-{
-	int		fd[2];
-	int		cmds_run;
-	int		pos;
-	pid_t	pid;
-
-	cmds_run = 0;
-	pos = 0;
-	if (!ms->cmdlist)
-		return ;
-	signal(SIGQUIT, signal_process_interrupt);
-	while (cmds_run < ms->cmd_count)
-	{
-		if (pipe(fd) < 0)
-			error(ms, 4, "pipe Error.");
-		pid = fork();
-		if (pid < 0)
-			error(ms, 5, "Fork Error.");
-		if (pid == 0)
-			child(ms, fd, cmds_run, pos);
-		else
-			parent(ms, fd, cmds_run, pos);
-		pos = find_cmd_pos(ms->main_arr, pos);
-		cmds_run++;
-	}
-} */

@@ -6,13 +6,13 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:11:59 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/01 15:13:32 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/24 13:15:05 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-void	signal_C(int signum)
+void	signal_c(int signum)
 {
 	if (signum == SIGINT)
 	{
@@ -33,16 +33,16 @@ void	signal_process_interrupt(int signum)
 
 void	signal_init(void)
 {
-	signal(SIGINT, signal_C);
+	signal(SIGINT, signal_c);
 	signal(SIGQUIT, SIG_IGN);
 }
 
-void	signal_D(t_minishell *ms)
+void	signal_d(t_minishell *ms)
 {
 	if (!(ms->input))
 	{
 		write(2, "\033[1;31mexit!\033[0m\n", 17);
-		free_ms(ms); // TODO: problem here with free_ms main_arr
+		free_ms(ms);
 	}
 }
 

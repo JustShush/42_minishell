@@ -72,7 +72,7 @@ int	check_identifier(t_minishell *ms, char *content)
 	ident = ft_split(content, '=');
 	if (ft_identifier(ident[0]) == 1)
 	{
-		if(find_ident_exp(ms->env, ident[0], content) == 2)
+		if (find_ident_exp(ms->env, ident[0], content) == 2)
 		{
 			free_arr(ident);
 			return (2);
