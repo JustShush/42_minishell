@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   str_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/24 13:08:50 by dimarque          #+#    #+#             */
+/*   Updated: 2024/01/24 13:08:50 by dimarque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/minishell.h"
 
 // Returns length of string when it reaches c.
@@ -57,4 +69,18 @@ int	strcmp_nochr(char *s1, char *s2, char c)
 	if (i < (int)ft_strlen(s1) - 1)
 		return (1);
 	return (s1[i] - s2[i]);
+}
+
+char	*ft_strndup(char *str, int len)
+{
+	char	*res;
+
+	res = malloc(sizeof(char) * len + 1);
+	if (!res)
+	{
+		printf("Minishell: Malloc error!\n");
+		return (NULL);
+	}
+	ft_strlcpy(res, str, len + 1);
+	return (res);
 }

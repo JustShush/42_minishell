@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 10:46:33 by marvin            #+#    #+#             */
-/*   Updated: 2023/11/17 10:46:33 by marvin           ###   ########.fr       */
+/*   Created: 2024/01/24 12:12:42 by dimarque          #+#    #+#             */
+/*   Updated: 2024/01/24 12:12:42 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,14 @@ void	remove_node(t_list **env, char *ident, size_t len)
 			if (lst->next->next == NULL)
 			{
 				rm_first_last(env);
-				break;
+				break ;
 			}
-			tmp = lst->next;	
+			tmp = lst->next;
 			lst->next = lst->next->next;
 			free(tmp->content);
 			free(tmp);
 		}
-		else if(ft_strncmp((char *)(lst)->content, ident, len) == 0)
+		else if (ft_strncmp((char *)(lst)->content, ident, len) == 0)
 		{
 			tmp = (*env);
 			*env = (*env)->next;
@@ -74,6 +74,8 @@ void	find_ident_unset(t_list **env, char *ident2)
 	free(ident1);
 }
 
+/*export hi
+unset hii*/
 void	unset(t_minishell *ms, char **cmd_line)
 {
 	int	i;

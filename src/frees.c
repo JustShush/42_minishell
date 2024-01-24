@@ -44,9 +44,11 @@ void	free_cmd_list(t_cmdlist *cmdlist)
 
 void	free_arr(char **arr)
 {
-	int i;
+	int	i;
 
 	i = 0;
+	if (!arr)
+		return ;
 	while (arr[i])
 		free(arr[i++]);
 	if (arr)
@@ -59,10 +61,8 @@ void	free_ms(t_minishell *ms)
 		free(ms->prompt);
 	if (ms->input)
 		free(ms->input);
-	printf("%sSEG_FAULT%s of main_arr when signal_D \n", BRED, RESET);
-	if (ms->main_arr)
+	if (ms->main_arr && ms->main_arr[0])
 		free_arr(ms->main_arr);
-	printf("%sSEG_FAULT SOLVED%s of main_arr in frees.c!\n", BGREEN, RESET);
 	free_list(ms->env);
 	free(ms);
 	exit(0);

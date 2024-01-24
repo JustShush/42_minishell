@@ -1,18 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmd_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/01/24 12:49:44 by dimarque          #+#    #+#             */
+/*   Updated: 2024/01/24 12:49:44 by dimarque         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../inc/minishell.h"
-
-void	print_arr(char *str, char **arr)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	if (!arr)
-		return ;
-	j = arr_size(arr);
-	printf("	%s:\n", str);
-	while (arr[i] && i < j)
-		printf("			%s\n", arr[i++]);
-}
 
 void	print_cmdlist(t_cmdlist *cmdlist)
 {

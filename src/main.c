@@ -14,14 +14,53 @@
 
 int	g_global = 0;
 
+char	**ft_arrdup(t_minishell *ms, char **old)
+{
+	char	**new;
+	int		index;
+
+	index = 0;
+	new = malloc(sizeof(char *) * (arr_size(old) + 1));
+	if (!new)
+		error(ms, 2, NULL);
+	while (old && old[index])
+	{
+		new[index] = ft_strdup(old[index]);
+		index++;
+	}
+	new[index] = NULL;
+	return (new);
+}
+
 void	minishell(t_minishell *ms)
 {
-	ms->main_arr = ms_split(ms, ms->input);
-	env_var(ms);
-	if (!ms->main_arr)
+	int		pipe_fd[2];
+	int		cmds_run;
+	int		pos;
+	pid_t	pid;
+
+	cmds_run = 0;
+	pos = 0;
+	if (!ms->cmdlist)
 		return ;
-	check_cmd(ms);
+	signal(SIGQUIT, signal_process_interrupt);
+	while (cmds_run < ms->cmd_count)
+	{
+		if (pipe(pipe_fd) < 0)
+			pipe_error(ms, pipe_fd);
+		pid = fork();
+		if (pid < 0)
+			fork_error(ms, pipe_fd);
+		if (pid == 0)
+			child(ms, pipe_fd, cmds_run, pos);
+		else
+			parent(ms, pipe_fd, cmds_run, pos);
+		pos = find_cmd_pos(ms->main_arr, pos);
+		cmds_run++;
+	}
+	get_exit_status(ms, pid, cmds_run);
 }
+	//check_cmd(ms);
 
 t_list	**env_init(char **envp)
 {
@@ -47,6 +86,7 @@ t_list	**env_init(char **envp)
 void	free_main(t_minishell *ms, int argc, char *argv[])
 {
 	post_process_signal();
+	signal_d(ms);
 	free_arr(ms->main_arr);
 	free(ms->prompt);
 	free(ms->input);
@@ -56,21 +96,22 @@ void	free_main(t_minishell *ms, int argc, char *argv[])
 
 int	main(int argc, char *argv[], char **env)
 {
-	t_minishell *ms;
+	t_minishell	*ms;
 
 	ms = malloc(sizeof(t_minishell));
-	//print_env(env);
+	if (!ms)
+		error(NULL, 2, NULL);
 	ms->env = env_init(env);
 	signal_init();
 	getcwd(ms->old_pwd, sizeof(ms->old_pwd));
 	while (1)
 	{
+		signal_init();
 		ms->prompt = ft_strdup("Minishell$> ");
 		ms->input = readline(ms->prompt);
+		printf("input: %s\n", ms->input);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
-		else
-			continue;
 		signal_D(ms);
 		if (!var_init(ms))
 		{
@@ -95,8 +136,5 @@ int	main(int argc, char *argv[], char **env)
 // \033[1;33mMinishell\033[0m$>
 
 /**
- ** Easy Fix!
- * Before parsing everything create a new array that subs all vars for the actual value of the var (replacer)
- * 
- * Create a diff arr just for the commands and flags of those commands
-*/
+ ** after any command the program exists by it self
+ */

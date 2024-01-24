@@ -14,8 +14,8 @@
 
 void	pwd(void)
 {
-	int i;
-	char cwd[PATH_MAX + 1];
+	int		i;
+	char	cwd[PATH_MAX + 1];
 
 	i = 0;
 	if (getcwd(cwd, sizeof(cwd)) != NULL) 
@@ -25,5 +25,5 @@ void	pwd(void)
 			cwd[i++] = 0;
 	}
 	else
-		perror("pwd() error!");
+		perror("Minishell$> pwd() error!");
 }

@@ -27,6 +27,9 @@
 # include <linux/limits.h>
 # include <limits.h> // PATH_MAX
 # include <signal.h>
+# include<sys/wait.h>
+# include <errno.h>
+# include <sys/stat.h>
 
 # include <stddef.h>
 # include <sys/ioctl.h>
@@ -54,6 +57,9 @@ typedef struct s_minishell
 	char	old_pwd[PATH_MAX + 1];
 	int		exit;
 	int		cmd_count;
+	int		fdin;
+	int		fdout;
+	int		cmd_fd;
 	t_list	**env;
 	t_cmdlist	*cmdlist;
 }	t_minishell;
@@ -74,10 +80,10 @@ void	free_ms(t_minishell *ms);
 //char	*prompt(void);
 
 //! in signals.c
-void	signal_C(int signum);
+void	signal_c(int signum);
 void	signal_process_interrupt(int signum);
 void	signal_init(void);
-void	signal_D(t_minishell *ms);
+void	signal_d(t_minishell *ms);
 void	post_process_signal(void);
 
 //* ---- BuiltIn DIR ----
@@ -119,8 +125,24 @@ void	remove_node(t_list **env, char *ident, size_t len);
 void	find_ident_unset(t_list **env, char *ident2);
 void	unset(t_minishell *ms, char **cmd_line);
 
-//* ---- Other DIR ----
+//* ---- ms_pipex DIR ----
+//! in exec_utils.c
 
+int		is_exec(t_minishell *ms, char *cmd, char **paths);
+int		is_usable(t_minishell *ms, char	*cmd, char *cmd_path, char **paths_array);
+
+//! in exec.c
+
+void	exec(t_minishell *ms, char **cmd_arr);
+
+//! in ms_pipex
+
+int		find_cmd_pos(char **main_arr, int pos);
+void	get_exit_status(t_minishell *ms, pid_t pid, int cmds_run);
+void	child(t_minishell *ms, int *pipe_fd, int cmds_run, int pos);
+void	parent(t_minishell *ms, int *pipe_fd, int cmds_run, int pos);
+
+//* ---- Other DIR ----
 //! in print_env.c
 void	print_env(char **env);
 
@@ -137,7 +159,7 @@ char	**ms_split(t_minishell *ms, char *str);
 //! in parser_utils.c
 int		quotes(char *str, char c, int i);
 int		space_tab(char *str, int i);
-int		dolar(char *str, int i);
+int		envar(char *str, int i);
 int		others(char *str, int i);
 
 //* --- Replacer DIR ----
@@ -164,7 +186,7 @@ int	env_var(t_minishell *ms);
 //! in env_split_utils.c
 
 char	*dollar_cond(t_minishell *ms, char *buf);
-char	*var_iter(t_list **env, char *var);
+char	*var_iter(t_minishell *ms, char *var);
 char	*var_str(t_list *env, char *var);
 int		empty_var(char **arr, t_list **env);
 
@@ -177,13 +199,16 @@ char	*replace_str(t_minishell *ms, char *str);
 char	*replace_single(t_minishell *ms, char *str, char *buf, int flag);
 
 //* ---- Utils DIR ----
+//! in arr_utils.c
 
-//! in arr_size.c
 int		arr_size(char **arr);
+char	**ft_arrdup(t_minishell *ms, char **old);
+char	**list_to_array(t_minishell *ms, t_list **list);
+void	print_arr(char *str, char **arr);
 
 //! in check_cmd.c
-int		IsBuiltIn(char *str);
-void	builtIn(t_minishell *ms, char **cmd_flags);
+int		isbuiltin(char *str);
+void	built_in(t_minishell *ms, char **cmd_flags, int parent);
 void	check_cmd(t_minishell *ms);
 
 //! in cmd_utils.c
@@ -198,26 +223,37 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
  * My function to handle all errors
  * @param op type of error msg
  * @param arg (optional) addicional msg
+ * @note 2 malloc error, 3 custom error
  */
 void	error(t_minishell *ms, int op, char *arg);
 void	error_message(t_minishell *ms, char *mess, char *plus);
+int		open_error(t_minishell *ms, char *filename, int child);
+void	pipe_error(t_minishell *ms, int *pipe_fd);
+void	fork_error(t_minishell *ms, int *pipe_fd);
 
 //! in inits.c
 
-int	var_init(t_minishell *ms);
+int		var_init(t_minishell *ms);
 
 //! in quotes_utils.c
 
 int		skip_quotes(char *str, int pos);
 char	*add_quotes(char *str, char c);
-char	*remove_quotes(char *str, char c);
-int		closed_quotes(char *str, char c);
+char	*remove_quotes(char *str);
+
+//! in redirect.c
+
+void	reset_fds(t_minishell *ms);
+int		redirect(t_minishell *ms, char **main_arr, int pos, int child);
 
 //! in str_utils.c
 
-int	strlen_chr(char *str, char c);
-int	strchr_malloc(char *s, char c);
+int		strlen_chr(char *str, char c);
+int		strchr_malloc(char *s, char c);
 char	*str_front_trim(char *str, char *trim);
-int	strcmp_nochr(char *s1, char *s2, char c);
+int		strcmp_nochr(char *s1, char *s2, char c);
+char	*ft_strndup(char *str, int len);
+
+char	**replaced_arr(t_minishell *ms);
 
 #endif
