@@ -79,7 +79,7 @@ unset hii*/
 void	unset(t_minishell *ms, char **cmd_line)
 {
 	int	i;
-	int flag;
+	int	flag;
 
 	i = 1;
 	if (!cmd_line[i])
@@ -87,13 +87,13 @@ void	unset(t_minishell *ms, char **cmd_line)
 	while (cmd_line[i])
 	{
 		flag = ft_identifier(cmd_line[i]);
-		if(flag == 0)
+		if (flag == 0)
 		{
 			error_message(ms, "unset: not a valid identifier\n", cmd_line[i]);
 			ms->exit = 1;
 			break ;
 		}
-		if(flag == 2)
+		if (flag == 2)
 			break ;
 		find_ident_unset(ms->env, cmd_line[i]);
 		i++;

@@ -33,7 +33,7 @@ void	change_dir(t_list **lst)
 			free((tmp)->content);
 			(tmp)->content = ident;
 			break ;
-		}	
+		}
 		tmp = (tmp)->next;
 	}
 }
@@ -41,7 +41,7 @@ void	change_dir(t_list **lst)
 void	home_to_dir(t_minishell *ms, char *path)
 {
 	size_t	len;
-	char *new_path;
+	char	*new_path;
 
 	len = ft_strlen(path) - 2;
 	new_path = ft_substr(path, 2, len);
@@ -63,7 +63,7 @@ int	find_home(t_list **lst)
 	while (tmp)
 	{
 		if (ft_strncmp((char *)(tmp)->content, "HOME=", 4) == 0)
-			return(1);	
+			return (1);
 		tmp = (tmp)->next;
 	}
 	return (0);
@@ -87,7 +87,7 @@ void	go_home(t_minishell *ms)
 			ms->exit = 1;
 		}
 		free(home);
-	}		
+	}
 }
 
 void	cd(t_minishell *ms, char **path)

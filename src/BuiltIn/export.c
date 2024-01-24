@@ -55,7 +55,8 @@ int	find_ident_exp(t_list **env, char *ident, char *new_cont, int flag)
 	len = ft_strlen(ident);
 	while (tmp)
 	{
-		if ((tmp)->n == flag && ft_strncmp((char *)(tmp)->content, ident, len) == 0)
+		if ((tmp)->n == flag && \
+		ft_strncmp((char *)(tmp)->content, ident, len) == 0)
 		{
 			free((tmp)->content);
 			(tmp)->content = new_cont;
@@ -83,13 +84,13 @@ int	check_identifier(t_minishell *ms, char *content)
 				flag = 4;
 			else
 				flag = 3;
-		}		
+		}
 		else
 		{
 			if (ident[1])
 			{
 				if (find_ident_exp(ms->env, ident[0], content, 1) == 2)
-					flag = 2;	
+					flag = 2;
 				else
 					flag = 1;
 			}

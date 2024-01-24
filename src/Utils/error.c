@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:58:21 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/12 16:27:28 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/01/24 15:51:08 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	error_message(t_minishell *ms, char *mess, char *plus)
 	else
 		ft_printf("%s%s%s", RED, ms->prompt, RESET);
 	ft_putstr_fd(mess, 2);
+}
+
 int	open_error(t_minishell *ms, char *filename, int child)
 {
 	ft_putstr_fd("Minishell: ", STDERR_FILENO);

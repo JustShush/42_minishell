@@ -14,7 +14,7 @@
 
 int	check_if_num(t_minishell *ms, char *arg)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (arg[i] == '-' || arg[i] == '+')
@@ -30,6 +30,7 @@ int	check_if_num(t_minishell *ms, char *arg)
 	}
 	return (1);
 }
+
 // exit: occ: numeric argument required
 // changes exit nbr in a way, that it is in between 0 and 256
 int	calc_exit(int n)
@@ -51,9 +52,9 @@ int	calc_exit(int n)
 
 void	ft_exit(t_minishell *ms, char **cmd_line)
 {
-	int nbr;
+	int	nbr;
 
-	//nbr = 0;
+	nbr = 0;
 	if (cmd_line && arr_size(cmd_line) == 1)
 		nbr = 0;
 	else if (cmd_line[1] && arr_size(cmd_line) == 2)
@@ -68,7 +69,7 @@ void	ft_exit(t_minishell *ms, char **cmd_line)
 		error_message(ms, "exit: too many arguments.\n", NULL);
 		nbr = 1;
 	}
-	nbr = calc_exit(nbr);	
+	nbr = calc_exit(nbr);
 	free_ms(ms);
 	exit(nbr);
 }

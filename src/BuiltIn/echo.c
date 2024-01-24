@@ -14,7 +14,7 @@
 
 int	check_option(char *opt)
 {
-	int 	i;
+	int		i;
 	int		len;
 	char	*str;
 
