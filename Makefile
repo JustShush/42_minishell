@@ -16,10 +16,12 @@ SRC_parser = ms_split.c parser_utils.c
 SRC_replacer = replace_utils.c replace.c
 SRC_utils = arr_utils.c check_cmd.c cmd_utils.c error.c inits.c quotes_utils.c str_utils.c
 
+
 lib = libft
 LIB = $(lib)/libft.a
 
 OBJ_DIR = obj
+
 SRCS =	$(addprefix src/, $(SRC)) $(addprefix src/Other/, $(SRC_other)) $(addprefix src/Parser/, $(SRC_parser)) \
 		$(addprefix src/Utils/, $(SRC_utils)) $(addprefix src/BuiltIn/, $(SRC_builtin)) \
 		$(addprefix src/replacer/, $(SRC_replacer)) $(addprefix src/ms_pipex/, $(SRC_pipex))

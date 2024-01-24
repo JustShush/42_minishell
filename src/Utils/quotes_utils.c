@@ -36,6 +36,7 @@ int	skip_quotes(char *str, int pos)
 
 //Removes quotes from str. Used for case echo "'$HOME'"
 char	*remove_quotes(char *str)
+
 {
 	int		i;
 	int		j;
