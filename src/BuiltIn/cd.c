@@ -12,50 +12,106 @@
 
 #include "../../inc/minishell.h"
 
+//printf("dir: %s\n", pwd);
+void	change_dir(t_list **lst)
+{
+	t_list	*tmp;
+	char	pwd[PATH_MAX + 1];
+	char	*ident;
+
+	ident = "PWD=";
+	tmp = *lst;
+	if (!tmp)
+		return ;
+	while (tmp)
+	{
+		if (ft_strncmp((char *)(tmp)->content, ident, 4) == 0)
+		{
+			getcwd(pwd, sizeof(pwd));
+			ident = ft_strjoin(ident, pwd);
+			ft_bzero(pwd, ft_strlen(pwd));
+			free((tmp)->content);
+			(tmp)->content = ident;
+			break ;
+		}	
+		tmp = (tmp)->next;
+	}
+}
+
+void	home_to_dir(t_minishell *ms, char *path)
+{
+	size_t	len;
+	char *new_path;
+
+	len = ft_strlen(path) - 2;
+	new_path = ft_substr(path, 2, len);
+	if (chdir(new_path) == -1)
+	{
+		error_message(ms, "cd: No such file or directory\n", new_path);
+		ms->exit = 1;
+	}
+	free(new_path);
+}
+
+int	find_home(t_list **lst)
+{
+	t_list	*tmp;
+
+	tmp = *lst;
+	if (!tmp)
+		return (0);
+	while (tmp)
+	{
+		if (ft_strncmp((char *)(tmp)->content, "HOME=", 4) == 0)
+			return(1);	
+		tmp = (tmp)->next;
+	}
+	return (0);
+}
+
 void	go_home(t_minishell *ms)
 {
 	char	*home;
 
-	home = ft_strtrim(var_str(*ms->env, "HOME="), "HOME=");
-	if (!home)
+	if (find_home(ms->env) == 0)
 	{
-		write(2, "Minishell$> cd: HOME is undefined\n", 34);
+		error_message(ms, "cd: HOME not set\n", NULL);
 		ms->exit = 1;
-		exit (1);
 	}
-	else if (chdir(home) != 0)
+	else
 	{
-		perror("Minishell$> cd: HOME");
-		ms->exit = 1;
-		exit (1);
-	}
-	if (home)
+		home = ft_strtrim(var_str(*ms->env, "HOME="), "HOME=");
+		if (chdir(home) == -1)
+		{
+			error_message(ms, "cd: No such file or directory\n", NULL);
+			ms->exit = 1;
+		}
 		free(home);
+	}		
 }
 
 void	cd(t_minishell *ms, char **path)
 {
-	char	old_pwd[PATH_MAX + 1];
-
-	getcwd(old_pwd, sizeof(old_pwd));
 	if (path && arr_size(path) > 2)
 	{
-		write(2, "Minishell$> cd: too many arguments\n", 34);
+		error_message(ms, "cd: too many arguments\n", NULL);
 		ms->exit = 1;
-		ft_bzero(old_pwd, ft_strlen(old_pwd));
-		return ;
 	}
-	// if theres is no arg (ex: cd) just return to home
-	else if (!path || !path[1] || !path[1][0])
+	else if (!path || !path[1] || path[1][0] == '~')
+	{
 		go_home(ms);
+		if (path[1][1] == '/' && path[1][2])
+			home_to_dir(ms, path[1]);
+	}
 	else if (chdir(path[1]) == -1)
 	{
-		perror("Minishell$> cd");
+		error_message(ms, "cd: No such file or directory\n", path[1]);
 		ms->exit = 1;
-		return ;
 	}
-	// Use the chdir function to change the current working directory
+	change_dir(ms->env);
 }
-
+// cd ~ -> home
+// if theres is no arg (ex: cd) just return to home
+// Use the chdir function to change the current working directory
 //* if there is no loc go back to home. DONE!
 // TODO: check if path is a valid dir

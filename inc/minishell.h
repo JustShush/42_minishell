@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/24 13:13:56 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/24 14:26:14 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ typedef struct s_minishell
 	char	*input;
 	char	**history;
 	char	**main_arr;
+	char	old_pwd[PATH_MAX + 1];
 	int		exit;
 	int		cmd_count;
 	int		fdin;
@@ -88,30 +89,40 @@ void	post_process_signal(void);
 //* ---- BuiltIn DIR ----
 
 //! in cd.c
-char	*var_str(t_list *env, char *var);
+void	change_dir(t_list **lst);
+void	home_to_dir(t_minishell *ms, char *path);
+int		find_home(t_list **lst);
 void	go_home(t_minishell *ms);
 void	cd(t_minishell *ms, char **path);
 
 //! in echo.c
 int		check_option(char *opt);
+void	command_echo(char **cmd_line, int flag, int i);
 void	echo(char **cmd_line);
 
 //! in env.c
+void	print_lst(t_list **lst);
 void	env(t_minishell *ms, char **cmd_line);
 
 //! in exit.c
+int		check_if_num(t_minishell *ms, char *arg);
+int		calc_exit(int n);
 void	ft_exit(t_minishell *ms, char **path);
 
 //! in export.c
 int		ft_identifier(char	*s);
-int		find_ident_exp(t_list **env, char *content, char *new_cont);
+int		find_ident_exp(t_list **env, char *content, char *new_cont, int flag);
 int		check_identifier(t_minishell *ms, char *content);
+void	print_exp(t_list **lst);
 void	ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c
-void	pwd(void);
+void	pwd();
 
 //! in unset.c
+void	rm_first_last(t_list **env);
+void	remove_node(t_list **env, char *ident, size_t len);
+void	find_ident_unset(t_list **env, char *ident2);
 void	unset(t_minishell *ms, char **cmd_line);
 
 //* ---- ms_pipex DIR ----
@@ -215,6 +226,7 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
  * @note 2 malloc error, 3 custom error
  */
 void	error(t_minishell *ms, int op, char *arg);
+void	error_message(t_minishell *ms, char *mess, char *plus);
 int		open_error(t_minishell *ms, char *filename, int child);
 void	pipe_error(t_minishell *ms, int *pipe_fd);
 void	fork_error(t_minishell *ms, int *pipe_fd);
@@ -241,12 +253,6 @@ int		strchr_malloc(char *s, char c);
 char	*str_front_trim(char *str, char *trim);
 int		strcmp_nochr(char *s1, char *s2, char c);
 char	*ft_strndup(char *str, int len);
-
-
-
-
-
-
 
 char	**replaced_arr(t_minishell *ms);
 

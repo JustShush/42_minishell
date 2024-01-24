@@ -18,7 +18,7 @@ void	pwd(void)
 	char	cwd[PATH_MAX + 1];
 
 	i = 0;
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
+	if (getcwd(cwd, sizeof(cwd)) != NULL) 
 	{
 		printf("%s\n", cwd);
 		while (cwd[i])

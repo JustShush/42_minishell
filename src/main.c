@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/24 13:14:04 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/24 00:19:46 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_list	**env_init(char **envp)
 	{
 		buf = ft_strdup(envp[i]);
 		node = ft_lstnew(buf);
-		node->n = i + 1;
+		node->n = 1;
 		ft_lstadd_back(env, node);
 		i++;
 	}
@@ -103,6 +103,7 @@ int	main(int argc, char *argv[], char **env)
 		error(NULL, 2, NULL);
 	ms->env = env_init(env);
 	signal_init();
+	getcwd(ms->old_pwd, sizeof(ms->old_pwd));
 	while (1)
 	{
 		signal_init();
@@ -111,6 +112,7 @@ int	main(int argc, char *argv[], char **env)
 		printf("input: %s\n", ms->input);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
+		signal_D(ms);
 		if (!var_init(ms))
 		{
 			minishell(ms);

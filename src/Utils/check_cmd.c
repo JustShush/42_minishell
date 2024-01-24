@@ -29,6 +29,7 @@ int	isbuiltin(char *str)
 
 void	built_in(t_minishell *ms, char **cmd_flags, int parent)
 {
+	ms->exit = 0;
 	(void)parent;
 	if (ft_strcmp(cmd_flags[0], "cd") == 0)
 		cd(ms, cmd_flags);

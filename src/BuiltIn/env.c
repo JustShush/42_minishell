@@ -15,22 +15,13 @@
 void	print_lst(t_list **lst)
 {
 	t_list	*tmp;
-	char	pwd[PATH_MAX + 1];
 
 	tmp = *lst;
 	if (!tmp)
-	{
-		perror("Minishell$> env");
 		return ;
-	}
 	while (tmp)
 	{
-		if (ft_strncmp((char *)(tmp)->content, "PWD=", 4) == 0)
-		{
-			getcwd(pwd, sizeof(pwd));
-			ft_printf("%s%d%s PWD=%s\n", YELLOW, (tmp)->n, RESET, pwd);
-		}
-		else
+		if ((tmp)->n == 1)
 			ft_printf("%s%d%s %s\n", YELLOW, (tmp)->n, RESET, (tmp)->content);
 		tmp = (tmp)->next;
 	}
@@ -40,13 +31,13 @@ void	env(t_minishell *ms, char **cmd_line)
 {
 	if (cmd_line[1])
 	{
-		perror("Minishell$> env");
-		ms->exit = 2;
+		error_message(ms, "env: Too many arguments\n", NULL);
+		ms->exit = 127;
 		return ;
 	}
 	if (ms->env == NULL)
 	{
-		write(2, "No environment variables found.\n", 32);
+		error_message(ms, "env: No environment variables found.\n", NULL);
 		return ;
 	}
 	print_lst(ms->env);

@@ -12,23 +12,34 @@
 
 #include "../../inc/minishell.h"
 
-//-n     no newline after the output
 int	check_option(char *opt)
 {
-	if (ft_strncmp(opt, "-n", 2) == 0)
+	int 	i;
+	int		len;
+	char	*str;
+
+	if (!opt)
+		return (0);
+	if (ft_strcmp(opt, "-n") == 0)
+		return (1);
+	i = 1;
+	str = ft_strdup(opt);
+	len = (int)ft_strlen(opt);
+	str[0] = '-';
+	while (i < len)
+	{
+		str[i] = 'n';
+		i++;
+	}
+	if (ft_strcmp(opt, str) == 0)
 		return (1);
 	return (0);
 }
 
-void	echo(char **cmd_line)
+void	command_echo(char **cmd_line, int flag, int i)
 {
-	int	i;
-
-	if (!cmd_line[1])
-		return ;
-	if (check_option(cmd_line[1]) == 1)
+	if (flag)
 	{
-		i = 2;
 		while (cmd_line[i])
 		{
 			ft_printf("%s", cmd_line[i]);
@@ -47,4 +58,21 @@ void	echo(char **cmd_line)
 		}
 		ft_printf("\n");
 	}
+}
+
+void	echo(char **cmd_line)
+{
+	int	i;
+	int	flag;
+
+	if (!cmd_line[1])
+		return ;
+	flag = 0;
+	i = 1;
+	while (check_option(cmd_line[i]) == 1)
+	{
+		flag = 1;
+		i++;
+	}
+	command_echo(cmd_line, flag, i);
 }
