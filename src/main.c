@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/24 23:59:07 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/01/25 14:39:06 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,7 @@ void free_main(t_minishell *ms, int argc, char *argv[])
 	post_process_signal();
 	signal_d(ms);
 	free_arr(ms->main_arr);
-	// if (ms->prompt)
-	// 	free(ms->prompt);
+	free(ms->prompt);
 	free(ms->input);
 	(void)argc;
 	(void)argv;
@@ -100,16 +99,13 @@ int main(int argc, char *argv[], char **env)
 
 	(void)argc;
 	(void)argv;
-	t_minishell	*ms;
-ms = malloc(sizeof(t_minishell));
-
-if (!ms)
+	t_minishell *ms;
+	ms = malloc(sizeof(t_minishell));
+	if (!ms)
 		error(NULL, 2, NULL);
-	
-ms->env = env_init(env);
-
-	while(1)
-  {
+	ms->env = env_init(env);
+	while (1)
+	{
 		signal_init();
 		ms->prompt = ft_strdup("Minishell$> ");
 		ms->input = readline(ms->prompt);
@@ -121,10 +117,9 @@ ms->env = env_init(env);
 			minishell(ms);
 			free_cmd_list(ms->cmdlist);
 		}
-		signal_d(ms);
+		free_main(ms, argc, argv);
 	}
 }
-
 
 /*
 int	main(int argc, char *argv[], char **env)
