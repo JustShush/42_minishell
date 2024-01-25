@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:04:11 by dimarque          #+#    #+#             */
-/*   Updated: 2023/12/08 19:21:42 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:37:36 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
+
+void	close_fd(int *fd)
+{
+	close(fd[0]);
+	close(fd[1]);
+}
 
 void	free_list(t_list **list)
 {
@@ -47,7 +53,7 @@ void	free_arr(char **arr)
 	int	i;
 
 	i = 0;
-	if (!arr)
+	if (!arr || arr[i])
 		return ;
 	while (arr[i])
 		free(arr[i++]);
@@ -57,6 +63,10 @@ void	free_arr(char **arr)
 
 void	free_ms(t_minishell *ms)
 {
+	int	e;
+
+	e = 0;
+	e = ms->exit;
 	if (ms->prompt)
 		free(ms->prompt);
 	if (ms->input)
@@ -65,5 +75,5 @@ void	free_ms(t_minishell *ms)
 		free_arr(ms->main_arr);
 	free_list(ms->env);
 	free(ms);
-	exit(0);
+	exit(e);
 }

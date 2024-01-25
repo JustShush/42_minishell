@@ -6,18 +6,18 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/24 15:50:39 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/25 12:17:15 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
-int	g_global = 0;
+int g_global = 0;
 
-char	**ft_arrdup(t_minishell *ms, char **old)
+char **ft_arrdup(t_minishell *ms, char **old)
 {
-	char	**new;
-	int		index;
+	char **new;
+	int index;
 
 	index = 0;
 	new = malloc(sizeof(char *) * (arr_size(old) + 1));
@@ -32,17 +32,17 @@ char	**ft_arrdup(t_minishell *ms, char **old)
 	return (new);
 }
 
-void	minishell(t_minishell *ms)
+void minishell(t_minishell *ms)
 {
-	int		pipe_fd[2];
-	int		cmds_run;
-	int		pos;
-	pid_t	pid;
+	int pipe_fd[2];
+	int cmds_run;
+	int pos;
+	pid_t pid;
 
 	cmds_run = 0;
 	pos = 0;
 	if (!ms->cmdlist)
-		return ;
+		return;
 	signal(SIGQUIT, signal_process_interrupt);
 	while (cmds_run < ms->cmd_count)
 	{
@@ -60,14 +60,14 @@ void	minishell(t_minishell *ms)
 	}
 	get_exit_status(ms, pid, cmds_run);
 }
-	//check_cmd(ms);
+// check_cmd(ms);
 
-t_list	**env_init(char **envp)
+t_list **env_init(char **envp)
 {
-	int		i;
-	char	*buf;
-	t_list	*node;
-	t_list	**env;
+	int i;
+	char *buf;
+	t_list *node;
+	t_list **env;
 
 	i = 0;
 	env = (t_list **)malloc(sizeof(env));
@@ -83,7 +83,7 @@ t_list	**env_init(char **envp)
 	return (env);
 }
 
-void	free_main(t_minishell *ms, int argc, char *argv[])
+void free_main(t_minishell *ms, int argc, char *argv[])
 {
 	post_process_signal();
 	signal_d(ms);
@@ -94,16 +94,14 @@ void	free_main(t_minishell *ms, int argc, char *argv[])
 	(void)argv;
 }
 
-int	main(int argc, char *argv[], char **env)
+int main(int argc, char *argv[], char **env)
 {
-	t_minishell	*ms;
+	t_minishell *ms;
 
 	ms = malloc(sizeof(t_minishell));
 	if (!ms)
 		error(NULL, 2, NULL);
 	ms->env = env_init(env);
-	signal_init();
-	getcwd(ms->old_pwd, sizeof(ms->old_pwd));
 	while (1)
 	{
 		signal_init();
