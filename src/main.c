@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/25 15:34:17 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/25 16:02:59 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,34 +94,6 @@ void free_main(t_minishell *ms, int argc, char *argv[])
 	(void)argv;
 }
 
-int main(int argc, char *argv[], char **env)
-{
-
-	(void)argc;
-	(void)argv;
-	t_minishell *ms;
-	ms = malloc(sizeof(t_minishell));
-	if (!ms)
-		error(NULL, 2, NULL);
-	ms->env = env_init(env);
-	while (1)
-	{
-		signal_init();
-		ms->prompt = ft_strdup("Minishell$> ");
-		ms->input = readline(ms->prompt);
-		printf("input: %s\n", ms->input);
-		if (ft_strlen(ms->input) != 0)
-			add_history(ms->input);
-		if (!var_init(ms))
-		{
-			minishell(ms);
-			free_cmd_list(ms->cmdlist);
-		}
-		free_main(ms, argc, argv);
-	}
-}
-
-/*
 int	main(int argc, char *argv[], char **env)
 {
 	t_minishell	*ms;
@@ -152,7 +124,7 @@ int	main(int argc, char *argv[], char **env)
 	}
 	exit(ms->exit);
 }
-*/
+
 // add single and double quotes to parser
 // fix parser error ex: ./minishell ls|echo s < a<b
 // output: ls | echo s < a<b
