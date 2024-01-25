@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/25 14:39:06 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:34:17 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,7 +130,7 @@ int	main(int argc, char *argv[], char **env)
 	if (!ms)
 		error(NULL, 2, NULL);
 	ms->env = env_init(env);
-	signal_init();
+	ms->exit = 0;
 	while (1)
 	{
 		signal_init();
@@ -140,6 +140,8 @@ int	main(int argc, char *argv[], char **env)
 		printf("input: %s\n", ms->input);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
+		//if (ms->input)
+		//	continue;
 		signal_d(ms);
 		if (!var_init(ms))
 		{
@@ -148,7 +150,7 @@ int	main(int argc, char *argv[], char **env)
 		}
 		free_main(ms, argc, argv);
 	}
-	return (0);
+	exit(ms->exit);
 }
 */
 // add single and double quotes to parser
