@@ -98,7 +98,7 @@ int	check_identifier(t_minishell *ms, char *content)
 	}
 	else if (ft_identifier(ident[0]) == 0)
 	{
-		error_message(ms, "export: not a valid identifier\n", content);
+		error(ms, 3, "export: not a valid identifier\n");
 		ms->exit = 1;
 	}
 	free_arr(ident);

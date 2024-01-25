@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/25 11:37:47 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/25 15:47:38 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -200,7 +200,6 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
  * @note 2 malloc error, 3 custom error
  */
 void	error(t_minishell *ms, int op, char *arg);
-void	error_message(t_minishell *ms, char *mess, char *plus);
 int		open_error(t_minishell *ms, char *filename, int child);
 void	pipe_error(t_minishell *ms, int *pipe_fd);
 void	fork_error(t_minishell *ms, int *pipe_fd);
