@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:04:11 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/25 11:37:36 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/24 18:52:23 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ void	free_arr(char **arr)
 	if (!arr || arr[i])
 		return ;
 	while (arr[i])
-		free(arr[i++]);
+	{
+		free(arr[i]);
+		i++;
+	}
 	if (arr)
 		free(arr);
 }
