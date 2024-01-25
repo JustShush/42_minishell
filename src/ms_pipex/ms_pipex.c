@@ -67,10 +67,9 @@ void	child(t_minishell *ms, int *pipe_fd, int cmds_run, int pos)
 	}
 	if (cmds_run < ms->cmd_count - 1)
 		dup2(pipe_fd[1], STDOUT_FILENO);
-	close(pipe_fd[1]);
-	close(pipe_fd[0]);
+	close_fd(pipe_fd);
 	if (ms->cmd_count == 1 && isbuiltin(cmd->cmds[0]))
-		free_ms(ms);
+		free_ms(ms);	
 	redirect(ms, ms->main_arr, pos, 1);
 	exec(ms, cmd->cmds);
 }
@@ -89,8 +88,7 @@ void	parent(t_minishell *ms, int *pipe_fd, int cmds_run, int pos)
 		if (isbuiltin(cmd->cmds[0]) && redirect(ms, ms->main_arr, pos, 0) \
 			== 0)
 		{
-			close(pipe_fd[0]);
-			close(pipe_fd[1]);
+			close_fd(pipe_fd);
 			built_in(ms, cmd->cmds, 1);
 		}
 	}

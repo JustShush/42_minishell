@@ -59,7 +59,7 @@ void	print_arr(char *str, char **arr)
 	int	j;
 
 	i = 0;
-	if (!arr)
+	if (!arr || arr[i])
 		return ;
 	j = arr_size(arr);
 	printf("	%s:\n", str);

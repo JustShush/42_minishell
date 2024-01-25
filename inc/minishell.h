@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
 /*   Updated: 2024/01/24 18:51:46 by mde-avel         ###   ########.fr       */
@@ -27,7 +27,7 @@
 # include <linux/limits.h>
 # include <limits.h> // PATH_MAX
 # include <signal.h>
-# include<sys/wait.h>
+# include <sys/wait.h>
 # include <errno.h>
 # include <sys/stat.h>
 
@@ -44,23 +44,23 @@ typedef struct s_content
 
 typedef struct s_cmdlist
 {
-	char	**cmds;
+	char				**cmds;
 	struct s_cmdlist	*next;
 }	t_cmdlist;
 
 typedef struct s_minishell
 {
-	char	*prompt;
-	char	*input;
-	char	**history;
-	char	**main_arr;
-	char	old_pwd[PATH_MAX + 1];
-	int		exit;
-	int		cmd_count;
-	int		fdin;
-	int		fdout;
-	int		cmd_fd;
-	t_list	**env;
+	char		*prompt;
+	char		*input;
+	char		**history;
+	char		**main_arr;
+	int			exit;
+	int			cmd_count;
+	int			fdin;
+	int			fdout;
+	int			dp[2];
+	int			cmd_fd;
+	t_list		**env;
 	t_cmdlist	*cmdlist;
 }	t_minishell;
 
@@ -71,6 +71,7 @@ void	minishell(t_minishell *ms);
 t_list	**env_init(char **envp);
 
 //! in frees.c
+void	close_fd(int *fd);
 void	free_list(t_list **list);
 void	free_cmd_list(t_cmdlist *cmdlist);
 void	free_arr(char **arr);
@@ -89,9 +90,6 @@ void	post_process_signal(void);
 //* ---- BuiltIn DIR ----
 
 //! in cd.c
-void	change_dir(t_list **lst);
-void	home_to_dir(t_minishell *ms, char *path);
-int		find_home(t_list **lst);
 void	go_home(t_minishell *ms);
 void	cd(t_minishell *ms, char **path);
 
@@ -117,7 +115,7 @@ void	print_exp(t_list **lst);
 void	ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c
-void	pwd();
+void	pwd(void);
 
 //! in unset.c
 void	rm_first_last(t_list **env);
@@ -129,7 +127,8 @@ void	unset(t_minishell *ms, char **cmd_line);
 //! in exec_utils.c
 
 int		is_exec(t_minishell *ms, char *cmd, char **paths);
-int		is_usable(t_minishell *ms, char	*cmd, char *cmd_path, char **paths_array);
+int		is_usable(t_minishell *ms, char	*cmd, char *cmd_path, \
+char **paths_array);
 
 //! in exec.c
 
@@ -163,26 +162,6 @@ int		envar(char *str, int i);
 int		others(char *str, int i);
 
 //* --- Replacer DIR ----
-//! in env_replacer.c
-
-char	*replace_cond(t_minishell *ms, char *str, char *buf1, int flag);
-
-/** Joins all substituted strings from the split str
- * @param string The string with all the vars
- * @param env env struct
- * @param flag
- * @return The new string now with the value of the var.
-*/
-char	*replacer(t_minishell *ms, char *str, int flag);
-
-/**
- * This replaces all the Vars to their actuall value.
- * @param ms The minishell main Struct
- * @param env env struct
- * @param arr Main Array with all the inputs
-*/
-int	env_var(t_minishell *ms);
-
 //! in env_split_utils.c
 
 char	*dollar_cond(t_minishell *ms, char *buf);
@@ -190,13 +169,8 @@ char	*var_iter(t_minishell *ms, char *var);
 char	*var_str(t_list *env, char *var);
 int		empty_var(char **arr, t_list **env);
 
-//! in env_split.c
-
-char	**var_split(char *str);
-
 //! in env_split2.c
 char	*replace_str(t_minishell *ms, char *str);
-char	*replace_single(t_minishell *ms, char *str, char *buf, int flag);
 
 //* ---- Utils DIR ----
 //! in arr_utils.c

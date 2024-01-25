@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:58:21 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/24 15:51:08 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/25 11:38:52 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,12 @@ void	error(t_minishell *ms, int op, char *arg)
 		ft_putstr_fd("Minishell: error: malloc failed\n", STDERR_FILENO);
 		ms->exit = 12;
 		free(ms);
+		exit(ms->exit);
 	}
 	if (op == 3 && arg != NULL)
 	{
 		printf("error in: %s\n", arg);
-		exit(EXIT_FAILURE);
+		exit(ms->exit);
 	}
 }
 
@@ -56,8 +57,7 @@ int	open_error(t_minishell *ms, char *filename, int child)
 
 void	pipe_error(t_minishell *ms, int *pipe_fd)
 {
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
+	close_fd(pipe_fd);
 	ft_putstr_fd("Minishell: error: pipe failed\n", STDERR_FILENO);
 	ms->exit = 1;
 	free_ms(ms);
@@ -65,8 +65,7 @@ void	pipe_error(t_minishell *ms, int *pipe_fd)
 
 void	fork_error(t_minishell *ms, int *pipe_fd)
 {
-	close(pipe_fd[0]);
-	close(pipe_fd[1]);
+	close_fd(pipe_fd);
 	ft_putstr_fd("Minishell: error: fork failed\n", STDERR_FILENO);
 	ms->exit = 1;
 	free_ms(ms);

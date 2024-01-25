@@ -12,12 +12,12 @@
 
 #include "../inc/minishell.h"
 
-int	g_global = 0;
+int g_global = 0;
 
-char	**ft_arrdup(t_minishell *ms, char **old)
+char **ft_arrdup(t_minishell *ms, char **old)
 {
-	char	**new;
-	int		index;
+	char **new;
+	int index;
 
 	index = 0;
 	new = malloc(sizeof(char *) * (arr_size(old) + 1));
@@ -32,17 +32,17 @@ char	**ft_arrdup(t_minishell *ms, char **old)
 	return (new);
 }
 
-void	minishell(t_minishell *ms)
+void minishell(t_minishell *ms)
 {
-	int		pipe_fd[2];
-	int		cmds_run;
-	int		pos;
-	pid_t	pid;
+	int pipe_fd[2];
+	int cmds_run;
+	int pos;
+	pid_t pid;
 
 	cmds_run = 0;
 	pos = 0;
 	if (!ms->cmdlist)
-		return ;
+		return;
 	signal(SIGQUIT, signal_process_interrupt);
 	while (cmds_run < ms->cmd_count)
 	{
@@ -60,14 +60,14 @@ void	minishell(t_minishell *ms)
 	}
 	get_exit_status(ms, pid, cmds_run);
 }
-	//check_cmd(ms);
+// check_cmd(ms);
 
-t_list	**env_init(char **envp)
+t_list **env_init(char **envp)
 {
-	int		i;
-	char	*buf;
-	t_list	*node;
-	t_list	**env;
+	int i;
+	char *buf;
+	t_list *node;
+	t_list **env;
 
 	i = 0;
 	env = (t_list **)malloc(sizeof(env));
@@ -83,7 +83,7 @@ t_list	**env_init(char **envp)
 	return (env);
 }
 
-void	free_main(t_minishell *ms, int argc, char *argv[])
+void free_main(t_minishell *ms, int argc, char *argv[])
 {
 	post_process_signal();
 	signal_d(ms);
@@ -95,7 +95,7 @@ void	free_main(t_minishell *ms, int argc, char *argv[])
 	(void)argv;
 }
 
-int	main(int argc, char *argv[], char **env)
+int main(int argc, char *argv[], char **env)
 {
 
 	(void)argc;
@@ -108,8 +108,8 @@ if (!ms)
 	
 ms->env = env_init(env);
 
-	while(1){
-
+	while(1)
+  {
 		signal_init();
 		ms->prompt = ft_strdup("Minishell$> ");
 		ms->input = readline(ms->prompt);
@@ -136,8 +136,6 @@ int	main(int argc, char *argv[], char **env)
 		error(NULL, 2, NULL);
 	ms->env = env_init(env);
 	signal_init();
-	//getcwd(ms->old_pwd, sizeof(ms->old_pwd));
-	//ms->prompt = ft_strdup("Minishell$> ");
 	while (1)
 	{
 		signal_init();
