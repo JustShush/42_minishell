@@ -56,9 +56,9 @@ int	redirect_out(t_minishell *ms, char *file, int append, int child)
 void	reset_fds(t_minishell *ms)
 {
 	dup2(ms->fdout, STDOUT_FILENO);
-	close(ms->fdout);
+	//close(ms->fdout);
 	dup2(ms->fdin, STDIN_FILENO);
-	close(ms->fdin);
+	//close(ms->fdin);
 }
 
 int	redirect(t_minishell *ms, char **main_arr, int pos, int child)

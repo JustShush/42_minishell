@@ -27,7 +27,7 @@ void	get_exit_status(t_minishell *ms, pid_t pid, int cmds_run)
 	int	status;
 
 	if (ms->cmd_count == 1 && isbuiltin(ms->cmdlist->cmds[0]) \
-		== 1)
+	== 1)
 	{
 		wait(&status);
 		reset_fds(ms);

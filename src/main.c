@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/24 15:50:39 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/01/24 23:59:07 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,12 +88,45 @@ void	free_main(t_minishell *ms, int argc, char *argv[])
 	post_process_signal();
 	signal_d(ms);
 	free_arr(ms->main_arr);
-	free(ms->prompt);
+	// if (ms->prompt)
+	// 	free(ms->prompt);
 	free(ms->input);
 	(void)argc;
 	(void)argv;
 }
 
+int	main(int argc, char *argv[], char **env)
+{
+
+	(void)argc;
+	(void)argv;
+	t_minishell	*ms;
+ms = malloc(sizeof(t_minishell));
+
+if (!ms)
+		error(NULL, 2, NULL);
+	
+ms->env = env_init(env);
+
+	while(1){
+
+		signal_init();
+		ms->prompt = ft_strdup("Minishell$> ");
+		ms->input = readline(ms->prompt);
+		printf("input: %s\n", ms->input);
+		if (ft_strlen(ms->input) != 0)
+			add_history(ms->input);
+		if (!var_init(ms))
+		{
+			minishell(ms);
+			free_cmd_list(ms->cmdlist);
+		}
+		signal_d(ms);
+	}
+}
+
+
+/*
 int	main(int argc, char *argv[], char **env)
 {
 	t_minishell	*ms;
@@ -103,11 +136,13 @@ int	main(int argc, char *argv[], char **env)
 		error(NULL, 2, NULL);
 	ms->env = env_init(env);
 	signal_init();
-	getcwd(ms->old_pwd, sizeof(ms->old_pwd));
+	//getcwd(ms->old_pwd, sizeof(ms->old_pwd));
+	//ms->prompt = ft_strdup("Minishell$> ");
 	while (1)
 	{
 		signal_init();
 		ms->prompt = ft_strdup("Minishell$> ");
+		printf("input: %s\n", ms->input);
 		ms->input = readline(ms->prompt);
 		printf("input: %s\n", ms->input);
 		if (ft_strlen(ms->input) != 0)
@@ -122,7 +157,7 @@ int	main(int argc, char *argv[], char **env)
 	}
 	return (0);
 }
-
+*/
 // add single and double quotes to parser
 // fix parser error ex: ./minishell ls|echo s < a<b
 // output: ls | echo s < a<b
@@ -133,7 +168,7 @@ int	main(int argc, char *argv[], char **env)
 // GPT https://chat.openai.com/c/3d9eb561-86d7-4b9e-8ac7-79eadb9c015c
 // ideas for the prompt:
 // \033[1;36mMinishell\033[0m \033[1;33m✗\033[0m
-// \033[1;33mMinishell\033[0m$>
+// \033[1;33mMinishell\03[0m$>
 
 /**
  ** after any command the program exists by it self
