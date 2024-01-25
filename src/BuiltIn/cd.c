@@ -97,7 +97,9 @@ void	cd(t_minishell *ms, char **path)
 		error(ms, 3, "cd: too many arguments\n");
 		ms->exit = 1;
 	}
-	else if (!path || !path[1] || path[1][0] == '~')
+	else if (!path || !path[1] || !path[1][0])
+		go_home(ms);
+	else if (path[1][0] == '~' && path)
 	{
 		go_home(ms);
 		if (path[1][1] == '/' && path[1][2])
