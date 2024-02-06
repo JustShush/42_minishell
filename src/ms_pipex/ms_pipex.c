@@ -69,7 +69,7 @@ void	child(t_minishell *ms, int *pipe_fd, int cmds_run, int pos)
 		dup2(pipe_fd[1], STDOUT_FILENO);
 	close_fd(pipe_fd);
 	if (ms->cmd_count == 1 && isbuiltin(cmd->cmds[0]))
-		free_ms(ms);	
+		free_ms(ms);
 	redirect(ms, ms->main_arr, pos, 1);
 	exec(ms, cmd->cmds);
 }
