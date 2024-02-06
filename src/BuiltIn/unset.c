@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-void	rm_first_last(t_list **env)
+void	rm_last(t_list **env)
 {
 	t_list	*last;
 	t_list	*tmp;
@@ -26,7 +26,29 @@ void	rm_first_last(t_list **env)
 	free(last);
 }
 
-void	remove_node(t_list **env, char *ident, size_t len)
+void	rm_middle(t_list **env, char *ident, size_t len)
+{
+	t_list	*tmp;
+	t_list	*lst;
+
+	lst = *env;
+	if (!lst)
+		return ;
+	while (lst->next != NULL)
+	{
+		if (ft_strncmp((char *)(lst)->content, ident, len) == 0)
+		{
+			tmp = (*env);
+			*env = (*env)->next;
+			lst = *env;
+			free(tmp->content);
+			free(tmp);
+		}
+		lst = lst->next;
+	}
+}
+
+void	rm_nodes(t_list **env, char *ident, size_t len)
 {
 	t_list	*tmp;
 	t_list	*lst;
@@ -39,25 +61,16 @@ void	remove_node(t_list **env, char *ident, size_t len)
 		if (ft_strncmp((char *)(lst)->next->content, ident, len) == 0)
 		{
 			if (lst->next->next == NULL)
-			{
-				rm_first_last(env);
-				break ;
-			}
+				rm_last(env);
 			tmp = lst->next;
 			lst->next = lst->next->next;
 			free(tmp->content);
 			free(tmp);
-		}
-		else if (ft_strncmp((char *)(lst)->content, ident, len) == 0)
-		{
-			tmp = (*env);
-			*env = (*env)->next;
-			lst = *env;
-			free(tmp->content);
-			free(tmp);
+			break ;
 		}
 		lst = lst->next;
 	}
+	rm_middle(env, ident, len);
 }
 
 void	find_ident_unset(t_list **env, char *ident2)
@@ -67,15 +80,13 @@ void	find_ident_unset(t_list **env, char *ident2)
 	char	*c;
 
 	len = ft_strlen(ident2);
-	remove_node(env, ident2, len);
+	rm_nodes(env, ident2, len);
 	c = "=";
 	ident1 = ft_strjoin(ident2, c);
-	remove_node(env, ident1, len + 1);
+	rm_nodes(env, ident1, len + 1);
 	free(ident1);
 }
 
-/*export hi
-unset hii*/
 void	unset(t_minishell *ms, char **cmd_line)
 {
 	int	i;
@@ -89,7 +100,7 @@ void	unset(t_minishell *ms, char **cmd_line)
 		flag = ft_identifier(cmd_line[i]);
 		if (flag == 0)
 		{
-			error(ms, 3, "unset: not a valid identifier\n");
+			error_message(ms, "unset: not a valid identifier\n", cmd_line[i]);
 			ms->exit = 1;
 			break ;
 		}
@@ -99,4 +110,8 @@ void	unset(t_minishell *ms, char **cmd_line)
 		i++;
 	}
 }
-//_=./minishell -> can't be remmoved
+/*
+_=./minishell -> can't be remmoved
+export hi
+unset hii
+*/

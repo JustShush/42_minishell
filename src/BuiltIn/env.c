@@ -12,17 +12,25 @@
 
 #include "../../inc/minishell.h"
 
-void	print_lst(t_list **lst)
+void	print_lst(t_list **lst, int flag)
 {
 	t_list	*tmp;
+	char	*exp;
 
+	exp = "declare -x";
 	tmp = *lst;
 	if (!tmp)
 		return ;
 	while (tmp)
 	{
-		if ((tmp)->n == 1)
-			ft_printf("%s%d%s %s\n", YELLOW, (tmp)->n, RESET, (tmp)->content);
+		if (flag == 1)
+		{
+			if ((tmp)->n == 1)
+				ft_printf("%s%d%s %s\n", YELLOW, (tmp)->n, RESET, \
+				(tmp)->content);
+		}
+		else
+			ft_printf("%s%s%s %s\n", YELLOW, exp, RESET, (tmp)->content);
 		tmp = (tmp)->next;
 	}
 }
@@ -40,5 +48,5 @@ void	env(t_minishell *ms, char **cmd_line)
 		error(ms, 3, "env: No environment variables found.\n");
 		return ;
 	}
-	print_lst(ms->env);
+	print_lst(ms->env, 1);
 }
