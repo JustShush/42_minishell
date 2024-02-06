@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/06 12:28:56 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:57:19 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,6 +172,18 @@ int		empty_var(char **arr, t_list **env);
 
 //! in env_split2.c
 char	*replace_str(t_minishell *ms, char *str);
+
+//* ---- Syntax DIR ----
+//! in syntax_err.c
+int		redir_syntax(char *str);
+int		double_redir_syntax(char *str);
+int		dollar_syntax(char *str);
+int		sucession_syntax(char *str);
+int		token_syntax(char *str);
+int		token_message(char token);
+
+//! in syntax.c
+int		syntax_error(t_minishell *ms);
 
 //* ---- Utils DIR ----
 //! in arr_utils.c

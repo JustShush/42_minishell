@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/06 12:29:21 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/06 12:47:47 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,10 @@ int	main(int argc, char *argv[], char **env)
 		signal_init();
 		ms->prompt = ft_strdup("Minishell$> ");
 		ms->input = readline(ms->prompt);
-		printf("input: %s\n", ms->input);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
+		if (ms->input && syntax_error(ms))
+			continue;
 		signal_d(ms);
 		if (!var_init(ms))
 		{
