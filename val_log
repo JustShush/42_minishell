@@ -1,0 +1,565 @@
+==168777== Memcheck, a memory error detector
+==168777== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==168777== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==168777== Command: ./minishell
+==168777== Parent PID: 168776
+==168777== 
+==168777== Conditional jump or move depends on uninitialised value(s)
+==168777==    at 0x493A73B: __vfprintf_internal (vfprintf-internal.c:1517)
+==168777==    by 0x492579E: printf (printf.c:33)
+==168777==    by 0x401629: main (main.c:110)
+==168777==  Uninitialised value was created by a heap allocation
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x4015B3: main (main.c:101)
+==168777== 
+==168779== Invalid free() / delete / delete[] / realloc()
+==168779==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168779==    by 0x401750: free_list (frees.c:30)
+==168779==    by 0x4018FD: free_ms (frees.c:80)
+==168779==    by 0x406371: child (ms_pipex.c:72)
+==168779==    by 0x40145C: minishell (main.c:55)
+==168779==    by 0x4016A1: main (main.c:120)
+==168779==  Address 0x4b22125 is 5 bytes inside a block of size 14 alloc'd
+==168779==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168779==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168779==    by 0x4014FF: env_init (main.c:77)
+==168779==    by 0x4015DC: main (main.c:104)
+==168779== 
+==168779== 
+==168779== HEAP SUMMARY:
+==168779==     in use at exit: 218,088 bytes in 610 blocks
+==168779==   total heap usage: 945 allocs, 397 frees, 241,398 bytes allocated
+==168779== 
+==168779== 4 bytes in 1 blocks are still reachable in loss record 2 of 77
+==168779==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168779==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168779==    by 0x401378: ft_arrdup (main.c:28)
+==168779==    by 0x4033F9: var_init (inits.c:63)
+==168779==    by 0x40168F: main (main.c:118)
+==168779== 
+==168779== 4 bytes in 1 blocks are indirectly lost in loss record 3 of 77
+==168779==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168779==    by 0x401DE3: split_temp (ms_split.c:63)
+==168779==    by 0x4020A8: ms_split (ms_split.c:107)
+==168779==    by 0x4033AC: var_init (inits.c:58)
+==168779==    by 0x40168F: main (main.c:118)
+==168779== 
+==168779== 4 bytes in 1 blocks are indirectly lost in loss record 4 of 77
+==168779==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168779==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168779==    by 0x4057C2: replaced_arr (replace.c:132)
+==168779==    by 0x4033DB: var_init (inits.c:61)
+==168779==    by 0x40168F: main (main.c:118)
+==168779== 
+==168779== 16 bytes in 1 blocks are still reachable in loss record 15 of 77
+==168779==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168779==    by 0x4031F8: cmdlist_lstnew (inits.c:21)
+==168779==    by 0x4032A8: cmd_list_init (inits.c:43)
+==168779==    by 0x40342C: var_init (inits.c:67)
+==168779==    by 0x40168F: main (main.c:118)
+==168779== 
+==168779== 16 bytes in 1 blocks are still reachable in loss record 16 of 77
+==168779==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168779==    by 0x402E4A: cmd_with_flags (cmd_utils.c:90)
+==168779==    by 0x40322D: cmdlist_lstnew (inits.c:24)
+==168779==    by 0x4032A8: cmd_list_init (inits.c:43)
+==168779==    by 0x40342C: var_init (inits.c:67)
+==168779==    by 0x40168F: main (main.c:118)
+==168779== 
+==168779== 16 bytes in 1 blocks are definitely lost in loss record 17 of 77
+==168779==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168779==    by 0x40130E: ft_arrdup (main.c:23)
+==168779==    by 0x4033F9: var_init (inits.c:63)
+==168779==    by 0x40168F: main (main.c:118)
+==168779== 
+==168779== 20 (16 direct, 4 indirect) bytes in 1 blocks are definitely lost in loss record 19 of 77
+==168779==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168779==    by 0x402004: ms_split (ms_split.c:99)
+==168779==    by 0x4033AC: var_init (inits.c:58)
+==168779==    by 0x40168F: main (main.c:118)
+==168779== 
+==168779== 20 (16 direct, 4 indirect) bytes in 1 blocks are definitely lost in loss record 20 of 77
+==168779==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168779==    by 0x406A2D: ft_calloc (in /home/mde-avel/course_42/minishell/minishell)
+==168779==    by 0x40576E: replaced_arr (replace.c:127)
+==168779==    by 0x4033DB: var_init (inits.c:61)
+==168779==    by 0x40168F: main (main.c:118)
+==168779== 
+==168779== 3,625 bytes in 253 blocks are indirectly lost in loss record 50 of 77
+==168779==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168779==    by 0x4075E6: ft_substr (in /home/mde-avel/course_42/minishell/minishell)
+==168779==    by 0x406EC2: ft_nstr (in /home/mde-avel/course_42/minishell/minishell)
+==168779==    by 0x406D91: ft_split (in /home/mde-avel/course_42/minishell/minishell)
+==168779==    by 0x404FA6: ft_envnew (builtin_utils.c:48)
+==168779==    by 0x40150C: env_init (main.c:78)
+==168779==    by 0x4015DC: main (main.c:104)
+==168779== 
+==168779== 3,628 bytes in 62 blocks are definitely lost in loss record 51 of 77
+==168779==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168779==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168779==    by 0x4014FF: env_init (main.c:77)
+==168779==    by 0x4015DC: main (main.c:104)
+==168779== 
+==168779== 6,145 (2,520 direct, 3,625 indirect) bytes in 62 blocks are definitely lost in loss record 63 of 77
+==168779==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168779==    by 0x406A2D: ft_calloc (in /home/mde-avel/course_42/minishell/minishell)
+==168779==    by 0x406D62: ft_split (in /home/mde-avel/course_42/minishell/minishell)
+==168779==    by 0x404FA6: ft_envnew (builtin_utils.c:48)
+==168779==    by 0x40150C: env_init (main.c:78)
+==168779==    by 0x4015DC: main (main.c:104)
+==168779== 
+==168779== LEAK SUMMARY:
+==168779==    definitely lost: 6,196 bytes in 127 blocks
+==168779==    indirectly lost: 3,633 bytes in 255 blocks
+==168779==      possibly lost: 0 bytes in 0 blocks
+==168779==    still reachable: 36 bytes in 3 blocks
+==168779==         suppressed: 208,223 bytes in 225 blocks
+==168779== 
+==168779== For lists of detected and suppressed errors, rerun with: -s
+==168779== ERROR SUMMARY: 68 errors from 7 contexts (suppressed: 0 from 0)
+==168777== Syscall param dup2(oldfd) contains uninitialised byte(s)
+==168777==    at 0x49DA01B: dup2 (syscall-template.S:120)
+==168777==    by 0x40665C: reset_fds (redirects.c:58)
+==168777==    by 0x4061DD: get_exit_status (ms_pipex.c:33)
+==168777==    by 0x4014A4: minishell (main.c:61)
+==168777==    by 0x4016A1: main (main.c:120)
+==168777==  Uninitialised value was created by a heap allocation
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x4015B3: main (main.c:101)
+==168777== 
+==168777== Syscall param dup2(oldfd) contains uninitialised byte(s)
+==168777==    at 0x49DA01B: dup2 (syscall-template.S:120)
+==168777==    by 0x40666A: reset_fds (redirects.c:59)
+==168777==    by 0x4061DD: get_exit_status (ms_pipex.c:33)
+==168777==    by 0x4014A4: minishell (main.c:61)
+==168777==    by 0x4016A1: main (main.c:120)
+==168777==  Uninitialised value was created by a heap allocation
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x4015B3: main (main.c:101)
+==168777== 
+==168777== Invalid read of size 1
+==168777==    at 0x484ED16: strlen (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x493BD30: __vfprintf_internal (vfprintf-internal.c:1517)
+==168777==    by 0x492579E: printf (printf.c:33)
+==168777==    by 0x401629: main (main.c:110)
+==168777==  Address 0x4b6b970 is 0 bytes inside a block of size 4 free'd
+==168777==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x401586: free_main (main.c:92)
+==168777==    by 0x4016BE: main (main.c:123)
+==168777==  Block was alloc'd at
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x48AABAC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x4888694: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x4892D2A: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x401635: main (main.c:111)
+==168777== 
+==168777== Invalid read of size 1
+==168777==    at 0x484ED24: strlen (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x493BD30: __vfprintf_internal (vfprintf-internal.c:1517)
+==168777==    by 0x492579E: printf (printf.c:33)
+==168777==    by 0x401629: main (main.c:110)
+==168777==  Address 0x4b6b971 is 1 bytes inside a block of size 4 free'd
+==168777==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x401586: free_main (main.c:92)
+==168777==    by 0x4016BE: main (main.c:123)
+==168777==  Block was alloc'd at
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x48AABAC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x4888694: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x4892D2A: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x401635: main (main.c:111)
+==168777== 
+==168777== Invalid read of size 1
+==168777==    at 0x4950734: _IO_new_file_xsputn (fileops.c:1218)
+==168777==    by 0x4950734: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==168777==    by 0x493C00B: outstring_func (vfprintf-internal.c:239)
+==168777==    by 0x493C00B: __vfprintf_internal (vfprintf-internal.c:1517)
+==168777==    by 0x492579E: printf (printf.c:33)
+==168777==    by 0x401629: main (main.c:110)
+==168777==  Address 0x4b6b972 is 2 bytes inside a block of size 4 free'd
+==168777==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x401586: free_main (main.c:92)
+==168777==    by 0x4016BE: main (main.c:123)
+==168777==  Block was alloc'd at
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x48AABAC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x4888694: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x4892D2A: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x401635: main (main.c:111)
+==168777== 
+==168777== Invalid read of size 1
+==168777==    at 0x48534F0: mempcpy (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x4950664: _IO_new_file_xsputn (fileops.c:1235)
+==168777==    by 0x4950664: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==168777==    by 0x493C00B: outstring_func (vfprintf-internal.c:239)
+==168777==    by 0x493C00B: __vfprintf_internal (vfprintf-internal.c:1517)
+==168777==    by 0x492579E: printf (printf.c:33)
+==168777==    by 0x401629: main (main.c:110)
+==168777==  Address 0x4b6b970 is 0 bytes inside a block of size 4 free'd
+==168777==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x401586: free_main (main.c:92)
+==168777==    by 0x4016BE: main (main.c:123)
+==168777==  Block was alloc'd at
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x48AABAC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x4888694: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x4892D2A: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x401635: main (main.c:111)
+==168777== 
+==168777== Invalid read of size 1
+==168777==    at 0x48534FE: mempcpy (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x4950664: _IO_new_file_xsputn (fileops.c:1235)
+==168777==    by 0x4950664: _IO_file_xsputn@@GLIBC_2.2.5 (fileops.c:1196)
+==168777==    by 0x493C00B: outstring_func (vfprintf-internal.c:239)
+==168777==    by 0x493C00B: __vfprintf_internal (vfprintf-internal.c:1517)
+==168777==    by 0x492579E: printf (printf.c:33)
+==168777==    by 0x401629: main (main.c:110)
+==168777==  Address 0x4b6b972 is 2 bytes inside a block of size 4 free'd
+==168777==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x401586: free_main (main.c:92)
+==168777==    by 0x4016BE: main (main.c:123)
+==168777==  Block was alloc'd at
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x48AABAC: xmalloc (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x4888694: readline_internal_teardown (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x4892D2A: readline (in /usr/lib/x86_64-linux-gnu/libreadline.so.8.1)
+==168777==    by 0x401635: main (main.c:111)
+==168777== 
+==168786== Invalid free() / delete / delete[] / realloc()
+==168786==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x401750: free_list (frees.c:30)
+==168786==    by 0x4018FD: free_ms (frees.c:80)
+==168786==    by 0x406371: child (ms_pipex.c:72)
+==168786==    by 0x40145C: minishell (main.c:55)
+==168786==    by 0x4016A1: main (main.c:120)
+==168786==  Address 0x4b22125 is 5 bytes inside a block of size 14 alloc'd
+==168786==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168786==    by 0x4014FF: env_init (main.c:77)
+==168786==    by 0x4015DC: main (main.c:104)
+==168786== 
+==168786== 
+==168786== HEAP SUMMARY:
+==168786==     in use at exit: 218,200 bytes in 619 blocks
+==168786==   total heap usage: 962 allocs, 405 frees, 241,628 bytes allocated
+==168786== 
+==168786== 4 bytes in 1 blocks are indirectly lost in loss record 1 of 78
+==168786==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168786==    by 0x401378: ft_arrdup (main.c:28)
+==168786==    by 0x4033F9: var_init (inits.c:63)
+==168786==    by 0x40168F: main (main.c:118)
+==168786== 
+==168786== 7 bytes in 1 blocks are still reachable in loss record 2 of 78
+==168786==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168786==    by 0x401378: ft_arrdup (main.c:28)
+==168786==    by 0x4033F9: var_init (inits.c:63)
+==168786==    by 0x40168F: main (main.c:118)
+==168786== 
+==168786== 11 bytes in 2 blocks are indirectly lost in loss record 6 of 78
+==168786==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x401DE3: split_temp (ms_split.c:63)
+==168786==    by 0x4020A8: ms_split (ms_split.c:107)
+==168786==    by 0x4033AC: var_init (inits.c:58)
+==168786==    by 0x40168F: main (main.c:118)
+==168786== 
+==168786== 11 bytes in 2 blocks are indirectly lost in loss record 7 of 78
+==168786==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168786==    by 0x4057C2: replaced_arr (replace.c:132)
+==168786==    by 0x4033DB: var_init (inits.c:61)
+==168786==    by 0x40168F: main (main.c:118)
+==168786== 
+==168786== 16 bytes in 1 blocks are still reachable in loss record 15 of 78
+==168786==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x4031F8: cmdlist_lstnew (inits.c:21)
+==168786==    by 0x4032A8: cmd_list_init (inits.c:43)
+==168786==    by 0x40342C: var_init (inits.c:67)
+==168786==    by 0x40168F: main (main.c:118)
+==168786== 
+==168786== 16 bytes in 1 blocks are still reachable in loss record 16 of 78
+==168786==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x402E4A: cmd_with_flags (cmd_utils.c:90)
+==168786==    by 0x40322D: cmdlist_lstnew (inits.c:24)
+==168786==    by 0x4032A8: cmd_list_init (inits.c:43)
+==168786==    by 0x40342C: var_init (inits.c:67)
+==168786==    by 0x40168F: main (main.c:118)
+==168786== 
+==168786== 36 (32 direct, 4 indirect) bytes in 2 blocks are definitely lost in loss record 21 of 78
+==168786==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x40130E: ft_arrdup (main.c:23)
+==168786==    by 0x4033F9: var_init (inits.c:63)
+==168786==    by 0x40168F: main (main.c:118)
+==168786== 
+==168786== 43 (32 direct, 11 indirect) bytes in 2 blocks are definitely lost in loss record 22 of 78
+==168786==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x402004: ms_split (ms_split.c:99)
+==168786==    by 0x4033AC: var_init (inits.c:58)
+==168786==    by 0x40168F: main (main.c:118)
+==168786== 
+==168786== 43 (32 direct, 11 indirect) bytes in 2 blocks are definitely lost in loss record 23 of 78
+==168786==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x406A2D: ft_calloc (in /home/mde-avel/course_42/minishell/minishell)
+==168786==    by 0x40576E: replaced_arr (replace.c:127)
+==168786==    by 0x4033DB: var_init (inits.c:61)
+==168786==    by 0x40168F: main (main.c:118)
+==168786== 
+==168786== 3,625 bytes in 253 blocks are indirectly lost in loss record 51 of 78
+==168786==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x4075E6: ft_substr (in /home/mde-avel/course_42/minishell/minishell)
+==168786==    by 0x406EC2: ft_nstr (in /home/mde-avel/course_42/minishell/minishell)
+==168786==    by 0x406D91: ft_split (in /home/mde-avel/course_42/minishell/minishell)
+==168786==    by 0x404FA6: ft_envnew (builtin_utils.c:48)
+==168786==    by 0x40150C: env_init (main.c:78)
+==168786==    by 0x4015DC: main (main.c:104)
+==168786== 
+==168786== 3,628 bytes in 62 blocks are definitely lost in loss record 52 of 78
+==168786==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168786==    by 0x4014FF: env_init (main.c:77)
+==168786==    by 0x4015DC: main (main.c:104)
+==168786== 
+==168786== 6,145 (2,520 direct, 3,625 indirect) bytes in 62 blocks are definitely lost in loss record 64 of 78
+==168786==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168786==    by 0x406A2D: ft_calloc (in /home/mde-avel/course_42/minishell/minishell)
+==168786==    by 0x406D62: ft_split (in /home/mde-avel/course_42/minishell/minishell)
+==168786==    by 0x404FA6: ft_envnew (builtin_utils.c:48)
+==168786==    by 0x40150C: env_init (main.c:78)
+==168786==    by 0x4015DC: main (main.c:104)
+==168786== 
+==168786== LEAK SUMMARY:
+==168786==    definitely lost: 6,244 bytes in 130 blocks
+==168786==    indirectly lost: 3,651 bytes in 258 blocks
+==168786==      possibly lost: 0 bytes in 0 blocks
+==168786==    still reachable: 39 bytes in 3 blocks
+==168786==         suppressed: 208,266 bytes in 228 blocks
+==168786== 
+==168786== For lists of detected and suppressed errors, rerun with: -s
+==168786== ERROR SUMMARY: 80 errors from 14 contexts (suppressed: 0 from 0)
+==168777== Invalid free() / delete / delete[] / realloc()
+==168777==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x401750: free_list (frees.c:30)
+==168777==    by 0x4018FD: free_ms (frees.c:80)
+==168777==    by 0x404609: ft_exit (exit.c:73)
+==168777==    by 0x402A28: built_in (check_cmd.c:41)
+==168777==    by 0x40645F: parent (ms_pipex.c:92)
+==168777==    by 0x401474: minishell (main.c:57)
+==168777==    by 0x4016A1: main (main.c:120)
+==168777==  Address 0x4b22125 is 5 bytes inside a block of size 14 alloc'd
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168777==    by 0x4014FF: env_init (main.c:77)
+==168777==    by 0x4015DC: main (main.c:104)
+==168777== 
+==168789== Invalid free() / delete / delete[] / realloc()
+==168789==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x401750: free_list (frees.c:30)
+==168789==    by 0x4018FD: free_ms (frees.c:80)
+==168789==    by 0x406371: child (ms_pipex.c:72)
+==168789==    by 0x40145C: minishell (main.c:55)
+==168789==    by 0x4016A1: main (main.c:120)
+==168789==  Address 0x4b22125 is 5 bytes inside a block of size 14 alloc'd
+==168789==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168789==    by 0x4014FF: env_init (main.c:77)
+==168789==    by 0x4015DC: main (main.c:104)
+==168789== 
+==168777== 
+==168777== HEAP SUMMARY:
+==168777==     in use at exit: 218,304 bytes in 628 blocks
+==168777==   total heap usage: 979 allocs, 413 frees, 241,848 bytes allocated
+==168777== 
+==168777== 5 bytes in 1 blocks are still reachable in loss record 1 of 78
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168777==    by 0x401378: ft_arrdup (main.c:28)
+==168777==    by 0x4033F9: var_init (inits.c:63)
+==168777==    by 0x40168F: main (main.c:118)
+==168777== 
+==168777== 11 bytes in 2 blocks are indirectly lost in loss record 4 of 78
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168777==    by 0x401378: ft_arrdup (main.c:28)
+==168777==    by 0x4033F9: var_init (inits.c:63)
+==168777==    by 0x40168F: main (main.c:118)
+==168777== 
+==168777== 16 bytes in 1 blocks are still reachable in loss record 12 of 78
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x4031F8: cmdlist_lstnew (inits.c:21)
+==168777==    by 0x4032A8: cmd_list_init (inits.c:43)
+==168777==    by 0x40342C: var_init (inits.c:67)
+==168777==    by 0x40168F: main (main.c:118)
+==168777== 
+==168777== 16 bytes in 1 blocks are still reachable in loss record 13 of 78
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x402E4A: cmd_with_flags (cmd_utils.c:90)
+==168777==    by 0x40322D: cmdlist_lstnew (inits.c:24)
+==168789== 
+==168777==    by 0x4032A8: cmd_list_init (inits.c:43)
+==168777==    by 0x40342C: var_init (inits.c:67)
+==168777==    by 0x40168F: main (main.c:118)
+==168777== 
+==168789== HEAP SUMMARY:
+==168789==     in use at exit: 218,304 bytes in 628 blocks
+==168789==   total heap usage: 979 allocs, 413 frees, 241,848 bytes allocated
+==168789== 
+==168777== 16 bytes in 3 blocks are indirectly lost in loss record 15 of 78
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x401DE3: split_temp (ms_split.c:63)
+==168777==    by 0x4020A8: ms_split (ms_split.c:107)
+==168777==    by 0x4033AC: var_init (inits.c:58)
+==168777==    by 0x40168F: main (main.c:118)
+==168777== 
+==168777== 16 bytes in 3 blocks are indirectly lost in loss record 16 of 78
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168777==    by 0x4057C2: replaced_arr (replace.c:132)
+==168777==    by 0x4033DB: var_init (inits.c:61)
+==168777==    by 0x40168F: main (main.c:118)
+==168777== 
+==168777== 59 (48 direct, 11 indirect) bytes in 3 blocks are definitely lost in loss record 24 of 78
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x40130E: ft_arrdup (main.c:23)
+==168777==    by 0x4033F9: var_init (inits.c:63)
+==168777==    by 0x40168F: main (main.c:118)
+==168777== 
+==168777== 64 (48 direct, 16 indirect) bytes in 3 blocks are definitely lost in loss record 25 of 78
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x402004: ms_split (ms_split.c:99)
+==168777==    by 0x4033AC: var_init (inits.c:58)
+==168777==    by 0x40168F: main (main.c:118)
+==168777== 
+==168777== 64 (48 direct, 16 indirect) bytes in 3 blocks are definitely lost in loss record 26 of 78
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x406A2D: ft_calloc (in /home/mde-avel/course_42/minishell/minishell)
+==168777==    by 0x40576E: replaced_arr (replace.c:127)
+==168777==    by 0x4033DB: var_init (inits.c:61)
+==168777==    by 0x40168F: main (main.c:118)
+==168777== 
+==168777== 3,625 bytes in 253 blocks are indirectly lost in loss record 51 of 78
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x4075E6: ft_substr (in /home/mde-avel/course_42/minishell/minishell)
+==168777==    by 0x406EC2: ft_nstr (in /home/mde-avel/course_42/minishell/minishell)
+==168777==    by 0x406D91: ft_split (in /home/mde-avel/course_42/minishell/minishell)
+==168777==    by 0x404FA6: ft_envnew (builtin_utils.c:48)
+==168777==    by 0x40150C: env_init (main.c:78)
+==168777==    by 0x4015DC: main (main.c:104)
+==168777== 
+==168777== 3,628 bytes in 62 blocks are definitely lost in loss record 52 of 78
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168777==    by 0x4014FF: env_init (main.c:77)
+==168777==    by 0x4015DC: main (main.c:104)
+==168777== 
+==168777== 6,145 (2,520 direct, 3,625 indirect) bytes in 62 blocks are definitely lost in loss record 64 of 78
+==168777==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168777==    by 0x406A2D: ft_calloc (in /home/mde-avel/course_42/minishell/minishell)
+==168777==    by 0x406D62: ft_split (in /home/mde-avel/course_42/minishell/minishell)
+==168777==    by 0x404FA6: ft_envnew (builtin_utils.c:48)
+==168777==    by 0x40150C: env_init (main.c:78)
+==168777==    by 0x4015DC: main (main.c:104)
+==168777== 
+==168777== LEAK SUMMARY:
+==168777==    definitely lost: 6,292 bytes in 133 blocks
+==168777==    indirectly lost: 3,668 bytes in 261 blocks
+==168777==      possibly lost: 0 bytes in 0 blocks
+==168777==    still reachable: 37 bytes in 3 blocks
+==168777==         suppressed: 208,307 bytes in 231 blocks
+==168777== 
+==168777== For lists of detected and suppressed errors, rerun with: -s
+==168777== ERROR SUMMARY: 101 errors from 14 contexts (suppressed: 0 from 0)
+==168789== 5 bytes in 1 blocks are still reachable in loss record 1 of 78
+==168789==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168789==    by 0x401378: ft_arrdup (main.c:28)
+==168789==    by 0x4033F9: var_init (inits.c:63)
+==168789==    by 0x40168F: main (main.c:118)
+==168789== 
+==168789== 11 bytes in 2 blocks are indirectly lost in loss record 4 of 78
+==168789==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168789==    by 0x401378: ft_arrdup (main.c:28)
+==168789==    by 0x4033F9: var_init (inits.c:63)
+==168789==    by 0x40168F: main (main.c:118)
+==168789== 
+==168789== 16 bytes in 1 blocks are still reachable in loss record 12 of 78
+==168789==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x4031F8: cmdlist_lstnew (inits.c:21)
+==168789==    by 0x4032A8: cmd_list_init (inits.c:43)
+==168789==    by 0x40342C: var_init (inits.c:67)
+==168789==    by 0x40168F: main (main.c:118)
+==168789== 
+==168789== 16 bytes in 1 blocks are still reachable in loss record 13 of 78
+==168789==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x402E4A: cmd_with_flags (cmd_utils.c:90)
+==168789==    by 0x40322D: cmdlist_lstnew (inits.c:24)
+==168789==    by 0x4032A8: cmd_list_init (inits.c:43)
+==168789==    by 0x40342C: var_init (inits.c:67)
+==168789==    by 0x40168F: main (main.c:118)
+==168789== 
+==168789== 16 bytes in 3 blocks are indirectly lost in loss record 15 of 78
+==168789==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x401DE3: split_temp (ms_split.c:63)
+==168789==    by 0x4020A8: ms_split (ms_split.c:107)
+==168789==    by 0x4033AC: var_init (inits.c:58)
+==168789==    by 0x40168F: main (main.c:118)
+==168789== 
+==168789== 16 bytes in 3 blocks are indirectly lost in loss record 16 of 78
+==168789==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168789==    by 0x4057C2: replaced_arr (replace.c:132)
+==168789==    by 0x4033DB: var_init (inits.c:61)
+==168789==    by 0x40168F: main (main.c:118)
+==168789== 
+==168789== 59 (48 direct, 11 indirect) bytes in 3 blocks are definitely lost in loss record 24 of 78
+==168789==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x40130E: ft_arrdup (main.c:23)
+==168789==    by 0x4033F9: var_init (inits.c:63)
+==168789==    by 0x40168F: main (main.c:118)
+==168789== 
+==168789== 64 (48 direct, 16 indirect) bytes in 3 blocks are definitely lost in loss record 25 of 78
+==168789==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x402004: ms_split (ms_split.c:99)
+==168789==    by 0x4033AC: var_init (inits.c:58)
+==168789==    by 0x40168F: main (main.c:118)
+==168789== 
+==168789== 64 (48 direct, 16 indirect) bytes in 3 blocks are definitely lost in loss record 26 of 78
+==168789==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x406A2D: ft_calloc (in /home/mde-avel/course_42/minishell/minishell)
+==168789==    by 0x40576E: replaced_arr (replace.c:127)
+==168789==    by 0x4033DB: var_init (inits.c:61)
+==168789==    by 0x40168F: main (main.c:118)
+==168789== 
+==168789== 3,625 bytes in 253 blocks are indirectly lost in loss record 51 of 78
+==168789==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x4075E6: ft_substr (in /home/mde-avel/course_42/minishell/minishell)
+==168789==    by 0x406EC2: ft_nstr (in /home/mde-avel/course_42/minishell/minishell)
+==168789==    by 0x406D91: ft_split (in /home/mde-avel/course_42/minishell/minishell)
+==168789==    by 0x404FA6: ft_envnew (builtin_utils.c:48)
+==168789==    by 0x40150C: env_init (main.c:78)
+==168789==    by 0x4015DC: main (main.c:104)
+==168789== 
+==168789== 3,628 bytes in 62 blocks are definitely lost in loss record 52 of 78
+==168789==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x407000: ft_strdup (in /home/mde-avel/course_42/minishell/minishell)
+==168789==    by 0x4014FF: env_init (main.c:77)
+==168789==    by 0x4015DC: main (main.c:104)
+==168789== 
+==168789== 6,145 (2,520 direct, 3,625 indirect) bytes in 62 blocks are definitely lost in loss record 64 of 78
+==168789==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==168789==    by 0x406A2D: ft_calloc (in /home/mde-avel/course_42/minishell/minishell)
+==168789==    by 0x406D62: ft_split (in /home/mde-avel/course_42/minishell/minishell)
+==168789==    by 0x404FA6: ft_envnew (builtin_utils.c:48)
+==168789==    by 0x40150C: env_init (main.c:78)
+==168789==    by 0x4015DC: main (main.c:104)
+==168789== 
+==168789== LEAK SUMMARY:
+==168789==    definitely lost: 6,292 bytes in 133 blocks
+==168789==    indirectly lost: 3,668 bytes in 261 blocks
+==168789==      possibly lost: 0 bytes in 0 blocks
+==168789==    still reachable: 37 bytes in 3 blocks
+==168789==         suppressed: 208,307 bytes in 231 blocks
+==168789== 
+==168789== For lists of detected and suppressed errors, rerun with: -s
+==168789== ERROR SUMMARY: 101 errors from 14 contexts (suppressed: 0 from 0)

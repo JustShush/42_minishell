@@ -106,22 +106,6 @@ int	check_identifier(t_minishell *ms, char *content)
 	return (flag);
 }
 
-void	print_exp(t_list **lst)
-{
-	t_list	*tmp;
-	char	*exp;
-
-	tmp = *lst;
-	exp = "declare -x";
-	if (!tmp)
-		return ;
-	while (tmp)
-	{
-		ft_printf("%s%s%s %s\n", YELLOW, exp, RESET, (tmp)->content);
-		tmp = (tmp)->next;
-	}
-}
-
 void	ft_export(t_minishell *ms, char **cmd_line)
 {
 	int		i;
@@ -132,7 +116,7 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 	i = 1;
 	if (!cmd_line[i])
 	{
-		print_exp(ms->env);
+		print_lst(ms->env, 2);
 		return ;
 	}
 	while (cmd_line[i])

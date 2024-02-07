@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/25 15:47:38 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:26:25 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,10 @@ void	post_process_signal(void);
 
 //* ---- BuiltIn DIR ----
 
+//! builtin_utils.c
+char	*env_strchr(const char *str, int c);
+t_list	*ft_envnew(void *content);
+
 //! in cd.c
 void	go_home(t_minishell *ms);
 void	cd(t_minishell *ms, char **path);
@@ -99,7 +103,7 @@ void	command_echo(char **cmd_line, int flag, int i);
 void	echo(char **cmd_line);
 
 //! in env.c
-void	print_lst(t_list **lst);
+void	print_lst(t_list **lst, int flag);
 void	env(t_minishell *ms, char **cmd_line);
 
 //! in exit.c
@@ -115,6 +119,7 @@ void	print_exp(t_list **lst);
 void	ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c
+int		ft_identifier(char	*s);
 void	pwd(void);
 
 //! in unset.c
@@ -172,6 +177,18 @@ int		empty_var(char **arr, t_list **env);
 //! in env_split2.c
 char	*replace_str(t_minishell *ms, char *str);
 
+//* ---- Syntax DIR ----
+//! in syntax_err.c
+int		redir_syntax(char *str);
+int		double_redir_syntax(char *str);
+int		dollar_syntax(char *str);
+int		sucession_syntax(char *str);
+int		token_syntax(char *str);
+int		token_message(char token);
+
+//! in syntax.c
+int		syntax_error(t_minishell *ms);
+
 //* ---- Utils DIR ----
 //! in arr_utils.c
 
@@ -200,6 +217,7 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
  * @note 2 malloc error, 3 custom error
  */
 void	error(t_minishell *ms, int op, char *arg);
+void	error_message(t_minishell *ms, char *mess, char *plus);
 int		open_error(t_minishell *ms, char *filename, int child);
 void	pipe_error(t_minishell *ms, int *pipe_fd);
 void	fork_error(t_minishell *ms, int *pipe_fd);

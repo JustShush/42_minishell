@@ -9,7 +9,7 @@ CFLAGS = -Wall -Wextra -Werror -g #-fsanitize=address
 # -fsanitize=thread
 
 SRC =	main.c prompt.c frees.c signals.c
-SRC_builtin = cd.c echo.c env.c exit.c export.c pwd.c unset.c
+SRC_builtin = cd.c echo.c env.c exit.c export.c pwd.c unset.c builtin_utils.c 
 SRC_pipex = exec_utils.c exec.c ms_pipex.c redirects.c
 SRC_other = print_env.c
 SRC_parser = ms_split.c parser_utils.c

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/25 16:02:59 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:27:26 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ t_list **env_init(char **envp)
 	while (envp[i])
 	{
 		buf = ft_strdup(envp[i]);
-		node = ft_lstnew(buf);
+		node = ft_envnew(buf);
 		node->n = 1;
 		ft_lstadd_back(env, node);
 		i++;
