@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/07 16:01:34 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:08:16 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,10 @@ void	free_main(t_minishell *ms, int argc, char *argv[])
 	free(ms->prompt);
 	free(ms->input);
 	free_arr(ms->main_arr);
+	/* if (ms->fdin != -1)
+		close(ms->fdin);
+	if (ms->fdout != -1)
+		close(ms->fdout); */
 	(void)argc;
 	(void)argv;
 }
@@ -134,11 +138,11 @@ int	main(int argc, char *argv[], char **env)
 		signal_init();
 		ms->prompt = set_prompt(ms);
 		ms->input = readline(ms->prompt);
+		signal_d(ms);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
 		if (ms->input && syntax_error(ms))
 			continue;
-		signal_d(ms);
 		if (!var_init(ms))
 		{
 			minishell(ms);

@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:04:11 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/07 16:01:02 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/07 17:14:09 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,21 @@ void	free_list(t_list **list)
 
 	if (!list)
 		return ;
+	while (*list)
+	{
+		tmp = *list;
+		*list = (*list)->next;
+		free(tmp->content);
+		free(tmp);
+	}
+	if (list)
+		free(list);
+}
+
+void	free_list_malloc(t_list **list)
+{
+	t_list	*tmp;
+
 	while (*list)
 	{
 		tmp = *list;
@@ -70,8 +85,9 @@ void	free_ms(t_minishell *ms)
 {
 	int	e;
 
-	if (!ms->exit)
+	if (ms->exit < 0)
 		exit(ms->exit);
+	printf("TEST\n");
 	close(0);
 	close(1);
 	close(2);
@@ -87,7 +103,9 @@ void	free_ms(t_minishell *ms)
 		free_arr(ms->main_arr);
 	if (ms->cmdlist)
 		free_cmd_list(ms->cmdlist);
-	free_list(ms->env);
+	printf("TEST1\n");
+	free_list_malloc(ms->env);
+	//close_fd(ms->dp);
 	e = ms->exit;
 	free(ms);
 	rl_clear_history();
