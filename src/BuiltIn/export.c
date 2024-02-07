@@ -46,18 +46,24 @@ int	find_ident_exp(t_list **env, char *ident, char *new_cont, int flag)
 	size_t	len;
 
 	tmp = *env;
+	
 	if (!tmp)
 		perror("Minishell$> export");
 	if (flag == 1)
 		ident = ft_strjoin(ident, "=");
-	else
-		ident = ft_strdup(new_cont);
+	// else
+	// 	ident = ft_strdup(ident);
+	ft_printf("%sident: %s|%s|\n", PURPLE, RESET, ident);
+	ft_printf("%snew_cont: %s|%s|\n", CYAN, RESET, new_cont);
+	//ft_printf("%stmp->ident: %s|%s|\n", BLUE, RESET, (tmp)->ident);
 	len = ft_strlen(ident);
 	while (tmp)
 	{
 		if ((tmp)->n == flag && \
-		ft_strncmp((char *)(tmp)->content, ident, len) == 0)
+		ft_strncmp((char *)(tmp)->ident, ident, len) == 0)
 		{
+			free((tmp)->ident);
+			(tmp)->ident = ident;
 			free((tmp)->content);
 			(tmp)->content = new_cont;
 			free(ident);
@@ -72,6 +78,7 @@ int	find_ident_exp(t_list **env, char *ident, char *new_cont, int flag)
 int	check_identifier(t_minishell *ms, char *content)
 {
 	char	**ident;
+	char	*new_con;
 	int		flag;
 
 	flag = 0;
@@ -80,7 +87,7 @@ int	check_identifier(t_minishell *ms, char *content)
 	{
 		if (!ft_strchr(content, '='))
 		{
-			if (find_ident_exp(ms->env, NULL, content, 2) == 2)
+			if (find_ident_exp(ms->env, content, "  ", 2) == 2)
 				flag = 4;
 			else
 				flag = 3;
@@ -89,7 +96,8 @@ int	check_identifier(t_minishell *ms, char *content)
 		{
 			if (ident[1])
 			{
-				if (find_ident_exp(ms->env, ident[0], content, 1) == 2)
+				new_con = get_cont(content, '=');
+				if (find_ident_exp(ms->env, ident[0], new_con, 1) == 2)
 					flag = 2;
 				else
 					flag = 1;
@@ -123,19 +131,22 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 	{
 		content = ft_strdup(cmd_line[i]);
 		check = check_identifier(ms, content);
+		//ft_printf("%s%s%s\n", YELLOW, content,  RESET);
 		if (check == 0)
 			break ;
 		if (check == 1)
 		{
-			new = ft_lstnew(content);
+			new = ft_envnew(content);
 			new->n = 1;
 			ft_lstadd_front(ms->env, new);
 		}
 		if (check == 3)
 		{
-			new = ft_lstnew(content);
+			new = ft_envnew(content);
+			//ft_printf("%shello%s\n", PURPLE, RESET);
 			new->n = 2;
 			ft_lstadd_front(ms->env, new);
+			//ft_printf("%sporra%s\n", YELLOW,  RESET);
 		}
 		i++;
 	}

@@ -27,7 +27,15 @@ void	print_lst(t_list **lst, int flag)
 		if ((tmp)->n == 1 && flag == 1)
 			ft_printf("%s%d%s %s%s\n", GREEN, (tmp)->n, RESET, (tmp)->ident, (tmp)->content);
 		else if (flag == 2)
-			ft_printf("%s%s%s %s\"%s\"\n", CYAN, exp, RESET, (tmp)->ident, (tmp)->content);
+		{
+			if (ft_strcmp((tmp)->content, "  ") == 0 && ft_strchr((tmp)->ident, '='))
+				ft_printf("%s%s%s %s\"\"\n", CYAN, exp, RESET, (tmp)->ident);
+			else if (!ft_strchr((tmp)->ident, '='))
+				ft_printf("%s%s%s %s\n", CYAN, exp, RESET, (tmp)->ident);
+			else
+				ft_printf("%s%s%s %s\"%s\"\n", CYAN, exp, RESET, (tmp)->ident, (tmp)->content);
+		}
+			
 		tmp = (tmp)->next;
 	}
 }

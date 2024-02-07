@@ -6,13 +6,13 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:56:03 by mde-avel          #+#    #+#             */
-/*   Updated: 2024/02/07 16:44:03 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/07 19:43:38 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-char	*env_strchr(const char *str, int c)
+char	*get_cont(const char *str, int c)
 {
 	int		i;
 	int		j;
@@ -34,28 +34,56 @@ char	*env_strchr(const char *str, int c)
 		return (NULL);
 	while (str[i])
 		res[++j] = str[++i];
+	res[j] = '\0';
+	return (res);
+}
+
+char	*get_ident(const char *str, int c)
+{
+	int		i;
+	int		j;
+	int		len;
+	char	*res;
+
+	i = -1;
+	j = 0;
+	while (str[++i])
+	{
+		if (str[i] == (char)c)
+			break ;
+	}
+	len = i + 1;
+	res = malloc(sizeof(char) * len);
+	if (!res)
+		return (NULL);
+	while (j <= i)
+	{
+		res[j] = str[j];
+		j++;
+	}
+	res[j] = '\0';
 	return (res);
 }
 
 t_list	*ft_envnew(void *content)
 {
 	t_list	*head;
-	char	**new_cont;
 
 	head = malloc(sizeof(t_list));
 	if (!head)
 		return (NULL);
-	if (!ft_strchr(content, '='))
+	if (ft_strchr(content, '=') == 0)
 	{
-		head->ident = ft_strjoin(content, "=");
-		head->content = NULL;
+		head->ident = get_ident(content, '=');
+		//ft_printf("%sident: %s%s\n", YELLOW, head->ident, RESET);
+		head->content = "  ";
+		//ft_printf("%scontent: %s%s\n", PURPLE, head->content, RESET);
 	}
 	else
 	{
-		new_cont = ft_split(content, '=');
-		head->ident = ft_strjoin(new_cont[0], "=");
-		head->content = env_strchr(content, '=');
-		free_arr(new_cont);
+		//ft_printf("%sHi%s\n", YELLOW, RESET);
+		head->ident = get_ident(content, '=');
+		head->content = get_cont(content, '=');
 	}
 	head->next = NULL;
 	return (head);
