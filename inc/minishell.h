@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/06 12:57:19 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/07 12:39:36 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ void	ft_exit(t_minishell *ms, char **path);
 int		ft_identifier(char	*s);
 int		find_ident_exp(t_list **env, char *content, char *new_cont, int flag);
 int		check_identifier(t_minishell *ms, char *content);
-void	print_exp(t_list **lst);
 void	ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c
@@ -165,10 +164,8 @@ int		others(char *str, int i);
 //* --- Replacer DIR ----
 //! in env_split_utils.c
 
-char	*dollar_cond(t_minishell *ms, char *buf);
 char	*var_iter(t_minishell *ms, char *var);
 char	*var_str(t_list *env, char *var);
-int		empty_var(char **arr, t_list **env);
 
 //! in env_split2.c
 char	*replace_str(t_minishell *ms, char *str);
@@ -189,6 +186,16 @@ int		syntax_error(t_minishell *ms);
 //! in arr_utils.c
 
 int		arr_size(char **arr);
+
+/**
+ * Duplicate a string array
+ * 
+ * @param ms A pointer to the minishell structure
+ * @param old The string array to duplicate
+ * @return A pointer to the duplicated string array
+ * @note Allocates memory dynamically, caller is responsible for freeing it
+ * @warning If memory allocation fails, it invokes error() with error type 2
+ */
 char	**ft_arrdup(t_minishell *ms, char **old);
 char	**list_to_array(t_minishell *ms, t_list **list);
 void	print_arr(char *str, char **arr);
@@ -206,11 +213,15 @@ int		cmd_count(char **arr);
 char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
 
 //! in error.c
+
 /**
- * My function to handle all errors
- * @param op type of error msg
- * @param arg (optional) addicional msg
- * @note 2 malloc error, 3 custom error
+ * Handle all errors
+ * 
+ * @param ms Pointer to the minishell structure
+ * @param op Type of error message
+ * @param arg (optional) Additional error message
+ * @note Type 2: Malloc failure error, prints the provided message 'arg' and exits with exit code 12 after freeing memory
+ * @note Type 3: Custom error, prints the provided message 'arg' and exits with the minishell exit code
  */
 void	error(t_minishell *ms, int op, char *arg);
 void	error_message(t_minishell *ms, char *mess, char *plus);
