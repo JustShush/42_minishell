@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:56:03 by mde-avel          #+#    #+#             */
-/*   Updated: 2024/02/07 15:32:16 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:44:03 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,27 @@
 
 char	*env_strchr(const char *str, int c)
 {
-	while (*str)
+	int		i;
+	int		j;
+	int		len;
+	char	*res;
+
+	i = -1;
+	j = -1;
+	while (str[++i])
 	{
-		if (*str == (char)c)
-		{
-			str++;
-			return ((char *)str);
-		}
-		str++;
+		if (str[i] == (char)c)
+			break ;
 	}
-	if ((char)c == '\0')
-	{
-		return ((char *)str);
-	}
-	return (0);
+	if (i == (int)ft_strlen(str))
+		return (NULL);
+	len = ft_strlen(str) - i + 1;
+	res = malloc(sizeof(char) * len);
+	if (!res)
+		return (NULL);
+	while (str[i])
+		res[++j] = str[++i];
+	return (res);
 }
 
 t_list	*ft_envnew(void *content)
@@ -38,7 +45,7 @@ t_list	*ft_envnew(void *content)
 	head = malloc(sizeof(t_list));
 	if (!head)
 		return (NULL);
-	if (env_strchr(content, '=') == 0)
+	if (!ft_strchr(content, '='))
 	{
 		head->ident = ft_strjoin(content, "=");
 		head->content = NULL;
@@ -48,7 +55,7 @@ t_list	*ft_envnew(void *content)
 		new_cont = ft_split(content, '=');
 		head->ident = ft_strjoin(new_cont[0], "=");
 		head->content = env_strchr(content, '=');
-		//free_arr(new_cont);
+		free_arr(new_cont);
 	}
 	head->next = NULL;
 	return (head);
