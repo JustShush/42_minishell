@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 14:16:24 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/23 20:48:00 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:48:25 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(const char *str)
 	if (!str)
 		return (NULL);
 	strlen = ft_strlen(str);
-	str1 = (char *)malloc(sizeof(char) * strlen + 1);
+	str1 = (char *)malloc(sizeof(char) * (strlen + 1));
 	if (!str1)
 		return (NULL);
 	ft_strlcpy(str1, str, strlen + 1);

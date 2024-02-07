@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/06 12:47:47 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:01:34 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ t_list	**env_init(char **envp)
 		ft_lstadd_back(env, node);
 		i++;
 	}
+	free(buf);
 	return (env);
 }
 
@@ -87,11 +88,36 @@ void	free_main(t_minishell *ms, int argc, char *argv[])
 {
 	post_process_signal();
 	signal_d(ms);
-	free_arr(ms->main_arr);
 	free(ms->prompt);
 	free(ms->input);
+	free_arr(ms->main_arr);
 	(void)argc;
 	(void)argv;
+}
+
+char	*set_prompt(t_minishell *ms)
+{
+	char	cwd[PATH_MAX];
+	char	*prompt;
+	char	*dir;
+
+	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	{
+		prompt = malloc(sizeof(char) * 12);
+		if (!prompt)
+			error(ms, 2, NULL);
+		prompt = "Minishell$> ";
+		return (prompt);
+	}
+	// maybe try to print the entire path until the user (~/documents/42_minishell) instead of (/home/dimarque/documents/42_minishell)
+	dir = ft_strjoin(ft_strrchr(getcwd(cwd, sizeof(cwd)), '/') + 1, "$> ");
+	if (!dir)
+		error(ms, 2, NULL);
+	prompt = ft_strjoin("Minishell:", dir);
+	if (!prompt)
+		error(ms, 2, NULL);
+	free(dir);
+	return (prompt);
 }
 
 int	main(int argc, char *argv[], char **env)
@@ -106,7 +132,7 @@ int	main(int argc, char *argv[], char **env)
 	while (1)
 	{
 		signal_init();
-		ms->prompt = ft_strdup("Minishell$> ");
+		ms->prompt = set_prompt(ms);
 		ms->input = readline(ms->prompt);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);

@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:04:11 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/06 17:03:52 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/07 16:01:02 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	free_list(t_list **list)
 {
 	t_list	*tmp;
 
+	if (!list)
+		return ;
 	while (*list)
 	{
 		tmp = *list;

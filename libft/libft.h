@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:57:51 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/07 12:32:45 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/07 15:49:19 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,9 +151,30 @@ char			*ft_strdup(const char *str);
  */
 size_t			ft_strlcat(char *dst, const char *src, size_t size);
 unsigned int	ft_strlcpy(char *dest, const char *src, size_t size);
+
+/**
+ * Copy a string into a destination buffer with size limit
+ * 
+ * @param dest The destination buffer where the string will be copied
+ * @param src The source string to copy
+ * @param size The size of the destination buffer
+ * @return The length of the source string (excluding the null terminator)
+ * @note The function copies at most 'size - 1' characters from 'src' into 'dest'
+ * and ensures null-termination
+ */
+unsigned int	ft_strlcpy(char *dest, const char *src, size_t size);
 size_t			ft_strlen(const char *str);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 char			*ft_strnstr(const char *big, const char *little, size_t len);
+
+/**
+ * Locate the last occurrence of a character in a string
+ * 
+ * @param s The string to search within
+ * @param c The character to search for (as an integer)
+ * @return A pointer to the last occurrence of the character 'c' in the string
+ * 's', or NULL if the character is not found
+ */
 char			*ft_strrchr(const char *s, int c);
 int				ft_tolower(int ch);
 int				ft_toupper(int ch);

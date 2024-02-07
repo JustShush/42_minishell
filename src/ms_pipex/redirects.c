@@ -57,8 +57,8 @@ void	reset_fds(t_minishell *ms)
 {
 	dup2(ms->fdout, STDOUT_FILENO);
 	dup2(ms->fdin, STDIN_FILENO);
-	close(ms->fdout);
-	close(ms->fdin);
+	//close(ms->fdout);
+	//close(ms->fdin);
 }
 
 int	redirect(t_minishell *ms, char **main_arr, int pos, int child)
