@@ -12,12 +12,19 @@
 
 #include "../../inc/minishell.h"
 
+//export ho ho ho
+//export _=poop
+//export A1=Desenhada A2=Banda 
+//export A1=Banana A2=Casca_de A3=Macaco_atira
+//export hi=bye hi=hello a1=folha ho
+
 int	ft_identifier(char	*s)
 {
 	int	i;
 	int	flag;
 
-	if (ft_strcmp(s, "_") == 0)
+	//ft_printf("%sft_identifier:%s|%s|\n", YELLOW, RESET, s);
+	if (ft_strcmp(s, "_=") == 0)
 		return (2);
 	if ((s[0] >= '0' && s[0] <= '9') || s[0] == '=')
 		return (0);
@@ -29,10 +36,7 @@ int	ft_identifier(char	*s)
 			|| (s[i] >= 'A' && s[i] <= 'Z') || s[i] == '_' || s[i] == '=')
 			flag = 1;
 		else
-		{
-			flag = 0;
 			break ;
-		}
 		i++;
 	}
 	if (flag == 1)
@@ -43,31 +47,44 @@ int	ft_identifier(char	*s)
 int	find_ident_exp(t_list **env, char *ident, char *new_cont, int flag)
 {
 	t_list	*tmp;
-	size_t	len;
+	//size_t	len;
 
-	(void)flag;
+	//(void)flag;
 	tmp = *env;
 	if (!tmp)
 		perror("Minishell$> export");
 	ft_printf("%sident: %s|%s|\n", PURPLE, RESET, ident);
 	ft_printf("%snew_cont: %s|%s|\n", YELLOW, RESET, new_cont);
-	len = ft_strlen(ident);
 	while (tmp)
 	{
-		if (ft_strncmp((char *)(tmp)->ident, ident, len - 1) == 0)
+		if (flag == (tmp)->n && ft_strcmp((char *)(tmp)->ident, ident) == 0)
 		{
+			if (flag == 1 && (tmp)->n == 2)
+				(tmp)->n = 1;
+			//free((tmp)->ident);
 			(tmp)->ident = ident;
-			ft_printf("%stmp->content: %s|%s|\n", BLUE, RESET, (tmp)->content);
 			//free((tmp)->content);
 			(tmp)->content = new_cont;
-			ft_printf("%stmp->new_con: %s|%s|\n", YELLOW, RESET, (tmp)->content);
 			return (2);
 		}
+		// else if (flag == 1 && (tmp)->n == 2)
+		// {
+		// 	if (ft_strlen(ident) <= ft_strlen((tmp)->ident))
+		// 		len = ft_strlen((tmp)->ident);
+		// 	else
+		// 		len = ft_strlen(ident);
+		// 	if (ft_strncmp((char *)(tmp)->ident, ident, len) == 0)
+		// 	{
+		// 		(tmp)->n = 1;
+		// 		(tmp)->ident = ident;
+		// 		(tmp)->content = new_cont;
+		// 		return (2);
+		// 	}
+		// }
 		tmp = (tmp)->next;
 	}
 	return (0);
 }
-//export hi=bye hi=hello a1=folha ho
 
 int	check_identifier(t_minishell *ms, char *content)
 {
@@ -77,8 +94,11 @@ int	check_identifier(t_minishell *ms, char *content)
 
 	flag = 0;
 	ft_printf("%scmd_line:%s|%s|\n", GREEN, RESET, content);
-	ident = get_ident(content, '=');
 	new_con = get_cont(content, '=');
+	if (!ft_strchr(content, '='))
+		ident = get_ident(content, '=', 0);
+	else
+		ident = get_ident(content, '=', 1);
 	//ft_printf("%sidentifier:%s|%s|\n", YELLOW, RESET, ident);
 	//ft_printf("%snew_contet:%s|%s|\n", PURPLE, RESET, new_con);
 	if (ft_identifier(ident) == 1)
@@ -102,6 +122,11 @@ int	check_identifier(t_minishell *ms, char *content)
 	{
 		error(ms, 3, "export: not a valid identifier\n");
 		ms->exit = 1;
+	}
+	if (flag == 3 || flag == 1)
+	{
+		free(ident);
+		free(new_con);
 	}
 	printf("check flag: %d\n", flag);
 	return (flag);
@@ -144,7 +169,3 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 		i++;
 	}
 }
-//export ho ho ho
-//export _=poop
-//export A1=Desenhada A2=Banda 
-//export A1=Banana A2=Casca_de A3=Macaco_atira
