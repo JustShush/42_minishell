@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/07 17:08:16 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:50:45 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,12 +75,12 @@ t_list	**env_init(char **envp)
 	while (envp[i])
 	{
 		buf = ft_strdup(envp[i]);
-		node = ft_lstnew(buf);
+		node = ft_lstnew(buf); // TODO: lstnew allocs mem free(node)
+		free(buf);
 		node->n = 1;
 		ft_lstadd_back(env, node);
 		i++;
 	}
-	free(buf);
 	return (env);
 }
 
@@ -138,7 +138,6 @@ int	main(int argc, char *argv[], char **env)
 		signal_init();
 		ms->prompt = set_prompt(ms);
 		ms->input = readline(ms->prompt);
-		signal_d(ms);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
 		if (ms->input && syntax_error(ms))

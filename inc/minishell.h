@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/07 12:39:36 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/08 11:47:39 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_list	**env_init(char **envp);
 //! in frees.c
 void	close_fd(int *fd);
 void	free_list(t_list **list);
+void	free_list_malloc(t_list **list);
 void	free_cmd_list(t_cmdlist *cmdlist);
 void	free_arr(char **arr);
 void	free_ms(t_minishell *ms);

@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:11:59 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/24 13:15:05 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:51:07 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,24 @@ void	signal_init(void)
 
 void	signal_d(t_minishell *ms)
 {
+	int e;
+
 	if (!(ms->input))
 	{
 		write(2, "\033[1;31mexit!\033[0m\n", 17);
-		free_ms(ms);
+		if (ms->prompt)
+			free(ms->prompt);
+		if (ms->input)
+			free(ms->input);
+		if (ms->main_arr)
+			free_arr(ms->main_arr);
+		if (ms->env)
+			free_list_malloc(ms->env);
+		e = ms->exit;
+		free(ms);
+		rl_clear_history();
+		exit(e);
+		//free_ms(ms);
 	}
 }
 
