@@ -127,6 +127,7 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 			break ;
 		ft_export2(check, content, ms);
 		i++;
+		free(content);
 	}
 }
 

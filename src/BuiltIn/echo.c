@@ -33,6 +33,7 @@ int	check_option(char *opt)
 	}
 	if (ft_strcmp(opt, str) == 0)
 		return (1);
+	free(str);
 	return (0);
 }
 

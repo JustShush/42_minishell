@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/08 15:26:13 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/08 16:47:54 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,10 @@ t_list	**env_init(char **envp)
 		ft_lstadd_back(env, node);
 		i++;
 	}
+	// need to free the node just dont know how
+	/* if (node->content)
+		free(node->content); */
+	//free(node);
 	return (env);
 }
 
