@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/07 15:27:26 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/08 13:07:11 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,9 +107,9 @@ int	main(int argc, char *argv[], char **env)
 	{
 		signal_init();
 		ms->prompt = ft_strdup("Minishell$> ");
-		printf("input: %s\n", ms->input);
+		//printf("input: %s\n", ms->input);
 		ms->input = readline(ms->prompt);
-		printf("input: %s\n", ms->input);
+		//printf("input: %s\n", ms->input);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
 		//if (ms->input)

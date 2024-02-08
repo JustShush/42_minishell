@@ -26,7 +26,7 @@ int	ft_identifier(char	*s)
 	while (s[i])
 	{
 		if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= '0' && s[i] <= '9')
-			|| (s[i] >= 'A' && s[i] <= 'Z') || s[i] == '_')
+			|| (s[i] >= 'A' && s[i] <= 'Z') || s[i] == '_' || s[i] == '=')
 			flag = 1;
 		else
 		{
@@ -45,71 +45,64 @@ int	find_ident_exp(t_list **env, char *ident, char *new_cont, int flag)
 	t_list	*tmp;
 	size_t	len;
 
+	(void)flag;
 	tmp = *env;
-	
 	if (!tmp)
 		perror("Minishell$> export");
-	if (flag == 1)
-		ident = ft_strjoin(ident, "=");
-	// else
-	// 	ident = ft_strdup(ident);
 	ft_printf("%sident: %s|%s|\n", PURPLE, RESET, ident);
-	ft_printf("%snew_cont: %s|%s|\n", CYAN, RESET, new_cont);
-	//ft_printf("%stmp->ident: %s|%s|\n", BLUE, RESET, (tmp)->ident);
+	ft_printf("%snew_cont: %s|%s|\n", YELLOW, RESET, new_cont);
 	len = ft_strlen(ident);
 	while (tmp)
 	{
-		if ((tmp)->n == flag && \
-		ft_strncmp((char *)(tmp)->ident, ident, len) == 0)
+		if (ft_strncmp((char *)(tmp)->ident, ident, len - 1) == 0)
 		{
-			free((tmp)->ident);
 			(tmp)->ident = ident;
-			free((tmp)->content);
+			ft_printf("%stmp->content: %s|%s|\n", BLUE, RESET, (tmp)->content);
+			//free((tmp)->content);
 			(tmp)->content = new_cont;
-			free(ident);
+			ft_printf("%stmp->new_con: %s|%s|\n", YELLOW, RESET, (tmp)->content);
 			return (2);
 		}
 		tmp = (tmp)->next;
 	}
-	free(ident);
 	return (0);
 }
+//export hi=bye hi=hello a1=folha ho
 
 int	check_identifier(t_minishell *ms, char *content)
 {
-	char	**ident;
+	char	*ident;
 	char	*new_con;
 	int		flag;
 
 	flag = 0;
-	ident = ft_split(content, '=');
-	if (ft_identifier(ident[0]) == 1)
+	ft_printf("%scmd_line:%s|%s|\n", GREEN, RESET, content);
+	ident = get_ident(content, '=');
+	new_con = get_cont(content, '=');
+	//ft_printf("%sidentifier:%s|%s|\n", YELLOW, RESET, ident);
+	//ft_printf("%snew_contet:%s|%s|\n", PURPLE, RESET, new_con);
+	if (ft_identifier(ident) == 1)
 	{
 		if (!ft_strchr(content, '='))
 		{
-			if (find_ident_exp(ms->env, content, "  ", 2) == 2)
+			if (find_ident_exp(ms->env, ident, new_con, 2) == 2)
 				flag = 4;
 			else
 				flag = 3;
 		}
 		else
 		{
-			if (ident[1])
-			{
-				new_con = get_cont(content, '=');
-				if (find_ident_exp(ms->env, ident[0], new_con, 1) == 2)
-					flag = 2;
-				else
-					flag = 1;
-			}
+			if (find_ident_exp(ms->env, ident, new_con, 1) == 2)
+				flag = 2;
+			else
+				flag = 1;
 		}
 	}
-	else if (ft_identifier(ident[0]) == 0)
+	else if (ft_identifier(ident) == 0)
 	{
 		error(ms, 3, "export: not a valid identifier\n");
 		ms->exit = 1;
 	}
-	free_arr(ident);
 	printf("check flag: %d\n", flag);
 	return (flag);
 }

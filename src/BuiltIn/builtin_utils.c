@@ -6,11 +6,13 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:56:03 by mde-avel          #+#    #+#             */
-/*   Updated: 2024/02/07 19:43:38 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/08 14:10:11 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
+
+//what is munmap_chunk(): invalid pointer?
 
 char	*get_cont(const char *str, int c)
 {
@@ -22,12 +24,13 @@ char	*get_cont(const char *str, int c)
 	i = -1;
 	j = -1;
 	while (str[++i])
-	{
 		if (str[i] == (char)c)
 			break ;
+	if (str[i + 1] == '\0')
+	{
+		res = ft_strdup("  ");
+		return (res);
 	}
-	if (i == (int)ft_strlen(str))
-		return (NULL);
 	len = ft_strlen(str) - i + 1;
 	res = malloc(sizeof(char) * len);
 	if (!res)
@@ -48,10 +51,8 @@ char	*get_ident(const char *str, int c)
 	i = -1;
 	j = 0;
 	while (str[++i])
-	{
 		if (str[i] == (char)c)
 			break ;
-	}
 	len = i + 1;
 	res = malloc(sizeof(char) * len);
 	if (!res)
