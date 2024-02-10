@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/08 19:19:49 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/10 20:43:14 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	post_process_signal(void);
 
 //! builtin_utils.c
 char	*get_cont(const char *str, int c);
-char	*get_ident(const char *str, int c, int flag);
+char	*get_ident(const char *str, int c);
 t_list	*ft_envnew(void *content);
 
 //! in cd.c

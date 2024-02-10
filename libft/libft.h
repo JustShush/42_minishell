@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:57:51 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/06 15:57:37 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/10 20:58:45 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@
 typedef struct s_list
 {
 	int				n;
+	int				equal;
 	char			*ident;
 	void			*content;
 	struct s_list	*next;

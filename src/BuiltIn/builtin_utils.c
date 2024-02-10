@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:56:03 by mde-avel          #+#    #+#             */
-/*   Updated: 2024/02/08 19:37:06 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/10 21:08:51 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	*get_cont(const char *str, int c)
 	return (res);
 }
 
-char	*get_ident(const char *str, int c, int flag)
+char	*get_ident(const char *str, int c)
 {
 	int		i;
 	int		j;
@@ -55,15 +55,9 @@ char	*get_ident(const char *str, int c, int flag)
 	res = malloc(sizeof(char) * len);
 	if (!res)
 		return (NULL);
-	while (j <= i)
+	while (j < i)
 	{
 		res[j] = str[j];
-		j++;
-	}
-	if (flag == 0)
-	{
-		ft_printf("%sHEY!%s\n", YELLOW, RESET);
-		res[j] = '=';
 		j++;
 	}
 	res[j] = '\0';
@@ -79,7 +73,7 @@ t_list	*ft_envnew(void *content)
 		return (NULL);
 	if (ft_strchr(content, '=') == 0)
 	{
-		head->ident = get_ident(content, '=', 0);
+		head->ident = get_ident(content, '=');
 		//ft_printf("%sident: %s%s\n", YELLOW, head->ident, RESET);
 		head->content = "  ";
 		//ft_printf("%scontent: %s%s\n", PURPLE, head->content, RESET);
@@ -87,7 +81,8 @@ t_list	*ft_envnew(void *content)
 	else
 	{
 		//ft_printf("%sHi%s\n", YELLOW, RESET);
-		head->ident = get_ident(content, '=', 1);
+		head->equal = 1;
+		head->ident = get_ident(content, '=');
 		head->content = get_cont(content, '=');
 	}
 	head->next = NULL;
