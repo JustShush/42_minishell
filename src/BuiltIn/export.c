@@ -16,7 +16,7 @@
 //export _=poop
 //export A1=Desenhada A2=Banda 
 //export A1=Banana A2=Casca_de A3=Macaco_atira
-//export hi=bye hi=hello a1=folha ho
+//export hi=bye hi=hello A1=folha ho
 
 int	ft_identifier(char	*s)
 {

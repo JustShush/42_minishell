@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/11 00:10:54 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/11 02:02:06 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,10 +125,8 @@ void	ft_export(t_minishell *ms, char **cmd_line);
 void	pwd(void);
 
 //! in unset.c
-void	rm_last(t_list **env);
-void	rm_middle(t_list **env, char *ident, size_t len);
-void	rm_nodes(t_list **env, char *ident, size_t len);
-void	find_ident_unset(t_list **env, char *ident2);
+void	rm_first(t_list **env);
+void	rm_nodes(t_list **env, char *ident);
 void	unset(t_minishell *ms, char **cmd_line);
 
 //* ---- ms_pipex DIR ----
