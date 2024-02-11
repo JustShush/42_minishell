@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/10 20:43:14 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/11 00:10:54 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,9 @@ char	*get_ident(const char *str, int c);
 t_list	*ft_envnew(void *content);
 
 //! in cd.c
+void	change_dir(t_list **lst);
+void	home_to_dir(t_minishell *ms, char *path);
+int		find_home(t_list **lst);
 void	go_home(t_minishell *ms);
 void	cd(t_minishell *ms, char **path);
 
@@ -116,16 +119,15 @@ void	ft_exit(t_minishell *ms, char **path);
 int		ft_identifier(char	*s);
 int		find_ident_exp(t_list **env, char *content, char *new_cont, int flag);
 int		check_identifier(t_minishell *ms, char *content);
-void	print_exp(t_list **lst);
 void	ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c
-int		ft_identifier(char	*s);
 void	pwd(void);
 
 //! in unset.c
-void	rm_first_last(t_list **env);
-void	remove_node(t_list **env, char *ident, size_t len);
+void	rm_last(t_list **env);
+void	rm_middle(t_list **env, char *ident, size_t len);
+void	rm_nodes(t_list **env, char *ident, size_t len);
 void	find_ident_unset(t_list **env, char *ident2);
 void	unset(t_minishell *ms, char **cmd_line);
 
