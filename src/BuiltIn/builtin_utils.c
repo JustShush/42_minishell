@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:56:03 by mde-avel          #+#    #+#             */
-/*   Updated: 2024/02/10 21:08:51 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/11 00:04:19 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ char	*get_ident(const char *str, int c)
 	return (res);
 }
 
+//ft_printf("%sident: %s%s\n", YELLOW, head->ident, RESET);
+//ft_printf("%scontent: %s%s\n", PURPLE, head->content, RESET);
 t_list	*ft_envnew(void *content)
 {
 	t_list	*head;
@@ -73,14 +75,12 @@ t_list	*ft_envnew(void *content)
 		return (NULL);
 	if (ft_strchr(content, '=') == 0)
 	{
+		head->equal = 0;
 		head->ident = get_ident(content, '=');
-		//ft_printf("%sident: %s%s\n", YELLOW, head->ident, RESET);
-		head->content = "  ";
-		//ft_printf("%scontent: %s%s\n", PURPLE, head->content, RESET);
+		head->content = get_cont(content, '=');
 	}
 	else
 	{
-		//ft_printf("%sHi%s\n", YELLOW, RESET);
 		head->equal = 1;
 		head->ident = get_ident(content, '=');
 		head->content = get_cont(content, '=');

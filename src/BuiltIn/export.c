@@ -23,7 +23,6 @@ int	ft_identifier(char	*s)
 	int	i;
 	int	flag;
 
-	//ft_printf("%sft_identifier:%s|%s|\n", YELLOW, RESET, s);
 	if (ft_strcmp(s, "_") == 0)
 		return (2);
 	if ((s[0] >= '0' && s[0] <= '9') || s[0] == '=')
@@ -44,17 +43,15 @@ int	ft_identifier(char	*s)
 	return (0);
 }
 
+	//ft_printf("%sident: %s|%s|\n", PURPLE, RESET, ident);
+	//ft_printf("%snew_cont: %s|%s|\n", YELLOW, RESET, new_cont);
 int	find_ident_exp(t_list **env, char *ident, char *new_cont, int flag)
 {
 	t_list	*tmp;
-	//size_t	len;
 
-	//(void)flag;
 	tmp = *env;
 	if (!tmp)
 		perror("Minishell$> export");
-	ft_printf("%sident: %s|%s|\n", PURPLE, RESET, ident);
-	ft_printf("%snew_cont: %s|%s|\n", YELLOW, RESET, new_cont);
 	while (tmp)
 	{
 		if (ft_strcmp((char *)(tmp)->ident, ident) == 0)
@@ -75,6 +72,9 @@ int	find_ident_exp(t_list **env, char *ident, char *new_cont, int flag)
 	return (0);
 }
 
+//ft_printf("%scmd_line:%s|%s|\n", GREEN, RESET, content);
+//ft_printf("%sidentifier:%s|%s|\n", YELLOW, RESET, ident);
+//ft_printf("%snew_contet:%s|%s|\n", PURPLE, RESET, new_con);
 int	check_identifier(t_minishell *ms, char *content)
 {
 	char	*ident;
@@ -82,11 +82,10 @@ int	check_identifier(t_minishell *ms, char *content)
 	int		flag;
 
 	flag = 0;
-	ft_printf("%scmd_line:%s|%s|\n", GREEN, RESET, content);
+	
 	new_con = get_cont(content, '=');
 	ident = get_ident(content, '=');
-	//ft_printf("%sidentifier:%s|%s|\n", YELLOW, RESET, ident);
-	//ft_printf("%snew_contet:%s|%s|\n", PURPLE, RESET, new_con);
+	
 	if (ft_identifier(ident) == 1)
 	{
 		if (!ft_strchr(content, '='))
@@ -135,7 +134,6 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 	{
 		content = ft_strdup(cmd_line[i]);
 		check = check_identifier(ms, content);
-		//ft_printf("%s%s%s\n", YELLOW, content,  RESET);
 		if (check == 0)
 			break ;
 		if (check == 1)
@@ -148,11 +146,9 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 		if (check == 3)
 		{
 			new = ft_envnew(content);
-			//ft_printf("%shello%s\n", PURPLE, RESET);
 			new->n = 2;
 			new->equal = 0;
 			ft_lstadd_front(ms->env, new);
-			//ft_printf("%sporra%s\n", YELLOW,  RESET);
 		}
 		i++;
 	}
