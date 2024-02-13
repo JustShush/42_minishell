@@ -17,6 +17,7 @@ void	print_lst(t_list **lst, int flag)
 	t_list	*tmp;
 	char	*exp;
 
+	exp = "declare -x";
 	tmp = *lst;
 	if (!tmp)
 		return ;

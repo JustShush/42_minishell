@@ -70,6 +70,6 @@ void	ft_exit(t_minishell *ms, char **cmd_line)
 		nbr = 1;
 	}
 	nbr = calc_exit(nbr);
+	ms->exit = nbr;
 	free_ms(ms);
-	exit(nbr);
 }

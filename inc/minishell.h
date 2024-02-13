@@ -71,14 +71,14 @@ void	minishell(t_minishell *ms);
 t_list	**env_init(char **envp);
 
 //! in frees.c
-void	close_fd(int *fd);
 void	free_list(t_list **list);
+void	free_list_malloc(t_list **list);
 void	free_cmd_list(t_cmdlist *cmdlist);
 void	free_arr(char **arr);
 void	free_ms(t_minishell *ms);
 
 //! in prompt.c
-//char	*prompt(void);
+char	*set_prompt(t_minishell *ms);
 
 //! in signals.c
 void	signal_c(int signum);
@@ -124,6 +124,7 @@ void	ft_export_2(t_minishell *ms, char *content, int check);
 void	ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c
+int		ft_identifier(char	*s);
 void	pwd(void);
 
 //! in unset.c
@@ -172,10 +173,8 @@ int		others(char *str, int i);
 //* --- Replacer DIR ----
 //! in env_split_utils.c
 
-char	*dollar_cond(t_minishell *ms, char *buf);
 char	*var_iter(t_minishell *ms, char *var);
 char	*var_str(t_list *env, char *var);
-int		empty_var(char **arr, t_list **env);
 
 //! in env_split2.c
 char	*replace_str(t_minishell *ms, char *str);
@@ -196,6 +195,16 @@ int		syntax_error(t_minishell *ms);
 //! in arr_utils.c
 
 int		arr_size(char **arr);
+
+/**
+ * Duplicate a string array
+ * 
+ * @param ms A pointer to the minishell structure
+ * @param old The string array to duplicate
+ * @return A pointer to the duplicated string array
+ * @note Allocates memory dynamically, caller is responsible for freeing it
+ * @warning If memory allocation fails, it invokes error() with error type 2
+ */
 char	**ft_arrdup(t_minishell *ms, char **old);
 char	**list_to_array(t_minishell *ms, t_list **list);
 void	print_arr(char *str, char **arr);
@@ -213,17 +222,25 @@ int		cmd_count(char **arr);
 char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
 
 //! in error.c
+
 /**
- * My function to handle all errors
- * @param op type of error msg
- * @param arg (optional) addicional msg
+ * Handle all errors
+ * 
+ * @param ms Pointer to the minishell structure
+ * @param op Type of error message
+ * @param arg (optional) Additional error message
  * @param plus (optional) cmdName
- * @note 2 malloc error, 3 custom error
+ * @note Type 2: Malloc failure error, prints the provided message 'arg' and exits with exit code 12 after freeing memory
+ * @note Type 3: Custom error, prints the provided message 'arg' and exits with the minishell exit code
  */
-void	error(t_minishell *ms, int op, char *arg, char *plus);
+void	error(t_minishell *ms, int op, char *arg);
+void	error_message(t_minishell *ms, char *mess, char *plus);
 int		open_error(t_minishell *ms, char *filename, int child);
 void	pipe_error(t_minishell *ms, int *pipe_fd);
 void	fork_error(t_minishell *ms, int *pipe_fd);
+
+//! in error1.c
+int	token_message(char token);
 
 //! in inits.c
 
@@ -238,6 +255,7 @@ char	*remove_quotes(char *str);
 //! in redirect.c
 
 void	reset_fds(t_minishell *ms);
+void	close_fd(int *fd);
 int		redirect(t_minishell *ms, char **main_arr, int pos, int child);
 
 //! in str_utils.c

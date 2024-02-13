@@ -1,36 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   error1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 14:16:24 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/07 15:48:25 by dimarque         ###   ########.fr       */
+/*   Created: 2024/02/13 12:51:38 by dimarque          #+#    #+#             */
+/*   Updated: 2024/02/13 12:51:53 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/minishell.h"
 
-char	*ft_strdup(const char *str)
+int	token_message(char token)
 {
-	int		strlen;
-	char	*str1;
-
-	if (!str)
-		return (NULL);
-	strlen = ft_strlen(str);
-	str1 = (char *)malloc(sizeof(char) * (strlen + 1));
-	if (!str1)
-		return (NULL);
-	ft_strlcpy(str1, str, strlen + 1);
-	return (str1);
+	write(2, "MiniShell: syntax error near unexpected token", 45);
+	write(2, " `", 2);
+	write(2, &token, 1);
+	write(2, "\'\n", 2);
+	return (1);
 }
-
-/* int main() {
-
-	printf("%s",ft_strdup("leite"));
-
-	return 0;
-}
- */

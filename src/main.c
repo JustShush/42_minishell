@@ -12,9 +12,9 @@
 
 #include "../inc/minishell.h"
 
-int g_global = 0;
+int	g_global = 0;
 
-char **ft_arrdup(t_minishell *ms, char **old)
+void	minishell(t_minishell *ms)
 {
 	char **new;
 	int index;
@@ -42,7 +42,7 @@ void minishell(t_minishell *ms)
 	cmds_run = 0;
 	pos = 0;
 	if (!ms->cmdlist)
-		return;
+		return ;
 	signal(SIGQUIT, signal_process_interrupt);
 	while (cmds_run < ms->cmd_count)
 	{
@@ -62,12 +62,12 @@ void minishell(t_minishell *ms)
 }
 // check_cmd(ms);
 
-t_list **env_init(char **envp)
+t_list	**env_init(char **envp)
 {
-	int i;
-	char *buf;
-	t_list *node;
-	t_list **env;
+	int		i;
+	char	*buf;
+	t_list	*node;
+	t_list	**env;
 
 	i = 0;
 	env = (t_list **)malloc(sizeof(env));
@@ -80,16 +80,24 @@ t_list **env_init(char **envp)
 		ft_lstadd_back(env, node);
 		i++;
 	}
+	// need to free the node just dont know how
+	/* if (node->content)
+		free(node->content); */
+	//free(node);
 	return (env);
 }
 
-void free_main(t_minishell *ms, int argc, char *argv[])
+void	free_main(t_minishell *ms, int argc, char *argv[])
 {
 	post_process_signal();
 	signal_d(ms);
-	free_arr(ms->main_arr);
 	free(ms->prompt);
 	free(ms->input);
+	free_arr(ms->main_arr);
+	/* if (ms->fdin != -1)
+		close(ms->fdin);
+	if (ms->fdout != -1)
+		close(ms->fdout); */
 	(void)argc;
 	(void)argv;
 }
@@ -106,15 +114,12 @@ int	main(int argc, char *argv[], char **env)
 	while (1)
 	{
 		signal_init();
-		ms->prompt = ft_strdup("Minishell$> ");
-		//printf("input: %s\n", ms->input);
+		ms->prompt = set_prompt(ms);
 		ms->input = readline(ms->prompt);
-		//printf("input: %s\n", ms->input);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
-		//if (ms->input)
-		//	continue;
-		signal_d(ms);
+		if (ms->input && syntax_error(ms))
+			continue ;
 		if (!var_init(ms))
 		{
 			minishell(ms);
@@ -131,12 +136,6 @@ int	main(int argc, char *argv[], char **env)
 // should be: ls | echo s < a < b
 
 // Add color and symbols to the prompt
-// My idea is to use ioctl to get the rows of the terminal and when the user types past it the program puts the users cursor one line down using \x1b (https://notes.burke.libbey.me/ansi-escape-codes/)
-// GPT https://chat.openai.com/c/3d9eb561-86d7-4b9e-8ac7-79eadb9c015c
 // ideas for the prompt:
 // \033[1;36mMinishell\033[0m \033[1;33m✗\033[0m
 // \033[1;33mMinishell\03[0m$>
-
-/**
- ** after any command the program exists by it self
- */

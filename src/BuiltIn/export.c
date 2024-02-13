@@ -139,5 +139,12 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 		check = check_identifier(ms, content);
 		ft_export_2(ms, content, check);
 		i++;
+		free(content);
 	}
 }
+/*
+printf("check: %d\n", flag);
+export ho ho ho _=poop
+export A1=Desenhada A2=Banda 
+export A1=Banana A2=Casca_de A3=Macaco_atira
+*/

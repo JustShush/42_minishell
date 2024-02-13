@@ -38,7 +38,7 @@ void	built_in(t_minishell *ms, char **cmd_flags, int parent)
 	else if (ft_strcmp(cmd_flags[0], "env") == 0)
 		env(ms, cmd_flags);
 	else if (ft_strcmp(cmd_flags[0], "exit") == 0)
-		ft_exit(ms, cmd_flags); // parent
+		ft_exit(ms, cmd_flags);
 	else if (ft_strcmp(cmd_flags[0], "export") == 0)
 		ft_export(ms, cmd_flags);
 	else if (ft_strcmp(cmd_flags[0], "pwd") == 0)
@@ -49,9 +49,6 @@ void	built_in(t_minishell *ms, char **cmd_flags, int parent)
 
 void	check_cmd(t_minishell *ms)
 {
-	// printf("%s\n", ms->main_arr[0]);
 	if (isbuiltin(ms->main_arr[0]))
 		built_in(ms, ms->main_arr, 0);
-	// check if is built-in
-	// if not then use pipex logic to get the cmd
 }
