@@ -74,7 +74,7 @@ void	unset(t_minishell *ms, char **cmd_line)
 			i++;
 		if (flag == 0)
 		{
-			error(ms, 1, "unset: not a valid identifier\n", NULL);
+			error(ms, 1, "unset: not a valid identifier\n", cmd_line[i]);
 			ms->exit = 1;
 			break ;
 		}
