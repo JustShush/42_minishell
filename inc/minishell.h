@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/13 12:37:48 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:22:39 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	post_process_signal(void);
 //! builtin_utils.c
 char	*get_cont(const char *str, int c);
 char	*get_ident(const char *str, int c);
+int		get_flag(t_minishell *ms, char *ident, char *new_con, char *content);
 t_list	*ft_envnew(void *content);
 
 //! in cd.c
@@ -116,9 +117,10 @@ int		calc_exit(int n);
 void	ft_exit(t_minishell *ms, char **path);
 
 //! in export.c
-int		ft_identifier(char	*s);
-int		find_ident_exp(t_list **env, char *content, char *new_cont, int flag);
+int		valid_ident(char *s);
+int		find_ident(t_list **env, char *content, char *new_cont, int flag);
 int		check_identifier(t_minishell *ms, char *content);
+void	ft_export_2(t_minishell *ms, char *content, int check);
 void	ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c

@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:56:03 by mde-avel          #+#    #+#             */
-/*   Updated: 2024/02/11 00:04:19 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:15:19 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,6 @@ char	*get_ident(const char *str, int c)
 
 	i = -1;
 	j = 0;
-	
 	while (str[++i])
 		if (str[i] == (char)c)
 			break ;
@@ -62,6 +61,25 @@ char	*get_ident(const char *str, int c)
 	}
 	res[j] = '\0';
 	return (res);
+}
+
+int	get_flag(t_minishell *ms, char *ident, char *new_con, char *content)
+{
+	if (!ft_strchr(content, '='))
+	{
+		if (find_ident(ms->env, ident, new_con, 2) == 2)
+			return (4);
+		else
+			return (3);
+	}
+	else
+	{
+		if (find_ident(ms->env, ident, new_con, 1) == 2)
+			return (2);
+		else
+			return (1);
+	}
+	return (0);
 }
 
 //ft_printf("%sident: %s%s\n", YELLOW, head->ident, RESET);

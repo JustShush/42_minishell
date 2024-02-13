@@ -13,6 +13,7 @@
 #include "../../inc/minishell.h"
 
 //printf("dir: %s\n", pwd);
+//ft_printf("%sPWD:%s %s\n", CYAN, RESET, pwd);
 void	change_dir(t_list **lst)
 {
 	t_list	*tmp;
@@ -26,12 +27,10 @@ void	change_dir(t_list **lst)
 	{
 		if (ft_strcmp((char *)(tmp)->ident, "PWD") == 0)
 		{
-			
 			getcwd(pwd, sizeof(pwd));
 			cont = ft_strdup(pwd);
 			free((tmp)->content);
 			(tmp)->content = cont;
-			//ft_printf("%sPWD:%s %s\n", CYAN, RESET, pwd);
 			ft_bzero(pwd, ft_strlen(pwd));
 			break ;
 		}
@@ -39,6 +38,7 @@ void	change_dir(t_list **lst)
 	}
 }
 
+//free(new_path);
 void	home_to_dir(t_minishell *ms, char *path)
 {
 	size_t	len;
@@ -51,7 +51,6 @@ void	home_to_dir(t_minishell *ms, char *path)
 		error(ms, 1, "cd: No such file or directory\n", NULL);
 		ms->exit = 1;
 	}
-	//free(new_path);
 }
 
 char	*find_home(t_list **lst)
@@ -70,12 +69,13 @@ char	*find_home(t_list **lst)
 	return (0);
 }
 
+//ft_printf("%shome:%s %s\n", PURPLE, RESET, home);
+//free(home);
 void	go_home(t_minishell *ms)
 {
 	char	*home;
 
 	home = find_home(ms->env);
-	//ft_printf("%shome:%s %s\n", PURPLE, RESET, home);
 	if (!home)
 	{
 		error(ms, 1, "cd: HOME not set\n", NULL);
@@ -88,7 +88,6 @@ void	go_home(t_minishell *ms)
 			error(ms, 1, "cd: No such file or directory\n", NULL);
 			ms->exit = 1;
 		}
-		//free(home);
 	}
 }
 

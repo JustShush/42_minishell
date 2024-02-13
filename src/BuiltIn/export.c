@@ -12,13 +12,12 @@
 
 #include "../../inc/minishell.h"
 
+//export _=poop A1=Desenhada A2=Banda
 //export hi ho hiho
-//export _=poop
-//export A1=Desenhada A2=Banda 
 //export A1=Banana A2=Casca_de A3=Macaco_atira
-//export hi=bye hi=hello A1=folha ho
+//export hi=bye hi=hello A1=folha ho=
 
-int	ft_identifier(char	*s)
+int	valid_ident(char	*s)
 {
 	int	i;
 	int	flag;
@@ -43,9 +42,11 @@ int	ft_identifier(char	*s)
 	return (0);
 }
 
-	//ft_printf("%sident: %s|%s|\n", PURPLE, RESET, ident);
-	//ft_printf("%snew_cont: %s|%s|\n", YELLOW, RESET, new_cont);
-int	find_ident_exp(t_list **env, char *ident, char *new_cont, int flag)
+//ft_printf("%sident: %s|%s|\n", PURPLE, RESET, ident);
+//ft_printf("%snew_cont: %s|%s|\n", YELLOW, RESET, new_cont);
+//free((tmp)->ident);
+//free((tmp)->content);
+int	find_ident(t_list **env, char *ident, char *new_cont, int flag)
 {
 	t_list	*tmp;
 
@@ -63,9 +64,7 @@ int	find_ident_exp(t_list **env, char *ident, char *new_cont, int flag)
 				(tmp)->n = 1;
 				(tmp)->equal = 1;
 			}
-			//free((tmp)->ident);
 			(tmp)->ident = ident;
-			//free((tmp)->content);
 			(tmp)->content = new_cont;
 			return (2);
 		}
@@ -84,28 +83,11 @@ int	check_identifier(t_minishell *ms, char *content)
 	int		flag;
 
 	flag = 0;
-	
 	new_con = get_cont(content, '=');
 	ident = get_ident(content, '=');
-	
-	if (ft_identifier(ident) == 1)
-	{
-		if (!ft_strchr(content, '='))
-		{
-			if (find_ident_exp(ms->env, ident, new_con, 2) == 2)
-				flag = 4;
-			else
-				flag = 3;
-		}
-		else
-		{
-			if (find_ident_exp(ms->env, ident, new_con, 1) == 2)
-				flag = 2;
-			else
-				flag = 1;
-		}
-	}
-	else if (ft_identifier(ident) == 0)
+	if (valid_ident(ident) == 1)
+		flag = get_flag(ms, ident, new_con, content);
+	else if (valid_ident(ident) == 0)
 	{
 		error(ms, 1, "export: not a valid identifier\n", ident);
 		ms->exit = 1;
@@ -119,12 +101,31 @@ int	check_identifier(t_minishell *ms, char *content)
 	return (flag);
 }
 
+void	ft_export_2(t_minishell *ms, char *content, int check)
+{
+	t_list	*new;
+
+	if (check == 1)
+	{
+		new = ft_envnew(content);
+		new->n = 1;
+		new->equal = 1;
+		ft_lstadd_front(ms->env, new);
+	}
+	if (check == 3)
+	{
+		new = ft_envnew(content);
+		new->n = 2;
+		new->equal = 0;
+		ft_lstadd_front(ms->env, new);
+	}
+}
+
 void	ft_export(t_minishell *ms, char **cmd_line)
 {
 	int		i;
 	int		check;
 	char	*content;
-	t_list	*new;
 
 	i = 1;
 	if (!cmd_line[i])
@@ -136,22 +137,7 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 	{
 		content = ft_strdup(cmd_line[i]);
 		check = check_identifier(ms, content);
-		if (check == 0)
-			break ;
-		if (check == 1)
-		{
-			new = ft_envnew(content);
-			new->n = 1;
-			new->equal = 1;
-			ft_lstadd_front(ms->env, new);
-		}
-		if (check == 3)
-		{
-			new = ft_envnew(content);
-			new->n = 2;
-			new->equal = 0;
-			ft_lstadd_front(ms->env, new);
-		}
+		ft_export_2(ms, content, check);
 		i++;
 	}
 }

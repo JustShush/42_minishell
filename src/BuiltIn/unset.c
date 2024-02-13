@@ -13,20 +13,20 @@
 #include "../../inc/minishell.h"
 
 //unset HOME LD_PRELOAD _ LESSOPEN
-
 void	rm_first(t_list **env)
 {
 	t_list	*tmp;
 
 	tmp = *env;
-	//ft_printf("%s|%s|%s\n", PURPLE, (tmp)->ident, RESET);
 	(*env) = (*env)->next;
-	//ft_printf("%s|%s|%s\n", CYAN, (*env)->ident, RESET);
 	free(tmp->ident);
 	free(tmp->content);
 	free(tmp);
 }
 
+//ft_printf("%s|%s|%s\n", YELLOW, (lst)->ident, RESET);
+//ft_printf("%sfirst node%s\n", GREEN, RESET);
+//ft_printf("%s|%s|%s\n", PURPLE, (tmp)->ident, RESET);
 void	rm_nodes(t_list **env, char *ident)
 {
 	t_list	*tmp;
@@ -38,17 +38,14 @@ void	rm_nodes(t_list **env, char *ident)
 		return ;
 	while (lst->next != NULL)
 	{
-		//ft_printf("%s|%s|%s\n", YELLOW, (lst)->ident, RESET);
 		if (ft_strcmp((char *)(tmp)->ident, ident) == 0)
 		{
-			//ft_printf("%sfirst node%s\n", GREEN, RESET);
 			rm_first(env);
 			break ;
 		}
 		else if (ft_strcmp((char *)(lst)->next->ident, ident) == 0)
 		{
 			tmp = lst->next;
-			//ft_printf("%s|%s|%s\n", PURPLE, (tmp)->ident, RESET);
 			lst->next = lst->next->next;
 			free(tmp->ident);
 			free(tmp->content);
@@ -69,7 +66,7 @@ void	unset(t_minishell *ms, char **cmd_line)
 		return ;
 	while (cmd_line[i])
 	{
-		flag = ft_identifier(cmd_line[i]);
+		flag = valid_ident(cmd_line[i]);
 		if (flag == 2)
 			i++;
 		if (flag == 0)
