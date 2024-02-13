@@ -17,6 +17,7 @@ void	change_dir(t_list **lst)
 {
 	t_list	*tmp;
 	char	pwd[PATH_MAX + 1];
+	char	*cont;
 
 	tmp = *lst;
 	if (!tmp)
@@ -27,10 +28,11 @@ void	change_dir(t_list **lst)
 		{
 			
 			getcwd(pwd, sizeof(pwd));
+			cont = ft_strdup(pwd);
 			free((tmp)->content);
-			(tmp)->content = pwd;
+			(tmp)->content = cont;
 			//ft_printf("%sPWD:%s %s\n", CYAN, RESET, pwd);
-			//ft_bzero(pwd, ft_strlen(pwd));
+			ft_bzero(pwd, ft_strlen(pwd));
 			break ;
 		}
 		tmp = (tmp)->next;
