@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/08 11:47:39 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:14:00 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	minishell(t_minishell *ms);
 t_list	**env_init(char **envp);
 
 //! in frees.c
-void	close_fd(int *fd);
 void	free_list(t_list **list);
 void	free_list_malloc(t_list **list);
 void	free_cmd_list(t_cmdlist *cmdlist);
@@ -79,7 +78,7 @@ void	free_arr(char **arr);
 void	free_ms(t_minishell *ms);
 
 //! in prompt.c
-//char	*prompt(void);
+char	*set_prompt(t_minishell *ms);
 
 //! in signals.c
 void	signal_c(int signum);
@@ -230,6 +229,9 @@ int		open_error(t_minishell *ms, char *filename, int child);
 void	pipe_error(t_minishell *ms, int *pipe_fd);
 void	fork_error(t_minishell *ms, int *pipe_fd);
 
+//! in error1.c
+int	token_message(char token);
+
 //! in inits.c
 
 int		var_init(t_minishell *ms);
@@ -243,6 +245,7 @@ char	*remove_quotes(char *str);
 //! in redirect.c
 
 void	reset_fds(t_minishell *ms);
+void	close_fd(int *fd);
 int		redirect(t_minishell *ms, char **main_arr, int pos, int child);
 
 //! in str_utils.c

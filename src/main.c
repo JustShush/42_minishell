@@ -6,31 +6,13 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/08 16:47:54 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:13:29 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 int	g_global = 0;
-
-char	**ft_arrdup(t_minishell *ms, char **old)
-{
-	char	**new;
-	int		index;
-
-	index = 0;
-	new = malloc(sizeof(char *) * (arr_size(old) + 1));
-	if (!new)
-		error(ms, 2, NULL);
-	while (old && old[index])
-	{
-		new[index] = ft_strdup(old[index]);
-		index++;
-	}
-	new[index] = NULL;
-	return (new);
-}
 
 void	minishell(t_minishell *ms)
 {
@@ -103,31 +85,6 @@ void	free_main(t_minishell *ms, int argc, char *argv[])
 	(void)argv;
 }
 
-char	*set_prompt(t_minishell *ms)
-{
-	char	cwd[PATH_MAX];
-	char	*prompt;
-	char	*dir;
-
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
-	{
-		prompt = malloc(sizeof(char) * 12);
-		if (!prompt)
-			error(ms, 2, NULL);
-		prompt = "Minishell$> ";
-		return (prompt);
-	}
-	// maybe try to print the entire path until the user (~/documents/42_minishell) instead of (/home/dimarque/documents/42_minishell)
-	dir = ft_strjoin(ft_strrchr(getcwd(cwd, sizeof(cwd)), '/') + 1, "$> ");
-	if (!dir)
-		error(ms, 2, NULL);
-	prompt = ft_strjoin("Minishell:", dir);
-	if (!prompt)
-		error(ms, 2, NULL);
-	free(dir);
-	return (prompt);
-}
-
 int	main(int argc, char *argv[], char **env)
 {
 	t_minishell	*ms;
@@ -145,7 +102,7 @@ int	main(int argc, char *argv[], char **env)
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
 		if (ms->input && syntax_error(ms))
-			continue;
+			continue ;
 		if (!var_init(ms))
 		{
 			minishell(ms);

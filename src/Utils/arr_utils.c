@@ -30,6 +30,24 @@ int	arr_size(char **arr)
 	return (count);
 }
 
+char	**ft_arrdup(t_minishell *ms, char **old)
+{
+	char	**new;
+	int		index;
+
+	index = 0;
+	new = malloc(sizeof(char *) * (arr_size(old) + 1));
+	if (!new)
+		error(ms, 2, NULL);
+	while (old && old[index])
+	{
+		new[index] = ft_strdup(old[index]);
+		index++;
+	}
+	new[index] = NULL;
+	return (new);
+}
+
 char	**list_to_array(t_minishell *ms, t_list **list)
 {
 	int		i;
