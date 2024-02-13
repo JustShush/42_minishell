@@ -38,7 +38,7 @@ char	**ft_arrdup(t_minishell *ms, char **old)
 	index = 0;
 	new = malloc(sizeof(char *) * (arr_size(old) + 1));
 	if (!new)
-		error(ms, 2, NULL);
+		error(ms, 2, NULL, NULL);
 	while (old && old[index])
 	{
 		new[index] = ft_strdup(old[index]);

@@ -54,7 +54,6 @@ void	rm_nodes(t_list **env, char *ident)
 		}
 		lst = lst->next;
 	}
-	rm_middle(env, ident, len);
 }
 
 void	unset(t_minishell *ms, char **cmd_line)

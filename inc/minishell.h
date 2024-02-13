@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/13 13:22:39 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:49:41 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -186,7 +186,6 @@ int		double_redir_syntax(char *str);
 int		dollar_syntax(char *str);
 int		sucession_syntax(char *str);
 int		token_syntax(char *str);
-int		token_message(char token);
 
 //! in syntax.c
 int		syntax_error(t_minishell *ms);
@@ -233,7 +232,7 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
  * @note Type 2: Malloc failure error, prints the provided message 'arg' and exits with exit code 12 after freeing memory
  * @note Type 3: Custom error, prints the provided message 'arg' and exits with the minishell exit code
  */
-void	error(t_minishell *ms, int op, char *arg);
+void	error(t_minishell *ms, int op, char *arg, char *plus);
 void	error_message(t_minishell *ms, char *mess, char *plus);
 int		open_error(t_minishell *ms, char *filename, int child);
 void	pipe_error(t_minishell *ms, int *pipe_fd);

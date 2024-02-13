@@ -6,31 +6,13 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/13 12:08:47 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:01:29 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 int	g_global = 0;
-
-void	minishell(t_minishell *ms)
-{
-	char **new;
-	int index;
-
-	index = 0;
-	new = malloc(sizeof(char *) * (arr_size(old) + 1));
-	if (!new)
-		error(ms, 2, NULL, NULL);
-	while (old && old[index])
-	{
-		new[index] = ft_strdup(old[index]);
-		index++;
-	}
-	new[index] = NULL;
-	return (new);
-}
 
 void minishell(t_minishell *ms)
 {

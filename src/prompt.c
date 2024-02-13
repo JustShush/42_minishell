@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:48:28 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/13 13:12:21 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/13 15:46:54 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,16 @@ char	*set_prompt(t_minishell *ms)
 	{
 		prompt = malloc(sizeof(char) * 12);
 		if (!prompt)
-			error(ms, 2, NULL);
+			error(ms, 2, NULL, NULL);
 		prompt = "Minishell$> ";
 		return (prompt);
 	}
 	dir = ft_strjoin(ft_strrchr(getcwd(cwd, sizeof(cwd)), '/') + 1, "$> ");
 	if (!dir)
-		error(ms, 2, NULL);
+		error(ms, 2, NULL, NULL);
 	prompt = ft_strjoin("Minishell:", dir);
 	if (!prompt)
-		error(ms, 2, NULL);
+		error(ms, 2, NULL, NULL);
 	free(dir);
 	return (prompt);
 }

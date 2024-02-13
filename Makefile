@@ -15,7 +15,7 @@ SRC_other = print_env.c
 SRC_parser = ms_split.c parser_utils.c
 SRC_replacer = replace_utils.c replace.c
 SRC_syntax = syntax_err.c syntax.c
-SRC_utils = arr_utils.c check_cmd.c cmd_utils.c error.c inits.c quotes_utils.c str_utils.c
+SRC_utils = arr_utils.c check_cmd.c cmd_utils.c error.c error1.c inits.c quotes_utils.c str_utils.c
 
 lib = libft
 LIB = $(lib)/libft.a
