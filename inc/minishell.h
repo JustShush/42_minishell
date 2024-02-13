@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/12 23:37:36 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:07:20 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,7 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
  * @param arg (optional) addicional msg
  * @note 2 malloc error, 3 custom error
  */
-void	error(t_minishell *ms, int op, char *arg);
+void	error(t_minishell *ms, int op, char *arg, char *plus);
 void	error_message(t_minishell *ms, char *mess, char *plus);
 int		open_error(t_minishell *ms, char *filename, int child);
 void	pipe_error(t_minishell *ms, int *pipe_fd);

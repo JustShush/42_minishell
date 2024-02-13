@@ -89,7 +89,7 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos)
 	args = cmd_args(arr, pos);
 	buf = malloc(sizeof(char *) * (args + 1));
 	if (!buf)
-		error(ms, 2, NULL);
+		error(ms, 2, NULL, NULL);
 	while (arr[pos] && !arr[pos][0])
 		pos++;
 	while (i < args)

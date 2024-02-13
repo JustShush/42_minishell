@@ -43,13 +43,13 @@ void	env(t_minishell *ms, char **cmd_line)
 {
 	if (cmd_line[1])
 	{
-		error(ms, 1, "env: Too many arguments\n");
+		error(ms, 1, "env: Too many arguments\n", NULL);
 		ms->exit = 127;
 		return ;
 	}
 	if (ms->env == NULL)
 	{
-		error(ms, 1, "env: No environment variables found.\n");
+		error(ms, 1, "env: No environment variables found.\n", NULL);
 		return ;
 	}
 	print_lst(ms->env, 1);

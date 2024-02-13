@@ -23,7 +23,7 @@ int	check_if_num(t_minishell *ms, char *arg)
 	{
 		if (ft_isdigit(arg[i]) == 0)
 		{
-			error(ms, 1, "exit: numeric argument required.\n");
+			error(ms, 1, "exit: numeric argument required.\n", NULL);
 			return (0);
 		}
 		i++;
@@ -66,7 +66,7 @@ void	ft_exit(t_minishell *ms, char **cmd_line)
 	}
 	else if (cmd_line[2] && arr_size(cmd_line) > 2)
 	{
-		error(ms, 1, "exit: too many arguments.\n");
+		error(ms, 1, "exit: too many arguments.\n", NULL);
 		nbr = 1;
 	}
 	nbr = calc_exit(nbr);

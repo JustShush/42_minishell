@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/08 13:07:11 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:08:47 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char **ft_arrdup(t_minishell *ms, char **old)
 	index = 0;
 	new = malloc(sizeof(char *) * (arr_size(old) + 1));
 	if (!new)
-		error(ms, 2, NULL);
+		error(ms, 2, NULL, NULL);
 	while (old && old[index])
 	{
 		new[index] = ft_strdup(old[index]);
@@ -100,7 +100,7 @@ int	main(int argc, char *argv[], char **env)
 
 	ms = malloc(sizeof(t_minishell));
 	if (!ms)
-		error(NULL, 2, NULL);
+		error(NULL, 2, NULL, NULL);
 	ms->env = env_init(env);
 	ms->exit = 0;
 	while (1)

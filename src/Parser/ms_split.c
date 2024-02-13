@@ -62,7 +62,7 @@ char	*split_temp(t_minishell *ms, char *str, int word_len)
 	temp = NULL;
 	temp = malloc(sizeof(char) * (word_len + 1));
 	if (!temp)
-		error(ms, 2, "split_temp");
+		error(ms, 2, "split_temp", NULL);
 	while (*str && i < word_len)
 		temp[i++] = *str++;
 	temp[i] = '\0';
@@ -98,7 +98,7 @@ char	**ms_split(t_minishell *ms, char *str)
 	ms_words = countw(str);
 	buff = malloc(sizeof(char *) * (ms_words + 1));
 	if (!buff)
-		error(ms, 2, "ms_split");
+		error(ms, 2, "ms_split", NULL);
 	while (i < ms_words)
 	{
 		while (*str && parser_op(*str) == 1)
