@@ -12,97 +12,111 @@
 
 #include "../../inc/minishell.h"
 
-//export Ho Ho 		-> declare -x Ho
-//export Ho=poop 	-> env & no declare -x
-int	find_ident_exp(t_list **env, char *ident, char *new_cont, int flag)
+//export _=poop A1=Desenhada A2=Banda
+//export hi ho hiho
+//export A1=Banana A2=Casca_de A3=Macaco_atira
+//export hi=bye hi=hello A1=folha ho=
+
+int	valid_ident(char	*s)
+{
+	int	i;
+	int	flag;
+
+	if (ft_strcmp(s, "_") == 0)
+		return (2);
+	if ((s[0] >= '0' && s[0] <= '9') || s[0] == '=')
+		return (0);
+	i = 0;
+	flag = 0;
+	while (s[i])
+	{
+		if ((s[i] >= 'a' && s[i] <= 'z') || (s[i] >= '0' && s[i] <= '9')
+			|| (s[i] >= 'A' && s[i] <= 'Z') || s[i] == '_')
+			flag = 1;
+		else
+			break ;
+		i++;
+	}
+	if (flag == 1)
+		return (1);
+	return (0);
+}
+
+//ft_printf("%sident: %s|%s|\n", PURPLE, RESET, ident);
+//ft_printf("%snew_cont: %s|%s|\n", YELLOW, RESET, new_cont);
+//free((tmp)->ident);
+//free((tmp)->content);
+int	find_ident(t_list **env, char *ident, char *new_cont, int flag)
 {
 	t_list	*tmp;
-	size_t	len;
 
 	tmp = *env;
 	if (!tmp)
 		perror("Minishell$> export");
-	if (flag == 1)
-		ident = ft_strjoin(ident, "=");
-	else
-		ident = ft_strdup(new_cont);
-	len = ft_strlen(ident);
 	while (tmp)
 	{
-		if ((tmp)->n == flag && \
-			ft_strncmp((char *)(tmp)->content, ident, len) == 0)
+		if (ft_strcmp((char *)(tmp)->ident, ident) == 0)
 		{
-			free((tmp)->content);
+			if (flag == 2 && (tmp)->n == 1)
+				return (2);
+			if (flag == 1 && (tmp)->n == 2)
+			{
+				(tmp)->n = 1;
+				(tmp)->equal = 1;
+			}
+			(tmp)->ident = ident;
 			(tmp)->content = new_cont;
-			free(ident);
 			return (2);
 		}
 		tmp = (tmp)->next;
 	}
-	free(ident);
 	return (0);
 }
 
-int	check_ident2(t_minishell *ms, char *content, char **ident)
-{
-	int	flag;
-
-	flag = 0;
-	if (!ft_strchr(content, '='))
-	{
-		if (find_ident_exp(ms->env, NULL, content, 2) == 2)
-			flag = 4;
-		else
-			flag = 3;
-	}
-	else
-	{
-		if (ident[1])
-		{
-			if (find_ident_exp(ms->env, ident[0], content, 1) == 2)
-				flag = 2;
-			else
-				flag = 1;
-		}
-	}
-	free_arr(ident);
-	return (flag);
-}
-
+//ft_printf("%scmd_line:%s|%s|\n", GREEN, RESET, content);
+//ft_printf("%sidentifier:%s|%s|\n", YELLOW, RESET, ident);
+//ft_printf("%snew_contet:%s|%s|\n", PURPLE, RESET, new_con);
 int	check_identifier(t_minishell *ms, char *content)
 {
-	char	**ident;
+	char	*ident;
+	char	*new_con;
 	int		flag;
 
 	flag = 0;
-	ident = ft_split(content, '=');
-	if (ft_identifier(ident[0]) == 1)
+	new_con = get_cont(content, '=');
+	ident = get_ident(content, '=');
+	if (valid_ident(ident) == 1)
+		flag = get_flag(ms, ident, new_con, content);
+	else if (valid_ident(ident) == 0)
 	{
-		flag = check_ident2(ms, content, ident);
-	}
-	else if (ft_identifier(ident[0]) == 0)
-	{
-		error_message(ms, "export: not a valid identifier\n", content);
+		error(ms, 1, "export: not a valid identifier\n", ident);
 		ms->exit = 1;
 	}
-	free_arr(ident);
+	if (flag == 3 || flag == 1)
+	{
+		free(ident);
+		free(new_con);
+	}
+	printf("check flag: %d\n", flag);
 	return (flag);
 }
 
-void	ft_export2(int check, char	*content, t_minishell *ms)
+void	ft_export_2(t_minishell *ms, char *content, int check)
 {
 	t_list	*new;
 
 	if (check == 1)
 	{
-		new = ft_lstnew(content);
+		new = ft_envnew(content);
 		new->n = 1;
+		new->equal = 1;
 		ft_lstadd_front(ms->env, new);
 	}
 	if (check == 3)
 	{
-		new = ft_lstnew(content);
+		new = ft_envnew(content);
 		new->n = 2;
+		new->equal = 0;
 		ft_lstadd_front(ms->env, new);
 	}
 }
@@ -123,14 +137,11 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 	{
 		content = ft_strdup(cmd_line[i]);
 		check = check_identifier(ms, content);
-		if (check == 0)
-			break ;
-		ft_export2(check, content, ms);
+		ft_export_2(ms, content, check);
 		i++;
 		free(content);
 	}
 }
-
 /*
 printf("check: %d\n", flag);
 export ho ho ho _=poop

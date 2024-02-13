@@ -5,15 +5,23 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 11:58:21 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/06 12:24:59 by dimarque         ###   ########.fr       */
+/*   Created: 2023/10/27 11:58:21 by dimarque          #+#    #+#             */t_list
+/*   Updated: 2024/02/13 12:38:01 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	error(t_minishell *ms, int op, char *arg)
+void	error(t_minishell *ms, int op, char *arg, char *plus)
 {
+	if (op == 1 && arg != NULL)
+	{
+		if (plus)
+			ft_printf("%s%s%s'%s': ", RED, ms->prompt, RESET, plus);
+		else
+			ft_printf("%s%s%s", RED, ms->prompt, RESET);
+		ft_putstr_fd(arg, 2);
+	}
 	if (op == 2)
 	{
 		printf("%s\n", arg);

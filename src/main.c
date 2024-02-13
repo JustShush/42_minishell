@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/13 13:13:29 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/13 12:08:47 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,28 @@ int	g_global = 0;
 
 void	minishell(t_minishell *ms)
 {
-	int		pipe_fd[2];
-	int		cmds_run;
-	int		pos;
-	pid_t	pid;
+	char **new;
+	int index;
+
+	index = 0;
+	new = malloc(sizeof(char *) * (arr_size(old) + 1));
+	if (!new)
+		error(ms, 2, NULL, NULL);
+	while (old && old[index])
+	{
+		new[index] = ft_strdup(old[index]);
+		index++;
+	}
+	new[index] = NULL;
+	return (new);
+}
+
+void minishell(t_minishell *ms)
+{
+	int pipe_fd[2];
+	int cmds_run;
+	int pos;
+	pid_t pid;
 
 	cmds_run = 0;
 	pos = 0;
@@ -57,8 +75,7 @@ t_list	**env_init(char **envp)
 	while (envp[i])
 	{
 		buf = ft_strdup(envp[i]);
-		node = ft_lstnew(buf); // TODO: lstnew allocs mem free(node)
-		free(buf);
+		node = ft_envnew(buf);
 		node->n = 1;
 		ft_lstadd_back(env, node);
 		i++;
@@ -91,7 +108,7 @@ int	main(int argc, char *argv[], char **env)
 
 	ms = malloc(sizeof(t_minishell));
 	if (!ms)
-		error(NULL, 2, NULL);
+		error(NULL, 2, NULL, NULL);
 	ms->env = env_init(env);
 	ms->exit = 0;
 	while (1)

@@ -13,31 +13,32 @@
 #include "../../inc/minishell.h"
 
 //printf("dir: %s\n", pwd);
+//ft_printf("%sPWD:%s %s\n", CYAN, RESET, pwd);
 void	change_dir(t_list **lst)
 {
 	t_list	*tmp;
 	char	pwd[PATH_MAX + 1];
-	char	*ident;
+	char	*cont;
 
-	ident = "PWD=";
 	tmp = *lst;
 	if (!tmp)
 		return ;
 	while (tmp)
 	{
-		if (ft_strncmp((char *)(tmp)->content, ident, 4) == 0)
+		if (ft_strcmp((char *)(tmp)->ident, "PWD") == 0)
 		{
 			getcwd(pwd, sizeof(pwd));
-			ident = ft_strjoin(ident, pwd);
-			ft_bzero(pwd, ft_strlen(pwd));
+			cont = ft_strdup(pwd);
 			free((tmp)->content);
-			(tmp)->content = ident;
+			(tmp)->content = cont;
+			ft_bzero(pwd, ft_strlen(pwd));
 			break ;
 		}
 		tmp = (tmp)->next;
 	}
 }
 
+//free(new_path);
 void	home_to_dir(t_minishell *ms, char *path)
 {
 	size_t	len;
@@ -47,13 +48,12 @@ void	home_to_dir(t_minishell *ms, char *path)
 	new_path = ft_substr(path, 2, len);
 	if (chdir(new_path) == -1)
 	{
-		error(ms, 3, "cd: No such file or directory\n");
+		error(ms, 1, "cd: No such file or directory\n", NULL);
 		ms->exit = 1;
 	}
-	free(new_path);
 }
 
-int	find_home(t_list **lst)
+char	*find_home(t_list **lst)
 {
 	t_list	*tmp;
 
@@ -62,31 +62,32 @@ int	find_home(t_list **lst)
 		return (0);
 	while (tmp)
 	{
-		if (ft_strncmp((char *)(tmp)->content, "HOME=", 4) == 0)
-			return (1);
+		if (ft_strcmp((char *)(tmp)->ident, "HOME") == 0)
+			return ((tmp)->content);
 		tmp = (tmp)->next;
 	}
 	return (0);
 }
 
+//ft_printf("%shome:%s %s\n", PURPLE, RESET, home);
+//free(home);
 void	go_home(t_minishell *ms)
 {
 	char	*home;
 
-	if (find_home(ms->env) == 0)
+	home = find_home(ms->env);
+	if (!home)
 	{
-		error(ms, 3, "cd: HOME not set\n");
+		error(ms, 1, "cd: HOME not set\n", NULL);
 		ms->exit = 1;
 	}
 	else
 	{
-		home = ft_strtrim(var_str(*ms->env, "HOME="), "HOME=");
 		if (chdir(home) == -1)
 		{
-			error(ms, 3, "cd: No such file or directory\n");
+			error(ms, 1, "cd: No such file or directory\n", NULL);
 			ms->exit = 1;
 		}
-		free(home);
 	}
 }
 
@@ -94,7 +95,7 @@ void	cd(t_minishell *ms, char **path)
 {
 	if (path && arr_size(path) > 2)
 	{
-		error(ms, 3, "cd: too many arguments\n");
+		error(ms, 1, "cd: too many arguments\n", NULL);
 		ms->exit = 1;
 	}
 	else if (!path || !path[1] || !path[1][0])
@@ -107,7 +108,7 @@ void	cd(t_minishell *ms, char **path)
 	}
 	else if (chdir(path[1]) == -1)
 	{
-		error(ms, 3, "cd: No such file or directory\n");
+		error(ms, 1, "cd: No such file or directory\n", NULL);
 		ms->exit = 1;
 	}
 	change_dir(ms->env);

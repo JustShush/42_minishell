@@ -60,7 +60,7 @@ char	**list_to_array(t_minishell *ms, t_list **list)
 	size = ft_lstsize(tmp);
 	buf = malloc(sizeof(char *) * (size + 1));
 	if (!buf)
-		error(ms, 2, NULL);
+		error(ms, 2, NULL, NULL);
 	while (tmp && i < size)
 	{
 		buf[i] = ft_strdup((char *)tmp->content);

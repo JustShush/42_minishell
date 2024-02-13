@@ -21,16 +21,23 @@ void	print_lst(t_list **lst, int flag)
 	tmp = *lst;
 	if (!tmp)
 		return ;
+	if (flag == 2)
+		exp = "declare -x";
 	while (tmp)
 	{
-		if (flag == 1)
-		{
-			if ((tmp)->n == 1)
-				ft_printf("%s%d%s %s\n", YELLOW, (tmp)->n, RESET, \
+		if ((tmp)->n == 1 && flag == 1)
+			ft_printf("%s%d%s %s=%s\n", GREEN, (tmp)->n, RESET, (tmp)->ident, \
 				(tmp)->content);
+		else if (flag == 2)
+		{
+			if ((tmp)->equal == 0 && ft_strcmp((tmp)->content, "  ") == 0)
+				ft_printf("%s%s%s %s\n", CYAN, exp, RESET, (tmp)->ident);
+			else if (ft_strcmp((tmp)->content, "  ") == 0)
+				ft_printf("%s%s%s %s=\"\"\n", CYAN, exp, RESET, (tmp)->ident);
+			else
+				ft_printf("%s%s%s %s=\"%s\"\n", CYAN, exp, RESET, \
+					(tmp)->ident, (tmp)->content);
 		}
-		else
-			ft_printf("%s%s%s %s\n", YELLOW, exp, RESET, (tmp)->content);
 		tmp = (tmp)->next;
 	}
 }
@@ -39,13 +46,13 @@ void	env(t_minishell *ms, char **cmd_line)
 {
 	if (cmd_line[1])
 	{
-		error(ms, 3, "env: Too many arguments\n");
+		error(ms, 1, "env: Too many arguments\n", NULL);
 		ms->exit = 127;
 		return ;
 	}
 	if (ms->env == NULL)
 	{
-		error(ms, 3, "env: No environment variables found.\n");
+		error(ms, 1, "env: No environment variables found.\n", NULL);
 		return ;
 	}
 	print_lst(ms->env, 1);

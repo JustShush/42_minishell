@@ -20,7 +20,7 @@ t_cmdlist	*cmdlist_lstnew(t_minishell *ms, int cmd_index)
 
 	cmdlist = malloc(sizeof(t_cmdlist));
 	if (!cmdlist)
-		error(ms, 2, NULL);
+		error(ms, 2, NULL, NULL);
 	cmdlist->cmds = cmd_with_flags(ms, ms->main_arr, cmd_index);
 	cmdlist->next = NULL;
 	return (cmdlist);

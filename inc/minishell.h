@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/13 13:14:00 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/13 13:22:39 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,16 @@ void	post_process_signal(void);
 
 //* ---- BuiltIn DIR ----
 
+//! builtin_utils.c
+char	*get_cont(const char *str, int c);
+char	*get_ident(const char *str, int c);
+int		get_flag(t_minishell *ms, char *ident, char *new_con, char *content);
+t_list	*ft_envnew(void *content);
+
 //! in cd.c
+void	change_dir(t_list **lst);
+void	home_to_dir(t_minishell *ms, char *path);
+char	*find_home(t_list **lst);
 void	go_home(t_minishell *ms);
 void	cd(t_minishell *ms, char **path);
 
@@ -108,9 +117,10 @@ int		calc_exit(int n);
 void	ft_exit(t_minishell *ms, char **path);
 
 //! in export.c
-int		ft_identifier(char	*s);
-int		find_ident_exp(t_list **env, char *content, char *new_cont, int flag);
+int		valid_ident(char *s);
+int		find_ident(t_list **env, char *content, char *new_cont, int flag);
 int		check_identifier(t_minishell *ms, char *content);
+void	ft_export_2(t_minishell *ms, char *content, int check);
 void	ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c
@@ -118,9 +128,8 @@ int		ft_identifier(char	*s);
 void	pwd(void);
 
 //! in unset.c
-void	rm_first_last(t_list **env);
-void	remove_node(t_list **env, char *ident, size_t len);
-void	find_ident_unset(t_list **env, char *ident2);
+void	rm_first(t_list **env);
+void	rm_nodes(t_list **env, char *ident);
 void	unset(t_minishell *ms, char **cmd_line);
 
 //* ---- ms_pipex DIR ----
@@ -220,6 +229,7 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
  * @param ms Pointer to the minishell structure
  * @param op Type of error message
  * @param arg (optional) Additional error message
+ * @param plus (optional) cmdName
  * @note Type 2: Malloc failure error, prints the provided message 'arg' and exits with exit code 12 after freeing memory
  * @note Type 3: Custom error, prints the provided message 'arg' and exits with the minishell exit code
  */
