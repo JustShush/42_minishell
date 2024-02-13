@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/11 02:02:06 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/12 23:37:36 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ t_list	*ft_envnew(void *content);
 //! in cd.c
 void	change_dir(t_list **lst);
 void	home_to_dir(t_minishell *ms, char *path);
-int		find_home(t_list **lst);
+char	*find_home(t_list **lst);
 void	go_home(t_minishell *ms);
 void	cd(t_minishell *ms, char **path);
 
