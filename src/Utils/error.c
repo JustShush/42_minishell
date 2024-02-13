@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:58:21 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/25 15:47:00 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/13 11:45:00 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 void	error(t_minishell *ms, int op, char *arg)
 {
+	if (op == 1 && arg != NULL)
+	{
+		ft_putstr_fd(arg, STDERR_FILENO);
+	}
 	if (op == 2)
 	{
 		printf("%s\n", arg);
@@ -27,6 +31,16 @@ void	error(t_minishell *ms, int op, char *arg)
 		printf("error in: %s\n", arg);
 		exit(ms->exit);
 	}
+}
+
+// The function prints an error message with a colored prompt.
+void	error_message(t_minishell *ms, char *mess, char *plus)
+{
+	if (plus)
+		ft_printf("%s%s%s'%s': ", RED, ms->prompt, RESET, plus);
+	else
+		ft_printf("%s%s%s", RED, ms->prompt, RESET);
+	ft_putstr_fd(mess, 2);
 }
 
 int	open_error(t_minishell *ms, char *filename, int child)

@@ -46,7 +46,7 @@ void	home_to_dir(t_minishell *ms, char *path)
 	new_path = ft_substr(path, 2, len);
 	if (chdir(new_path) == -1)
 	{
-		error(ms, 3, "cd: No such file or directory\n");
+		error(ms, 1, "cd: No such file or directory\n");
 		ms->exit = 1;
 	}
 	//free(new_path);
@@ -76,14 +76,14 @@ void	go_home(t_minishell *ms)
 	//ft_printf("%shome:%s %s\n", PURPLE, RESET, home);
 	if (!home)
 	{
-		error(ms, 3, "cd: HOME not set\n");
+		error(ms, 1, "cd: HOME not set\n");
 		ms->exit = 1;
 	}
 	else
 	{
 		if (chdir(home) == -1)
 		{
-			error(ms, 3, "cd: No such file or directory\n");
+			error(ms, 1, "cd: No such file or directory\n");
 			ms->exit = 1;
 		}
 		//free(home);
@@ -94,7 +94,7 @@ void	cd(t_minishell *ms, char **path)
 {
 	if (path && arr_size(path) > 2)
 	{
-		error(ms, 3, "cd: too many arguments\n");
+		error(ms, 1, "cd: too many arguments\n");
 		ms->exit = 1;
 	}
 	else if (!path || !path[1] || !path[1][0])
@@ -107,7 +107,7 @@ void	cd(t_minishell *ms, char **path)
 	}
 	else if (chdir(path[1]) == -1)
 	{
-		error(ms, 3, "cd: No such file or directory\n");
+		error(ms, 1, "cd: No such file or directory\n");
 		ms->exit = 1;
 	}
 	change_dir(ms->env);
