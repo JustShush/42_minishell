@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/13 15:49:41 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:54:01 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,8 +229,10 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
  * @param op Type of error message
  * @param arg (optional) Additional error message
  * @param plus (optional) cmdName
- * @note Type 2: Malloc failure error, prints the provided message 'arg' and exits with exit code 12 after freeing memory
- * @note Type 3: Custom error, prints the provided message 'arg' and exits with the minishell exit code
+ * @note Type 2: Malloc failure error, prints the provided message 'arg' and \
+ * exits with exit code 12 after freeing memory
+ * @note Type 3: Custom error, prints the provided message 'arg' and exits with \
+ *  the minishell exit code
  */
 void	error(t_minishell *ms, int op, char *arg, char *plus);
 void	error_message(t_minishell *ms, char *mess, char *plus);
@@ -239,7 +241,7 @@ void	pipe_error(t_minishell *ms, int *pipe_fd);
 void	fork_error(t_minishell *ms, int *pipe_fd);
 
 //! in error1.c
-int	token_message(char token);
+int		token_message(char token);
 
 //! in inits.c
 

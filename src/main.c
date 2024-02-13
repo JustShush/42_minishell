@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/13 16:01:29 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:46:32 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	g_global = 0;
 
-void minishell(t_minishell *ms)
+void	minishell(t_minishell *ms)
 {
-	int pipe_fd[2];
-	int cmds_run;
-	int pos;
-	pid_t pid;
+	int		pipe_fd[2];
+	int		cmds_run;
+	int		pos;
+	pid_t	pid;
 
 	cmds_run = 0;
 	pos = 0;
@@ -62,10 +62,6 @@ t_list	**env_init(char **envp)
 		ft_lstadd_back(env, node);
 		i++;
 	}
-	// need to free the node just dont know how
-	/* if (node->content)
-		free(node->content); */
-	//free(node);
 	return (env);
 }
 

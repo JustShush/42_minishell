@@ -26,8 +26,7 @@ void	print_lst(t_list **lst, int flag)
 	while (tmp)
 	{
 		if ((tmp)->n == 1 && flag == 1)
-			ft_printf("%s%d%s %s=%s\n", GREEN, (tmp)->n, RESET, (tmp)->ident, \
-				(tmp)->content);
+			ft_printf("%s%s %s=%s\n", GREEN, (tmp)->ident, RESET, (tmp)->content);
 		else if (flag == 2)
 		{
 			if ((tmp)->equal == 0 && ft_strcmp((tmp)->content, "  ") == 0)

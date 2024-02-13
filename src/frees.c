@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:04:11 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/07 15:47:38 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/13 16:52:45 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	free_list(t_list **list)
 		tmp = *list;
 		*list = (*list)->next;
 		free(tmp->ident);
-		if(tmp->content)
+		if (tmp->content)
 			free(tmp->content);
 		free(tmp);
 	}
