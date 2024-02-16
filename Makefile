@@ -126,6 +126,10 @@ $(NAME): $(LIB) $(OBJS)
 $(OBJ_DIR)/%.o: $(SRCS)
 		@mkdir -p $(OBJ_DIR)
 		@$(CC) $(CFLAGS) -o $@ -c $<
+
+a: all
+	@$(CTRL_L)
+
 clean:
 	@$(CTRL_L)
 	@/bin/rm -rf $(OBJ_DIR)
