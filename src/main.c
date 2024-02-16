@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/13 16:46:32 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/16 10:52:31 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ t_list	**env_init(char **envp)
 	{
 		buf = ft_strdup(envp[i]);
 		node = ft_envnew(buf);
+		free(buf);
 		node->n = 1;
 		ft_lstadd_back(env, node);
 		i++;
