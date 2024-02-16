@@ -55,6 +55,9 @@ int	var_init(t_minishell *ms)
 {
 	char	**new_arr;
 
+	ms->cmd_fd = 0;
+	ms->fdin = dup(STDIN_FILENO);
+	ms->fdout = dup(STDOUT_FILENO);
 	ms->main_arr = ms_split(ms, ms->input);
 	if (!(ms->main_arr))
 		return (1);
