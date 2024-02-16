@@ -45,7 +45,7 @@ void	env(t_minishell *ms, char **cmd_line)
 {
 	if (cmd_line[1])
 	{
-		error(ms, 1, "env: Too many arguments\n", NULL);
+		error(ms, 1, "env: No such file or directory\n", NULL);
 		ms->exit = 127;
 		return ;
 	}

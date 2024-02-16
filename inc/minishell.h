@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/16 16:36:07 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/16 19:04:33 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,6 @@ void	ft_export_2(t_minishell *ms, char *content, int check);
 void	ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c
-int		ft_identifier(char	*s);
 void	pwd(void);
 
 //! in unset.c

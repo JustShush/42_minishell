@@ -1,244 +1,200 @@
-==764764== Memcheck, a memory error detector
-==764764== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
-==764764== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
-==764764== Command: ./minishell
-==764764== Parent PID: 764763
-==764764== 
-==764768== 
-==764768== HEAP SUMMARY:
-==764768==     in use at exit: 208,203 bytes in 222 blocks
-==764768==   total heap usage: 702 allocs, 480 frees, 238,340 bytes allocated
-==764768== 
-==764768== LEAK SUMMARY:
-==764768==    definitely lost: 0 bytes in 0 blocks
-==764768==    indirectly lost: 0 bytes in 0 blocks
-==764768==      possibly lost: 0 bytes in 0 blocks
-==764768==    still reachable: 0 bytes in 0 blocks
-==764768==         suppressed: 208,203 bytes in 222 blocks
-==764768== 
-==764768== For lists of detected and suppressed errors, rerun with: -s
-==764768== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==764775== 
-==764775== HEAP SUMMARY:
-==764775==     in use at exit: 208,203 bytes in 222 blocks
-==764775==   total heap usage: 749 allocs, 527 frees, 271,933 bytes allocated
-==764775== 
-==764775== LEAK SUMMARY:
-==764775==    definitely lost: 0 bytes in 0 blocks
-==764775==    indirectly lost: 0 bytes in 0 blocks
-==764775==      possibly lost: 0 bytes in 0 blocks
-==764775==    still reachable: 0 bytes in 0 blocks
-==764775==         suppressed: 208,203 bytes in 222 blocks
-==764775== 
-==764775== For lists of detected and suppressed errors, rerun with: -s
-==764775== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==764777== 
-==764777== HEAP SUMMARY:
-==764777==     in use at exit: 208,207 bytes in 222 blocks
-==764777==   total heap usage: 769 allocs, 547 frees, 272,239 bytes allocated
-==764777== 
-==764777== LEAK SUMMARY:
-==764777==    definitely lost: 0 bytes in 0 blocks
-==764777==    indirectly lost: 0 bytes in 0 blocks
-==764777==      possibly lost: 0 bytes in 0 blocks
-==764777==    still reachable: 0 bytes in 0 blocks
-==764777==         suppressed: 208,207 bytes in 222 blocks
-==764777== 
-==764777== For lists of detected and suppressed errors, rerun with: -s
-==764777== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==764847== 
-==764847== HEAP SUMMARY:
-==764847==     in use at exit: 208,232 bytes in 224 blocks
-==764847==   total heap usage: 821 allocs, 597 frees, 273,025 bytes allocated
-==764847== 
-==764847== LEAK SUMMARY:
-==764847==    definitely lost: 0 bytes in 0 blocks
-==764847==    indirectly lost: 0 bytes in 0 blocks
-==764847==      possibly lost: 0 bytes in 0 blocks
-==764847==    still reachable: 0 bytes in 0 blocks
-==764847==         suppressed: 208,232 bytes in 224 blocks
-==764847== 
-==764847== For lists of detected and suppressed errors, rerun with: -s
-==764847== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==764848== 
-==764848== HEAP SUMMARY:
-==764848==     in use at exit: 208,483 bytes in 227 blocks
-==764848==   total heap usage: 845 allocs, 618 frees, 273,558 bytes allocated
-==764848== 
-==764848== LEAK SUMMARY:
-==764848==    definitely lost: 0 bytes in 0 blocks
-==764848==    indirectly lost: 0 bytes in 0 blocks
-==764848==      possibly lost: 0 bytes in 0 blocks
-==764848==    still reachable: 0 bytes in 0 blocks
-==764848==         suppressed: 208,483 bytes in 227 blocks
-==764848== 
-==764848== For lists of detected and suppressed errors, rerun with: -s
-==764848== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==765337== 
-==765337== HEAP SUMMARY:
-==765337==     in use at exit: 208,483 bytes in 227 blocks
-==765337==   total heap usage: 942 allocs, 715 frees, 373,936 bytes allocated
-==765337== 
-==765337== LEAK SUMMARY:
-==765337==    definitely lost: 0 bytes in 0 blocks
-==765337==    indirectly lost: 0 bytes in 0 blocks
-==765337==      possibly lost: 0 bytes in 0 blocks
-==765337==    still reachable: 0 bytes in 0 blocks
-==765337==         suppressed: 208,483 bytes in 227 blocks
-==765337== 
-==765337== For lists of detected and suppressed errors, rerun with: -s
-==765337== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==765345== 
-==765345== HEAP SUMMARY:
-==765345==     in use at exit: 208,473 bytes in 227 blocks
-==765345==   total heap usage: 962 allocs, 735 frees, 374,204 bytes allocated
-==765345== 
-==765345== LEAK SUMMARY:
-==765345==    definitely lost: 0 bytes in 0 blocks
-==765345==    indirectly lost: 0 bytes in 0 blocks
-==765345==      possibly lost: 0 bytes in 0 blocks
-==765345==    still reachable: 0 bytes in 0 blocks
-==765345==         suppressed: 208,473 bytes in 227 blocks
-==765345== 
-==765345== For lists of detected and suppressed errors, rerun with: -s
-==765345== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==765349== 
-==765349== HEAP SUMMARY:
-==765349==     in use at exit: 208,448 bytes in 225 blocks
-==765349==   total heap usage: 980 allocs, 755 frees, 374,438 bytes allocated
-==765349== 
-==765349== LEAK SUMMARY:
-==765349==    definitely lost: 0 bytes in 0 blocks
-==765349==    indirectly lost: 0 bytes in 0 blocks
-==765349==      possibly lost: 0 bytes in 0 blocks
-==765349==    still reachable: 0 bytes in 0 blocks
-==765349==         suppressed: 208,448 bytes in 225 blocks
-==765349== 
-==765349== For lists of detected and suppressed errors, rerun with: -s
-==765349== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==765366== 
-==765366== HEAP SUMMARY:
-==765366==     in use at exit: 208,473 bytes in 227 blocks
-==765366==   total heap usage: 1,007 allocs, 780 frees, 374,761 bytes allocated
-==765366== 
-==765366== LEAK SUMMARY:
-==765366==    definitely lost: 0 bytes in 0 blocks
-==765366==    indirectly lost: 0 bytes in 0 blocks
-==765366==      possibly lost: 0 bytes in 0 blocks
-==765366==    still reachable: 0 bytes in 0 blocks
-==765366==         suppressed: 208,473 bytes in 227 blocks
-==765366== 
-==765366== For lists of detected and suppressed errors, rerun with: -s
-==765366== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==765369== 
-==765369== HEAP SUMMARY:
-==765369==     in use at exit: 208,483 bytes in 227 blocks
-==765369==   total heap usage: 1,027 allocs, 800 frees, 375,023 bytes allocated
-==765369== 
-==765369== LEAK SUMMARY:
-==765369==    definitely lost: 0 bytes in 0 blocks
-==765369==    indirectly lost: 0 bytes in 0 blocks
-==765369==      possibly lost: 0 bytes in 0 blocks
-==765369==    still reachable: 0 bytes in 0 blocks
-==765369==         suppressed: 208,483 bytes in 227 blocks
-==765369== 
-==765369== For lists of detected and suppressed errors, rerun with: -s
-==765369== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==765372== 
-==765372== HEAP SUMMARY:
-==765372==     in use at exit: 208,483 bytes in 227 blocks
-==765372==   total heap usage: 1,049 allocs, 822 frees, 375,432 bytes allocated
-==765372== 
-==765372== LEAK SUMMARY:
-==765372==    definitely lost: 0 bytes in 0 blocks
-==765372==    indirectly lost: 0 bytes in 0 blocks
-==765372==      possibly lost: 0 bytes in 0 blocks
-==765372==    still reachable: 0 bytes in 0 blocks
-==765372==         suppressed: 208,483 bytes in 227 blocks
-==765372== 
-==765372== For lists of detected and suppressed errors, rerun with: -s
-==765372== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==765374== 
-==765374== HEAP SUMMARY:
-==765374==     in use at exit: 208,473 bytes in 227 blocks
-==765374==   total heap usage: 1,069 allocs, 842 frees, 375,700 bytes allocated
-==765374== 
-==765374== LEAK SUMMARY:
-==765374==    definitely lost: 0 bytes in 0 blocks
-==765374==    indirectly lost: 0 bytes in 0 blocks
-==765374==      possibly lost: 0 bytes in 0 blocks
-==765374==    still reachable: 0 bytes in 0 blocks
-==765374==         suppressed: 208,473 bytes in 227 blocks
-==765374== 
-==765374== For lists of detected and suppressed errors, rerun with: -s
-==765374== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==765377== 
-==765377== HEAP SUMMARY:
-==765377==     in use at exit: 208,473 bytes in 227 blocks
-==765377==   total heap usage: 1,103 allocs, 876 frees, 376,135 bytes allocated
-==765377== 
-==765377== LEAK SUMMARY:
-==765377==    definitely lost: 0 bytes in 0 blocks
-==765377==    indirectly lost: 0 bytes in 0 blocks
-==765377==      possibly lost: 0 bytes in 0 blocks
-==765377==    still reachable: 0 bytes in 0 blocks
-==765377==         suppressed: 208,473 bytes in 227 blocks
-==765377== 
-==765377== For lists of detected and suppressed errors, rerun with: -s
-==765377== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==765381== 
-==765381== HEAP SUMMARY:
-==765381==     in use at exit: 208,483 bytes in 227 blocks
-==765381==   total heap usage: 1,123 allocs, 896 frees, 376,397 bytes allocated
-==765381== 
-==765381== LEAK SUMMARY:
-==765381==    definitely lost: 0 bytes in 0 blocks
-==765381==    indirectly lost: 0 bytes in 0 blocks
-==765381==      possibly lost: 0 bytes in 0 blocks
-==765381==    still reachable: 0 bytes in 0 blocks
-==765381==         suppressed: 208,483 bytes in 227 blocks
-==765381== 
-==765381== For lists of detected and suppressed errors, rerun with: -s
-==765381== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==765382== 
-==765382== HEAP SUMMARY:
-==765382==     in use at exit: 208,483 bytes in 227 blocks
-==765382==   total heap usage: 1,145 allocs, 918 frees, 376,806 bytes allocated
-==765382== 
-==765382== LEAK SUMMARY:
-==765382==    definitely lost: 0 bytes in 0 blocks
-==765382==    indirectly lost: 0 bytes in 0 blocks
-==765382==      possibly lost: 0 bytes in 0 blocks
-==765382==    still reachable: 0 bytes in 0 blocks
-==765382==         suppressed: 208,483 bytes in 227 blocks
-==765382== 
-==765382== For lists of detected and suppressed errors, rerun with: -s
-==765382== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==764764== 
-==764764== HEAP SUMMARY:
-==764764==     in use at exit: 208,448 bytes in 225 blocks
-==764764==   total heap usage: 1,164 allocs, 939 frees, 377,086 bytes allocated
-==764764== 
-==765396== 
-==765396== HEAP SUMMARY:
-==765396==     in use at exit: 208,448 bytes in 225 blocks
-==765396==   total heap usage: 1,164 allocs, 939 frees, 377,086 bytes allocated
-==765396== 
-==764764== LEAK SUMMARY:
-==764764==    definitely lost: 0 bytes in 0 blocks
-==764764==    indirectly lost: 0 bytes in 0 blocks
-==764764==      possibly lost: 0 bytes in 0 blocks
-==764764==    still reachable: 0 bytes in 0 blocks
-==764764==         suppressed: 208,448 bytes in 225 blocks
-==764764== 
-==764764== For lists of detected and suppressed errors, rerun with: -s
-==764764== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
-==765396== LEAK SUMMARY:
-==765396==    definitely lost: 0 bytes in 0 blocks
-==765396==    indirectly lost: 0 bytes in 0 blocks
-==765396==      possibly lost: 0 bytes in 0 blocks
-==765396==    still reachable: 0 bytes in 0 blocks
-==765396==         suppressed: 208,448 bytes in 225 blocks
-==765396== 
-==765396== For lists of detected and suppressed errors, rerun with: -s
-==765396== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==774408== Memcheck, a memory error detector
+==774408== Copyright (C) 2002-2017, and GNU GPL'd, by Julian Seward et al.
+==774408== Using Valgrind-3.18.1 and LibVEX; rerun with -h for copyright info
+==774408== Command: ./minishell
+==774408== Parent PID: 774407
+==774408== 
+==774424== 
+==774424== HEAP SUMMARY:
+==774424==     in use at exit: 208,462 bytes in 225 blocks
+==774424==   total heap usage: 710 allocs, 485 frees, 238,761 bytes allocated
+==774424== 
+==774424== LEAK SUMMARY:
+==774424==    definitely lost: 0 bytes in 0 blocks
+==774424==    indirectly lost: 0 bytes in 0 blocks
+==774424==      possibly lost: 0 bytes in 0 blocks
+==774424==    still reachable: 0 bytes in 0 blocks
+==774424==         suppressed: 208,462 bytes in 225 blocks
+==774424== 
+==774424== For lists of detected and suppressed errors, rerun with: -s
+==774424== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==774427== 
+==774427== HEAP SUMMARY:
+==774427==     in use at exit: 208,487 bytes in 227 blocks
+==774427==   total heap usage: 748 allocs, 521 frees, 239,290 bytes allocated
+==774427== 
+==774427== LEAK SUMMARY:
+==774427==    definitely lost: 0 bytes in 0 blocks
+==774427==    indirectly lost: 0 bytes in 0 blocks
+==774427==      possibly lost: 0 bytes in 0 blocks
+==774427==    still reachable: 0 bytes in 0 blocks
+==774427==         suppressed: 208,487 bytes in 227 blocks
+==774427== 
+==774427== For lists of detected and suppressed errors, rerun with: -s
+==774427== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
+==774408== Invalid read of size 1
+==774408==    at 0x4053E8: get_cont (builtin_utils.c:29)
+==774408==    by 0x404E94: check_identifier (export.c:87)
+==774408==    by 0x40507A: ft_export (export.c:140)
+==774408==    by 0x402C09: built_in (check_cmd.c:43)
+==774408==    by 0x406BDF: parent (ms_pipex.c:92)
+==774408==    by 0x4013C4: minishell (main.c:39)
+==774408==    by 0x4015E9: main (main.c:104)
+==774408==  Address 0x4b69b73 is 0 bytes after a block of size 3 alloc'd
+==774408==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==774408==    by 0x4086D1: ft_strdup (in /home/mde-avel/my_projects/leaks_mini/minishell)
+==774408==    by 0x405069: ft_export (export.c:139)
+==774408==    by 0x402C09: built_in (check_cmd.c:43)
+==774408==    by 0x406BDF: parent (ms_pipex.c:92)
+==774408==    by 0x4013C4: minishell (main.c:39)
+==774408==    by 0x4015E9: main (main.c:104)
+==774408== 
+==774408== Invalid free() / delete / delete[] / realloc()
+==774408==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==774408==    by 0x404F34: check_identifier (export.c:98)
+==774408==    by 0x40507A: ft_export (export.c:140)
+==774408==    by 0x402C09: built_in (check_cmd.c:43)
+==774408==    by 0x406BDF: parent (ms_pipex.c:92)
+==774408==    by 0x4013C4: minishell (main.c:39)
+==774408==    by 0x4015E9: main (main.c:104)
+==774408==  Address 0x4b69c10 is 0 bytes inside a block of size 3 free'd
+==774408==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==774408==    by 0x403558: free2 (free2.c:17)
+==774408==    by 0x404DD9: find_ident (export.c:61)
+==774408==    by 0x4055F9: get_flag (builtin_utils.c:76)
+==774408==    by 0x404ED1: check_identifier (export.c:90)
+==774408==    by 0x40507A: ft_export (export.c:140)
+==774408==    by 0x402C09: built_in (check_cmd.c:43)
+==774408==    by 0x406BDF: parent (ms_pipex.c:92)
+==774408==    by 0x4013C4: minishell (main.c:39)
+==774408==    by 0x4015E9: main (main.c:104)
+==774408==  Block was alloc'd at
+==774408==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==774408==    by 0x405540: get_ident (builtin_utils.c:54)
+==774408==    by 0x404EA6: check_identifier (export.c:88)
+==774408==    by 0x40507A: ft_export (export.c:140)
+==774408==    by 0x402C09: built_in (check_cmd.c:43)
+==774408==    by 0x406BDF: parent (ms_pipex.c:92)
+==774408==    by 0x4013C4: minishell (main.c:39)
+==774408==    by 0x4015E9: main (main.c:104)
+==774408== 
+==774408== Invalid free() / delete / delete[] / realloc()
+==774408==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==774408==    by 0x404F3D: check_identifier (export.c:99)
+==774408==    by 0x40507A: ft_export (export.c:140)
+==774408==    by 0x402C09: built_in (check_cmd.c:43)
+==774408==    by 0x406BDF: parent (ms_pipex.c:92)
+==774408==    by 0x4013C4: minishell (main.c:39)
+==774408==    by 0x4015E9: main (main.c:104)
+==774408==  Address 0x4b69bc0 is 0 bytes inside a block of size 3 free'd
+==774408==    at 0x484B27F: free (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==774408==    by 0x403561: free2 (free2.c:18)
+==774408==    by 0x404DD9: find_ident (export.c:61)
+==774408==    by 0x4055F9: get_flag (builtin_utils.c:76)
+==774408==    by 0x404ED1: check_identifier (export.c:90)
+==774408==    by 0x40507A: ft_export (export.c:140)
+==774408==    by 0x402C09: built_in (check_cmd.c:43)
+==774408==    by 0x406BDF: parent (ms_pipex.c:92)
+==774408==    by 0x4013C4: minishell (main.c:39)
+==774408==    by 0x4015E9: main (main.c:104)
+==774408==  Block was alloc'd at
+==774408==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==774408==    by 0x4086D1: ft_strdup (in /home/mde-avel/my_projects/leaks_mini/minishell)
+==774408==    by 0x405420: get_cont (builtin_utils.c:30)
+==774408==    by 0x404E94: check_identifier (export.c:87)
+==774408==    by 0x40507A: ft_export (export.c:140)
+==774408==    by 0x402C09: built_in (check_cmd.c:43)
+==774408==    by 0x406BDF: parent (ms_pipex.c:92)
+==774408==    by 0x4013C4: minishell (main.c:39)
+==774408==    by 0x4015E9: main (main.c:104)
+==774408== 
+==774408== Invalid read of size 1
+==774408==    at 0x4053E8: get_cont (builtin_utils.c:29)
+==774408==    by 0x4056EB: ft_envnew (builtin_utils.c:105)
+==774408==    by 0x404FC2: ft_export_2 (export.c:118)
+==774408==    by 0x40508D: ft_export (export.c:141)
+==774408==    by 0x402C09: built_in (check_cmd.c:43)
+==774408==    by 0x406BDF: parent (ms_pipex.c:92)
+==774408==    by 0x4013C4: minishell (main.c:39)
+==774408==    by 0x4015E9: main (main.c:104)
+==774408==  Address 0x4b69b73 is 0 bytes after a block of size 3 alloc'd
+==774408==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==774408==    by 0x4086D1: ft_strdup (in /home/mde-avel/my_projects/leaks_mini/minishell)
+==774408==    by 0x405069: ft_export (export.c:139)
+==774408==    by 0x402C09: built_in (check_cmd.c:43)
+==774408==    by 0x406BDF: parent (ms_pipex.c:92)
+==774408==    by 0x4013C4: minishell (main.c:39)
+==774408==    by 0x4015E9: main (main.c:104)
+==774408== 
+==774428== 
+==774428== HEAP SUMMARY:
+==774428==     in use at exit: 208,490 bytes in 228 blocks
+==774428==   total heap usage: 784 allocs, 556 frees, 239,768 bytes allocated
+==774428== 
+==774428== 3 bytes in 1 blocks are definitely lost in loss record 2 of 69
+==774428==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==774428==    by 0x405540: get_ident (builtin_utils.c:54)
+==774428==    by 0x404EA6: check_identifier (export.c:88)
+==774428==    by 0x40507A: ft_export (export.c:140)
+==774428==    by 0x402C09: built_in (check_cmd.c:43)
+==774428==    by 0x406BDF: parent (ms_pipex.c:92)
+==774428==    by 0x4013C4: minishell (main.c:39)
+==774428==    by 0x4015E9: main (main.c:104)
+==774428== 
+==774428== LEAK SUMMARY:
+==774428==    definitely lost: 3 bytes in 1 blocks
+==774428==    indirectly lost: 0 bytes in 0 blocks
+==774428==      possibly lost: 0 bytes in 0 blocks
+==774428==    still reachable: 0 bytes in 0 blocks
+==774428==         suppressed: 208,487 bytes in 227 blocks
+==774428== 
+==774428== For lists of detected and suppressed errors, rerun with: -s
+==774428== ERROR SUMMARY: 1 errors from 1 contexts (suppressed: 0 from 0)
+==774447== 
+==774408== 
+==774447== HEAP SUMMARY:
+==774447==     in use at exit: 208,465 bytes in 226 blocks
+==774447==   total heap usage: 808 allocs, 584 frees, 240,082 bytes allocated
+==774447== 
+==774408== HEAP SUMMARY:
+==774408==     in use at exit: 208,465 bytes in 226 blocks
+==774408==   total heap usage: 808 allocs, 584 frees, 240,082 bytes allocated
+==774408== 
+==774408== 3 bytes in 1 blocks are definitely lost in loss record 1 of 67
+==774447== 3 bytes in 1 blocks are definitely lost in loss record 1 of 67
+==774408==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==774447==    at 0x4848899: malloc (in /usr/libexec/valgrind/vgpreload_memcheck-amd64-linux.so)
+==774408==    by 0x405540: get_ident (builtin_utils.c:54)
+==774447==    by 0x405540: get_ident (builtin_utils.c:54)
+==774408==    by 0x404EA6: check_identifier (export.c:88)
+==774447==    by 0x404EA6: check_identifier (export.c:88)
+==774408==    by 0x40507A: ft_export (export.c:140)
+==774447==    by 0x40507A: ft_export (export.c:140)
+==774408==    by 0x402C09: built_in (check_cmd.c:43)
+==774447==    by 0x402C09: built_in (check_cmd.c:43)
+==774408==    by 0x406BDF: parent (ms_pipex.c:92)
+==774447==    by 0x406BDF: parent (ms_pipex.c:92)
+==774408==    by 0x4013C4: minishell (main.c:39)
+==774447==    by 0x4013C4: minishell (main.c:39)
+==774408==    by 0x4015E9: main (main.c:104)
+==774447==    by 0x4015E9: main (main.c:104)
+==774408== 
+==774447== 
+==774408== LEAK SUMMARY:
+==774447== LEAK SUMMARY:
+==774408==    definitely lost: 3 bytes in 1 blocks
+==774447==    definitely lost: 3 bytes in 1 blocks
+==774408==    indirectly lost: 0 bytes in 0 blocks
+==774447==    indirectly lost: 0 bytes in 0 blocks
+==774408==      possibly lost: 0 bytes in 0 blocks
+==774447==      possibly lost: 0 bytes in 0 blocks
+==774408==    still reachable: 0 bytes in 0 blocks
+==774447==    still reachable: 0 bytes in 0 blocks
+==774408==         suppressed: 208,462 bytes in 225 blocks
+==774447==         suppressed: 208,462 bytes in 225 blocks
+==774408== 
+==774447== 
+==774408== For lists of detected and suppressed errors, rerun with: -s
+==774447== For lists of detected and suppressed errors, rerun with: -s
+==774408== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 0 from 0)
+==774447== ERROR SUMMARY: 5 errors from 5 contexts (suppressed: 0 from 0)
