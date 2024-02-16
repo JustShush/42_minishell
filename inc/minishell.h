@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/16 16:07:56 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:20:11 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -238,6 +238,13 @@ void	fork_error(t_minishell *ms, int *pipe_fd);
 
 //! in error1.c
 int		token_message(char token);
+
+//! in free2.c
+
+/**
+ * @note Just free 2 diff strings so save 1 line
+*/
+void	free2(char *str, char *str1);
 
 //! in inits.c
 

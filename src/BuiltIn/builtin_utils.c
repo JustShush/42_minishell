@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:56:03 by mde-avel          #+#    #+#             */
-/*   Updated: 2024/02/16 14:54:19 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/16 17:10:56 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ char	*get_ident(const char *str, int c)
 	res[j] = '\0';
 	return (res);
 }
+
 /**
  * @note Type: 1 Creates a new var env
  * @note Type 2 Subs var env
