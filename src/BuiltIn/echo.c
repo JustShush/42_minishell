@@ -32,7 +32,10 @@ int	check_option(char *opt)
 		i++;
 	}
 	if (ft_strcmp(opt, str) == 0)
+	{
+		free(str);
 		return (1);
+	}
 	free(str);
 	return (0);
 }
@@ -57,7 +60,6 @@ void	with_option(char **cmd_line, int i)
 {
 	char	*new_cmd;
 
-	ft_printf("%swith_option:%s\n", PURPLE, RESET);
 	while (cmd_line[i])
 	{
 		new_cmd = quot_marks(cmd_line[i]);
@@ -74,14 +76,12 @@ void	with_option(char **cmd_line, int i)
 	}
 }
 
-//echo hello "banana    minion gosta"
 void	no_option(char **cmd_line)
 {
-	int i;
+	int		i;
 	char	*new_cmd;
 
 	i = 1;
-	ft_printf("%sno_option:%s\n", BLUE, RESET);
 	while (cmd_line[i])
 	{
 		new_cmd = quot_marks(cmd_line[i]);
@@ -97,6 +97,7 @@ void	no_option(char **cmd_line)
 	ft_printf("\n");
 }
 
+//echo -n -n -nnnnn    "banana   .  "
 void	echo(char **cmd_line)
 {
 	int	i;
