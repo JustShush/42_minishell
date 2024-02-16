@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/13 16:54:01 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/16 16:07:56 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,10 +149,6 @@ int		find_cmd_pos(char **main_arr, int pos);
 void	get_exit_status(t_minishell *ms, pid_t pid, int cmds_run);
 void	child(t_minishell *ms, int *pipe_fd, int cmds_run, int pos);
 void	parent(t_minishell *ms, int *pipe_fd, int cmds_run, int pos);
-
-//* ---- Other DIR ----
-//! in print_env.c
-void	print_env(char **env);
 
 //* ---- Parser DIR ----
 
