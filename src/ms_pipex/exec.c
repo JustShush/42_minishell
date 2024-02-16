@@ -35,6 +35,18 @@ char	**special_path(const char *cmd)
 	return (paths);
 }
 
+void	list_print(t_list **list)
+{
+	t_list	*tmp;
+
+	tmp = *list;
+	while (tmp)
+	{
+		ft_putendl_fd((char *)tmp->content, 1);
+		tmp = tmp->next;
+	}
+}
+
 char	**get_paths(t_list **env, char *cmd)
 {
 	t_list	*tmp;
@@ -46,8 +58,10 @@ char	**get_paths(t_list **env, char *cmd)
 		|| cmd[0] == '/')
 		return (special_path(cmd));
 	tmp = *env;
-	while (tmp && strncmp(tmp->content, "PATH", 4) != 0)
+	while (tmp && strncmp(tmp->ident, "PATH", 4) != 0)
 		tmp = tmp->next;
+	//list_print(env);
+	printf("found PATH\n");
 	if (!tmp)
 		return (NULL);
 	paths = ft_split(tmp->content + 5, ':');
@@ -80,6 +94,7 @@ char	*get_cmd_path(t_minishell *ms, char **paths, char *cmd)
 		free(buf2);
 		i++;
 	}
+	printf("cmd: %s | res: %d\n", cmd, ft_strcmp(cmd, "\'\'") != 0);
 	ms->exit = 127;
 	if (strchr(cmd, '/'))
 		perror(cmd);
@@ -87,7 +102,7 @@ char	*get_cmd_path(t_minishell *ms, char **paths, char *cmd)
 	{
 		write(STDERR_FILENO, "Minishell: ", 11);
 		ft_putstr_fd(cmd, STDERR_FILENO);
-		write(STDERR_FILENO, ": command not found\n", 20);
+		write(STDERR_FILENO, ": command not found2222222\n", 27);
 	}
 	return (NULL);
 }
@@ -107,6 +122,9 @@ void	exec(t_minishell *ms, char **cmd_arr)
 	if (!cmd_arr || !cmd_arr[0] || !cmd_arr[0][0] || isbuiltin(cmd_arr[0]))
 		free_ms(ms);
 	paths = get_paths(ms->env, cmd_arr[0]);
+	if (!paths) printf("no paths\n");
+	printf("cmd_arr0: %s\n", cmd_arr[0]);
+	//print_arr("paths: ", paths);
 	if (is_exec(ms, cmd_arr[0], paths) == 0)
 		free_ms(ms);
 	cmd_path = get_cmd_path(ms, paths, cmd_arr[0]);
