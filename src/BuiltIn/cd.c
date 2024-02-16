@@ -38,7 +38,6 @@ void	change_dir(t_list **lst)
 	}
 }
 
-//free(new_path);
 void	home_to_dir(t_minishell *ms, char *path)
 {
 	size_t	len;
@@ -51,6 +50,7 @@ void	home_to_dir(t_minishell *ms, char *path)
 		error(ms, 1, "cd: No such file or directory\n", NULL);
 		ms->exit = 1;
 	}
+	free(new_path);
 }
 
 char	*find_home(t_list **lst)
@@ -70,7 +70,6 @@ char	*find_home(t_list **lst)
 }
 
 //ft_printf("%shome:%s %s\n", PURPLE, RESET, home);
-//free(home);
 void	go_home(t_minishell *ms)
 {
 	char	*home;
