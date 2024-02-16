@@ -58,14 +58,19 @@ int	find_ident(t_list **env, char *ident, char *new_cont, int flag)
 		if (ft_strcmp((char *)(tmp)->ident, ident) == 0)
 		{
 			if (flag == 2 && (tmp)->n == 1)
-				return (2);
+			{
+				free(ident);
+				free(new_cont);
+				return (0);
+			}
 			if (flag == 1 && (tmp)->n == 2)
 			{
 				(tmp)->n = 1;
 				(tmp)->equal = 1;
 			}
-			(tmp)->ident = ident;
-			(tmp)->content = new_cont;
+			free((tmp)->content);
+			(tmp)->content = ft_strdup(new_cont);
+			free(new_cont);
 			return (2);
 		}
 		tmp = (tmp)->next;
@@ -92,7 +97,7 @@ int	check_identifier(t_minishell *ms, char *content)
 		error(ms, 1, "export: not a valid identifier\n", ident);
 		ms->exit = 1;
 	}
-	if (flag == 3 || flag == 1)
+	if (flag == 1 || flag == 3)
 	{
 		free(ident);
 		free(new_con);

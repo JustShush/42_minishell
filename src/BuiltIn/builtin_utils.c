@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:56:03 by mde-avel          #+#    #+#             */
-/*   Updated: 2024/02/13 13:15:19 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/16 14:54:19 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,12 @@ char	*get_ident(const char *str, int c)
 	res[j] = '\0';
 	return (res);
 }
-
+/**
+ * @note Type: 1 Creates a new var env
+ * @note Type 2 Subs var env
+ * @note Type 3 Creates a new var export
+ * @note Type 4 Subs var export
+*/
 int	get_flag(t_minishell *ms, char *ident, char *new_con, char *content)
 {
 	if (!ft_strchr(content, '='))
@@ -92,17 +97,11 @@ t_list	*ft_envnew(void *content)
 	if (!head)
 		return (NULL);
 	if (ft_strchr(content, '=') == 0)
-	{
 		head->equal = 0;
-		head->ident = get_ident(content, '=');
-		head->content = get_cont(content, '=');
-	}
 	else
-	{
 		head->equal = 1;
-		head->ident = get_ident(content, '=');
-		head->content = get_cont(content, '=');
-	}
+	head->ident = get_ident(content, '=');
+	head->content = get_cont(content, '=');
 	head->next = NULL;
 	return (head);
 }
