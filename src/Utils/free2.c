@@ -1,25 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   print_env.c                                        :+:      :+:    :+:   */
+/*   free2.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/27 11:25:18 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/24 12:10:59 by dimarque         ###   ########.fr       */
+/*   Created: 2024/02/16 17:18:19 by dimarque          #+#    #+#             */
+/*   Updated: 2024/02/16 17:18:31 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
-void	print_env(char **env)
+void	free2(char *str, char *str1)
 {
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		printf("%s\n", env[i]);
-		i++;
-	}
+	free(str);
+	free(str1);
 }

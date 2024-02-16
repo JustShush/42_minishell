@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 10:46:28 by marvin            #+#    #+#             */
-/*   Updated: 2023/11/17 10:46:28 by marvin           ###   ########.fr       */
+/*   Created: 2023/11/17 10:46:28 by dimarque          #+#    #+#             */
+/*   Updated: 2023/11/17 10:46:28 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,11 +58,7 @@ int	find_ident(t_list **env, char *ident, char *new_cont, int flag)
 		if (ft_strcmp((char *)(tmp)->ident, ident) == 0)
 		{
 			if (flag == 2 && (tmp)->n == 1)
-			{
-				free(ident);
-				free(new_cont);
-				return (0);
-			}
+				return (free2(ident, new_cont), 0);
 			if (flag == 1 && (tmp)->n == 2)
 			{
 				(tmp)->n = 1;

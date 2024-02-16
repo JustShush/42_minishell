@@ -11,26 +11,24 @@ CFLAGS = -Wall -Wextra -Werror -g
 SRC =	main.c prompt.c frees.c signals.c
 SRC_builtin = cd.c echo.c env.c exit.c export.c pwd.c unset.c builtin_utils.c 
 SRC_pipex = exec_utils.c exec.c ms_pipex.c redirects.c
-SRC_other = print_env.c
 SRC_parser = ms_split.c parser_utils.c
 SRC_replacer = replace_utils.c replace.c
 SRC_syntax = syntax_err.c syntax.c
-SRC_utils = arr_utils.c check_cmd.c cmd_utils.c error.c error1.c inits.c quotes_utils.c str_utils.c
+SRC_utils = arr_utils.c check_cmd.c cmd_utils.c error.c error1.c free2.c inits.c quotes_utils.c str_utils.c
 
 lib = libft
 LIB = $(lib)/libft.a
 
 OBJ_DIR = obj
 
-SRCS =	$(addprefix src/, $(SRC)) $(addprefix src/Other/, $(SRC_other)) $(addprefix src/Parser/, $(SRC_parser)) \
-		$(addprefix src/Utils/, $(SRC_utils)) $(addprefix src/BuiltIn/, $(SRC_builtin)) \
-		$(addprefix src/replacer/, $(SRC_replacer)) $(addprefix src/ms_pipex/, $(SRC_pipex)) \
-		$(addprefix src/syntax/, $(SRC_syntax))
+SRCS =	$(addprefix src/, $(SRC)) $(addprefix src/Parser/, $(SRC_parser)) $(addprefix src/Utils/, $(SRC_utils)) \
+		$(addprefix src/BuiltIn/, $(SRC_builtin)) $(addprefix src/replacer/, $(SRC_replacer)) \
+		$(addprefix src/ms_pipex/, $(SRC_pipex)) $(addprefix src/syntax/, $(SRC_syntax))
 
-OBJS =	$(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_other:%.c=%.o)) \
-		$(addprefix $(OBJ_DIR)/, $(SRC_parser:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_utils:%.c=%.o)) \
-		$(addprefix $(OBJ_DIR)/, $(SRC_builtin:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_replacer:%.c=%.o)) \
-		$(addprefix $(OBJ_DIR)/, $(SRC_pipex:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_syntax:%.c=%.o))
+OBJS =	$(addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_parser:%.c=%.o)) \
+		$(addprefix $(OBJ_DIR)/, $(SRC_utils:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_builtin:%.c=%.o)) \
+		$(addprefix $(OBJ_DIR)/, $(SRC_replacer:%.c=%.o)) $(addprefix $(OBJ_DIR)/, $(SRC_pipex:%.c=%.o)) \
+		$(addprefix $(OBJ_DIR)/, $(SRC_syntax:%.c=%.o))
 
 # Reset
 Color_Off='\033[0m'       # Text Reset

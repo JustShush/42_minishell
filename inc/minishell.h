@@ -152,10 +152,6 @@ void	get_exit_status(t_minishell *ms, pid_t pid, int cmds_run);
 void	child(t_minishell *ms, int *pipe_fd, int cmds_run, int pos);
 void	parent(t_minishell *ms, int *pipe_fd, int cmds_run, int pos);
 
-//* ---- Other DIR ----
-//! in print_env.c
-void	print_env(char **env);
-
 //* ---- Parser DIR ----
 
 //! in ms_split.c
@@ -244,6 +240,13 @@ void	fork_error(t_minishell *ms, int *pipe_fd);
 
 //! in error1.c
 int		token_message(char token);
+
+//! in free2.c
+
+/**
+ * @note Just free 2 diff strings so save 1 line
+*/
+void	free2(char *str, char *str1);
 
 //! in inits.c
 
