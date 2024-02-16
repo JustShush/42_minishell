@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/16 17:20:11 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/16 16:36:07 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,9 @@ void	cd(t_minishell *ms, char **path);
 
 //! in echo.c
 int		check_option(char *opt);
-void	command_echo(char **cmd_line, int flag, int i);
+char	*quot_marks(char *cmd_line);
+void	with_option(char **cmd_line, int i);
+void	no_option(char **cmd_line);
 void	echo(char **cmd_line);
 
 //! in env.c
