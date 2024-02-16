@@ -124,7 +124,6 @@ void	exec(t_minishell *ms, char **cmd_arr)
 	paths = get_paths(ms->env, cmd_arr[0]);
 	if (!paths) printf("no paths\n");
 	printf("cmd_arr0: %s\n", cmd_arr[0]);
-	//print_arr("paths: ", paths);
 	if (is_exec(ms, cmd_arr[0], paths) == 0)
 		free_ms(ms);
 	cmd_path = get_cmd_path(ms, paths, cmd_arr[0]);
