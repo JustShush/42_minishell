@@ -17,7 +17,7 @@
 //export A1=Banana A2=Casca_de A3=Macaco_atira
 //export hi=bye hi=hello A1=folha ho=
 
-int	valid_ident(char	*s)
+int	valid_ident(char *s)
 {
 	int	i;
 	int	flag;
@@ -46,6 +46,7 @@ int	valid_ident(char	*s)
 //ft_printf("%snew_cont: %s|%s|\n", YELLOW, RESET, new_cont);
 //free((tmp)->ident);
 //free((tmp)->content);
+//return (free2(ident, new_cont), 0);
 int	find_ident(t_list **env, char *ident, char *new_cont, int flag)
 {
 	t_list	*tmp;
@@ -58,7 +59,7 @@ int	find_ident(t_list **env, char *ident, char *new_cont, int flag)
 		if (ft_strcmp((char *)(tmp)->ident, ident) == 0)
 		{
 			if (flag == 2 && (tmp)->n == 1)
-				return (free2(ident, new_cont), 0);
+				return (1);	
 			if (flag == 1 && (tmp)->n == 2)
 			{
 				(tmp)->n = 1;
@@ -67,6 +68,7 @@ int	find_ident(t_list **env, char *ident, char *new_cont, int flag)
 			free((tmp)->content);
 			(tmp)->content = ft_strdup(new_cont);
 			free(new_cont);
+			free(ident);
 			return (2);
 		}
 		tmp = (tmp)->next;
@@ -93,7 +95,7 @@ int	check_identifier(t_minishell *ms, char *content)
 		error(ms, 1, "export: not a valid identifier\n", ident);
 		ms->exit = 1;
 	}
-	if (flag == 1 || flag == 3)
+	if (flag == 1 || flag == 3 || flag == 0)
 	{
 		free(ident);
 		free(new_con);

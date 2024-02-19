@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:56:03 by mde-avel          #+#    #+#             */
-/*   Updated: 2024/02/16 17:10:56 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:49:53 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*get_cont(const char *str, int c)
 	while (str[++i])
 		if (str[i] == (char)c)
 			break ;
-	if (str[i + 1] == '\0' || i == (int)ft_strlen(str))
+	if (i == (int)ft_strlen(str) || str[i + 1] == '\0')
 		return (ft_strdup("  "));
 	len = ft_strlen(str) - i + 1;
 	res = malloc(sizeof(char) * len);
@@ -75,6 +75,8 @@ int	get_flag(t_minishell *ms, char *ident, char *new_con, char *content)
 	{
 		if (find_ident(ms->env, ident, new_con, 2) == 2)
 			return (4);
+		else if (find_ident(ms->env, ident, new_con, 2) == 1)
+			return (0);
 		else
 			return (3);
 	}
