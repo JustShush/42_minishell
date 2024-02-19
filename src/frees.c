@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:04:11 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/16 13:30:50 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/19 18:37:14 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	free_ms(t_minishell *ms)
 {
 	int	e;
 
+	e = ms->exit;
 	if (ms->prompt)
 		free(ms->prompt);
 	if (ms->input)
@@ -93,7 +94,6 @@ void	free_ms(t_minishell *ms)
 	free_list_malloc(ms->env);
 	if (ms->cmdlist)
 		free_cmd_list(ms->cmdlist);
-	e = ms->exit;
 	free(ms);
 	rl_clear_history();
 	exit(e);
