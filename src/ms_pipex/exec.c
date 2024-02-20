@@ -60,8 +60,6 @@ char	**get_paths(t_list **env, char *cmd)
 	tmp = *env;
 	while (tmp && strncmp(tmp->ident, "PATH", 4) != 0)
 		tmp = tmp->next;
-	//list_print(env);
-	printf("found PATH\n");
 	if (!tmp)
 		return (NULL);
 	paths = ft_split(tmp->content + 5, ':');
@@ -94,7 +92,6 @@ char	*get_cmd_path(t_minishell *ms, char **paths, char *cmd)
 		free(buf2);
 		i++;
 	}
-	//printf("cmd: %s | res: %d\n", cmd, ft_strcmp(cmd, "\'\'") != 0);
 	ms->exit = 127;
 	if (strchr(cmd, '/'))
 		perror(cmd);
@@ -122,8 +119,6 @@ void	exec(t_minishell *ms, char **cmd_arr)
 	if (!cmd_arr || !cmd_arr[0] || !cmd_arr[0][0] || isbuiltin(cmd_arr[0]))
 		free_ms(ms);
 	paths = get_paths(ms->env, cmd_arr[0]);
-	//if (!paths) printf("no paths\n");
-	//printf("cmd_arr0: %s\n", cmd_arr[0]);
 	if (is_exec(ms, cmd_arr[0], paths) == 0)
 		free_ms(ms);
 	cmd_path = get_cmd_path(ms, paths, cmd_arr[0]);

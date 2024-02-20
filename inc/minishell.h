@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/20 19:47:04 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:57:07 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,138 +71,139 @@ typedef struct s_minishell
 //* ---- src DIR ----
 
 //! in main.c
-void	minishell(t_minishell *ms);
-t_list	**env_init(char **envp);
+void		minishell(t_minishell *ms);
+t_list		**env_init(char **envp);
 
 //! in frees.c
-void	free_list(t_list **list);
-void	free_list_malloc(t_list **list);
-void	free_cmd_list(t_cmdlist *cmdlist);
-void	free_arr(char **arr);
-void	free_ms(t_minishell *ms);
+void		free_list(t_list **list);
+void		free_list_malloc(t_list **list);
+void		free_cmd_list(t_cmdlist *cmdlist);
+void		free_arr(char **arr);
+void		free_ms(t_minishell *ms);
 
 //! in prompt.c
-char	*set_prompt(t_minishell *ms);
+char		*set_prompt(t_minishell *ms);
 
 //! in signals.c
-void	signal_c(int signum);
-void	signal_process_interrupt(int signum);
-void	signal_init(void);
-void	signal_d(t_minishell *ms);
-void	post_process_signal(void);
+void		signal_c(int signum);
+void		signal_process_interrupt(int signum);
+void		signal_init(void);
+void		signal_d(t_minishell *ms);
+void		post_process_signal(void);
 
 //* ---- BuiltIn DIR ----
 
 //! builtin_utils.c
-void	change_oldpwd(t_list **lst, char *oldpwd);
-char	*get_cont(const char *str, int c);
-char	*get_ident(const char *str, int c);
-int		get_flag(t_minishell *ms, char *ident, char *new_con, char *content);
-t_list	*ft_envnew(void *content);
+void		change_oldpwd(t_list **lst, char *oldpwd);
+char		*get_cont(const char *str, int c);
+char		*get_ident(const char *str, int c);
+int			get_flag(t_minishell *ms, char *ident, char *new_con, \
+char *content);
+t_list		*ft_envnew(void *content);
 
 //! in cd.c
-void	change_pwd(t_list **lst);
-void	home_to_dir(t_minishell *ms, char *path);
-char	*find_home(t_list **lst);
-void	go_home(t_minishell *ms);
-void	cd(t_minishell *ms, char **path);
+void		change_pwd(t_list **lst);
+void		home_to_dir(t_minishell *ms, char *path);
+char		*find_home(t_list **lst);
+void		go_home(t_minishell *ms);
+void		cd(t_minishell *ms, char **path);
 
 //! in echo.c
-int		check_option(char *opt);
-char	*quot_marks(char *cmd_line);
-void	with_option(char **cmd_line, int i);
-void	no_option(char **cmd_line);
-void	myecho(char **cmd_line);
+int			check_option(char *opt);
+char		*quot_marks(char *cmd_line);
+void		with_option(char **cmd_line, int i);
+void		no_option(char **cmd_line);
+void		myecho(char **cmd_line);
 
 //! in env.c
-void	print_lst(t_list **lst, int flag);
-void	env(t_minishell *ms, char **cmd_line);
+void		print_lst(t_list **lst, int flag);
+void		env(t_minishell *ms, char **cmd_line);
 
 //! in exit.c
-int		check_if_num(t_minishell *ms, char *arg);
-int		calc_exit(int n);
-void	ft_exit(t_minishell *ms, char **path);
+int			check_if_num(t_minishell *ms, char *arg);
+int			calc_exit(int n);
+void		ft_exit(t_minishell *ms, char **path);
 
 //! in export.c
-int		valid_ident(char *s);
-int		find_ident(t_list **env, char *content, char *new_cont, int flag);
-int		check_identifier(t_minishell *ms, char *content);
-void	ft_export_2(t_minishell *ms, char *content, int check);
-void	ft_export(t_minishell *ms, char **cmd_line);
+int			valid_ident(char *s);
+int			find_ident(t_list **env, char *content, char *new_cont, int flag);
+int			check_identifier(t_minishell *ms, char *content);
+void		ft_export_2(t_minishell *ms, char *content, int check);
+void		ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c
-void	pwd(void);
+void		pwd(void);
 
 //! in unset.c
-void	rm_first(t_list **env);
-void	rm_nodes(t_list **env, char *ident);
-void	unset(t_minishell *ms, char **cmd_line);
+void		rm_first(t_list **env);
+void		rm_nodes(t_list **env, char *ident);
+void		unset(t_minishell *ms, char **cmd_line);
 
 //* ---- ms_pipex DIR ----
 //! in exec_utils.c
 
-int		is_exec(t_minishell *ms, char *cmd, char **paths);
-int		is_usable(t_minishell *ms, char	*cmd, char *cmd_path, \
+int			is_exec(t_minishell *ms, char *cmd, char **paths);
+int			is_usable(t_minishell *ms, char	*cmd, char *cmd_path, \
 char **paths_array);
 
 //! in exec.c
 
-void	exec(t_minishell *ms, char **cmd_arr);
+void		exec(t_minishell *ms, char **cmd_arr);
 
 //! in hdoc_utils.c
 
-void	change_terminal(void);
-int		create_file(t_minishell *ms, char *filename);
-char	*create_filename(int here_num);
-void	heredoc_signal(int signum);
+void		change_terminal(void);
+int			create_file(t_minishell *ms, char *filename);
+char		*create_filename(int here_num);
+void		heredoc_signal(int signum);
 
 //! in ms_pipex
 
-int		find_cmd_pos(char **main_arr, int pos);
-void	get_exit_status(t_minishell *ms, pid_t pid, int cmds_run);
-void	child(t_minishell *ms, int *pipe_fd, int cmds_run, int pos);
-void	parent(t_minishell *ms, int *pipe_fd, int cmds_run, int pos);
+int			find_cmd_pos(char **main_arr, int pos);
+void		get_exit_status(t_minishell *ms, pid_t pid, int cmds_run);
+void		child(t_minishell *ms, int *pipe_fd, int cmds_run, int pos);
+void		parent(t_minishell *ms, int *pipe_fd, int cmds_run, int pos);
 
 //* ---- Parser DIR ----
 
 //! in ms_split.c
 
-int		parser_op(char c);
-int		countw(char *str);
-char	*split_temp(t_minishell *ms, char *str, int word_len);
-int		get_wordl(char *str);
-char	**ms_split(t_minishell *ms, char *str);
+int			parser_op(char c);
+int			countw(char *str);
+char		*split_temp(t_minishell *ms, char *str, int word_len);
+int			get_wordl(char *str);
+char		**ms_split(t_minishell *ms, char *str);
 
 //! in parser_utils.c
-int		quotes(char *str, char c, int i);
-int		space_tab(char *str, int i);
-int		envar(char *str, int i);
-int		others(char *str, int i);
+int			quotes(char *str, char c, int i);
+int			space_tab(char *str, int i);
+int			envar(char *str, int i);
+int			others(char *str, int i);
 
 //* --- Replacer DIR ----
 //! in env_split_utils.c
 
-char	*var_iter(t_minishell *ms, char *var);
-char	*var_str(t_list *env, char *var);
+char		*var_iter(t_minishell *ms, char *var);
+char		*var_str(t_list *env, char *var);
 
 //! in env_split2.c
-char	*replace_str(t_minishell *ms, char *str);
+char		*replace_str(t_minishell *ms, char *str);
 
 //* ---- Syntax DIR ----
 //! in syntax_err.c
-int		redir_syntax(char *str);
-int		double_redir_syntax(char *str);
-int		dollar_syntax(char *str);
-int		sucession_syntax(char *str);
-int		token_syntax(char *str);
+int			redir_syntax(char *str);
+int			double_redir_syntax(char *str);
+int			dollar_syntax(char *str);
+int			sucession_syntax(char *str);
+int			token_syntax(char *str);
 
 //! in syntax.c
-int		syntax_error(t_minishell *ms);
+int			syntax_error(t_minishell *ms);
 
 //* ---- Utils DIR ----
 //! in arr_utils.c
 
-int		arr_size(char **arr);
+int			arr_size(char **arr);
 
 /**
  * Duplicate a string array
@@ -213,21 +214,21 @@ int		arr_size(char **arr);
  * @note Allocates memory dynamically, caller is responsible for freeing it
  * @warning If memory allocation fails, it invokes error() with error type 2
  */
-char	**ft_arrdup(t_minishell *ms, char **old);
-char	**list_to_array(t_minishell *ms, t_list **list);
-void	print_arr(char *str, char **arr);
+char		**ft_arrdup(t_minishell *ms, char **old);
+char		**list_to_array(t_minishell *ms, t_list **list);
+void		print_arr(char *str, char **arr);
 
 //! in check_cmd.c
-int		isbuiltin(char *str);
-void	built_in(t_minishell *ms, char **cmd_flags, int parent);
-void	check_cmd(t_minishell *ms);
+int			isbuiltin(char *str);
+void		built_in(t_minishell *ms, char **cmd_flags, int parent);
+void		check_cmd(t_minishell *ms);
 
 //! in cmd_utils.c
 
-void	print_arr(char *str, char **arr);
-void	print_cmdlist(t_cmdlist *cmdlist);
-int		cmd_count(char **arr);
-char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
+void		print_arr(char *str, char **arr);
+void		print_cmdlist(t_cmdlist *cmdlist);
+int			cmd_count(char **arr);
+char		**cmd_with_flags(t_minishell *ms, char **arr, int pos);
 
 //! in cmd_utils2.c
 t_cmdlist	*cmdlist_last(t_cmdlist *lst);
@@ -247,46 +248,46 @@ void		cmdlist_add_back(t_cmdlist **lst, t_cmdlist *new);
  * @note Type 3: Custom error, prints the provided message 'arg' and exits with \
  *  the minishell exit code
  */
-void	error(t_minishell *ms, int op, char *arg, char *plus);
-void	error_message(t_minishell *ms, char *mess, char *plus);
-int		open_error(t_minishell *ms, char *filename, int child);
-void	pipe_error(t_minishell *ms, int *pipe_fd);
-void	fork_error(t_minishell *ms, int *pipe_fd);
+void		error(t_minishell *ms, int op, char *arg, char *plus);
+void		error_message(t_minishell *ms, char *mess, char *plus);
+int			open_error(t_minishell *ms, char *filename, int child);
+void		pipe_error(t_minishell *ms, int *pipe_fd);
+void		fork_error(t_minishell *ms, int *pipe_fd);
 
 //! in error1.c
-int		token_message(char token);
+int			token_message(char token);
 
 //! in free2.c
 
 /**
  * @note Just free 2 diff strings so save 1 line
 */
-void	free2(char *str, char *str1);
+void		free2(char *str, char *str1);
 
 //! in inits.c
 
-int		var_init(t_minishell *ms);
+int			var_init(t_minishell *ms);
 
 //! in quotes_utils.c
 
-int		skip_quotes(char *str, int pos);
-char	*add_quotes(char *str, char c);
-char	*remove_quotes(char *str);
+int			skip_quotes(char *str, int pos);
+char		*add_quotes(char *str, char c);
+char		*remove_quotes(char *str);
 
 //! in redirect.c
 
-void	reset_fds(t_minishell *ms);
-void	close_fd(int *fd);
-int		redirect(t_minishell *ms, char **main_arr, int pos, int child);
+void		reset_fds(t_minishell *ms);
+void		close_fd(int *fd);
+int			redirect(t_minishell *ms, char **main_arr, int pos, int child);
 
 //! in str_utils.c
 
-int		strlen_chr(char *str, char c);
-int		strchr_malloc(char *s, char c);
-char	*str_front_trim(char *str, char *trim);
-int		strcmp_nochr(char *s1, char *s2, char c);
-char	*ft_strndup(char *str, int len);
+int			strlen_chr(char *str, char c);
+int			strchr_malloc(char *s, char c);
+char		*str_front_trim(char *str, char *trim);
+int			strcmp_nochr(char *s1, char *s2, char c);
+char		*ft_strndup(char *str, int len);
 
-char	**replaced_arr(t_minishell *ms);
+char		**replaced_arr(t_minishell *ms);
 
 #endif
