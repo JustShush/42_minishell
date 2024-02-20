@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/20 19:07:05 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:47:04 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@
 
 # include <stddef.h>
 # include <sys/ioctl.h>
+
+# include <termios.h>
+# include <term.h>
+# include <curses.h>
 
 extern int	g_global;
 
@@ -108,7 +112,7 @@ int		check_option(char *opt);
 char	*quot_marks(char *cmd_line);
 void	with_option(char **cmd_line, int i);
 void	no_option(char **cmd_line);
-void	echo(char **cmd_line);
+void	myecho(char **cmd_line);
 
 //! in env.c
 void	print_lst(t_list **lst, int flag);
@@ -144,6 +148,13 @@ char **paths_array);
 //! in exec.c
 
 void	exec(t_minishell *ms, char **cmd_arr);
+
+//! in hdoc_utils.c
+
+void	change_terminal(void);
+int		create_file(t_minishell *ms, char *filename);
+char	*create_filename(int here_num);
+void	heredoc_signal(int signum);
 
 //! in ms_pipex
 
