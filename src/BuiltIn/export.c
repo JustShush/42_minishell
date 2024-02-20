@@ -59,7 +59,7 @@ int	find_ident(t_list **env, char *ident, char *new_cont, int flag)
 		if (ft_strcmp((char *)(tmp)->ident, ident) == 0)
 		{
 			if (flag == 2 && (tmp)->n == 1)
-				return (1);	
+				return (1);
 			if (flag == 1 && (tmp)->n == 2)
 			{
 				(tmp)->n = 1;
