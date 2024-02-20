@@ -20,6 +20,7 @@ void	change_pwd(t_list **lst, char *oldpwd)
 	char	pwd[PATH_MAX + 1];
 
 	tmp = *lst;
+	oldpwd = NULL;
 	if (!tmp)
 		return ;
 	while (tmp)
