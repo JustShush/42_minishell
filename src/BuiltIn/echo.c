@@ -98,7 +98,7 @@ void	no_option(char **cmd_line)
 }
 
 //echo -n -n -nnnnn    "banana   .  "
-void	echo(char **cmd_line)
+void	myecho(char **cmd_line)
 {
 	int	i;
 	int	flag;
