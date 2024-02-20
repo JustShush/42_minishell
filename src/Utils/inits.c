@@ -45,7 +45,7 @@ t_cmdlist	*cmd_list_init(t_minishell *ms)
 			i++;
 		if (ms->main_arr[i] && ft_strcmp(ms->main_arr[i], "|") == 0)
 			i++;
-		ft_lstadd_back((t_list **)&cmdlist, (t_list *)node);
+		cmdlist_add_back(&cmdlist, node);
 		cmd_n++;
 	}
 	return (cmdlist);

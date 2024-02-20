@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/20 14:09:39 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/20 19:07:05 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,6 +217,10 @@ void	print_arr(char *str, char **arr);
 void	print_cmdlist(t_cmdlist *cmdlist);
 int		cmd_count(char **arr);
 char	**cmd_with_flags(t_minishell *ms, char **arr, int pos);
+
+//! in cmd_utils2.c
+t_cmdlist	*cmdlist_last(t_cmdlist *lst);
+void		cmdlist_add_back(t_cmdlist **lst, t_cmdlist *new);
 
 //! in error.c
 
