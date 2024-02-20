@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/20 19:57:07 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:20:35 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ char *content);
 t_list		*ft_envnew(void *content);
 
 //! in cd.c
-void		change_pwd(t_list **lst);
+void		change_pwd(t_list **lst, char *oldpwd);
 void		home_to_dir(t_minishell *ms, char *path);
 char		*find_home(t_list **lst);
 void		go_home(t_minishell *ms);

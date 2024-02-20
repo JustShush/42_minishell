@@ -6,17 +6,17 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/07 14:56:03 by mde-avel          #+#    #+#             */
-/*   Updated: 2024/02/20 14:07:54 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/20 20:19:12 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/minishell.h"
 
 //what is munmap_chunk(): invalid pointer?
-
 void	change_oldpwd(t_list **lst, char *oldpwd)
 {
 	t_list	*tmp;
+	char	*new_cont;
 
 	tmp = *lst;
 	if (!tmp)
@@ -25,10 +25,9 @@ void	change_oldpwd(t_list **lst, char *oldpwd)
 	{
 		if (ft_strcmp((char *)(tmp)->ident, "OLDPWD") == 0)
 		{
-			ft_printf("%sOLDPWD:%s %s\n", CYAN, RESET, oldpwd);
+			new_cont = ft_strdup(oldpwd);
 			free((tmp)->content);
-			(tmp)->content = oldpwd;
-			ft_printf("%s(tmp)->content:%s %s\n", BLUE, RESET, (tmp)->content);
+			(tmp)->content = new_cont;
 			break ;
 		}
 		tmp = (tmp)->next;
