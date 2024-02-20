@@ -1,4 +1,4 @@
-val_log
+*.txt
 .vscode
 minishell
 # Ignore Obj folder
