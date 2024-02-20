@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   frees.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:04:11 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/19 18:37:14 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:26:22 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ void	free_ms(t_minishell *ms)
 	int	e;
 
 	e = ms->exit;
+	if (ms->fdin != -1)
+		close(ms->fdin);
+	if (ms->fdout != -1)
+		close(ms->fdout);
 	if (ms->prompt)
 		free(ms->prompt);
 	if (ms->input)

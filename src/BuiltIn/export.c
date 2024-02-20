@@ -79,6 +79,7 @@ int	find_ident(t_list **env, char *ident, char *new_cont, int flag)
 //ft_printf("%scmd_line:%s|%s|\n", GREEN, RESET, content);
 //ft_printf("%sidentifier:%s|%s|\n", YELLOW, RESET, ident);
 //ft_printf("%snew_contet:%s|%s|\n", PURPLE, RESET, new_con);
+//printf("check flag: %d\n", flag);
 int	check_identifier(t_minishell *ms, char *content)
 {
 	char	*ident;
@@ -100,7 +101,6 @@ int	check_identifier(t_minishell *ms, char *content)
 		free(ident);
 		free(new_con);
 	}
-	printf("check flag: %d\n", flag);
 	return (flag);
 }
 

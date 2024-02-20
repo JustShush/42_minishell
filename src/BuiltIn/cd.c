@@ -14,12 +14,10 @@
 
 //printf("dir: %s\n", pwd);
 //ft_printf("%sPWD:%s %s\n", CYAN, RESET, pwd);
-void	change_pwd(t_list **lst)
+void	change_pwd(t_list **lst, char *oldpwd)
 {
 	t_list	*tmp;
 	char	pwd[PATH_MAX + 1];
-	char	*cont;
-	char	*oldpwd;
 
 	tmp = *lst;
 	oldpwd = NULL;
@@ -30,10 +28,8 @@ void	change_pwd(t_list **lst)
 		if (ft_strcmp((char *)(tmp)->ident, "PWD") == 0)
 		{
 			getcwd(pwd, sizeof(pwd));
-			cont = ft_strdup(pwd);
-			oldpwd = ft_strdup((tmp)->content);
 			free((tmp)->content);
-			(tmp)->content = cont;
+			(tmp)->content = ft_strdup(pwd);
 			ft_bzero(pwd, ft_strlen(pwd));
 			break ;
 		}
@@ -96,6 +92,9 @@ void	go_home(t_minishell *ms)
 
 void	cd(t_minishell *ms, char **path)
 {
+	char	oldpwd[PATH_MAX + 1];
+
+	getcwd(oldpwd, sizeof(oldpwd));
 	if (path && arr_size(path) > 2)
 	{
 		error(ms, 1, "cd: too many arguments\n", NULL);
@@ -114,7 +113,8 @@ void	cd(t_minishell *ms, char **path)
 		error(ms, 1, "cd: No such file or directory\n", NULL);
 		ms->exit = 1;
 	}
-	change_pwd(ms->env);
+	change_pwd(ms->env, oldpwd);
+	ft_bzero(oldpwd, ft_strlen(oldpwd));
 }
 // cd ~ -> home
 // if theres is no arg (ex: cd) just return to home

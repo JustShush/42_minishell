@@ -97,7 +97,7 @@ int		get_flag(t_minishell *ms, char *ident, char *new_con, char *content);
 t_list	*ft_envnew(void *content);
 
 //! in cd.c
-void	change_pwd(t_list **lst);
+void	change_pwd(t_list **lst, char *oldpwd);
 void	home_to_dir(t_minishell *ms, char *path);
 char	*find_home(t_list **lst);
 void	go_home(t_minishell *ms);

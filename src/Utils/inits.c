@@ -48,6 +48,7 @@ t_cmdlist	*cmd_list_init(t_minishell *ms)
 		cmdlist_add_back(&cmdlist, node);
 		cmd_n++;
 	}
+	free_cmd_list(node);
 	return (cmdlist);
 }
 
