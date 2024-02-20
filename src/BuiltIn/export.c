@@ -101,7 +101,6 @@ int	check_identifier(t_minishell *ms, char *content)
 		free(ident);
 		free(new_con);
 	}
-	
 	return (flag);
 }
 
