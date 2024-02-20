@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/16 19:04:33 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/20 14:09:39 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,13 +90,14 @@ void	post_process_signal(void);
 //* ---- BuiltIn DIR ----
 
 //! builtin_utils.c
+void	change_oldpwd(t_list **lst, char *oldpwd);
 char	*get_cont(const char *str, int c);
 char	*get_ident(const char *str, int c);
 int		get_flag(t_minishell *ms, char *ident, char *new_con, char *content);
 t_list	*ft_envnew(void *content);
 
 //! in cd.c
-void	change_dir(t_list **lst);
+void	change_pwd(t_list **lst);
 void	home_to_dir(t_minishell *ms, char *path);
 char	*find_home(t_list **lst);
 void	go_home(t_minishell *ms);

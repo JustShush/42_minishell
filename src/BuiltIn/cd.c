@@ -14,13 +14,15 @@
 
 //printf("dir: %s\n", pwd);
 //ft_printf("%sPWD:%s %s\n", CYAN, RESET, pwd);
-void	change_dir(t_list **lst)
+void	change_pwd(t_list **lst)
 {
 	t_list	*tmp;
 	char	pwd[PATH_MAX + 1];
 	char	*cont;
+	char	*oldpwd;
 
 	tmp = *lst;
+	oldpwd = NULL;
 	if (!tmp)
 		return ;
 	while (tmp)
@@ -29,6 +31,7 @@ void	change_dir(t_list **lst)
 		{
 			getcwd(pwd, sizeof(pwd));
 			cont = ft_strdup(pwd);
+			oldpwd = ft_strdup((tmp)->content);
 			free((tmp)->content);
 			(tmp)->content = cont;
 			ft_bzero(pwd, ft_strlen(pwd));
@@ -36,6 +39,7 @@ void	change_dir(t_list **lst)
 		}
 		tmp = (tmp)->next;
 	}
+	change_oldpwd(lst, oldpwd);
 }
 
 void	home_to_dir(t_minishell *ms, char *path)
@@ -110,7 +114,7 @@ void	cd(t_minishell *ms, char **path)
 		error(ms, 1, "cd: No such file or directory\n", NULL);
 		ms->exit = 1;
 	}
-	change_dir(ms->env);
+	change_pwd(ms->env);
 }
 // cd ~ -> home
 // if theres is no arg (ex: cd) just return to home
