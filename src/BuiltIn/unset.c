@@ -70,11 +70,7 @@ void	unset(t_minishell *ms, char **cmd_line)
 		if (flag == 2)
 			i++;
 		if (flag == 0)
-		{
-			error(ms, 1, "unset: not a valid identifier\n", cmd_line[i]);
-			ms->exit = 1;
 			break ;
-		}
 		rm_nodes(ms->env, cmd_line[i]);
 		i++;
 	}

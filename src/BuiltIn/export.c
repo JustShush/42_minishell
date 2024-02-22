@@ -34,7 +34,7 @@ int	valid_ident(char *s)
 			|| (s[i] >= 'A' && s[i] <= 'Z') || s[i] == '_')
 			flag = 1;
 		else
-			break ;
+			return (0);
 		i++;
 	}
 	if (flag == 1)
