@@ -42,7 +42,7 @@ int	check_option(char *opt)
 
 //printf("cmd: |%s| c: %c\n", new_cmd, new_cmd[len]);
 //printf("new: |%s| c: %c \n", new_cmd, new_cmd[len]);
-char	*quot_marks(char *cmd_line)
+char	*if_quot_marks(char *cmd_line)
 {
 	char	*new_cmd;
 	int		len;
@@ -69,7 +69,7 @@ void	with_option(char **cmd_line, int i)
 
 	while (cmd_line[i])
 	{
-		new_cmd = quot_marks(cmd_line[i]);
+		new_cmd = if_quot_marks(cmd_line[i]);
 		if (new_cmd == NULL)
 			ft_printf("%s", cmd_line[i]);
 		else
@@ -91,7 +91,7 @@ void	no_option(char **cmd_line)
 	i = 1;
 	while (cmd_line[i])
 	{
-		new_cmd = quot_marks(cmd_line[i]);
+		new_cmd = if_quot_marks(cmd_line[i]);
 		if (new_cmd == NULL)
 			ft_printf("%s ", cmd_line[i]);
 		else

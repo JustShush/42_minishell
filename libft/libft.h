@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:57:51 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/10 20:58:45 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/22 20:12:00 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,5 +286,6 @@ char			*ctrl_l(char *buffer);
 
 // Other
 int				ft_strcmp(char *s1, char *s2);
+char			*rm_quots(char *str);
 
 #endif
