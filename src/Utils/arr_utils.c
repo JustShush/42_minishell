@@ -54,6 +54,7 @@ char	**list_to_array(t_minishell *ms, t_list **list)
 	int		size;
 	t_list	*tmp;
 	char	**buf;
+	char	*ident;
 
 	i = 0;
 	tmp = *list;
@@ -63,8 +64,10 @@ char	**list_to_array(t_minishell *ms, t_list **list)
 		error(ms, 2, NULL, NULL);
 	while (tmp && i < size)
 	{
-		buf[i] = ft_strdup((char *)tmp->content);
+		ident = ft_strjoin(tmp->ident , "=");
+		buf[i] = ft_strjoin(ident , tmp->content);
 		tmp = tmp->next;
+		free(ident);
 		i++;
 	}
 	buf[i] = 0;
