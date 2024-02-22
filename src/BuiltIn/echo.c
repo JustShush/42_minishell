@@ -40,19 +40,26 @@ int	check_option(char *opt)
 	return (0);
 }
 
-//ft_printf("%snew_cmd:%s|%s|\n", PURPLE, RESET, cmd_line[i]);
+//printf("cmd: |%s| c: %c\n", new_cmd, new_cmd[len]);
+//printf("new: |%s| c: %c \n", new_cmd, new_cmd[len]);
 char	*quot_marks(char *cmd_line)
 {
-	size_t	len;
 	char	*new_cmd;
+	int		len;
 
-	len = ft_strlen(cmd_line) - 1;
-	if (cmd_line[0] == '"' && cmd_line[len] == '"')
+	new_cmd = ft_strdup(cmd_line);
+	len = ft_strlen(new_cmd) - 1;
+	while (1)
 	{
-		new_cmd = ft_strtrim(cmd_line, "\"");
+		if ((new_cmd[0] == '"' && new_cmd[len] == '"') || 
+			(new_cmd[0] == '\'' && new_cmd[len] == '\''))
+		{
+			new_cmd = rm_quots(new_cmd);
+			len = ft_strlen(new_cmd) - 1;
+		}
+		else
+			break ;
 	}
-	else
-		return (NULL);
 	return (new_cmd);
 }
 

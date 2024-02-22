@@ -64,8 +64,8 @@ char	**list_to_array(t_minishell *ms, t_list **list)
 		error(ms, 2, NULL, NULL);
 	while (tmp && i < size)
 	{
-		ident = ft_strjoin(tmp->ident , "=");
-		buf[i] = ft_strjoin(ident , tmp->content);
+		ident = ft_strjoin(tmp->ident, "=");
+		buf[i] = ft_strjoin(ident, tmp->content);
 		tmp = tmp->next;
 		free(ident);
 		i++;
