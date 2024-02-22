@@ -40,27 +40,31 @@ int	check_option(char *opt)
 	return (0);
 }
 
-//printf("cmd: |%s| c: %c\n", new_cmd, new_cmd[len]);
-//printf("new: |%s| c: %c \n", new_cmd, new_cmd[len]);
-char	*if_quot_marks(char *cmd_line)
+char	*if_rm_quots(char *str)
 {
-	char	*new_cmd;
+	char	*new;
+	int		i;
+	int		j;
 	int		len;
 
-	new_cmd = ft_strdup(cmd_line);
-	len = ft_strlen(new_cmd) - 1;
-	while (1)
+	i = 0;
+	j = 1;
+	len = (int)ft_strlen(str) - 2;
+	new = malloc(sizeof(char) * (len + 1));
+	if (!new)
+		return (NULL);
+	if (!str)
+		return (NULL);
+	while (j <= len) 
 	{
-		if ((new_cmd[0] == '"' && new_cmd[len] == '"') || 
-			(new_cmd[0] == '\'' && new_cmd[len] == '\''))
-		{
-			new_cmd = rm_quots(new_cmd);
-			len = ft_strlen(new_cmd) - 1;
-		}
-		else
-			break ;
+		new[i] = str[j];
+		i++;
+		j++;
 	}
-	return (new_cmd);
+	new[i] = '\0';
+	len = (int)ft_strlen(new);	
+	free(str);
+	return (new);
 }
 
 void	with_option(char **cmd_line, int i)
