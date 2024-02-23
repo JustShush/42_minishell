@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/22 22:53:12 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/23 19:32:03 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,7 +169,7 @@ void		parent(t_minishell *ms, int *pipe_fd, int cmds_run, int pos);
 
 int			parser_op(char c);
 int			countw(char *str);
-char		*split_temp(t_minishell *ms, char *str, int word_len);
+char		*split_tmp(t_minishell *ms, char *str, int word_len);
 int			get_wordl(char *str);
 char		**ms_split(t_minishell *ms, char *str);
 
@@ -288,5 +288,7 @@ int			strcmp_nochr(char *s1, char *s2, char c);
 char		*ft_strndup(char *str, int len);
 
 char		**replaced_arr(t_minishell *ms);
+
+int	ft_echo(t_minishell *ms, char **cmd_args);
 
 #endif

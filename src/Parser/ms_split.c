@@ -53,33 +53,20 @@ int	countw(char *str)
 	return (words);
 }
 
-char	*split_temp(t_minishell *ms, char *str, int word_len)
+char	*split_tmp(t_minishell *ms, char *str, int word_len)
 {
 	int		i;
-	int		j;
-	int		flag;
-	char	*temp;
+	char	*tmp;
 
 	i = 0;
-	j = 0;
-	flag = 0;
-	temp = NULL;
-	temp = malloc(sizeof(char) * (word_len + 1));
-	if (!temp)
-		error(ms, 2, "split_temp", NULL);
-	while (str[j] && i < word_len)
-	{
-		if (flag && parser_op(str[j]) == 3)
-		{
-			j += 1;
-			flag = 0;
-		}
-		if (parser_op(str[j]) == 3)
-			flag = 1;
-		temp[i++] = str[j++];
-	}
-	temp[i] = '\0';
-	return (temp);
+	tmp = NULL;
+	tmp = malloc(sizeof(char) * (word_len + 1));
+	if (!tmp)
+		error(ms, 2, "split_tmp", NULL);
+	while (*str && i < word_len)
+		tmp[i++] = *str++;
+	tmp[i] = '\0';
+	return (tmp);
 }
 
 // Returns the length of str until the next whitespace or separating meta-char
@@ -116,9 +103,8 @@ char	**ms_split(t_minishell *ms, char *str)
 	{
 		while (*str && parser_op(*str) == 1)
 			str++;
-		str = remove_quotes(str);
 		word_len = get_wordl(str);
-		buff[i++] = split_temp(ms, str, word_len);
+		buff[i++] = split_tmp(ms, str, word_len);
 		str = str + word_len;
 	}
 	buff[i] = 0;

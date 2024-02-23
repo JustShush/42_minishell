@@ -34,7 +34,7 @@ void	built_in(t_minishell *ms, char **cmd_flags, int parent)
 	if (ft_strcmp(cmd_flags[0], "cd") == 0)
 		cd(ms, cmd_flags);
 	else if (ft_strcmp(cmd_flags[0], "echo") == 0)
-		myecho(cmd_flags);
+		ft_echo(ms, cmd_flags);
 	else if (ft_strcmp(cmd_flags[0], "env") == 0)
 		env(ms, cmd_flags);
 	else if (ft_strcmp(cmd_flags[0], "exit") == 0)
