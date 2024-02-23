@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:57:51 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/22 22:52:45 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/23 18:15:12 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -286,7 +286,8 @@ char			*ctrl_l(char *buffer);
 
 // Other
 int				ft_strcmp(char *s1, char *s2);
-char			*rm_quots(char *str);
-char			*if_quot_marks(char *cmd_line);
+char			*rm_fl_quotes(char *str);
+char			*find_quotes(char *cmd_line, char quote, int flag);
+char			*quote_marks(char *cmd_line);
 
 #endif

@@ -40,40 +40,13 @@ int	check_option(char *opt)
 	return (0);
 }
 
-char	*if_rm_quots(char *str)
-{
-	char	*new;
-	int		i;
-	int		j;
-	int		len;
-
-	i = 0;
-	j = 1;
-	len = (int)ft_strlen(str) - 2;
-	new = malloc(sizeof(char) * (len + 1));
-	if (!new)
-		return (NULL);
-	if (!str)
-		return (NULL);
-	while (j <= len) 
-	{
-		new[i] = str[j];
-		i++;
-		j++;
-	}
-	new[i] = '\0';
-	len = (int)ft_strlen(new);	
-	free(str);
-	return (new);
-}
-
 void	with_option(char **cmd_line, int i)
 {
 	char	*new_cmd;
 
 	while (cmd_line[i])
 	{
-		new_cmd = if_quot_marks(cmd_line[i]);
+		new_cmd = quote_marks(cmd_line[i]);
 		if (new_cmd == NULL)
 			ft_printf("%s", cmd_line[i]);
 		else
@@ -95,7 +68,7 @@ void	no_option(char **cmd_line)
 	i = 1;
 	while (cmd_line[i])
 	{
-		new_cmd = if_quot_marks(cmd_line[i]);
+		new_cmd = quote_marks(cmd_line[i]);
 		if (new_cmd == NULL)
 			ft_printf("%s ", cmd_line[i]);
 		else
@@ -109,13 +82,13 @@ void	no_option(char **cmd_line)
 }
 
 //echo -n -n -nnnnn    "banana   .  "
-void	myecho(char **cmd_line)
+void	ft_echo(char **cmd_line)
 {
 	int	i;
 	int	flag;
 
 	if (!cmd_line[1])
-		return ;
+		printf("\n");
 	flag = 0;
 	i = 1;
 	if (check_option(cmd_line[i]) == 1)
