@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quots.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:56:42 by mde-avel          #+#    #+#             */
-/*   Updated: 2024/02/22 22:52:19 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/23 17:12:26 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*rm_quots(char *str)
 
 //printf("cmd: |%s| c: %c\n", aux, aux[len]);
 //printf("new: |%s| c: %c \n", aux, aux[len]);
-char		*if_quot_marks(char *cmd_line)
+char	*if_quot_marks(char *cmd_line)
 {
 	char	*new;
 	char	*aux;

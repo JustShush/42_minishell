@@ -62,7 +62,7 @@ char	*if_rm_quots(char *str)
 		j++;
 	}
 	new[i] = '\0';
-	len = (int)ft_strlen(new);	
+	len = (int)ft_strlen(new);
 	free(str);
 	return (new);
 }
