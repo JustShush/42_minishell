@@ -106,6 +106,7 @@ char	**ms_split(t_minishell *ms, char *str)
 	int		word_len;
 	char	**buff;
 	int		ms_words;
+	char	*string;
 
 	i = 0;
 	ms_words = countw(str);
@@ -116,8 +117,9 @@ char	**ms_split(t_minishell *ms, char *str)
 	{
 		while (*str && parser_op(*str) == 1)
 			str++;
-		str = remove_quotes(str);
-		word_len = get_wordl(str);
+		string = remove_quotes(str);
+		word_len = get_wordl(string);
+		free(string);
 		buff[i++] = split_temp(ms, str, word_len);
 		str = str + word_len;
 	}
