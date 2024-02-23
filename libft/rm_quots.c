@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   rm_quots.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:56:42 by mde-avel          #+#    #+#             */
 /*   Updated: 2024/02/23 18:14:19 by mde-avel         ###   ########.fr       */

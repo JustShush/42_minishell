@@ -94,6 +94,7 @@ char	*replace_str(t_minishell *ms, char *str)
 	quotes = '\0';
 	str_index = 0;
 	result = ft_strdup(str);
+	printf("res: %s\n", result);
 	while (result && result[str_index])
 	{
 		if (!quotes && parser_op(result[str_index]) == 3)

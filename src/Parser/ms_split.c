@@ -17,7 +17,7 @@ int	parser_op(char c)
 {
 	if (c == ' ' || c == '\t')
 		return (1);
-	if (c == '<' || c == '>' || c == '\t')
+	if (c == '<' || c == '>')
 		return (2);
 	if (c == '\'' || c == '\"')
 		return (3);
@@ -56,15 +56,28 @@ int	countw(char *str)
 char	*split_temp(t_minishell *ms, char *str, int word_len)
 {
 	int		i;
+	int		j;
+	int		flag;
 	char	*temp;
 
 	i = 0;
+	j = 0;
+	flag = 0;
 	temp = NULL;
 	temp = malloc(sizeof(char) * (word_len + 1));
 	if (!temp)
 		error(ms, 2, "split_temp", NULL);
-	while (*str && i < word_len)
-		temp[i++] = *str++;
+	while (str[j] && i < word_len)
+	{
+		if (flag && parser_op(str[j]) == 3)
+		{
+			j += 1;
+			flag = 0;
+		}
+		if (parser_op(str[j]) == 3)
+			flag = 1;
+		temp[i++] = str[j++];
+	}
 	temp[i] = '\0';
 	return (temp);
 }
@@ -93,6 +106,7 @@ char	**ms_split(t_minishell *ms, char *str)
 	int		word_len;
 	char	**buff;
 	int		ms_words;
+	char	*string;
 
 	i = 0;
 	ms_words = countw(str);
@@ -103,7 +117,9 @@ char	**ms_split(t_minishell *ms, char *str)
 	{
 		while (*str && parser_op(*str) == 1)
 			str++;
-		word_len = get_wordl(str);
+		string = remove_quotes(str);
+		word_len = get_wordl(string);
+		free(string);
 		buff[i++] = split_temp(ms, str, word_len);
 		str = str + word_len;
 	}
