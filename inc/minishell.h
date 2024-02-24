@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/24 18:30:01 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/24 20:54:10 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,7 +289,7 @@ char		*ft_strndup(char *str, int len);
 
 char		**replaced_arr(t_minishell *ms);
 
-//void	ft_echo(char **cmd_line);
-int			ft_echo(t_minishell *ms, char **cmd_args);
+void	ft_echo(char **cmd_line);
+//int			ft_echo(t_minishell *ms, char **cmd_args);
 
 #endif

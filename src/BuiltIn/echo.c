@@ -12,7 +12,7 @@
 
 #include "../../inc/minishell.h"
 
-int	echo_flag(char *str)
+/* int	echo_flag(char *str)
 {
 	int	i;
 
@@ -67,9 +67,9 @@ int	ft_echo(t_minishell *ms, char **cmd_args)
 	if (!n_flag)
 		printf("\n");
 	return (0);
-}
+} */
 
-/* int	check_option(char *opt)
+int	check_option(char *opt)
 {
 	int		i;
 	int		len;
@@ -97,40 +97,13 @@ int	ft_echo(t_minishell *ms, char **cmd_args)
 	return (0);
 }
 
-char	*if_rm_quots(char *str)
-{
-	char	*new;
-	int		i;
-	int		j;
-	int		len;
-
-	i = 0;
-	j = 1;
-	len = (int)ft_strlen(str) - 2;
-	new = malloc(sizeof(char) * (len + 1));
-	if (!new)
-		return (NULL);
-	if (!str)
-		return (NULL);
-	while (j <= len) 
-	{
-		new[i] = str[j];
-		i++;
-		j++;
-	}
-	new[i] = '\0';
-	len = (int)ft_strlen(new);
-	free(str);
-	return (new);
-}
-
 void	with_option(char **cmd_line, int i)
 {
 	char	*new_cmd;
 
 	while (cmd_line[i])
 	{
-		new_cmd = if_quot_marks(cmd_line[i]);
+		new_cmd = ft_strdup(cmd_line[i]);
 		if (new_cmd == NULL)
 			ft_printf("%s", cmd_line[i]);
 		else
@@ -152,7 +125,7 @@ void	no_option(char **cmd_line)
 	i = 1;
 	while (cmd_line[i])
 	{
-		new_cmd = if_quot_marks(cmd_line[i]);
+		new_cmd = ft_strdup(cmd_line[i]);
 		if (new_cmd == NULL)
 			ft_printf("%s ", cmd_line[i]);
 		else
@@ -187,4 +160,4 @@ void	ft_echo(char **cmd_line)
 		with_option(cmd_line, i);
 	else
 		no_option(cmd_line);
-} */
+}

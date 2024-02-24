@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:49:04 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/24 12:49:04 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/24 20:38:08 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,49 +74,14 @@ char	*remove_quotes(char *str)
 	return (buf);
 }
 
-char	*add_quotes(char *str, char c)
-{
-	int		i;
-	int		j;
-	char	*buf;
-
-	i = 0;
-	j = 0;
-	if (!str)
-		return (NULL);
-	buf = calloc(sizeof(char), ft_strlen(str) + 3);
-	buf[j++] = c;
-	while (str[i])
-		buf[j++] = str[i++];
-	buf[j] = c;
-	return (buf);
-}
-
-//Removes quotes from str.
-void	rm_quotes(char *str)
-{
-	char *src = str;
-	char *dst = str;
-
-	while (*src) {
-		if (parser_op(*src) == 3) {
-			src++;
-		} else {
-			*dst++ = *src++;
-		}
-	}
-
-	*dst = '\0';
-}
-
 void	rm_all_quotes(char **cmds)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (cmds[i])
 	{
-		rm_quotes(cmds[i]);
+		cmds[i] = remove_quotes(cmds[i]);
 		i++;
 	}
 }
