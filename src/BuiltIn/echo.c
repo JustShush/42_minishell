@@ -12,8 +12,6 @@
 
 #include "../../inc/minishell.h"
 
-//check if there is an echo flag
-//Returns 1 if yes, 0 if no
 int	echo_flag(char *str)
 {
 	int	i;
@@ -168,13 +166,16 @@ void	no_option(char **cmd_line)
 }
 
 //echo -n -n -nnnnn    "banana   .  "
-void	myecho(char **cmd_line)
+void	ft_echo(char **cmd_line)
 {
 	int	i;
 	int	flag;
 
 	if (!cmd_line[1])
+	{
+		printf("\n");
 		return ;
+	}
 	flag = 0;
 	i = 1;
 	if (check_option(cmd_line[i]) == 1)
@@ -186,5 +187,4 @@ void	myecho(char **cmd_line)
 		with_option(cmd_line, i);
 	else
 		no_option(cmd_line);
-}
- */
+} */

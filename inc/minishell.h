@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/24 14:35:35 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/24 15:55:45 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,7 +220,6 @@ void		print_arr(char *str, char **arr);
 //! in check_cmd.c
 int			isbuiltin(char *str);
 void		built_in(t_minishell *ms, char **cmd_flags, int parent);
-void		check_cmd(t_minishell *ms);
 
 //! in cmd_utils.c
 
@@ -272,10 +271,7 @@ int			var_init(t_minishell *ms);
 int			skip_quotes(char *str, int pos);
 char		*add_quotes(char *str, char c);
 char		*remove_quotes(char *str);
-
-//! in rm_quotes.c
-
-void	rm_quotes(char *str);
+void		rm_quotes(char *str);
 
 //! in redirect.c
 
@@ -293,6 +289,7 @@ char		*ft_strndup(char *str, int len);
 
 char		**replaced_arr(t_minishell *ms);
 
-int	ft_echo(t_minishell *ms, char **cmd_args);
+//void	ft_echo(char **cmd_line);
+int			ft_echo(t_minishell *ms, char **cmd_args);
 
 #endif

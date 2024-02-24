@@ -91,3 +91,20 @@ char	*add_quotes(char *str, char c)
 	buf[j] = c;
 	return (buf);
 }
+
+//Removes quotes from str.
+void	rm_quotes(char *str)
+{
+	char *src = str;
+	char *dst = str;
+
+	while (*src) {
+		if (parser_op(*src) == 3) {
+			src++;
+		} else {
+			*dst++ = *src++;
+		}
+	}
+
+	*dst = '\0';
+}

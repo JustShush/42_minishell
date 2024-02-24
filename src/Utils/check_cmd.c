@@ -46,9 +46,3 @@ void	built_in(t_minishell *ms, char **cmd_flags, int parent)
 	else if (ft_strcmp(cmd_flags[0], "unset") == 0)
 		unset(ms, cmd_flags);
 }
-
-void	check_cmd(t_minishell *ms)
-{
-	if (isbuiltin(ms->main_arr[0]))
-		built_in(ms, ms->main_arr, 0);
-}
