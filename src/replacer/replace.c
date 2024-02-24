@@ -41,7 +41,6 @@ char	*replace_var(t_minishell *ms, char *result, char quotes, int str_index)
 	fix = NULL;
 	buffer = NULL;
 	fix = ft_strndup(result, str_index);
-	//printf("inside |%s|%d\n", fix, str_index);
 	if (!(parser_op(result[str_index + 1]) == 3 && !quotes))
 		buffer = ft_strndup(result + str_index, \
 		get_var_len(result + str_index));
@@ -49,8 +48,10 @@ char	*replace_var(t_minishell *ms, char *result, char quotes, int str_index)
 		var = ft_strdup(buffer);
 	else if (buffer)
 		var = var_iter(ms, buffer + 1);
+	//printf("buffer %s\n", buffer);
 	free(buffer);
 	buffer = ft_strjoin(fix, var);
+	//printf("inside |%s|%d\n", buffer, str_index);
 	free(fix);
 	fix = ft_strdup(result + str_index + get_var_len(result + str_index));
 	free(var);
@@ -104,6 +105,7 @@ char	*replace_str(t_minishell *ms, char *str)
 			quotes = '\0';
 		if (result[str_index] == '$' && quotes != '\'')
 		{
+			//printf("resss |%s|%c|\n", result, result[str_index]);
 			var_len = get_new_index(ms, result, quotes, str_index);
 			result = replace_var(ms, result, quotes, str_index);
 			//printf("res: after|%s|\n", result);

@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/22 19:56:42 by mde-avel          #+#    #+#             */
-/*   Updated: 2024/02/23 17:12:26 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/24 18:31:02 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 //printf("len:%d\n", len);	
 //len = (int)ft_strlen(new);
 //printf("new: |%s| len: %d\n", new, len);	
-char	*rm_quots(char *str)
+/* char	*rm_quots(char *str)
 {
 	char	*new;
 	int		i;
@@ -39,7 +39,7 @@ char	*rm_quots(char *str)
 	new[i] = '\0';
 	free(str);
 	return (new);
-}
+} */
 
 //printf("cmd: |%s| c: %c\n", aux, aux[len]);
 //printf("new: |%s| c: %c \n", aux, aux[len]);

@@ -103,7 +103,7 @@ char	**ms_split(t_minishell *ms, char *str)
 	{
 		while (*str && parser_op(*str) == 1)
 			str++;
-		rm_quotes(str);
+		//rm_quotes(str);
 		word_len = get_wordl(str);
 		buff[i++] = split_tmp(ms, str, word_len);
 		str = str + word_len;

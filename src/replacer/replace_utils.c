@@ -17,23 +17,6 @@
 // var = HOME
 // env: HOME=/home/dmarque
 // return: /home/dmarque
-char	*var_cmp(char *env, char *var)
-{
-	char	*buf1;
-	char	*buf2;
-
-	if (!var)
-		return (NULL);
-	if (strcmp_nochr(var, env, '=') == 0)
-	{
-		buf1 = str_front_trim(env, var);
-		buf2 = str_front_trim(buf1, "=");
-		free(buf1);
-		return (buf2);
-	}
-	return (NULL);
-}
-
 char	*var_iter(t_minishell *ms, char *var)
 {
 	char	*buf;
@@ -47,7 +30,10 @@ char	*var_iter(t_minishell *ms, char *var)
 	tmp = *ms->env;
 	while (tmp)
 	{
-		buf = var_cmp((char *)tmp->content, var);
+		if (strcmp((tmp)->ident, var) == 0)
+			buf = strdup((tmp)->content);
+		else
+			buf = NULL;
 		if (buf)
 			return (buf);
 		tmp = tmp->next;

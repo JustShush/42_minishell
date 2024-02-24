@@ -89,7 +89,7 @@ void	parent(t_minishell *ms, int *pipe_fd, int cmds_run, int pos)
 			== 0)
 		{
 			close_fd(pipe_fd);
-			built_in(ms, cmd->cmds, 1);
+			built_in(ms, cmd->cmds);
 		}
 	}
 	if (cmds_run > 0)

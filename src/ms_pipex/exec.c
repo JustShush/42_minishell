@@ -113,7 +113,7 @@ void	exec(t_minishell *ms, char **cmd_arr)
 	if (!cmd_arr || !cmd_arr[0] || !cmd_arr[0][0])
 		write(STDERR_FILENO, "Minishell: '': command not found\n", 33);
 	if (isbuiltin(cmd_arr[0]))
-		built_in(ms, cmd_arr, 0);
+		built_in(ms, cmd_arr);
 	if (g_global == SIGPIPE)
 		free_ms(ms);
 	if (!cmd_arr || !cmd_arr[0] || !cmd_arr[0][0] || isbuiltin(cmd_arr[0]))
@@ -126,6 +126,7 @@ void	exec(t_minishell *ms, char **cmd_arr)
 	if (!cmd_path)
 		free_ms(ms);
 	env = list_to_array(ms, ms->env);
+	rm_all_quotes(cmd_arr);
 	execve(cmd_path, cmd_arr, env);
 	free(cmd_path);
 	ms->exit = errno;

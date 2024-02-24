@@ -108,3 +108,15 @@ void	rm_quotes(char *str)
 
 	*dst = '\0';
 }
+
+void	rm_all_quotes(char **cmds)
+{
+	int i;
+
+	i = 0;
+	while (cmds[i])
+	{
+		rm_quotes(cmds[i]);
+		i++;
+	}
+}

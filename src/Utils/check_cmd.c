@@ -27,10 +27,10 @@ int	isbuiltin(char *str)
 	return (0);
 }
 
-void	built_in(t_minishell *ms, char **cmd_flags, int parent)
+void	built_in(t_minishell *ms, char **cmd_flags)
 {
 	ms->exit = 0;
-	(void)parent;
+	rm_all_quotes(cmd_flags);
 	if (ft_strcmp(cmd_flags[0], "cd") == 0)
 		cd(ms, cmd_flags);
 	else if (ft_strcmp(cmd_flags[0], "echo") == 0)
