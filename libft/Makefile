@@ -60,7 +60,6 @@ SRC = ft_atoi.c \
 		ft_lstclear_bonus.c \
 		ft_lstiter_bonus.c \
 		ft_lstmap_bonus.c \
-		rm_quots.c
 
 OBJ = $(SRC:.c=.o)
 

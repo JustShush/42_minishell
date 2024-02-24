@@ -32,32 +32,3 @@ int	is_exec(t_minishell *ms, char *cmd, char **paths)
 	}
 	return (1);
 }
-
-int	ft_access(t_minishell *ms, char	*cmd, char *cmd_path, char **paths_array)
-{
-	struct stat	path_stat;
-
-	stat(cmd_path, &path_stat);
-	if (S_ISDIR(path_stat.st_mode) != 0)
-	{
-		ft_putstr_fd("Minishell: ", STDERR_FILENO);
-		ft_putstr_fd(cmd, STDERR_FILENO);
-		ft_putstr_fd(": Is a directory\n", STDERR_FILENO);
-		ms->exit = 126;
-	}
-	else if (access(cmd_path, X_OK) == 0)
-	{
-		free(cmd_path);
-		return (1);
-	}
-	else if (access(cmd_path, X_OK) != 0)
-	{
-		perror("Minishell: error: ");
-		ms->exit = 126;
-	}
-	else
-		ms->exit = 1;
-	free(cmd_path);
-	free_arr(paths_array);
-	return (0);
-}

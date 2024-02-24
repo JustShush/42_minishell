@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/24 15:57:51 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/24 18:31:18 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/24 19:16:30 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -287,6 +287,6 @@ char			*ctrl_l(char *buffer);
 // Other
 int				ft_strcmp(char *s1, char *s2);
 //char			*rm_quots(char *str);
-char			*if_quot_marks(char *cmd_line);
+//char			*if_quot_marks(char *cmd_line);
 
 #endif
