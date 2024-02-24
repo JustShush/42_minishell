@@ -57,7 +57,7 @@ char	*remove_quotes(char *str)
 
 	i = 0;
 	j = 0;
-	buf = calloc(sizeof(char), (ft_strlen(str) - quote_num(str) + 1));
+	buf = ft_calloc(sizeof(char), (ft_strlen(str) - quote_num(str) + 1));
 	while (str[i])
 	{
 		if (parser_op(str[i]) == 3)

@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/23 19:32:03 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/24 14:35:35 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -272,6 +272,10 @@ int			var_init(t_minishell *ms);
 int			skip_quotes(char *str, int pos);
 char		*add_quotes(char *str, char c);
 char		*remove_quotes(char *str);
+
+//! in rm_quotes.c
+
+void	rm_quotes(char *str);
 
 //! in redirect.c
 
