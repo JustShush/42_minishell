@@ -65,7 +65,7 @@ char	**list_to_array(t_minishell *ms, t_list **list)
 	while (tmp && i < size)
 	{
 		ident = ft_strjoin(tmp->ident, "=");
-		buf[i] = ft_strjoin(ident, tmp->content);
+		buf[i] = ft_strjoin(ident, (char *)tmp->content);
 		tmp = tmp->next;
 		free(ident);
 		i++;

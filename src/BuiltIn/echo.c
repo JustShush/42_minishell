@@ -40,8 +40,7 @@ void	echo_print(char **cmd_args, int pos)
 				printf("%c", cmd_args[pos][i++]);
 		}
 		pos++;
-		if (cmd_args && cmd_args[0]
-			&& pos < arr_size(cmd_args))
+		if (cmd_args && cmd_args[0] && pos < arr_size(cmd_args))
 			printf(" ");
 	}
 }
@@ -130,7 +129,9 @@ void	no_option(char **cmd_line)
 			ft_printf("%s ", cmd_line[i]);
 		else
 		{
-			ft_printf("%s ", new_cmd);
+			ft_printf("%s", new_cmd);
+			if (cmd_line[i + 1] != NULL)
+				ft_printf(" ");
 			free(new_cmd);
 		}
 		i++;
