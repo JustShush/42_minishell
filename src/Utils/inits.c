@@ -51,6 +51,35 @@ t_cmdlist	*cmd_list_init(t_minishell *ms)
 	return (cmdlist);
 }
 
+int	init_heredoc(t_minishell *ms, char **main_arr)
+{
+	int		index;
+	char	*buf;
+
+	index = 0;
+	if (!main_arr || !main_arr[0] || !main_arr[0][0])
+		return (0);
+	while (main_arr[index])
+	{
+		if (ft_strcmp(main_arr[index], "<<") == 0)
+		{
+			buf = heredoc(ms, main_arr[index + 1], index);
+			free(main_arr[index + 1]);
+			main_arr[index + 1] = ft_strdup(buf);
+			free(buf);
+			if (g_global == SIGINT)
+			{
+				g_global = 0;
+				return (1);
+			}
+			index += 2;
+		}
+		else
+			index++;
+	}
+	return (0);
+}
+
 int	var_init(t_minishell *ms)
 {
 	char	**new_arr;
@@ -59,7 +88,7 @@ int	var_init(t_minishell *ms)
 	ms->fdin = dup(STDIN_FILENO);
 	ms->fdout = dup(STDOUT_FILENO);
 	ms->main_arr = ms_split(ms, ms->input);
-	if (!(ms->main_arr))
+	if (init_heredoc(ms, ms->main_arr))
 		return (1);
 	new_arr = replaced_arr(ms);
 	free_arr(ms->main_arr);

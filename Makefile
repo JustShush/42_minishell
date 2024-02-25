@@ -10,7 +10,7 @@ CFLAGS = -Wall -Wextra -Werror -g
 
 SRC =	main.c prompt.c frees.c signals.c
 SRC_builtin = cd.c echo.c env.c exit.c export.c pwd.c unset.c builtin_utils.c 
-SRC_pipex = exec_utils.c exec.c ms_pipex.c redirects.c
+SRC_pipex = exec_utils.c exec.c hdoc_utils.c heredoc.c ms_pipex.c redirects.c
 SRC_parser = ms_split.c parser_utils.c
 SRC_replacer = replace_utils.c replace.c
 SRC_syntax = syntax_err.c syntax.c

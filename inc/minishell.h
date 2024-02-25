@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/25 15:27:25 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/25 17:00:42 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,6 +156,10 @@ int			create_file(t_minishell *ms, char *filename);
 char		*create_filename(int here_num);
 void		heredoc_signal(int signum);
 
+//! in heredoc.c
+
+char	*heredoc(t_minishell *ms, char *limiter, int here_num);
+
 //! in ms_pipex
 
 int			find_cmd_pos(char **main_arr, int pos);
@@ -254,6 +258,7 @@ void		fork_error(t_minishell *ms, int *pipe_fd);
 
 //! in error1.c
 int			token_message(char token);
+void		heredoc_eof(char *limiter);
 
 //! in free2.c
 
@@ -261,6 +266,7 @@ int			token_message(char token);
  * @note Just free 2 diff strings so save 1 line
 */
 void		free2(char *str, char *str1);
+void		free_hdoc(t_minishell *ms);
 
 //! in inits.c
 
