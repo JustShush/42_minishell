@@ -152,7 +152,7 @@ void	ft_echo(char **cmd_line)
 	}
 	flag = 0;
 	i = 1;
-	if (check_option(cmd_line[i]) == 1)
+	while (check_option(cmd_line[i]) == 1)
 	{
 		flag = 1;
 		i++;
