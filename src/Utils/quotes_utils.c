@@ -82,6 +82,7 @@ void	rm_all_quotes(char **cmds)
 	while (cmds[i])
 	{
 		cmds[i] = remove_quotes(cmds[i]);
+		//free(cmds[i]);
 		i++;
 	}
 }
