@@ -12,12 +12,18 @@
 
 #include "../../inc/minishell.h"
 
-// 0 if not one of the options
+/**
+ * @note 1 = spaces/tabs
+ * @note 2 = < > |
+ * @note 3 = quotes
+ * @note 4 = $
+ * @note 0 if not one of the options
+*/
 int	parser_op(char c)
 {
 	if (c == ' ' || c == '\t')
 		return (1);
-	if (c == '<' || c == '>')
+	if (c == '<' || c == '>' || c == '|')
 		return (2);
 	if (c == '\'' || c == '\"')
 		return (3);

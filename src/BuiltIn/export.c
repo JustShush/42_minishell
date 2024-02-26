@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   export.c                                          :+:      :+:    :+:   */
+/*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 10:46:28 by dimarque          #+#    #+#             */
-/*   Updated: 2023/11/17 10:46:28 by dimarque         ###   ########.fr       */
+/*   Created: 2024/02/26 19:40:06 by dimarque          #+#    #+#             */
+/*   Updated: 2024/02/26 19:40:06 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,116 +123,6 @@ void	ft_export_2(t_minishell *ms, char *content, int check)
 	}
 }
 
-void	sort_env(t_list **env)
-{
-    int swapped;
-    t_list *ptr1;
-    t_list *lptr = NULL;
-
-    do {
-        swapped = 0;
-        ptr1 = *env;
-
-        while (ptr1->next != lptr) {
-            if (strcmp(ptr1->ident, ptr1->next->ident) > 0) {
-                char *temp_ident = ptr1->ident;
-                ptr1->ident = ptr1->next->ident;
-                ptr1->next->ident = temp_ident;
-
-                void *temp_content = ptr1->content;
-                ptr1->content = ptr1->next->content;
-                ptr1->next->content = temp_content;
-
-                swapped = 1;
-            }
-            ptr1 = ptr1->next;
-        }
-        lptr = ptr1;
-    } while (swapped);
-}
-
-void print_env(t_list **env)
-{
-	t_list *current;
-
-	current =  *env;
-	while (current != NULL)
-	{
-		if (ft_strcmp(current->ident, "_") == 0)
-		{
-				if (current->next)
-					current = current->next;
-				else
-					break ;
-		}
-			ft_printf("%s%s%s %s=\"%s\"\n", CYAN, "declare -x", RESET, \
-						current->ident, current->content);
-			current = current->next;
-	}
-}
-
-t_list *copy_env(t_list *env) {
-    t_list *head = NULL;
-    t_list *tail = NULL;
-    
-    // Iterate through original env list
-    while (env != NULL) {
-        // Create a new node
-        t_list *new_node = malloc(sizeof(t_list));
-        if (new_node == NULL) {
-            // Error handling if memory allocation fails
-            fprintf(stderr, "Memory allocation failed\n");
-            exit(1);
-        }
-
-        // Copy ident and content
-        new_node->ident = strdup(env->ident);
-        new_node->content = strdup((char *)env->content);
-        new_node->next = NULL;
-
-        // Append new node to the new list
-        if (tail == NULL) {
-            head = tail = new_node;
-        } else {
-            tail->next = new_node;
-            tail = new_node;
-        }
-
-        // Move to next node in original env list
-        env = env->next;
-    }
-    
-    return head;
-}
-
-void sort_and_print(t_minishell *ms) {
-    if (ms == NULL || ms->env == NULL || *ms->env == NULL) {
-        printf("No environment variables to sort or print.\n");
-        return;
-    }
-
-    // Create a temporary copy of env
-    t_list *tmp_env;
-	tmp_env = copy_env(*ms->env);
-
-    // Sort the temporary copy
-    sort_env(&tmp_env);
-
-    // Print the sorted environment variables
-    printf("Sorted Environment Variables:\n");
-    print_env(&tmp_env);
-
-    // Free the memory allocated for the temporary copy
-    t_list *current = tmp_env;
-    while (current != NULL) {
-        t_list *next = current->next;
-        free(current->ident);
-        free(current->content);
-        free(current);
-        current = next;
-    }
-}
-
 void	ft_export(t_minishell *ms, char **cmd_line)
 {
 	int		i;
@@ -240,15 +130,9 @@ void	ft_export(t_minishell *ms, char **cmd_line)
 	char	*content;
 
 	i = 1;
-	//t_list *tmp_env = duplicate_env(*(ms->env));
 	if (!cmd_line[i])
 	{
 		sort_and_print(ms);
-		/* sort_env(tmp_env);
-		print_sorted_env(tmp_env);
-		free_env(tmp_env); */
-
-		//print_lst(tmp, 2);
 		return ;
 	}
 	while (cmd_line[i])

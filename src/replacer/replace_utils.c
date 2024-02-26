@@ -30,8 +30,8 @@ char	*var_iter(t_minishell *ms, char *var)
 	tmp = *ms->env;
 	while (tmp)
 	{
-		if (strcmp((tmp)->ident, var) == 0)
-			buf = strdup((tmp)->content);
+		if (ft_strcmp((tmp)->ident, var) == 0)
+			buf = ft_strdup((tmp)->content);
 		else
 			buf = NULL;
 		if (buf)

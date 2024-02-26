@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/26 12:57:50 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/26 19:54:36 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ typedef struct s_minishell
 
 //! in main.c
 void		minishell(t_minishell *ms);
-t_list		**env_init(char **envp);
 
 //! in frees.c
 void		free_list(t_list **list);
@@ -114,8 +113,9 @@ void		no_option(char **cmd_line);
 void		ft_echo(char **cmd_line);
 
 //! in env.c
+void		list_swap(t_minishell *ms, t_list *list);
 void		print_lst(t_list **lst, int flag);
-void		env(t_minishell *ms, char **cmd_line);
+void		env(t_minishell *ms);
 
 //! in exit.c
 int			check_if_num(t_minishell *ms, char *arg);
@@ -131,6 +131,10 @@ void		ft_export(t_minishell *ms, char **cmd_line);
 
 //! in pwd.c
 void		pwd(void);
+
+//! in export.c
+
+void		sort_and_print(t_minishell *ms);
 
 //! in unset.c
 void		rm_first(t_list **env);
@@ -183,13 +187,15 @@ int			envar(char *str, int i);
 int			others(char *str, int i);
 
 //* --- Replacer DIR ----
-//! in env_split_utils.c
+//! in replace.c
+
+char		*replace_str(t_minishell *ms, char *str);
+char		**replaced_arr(t_minishell *ms);
+
+//! in replace_utils.c
 
 char		*var_iter(t_minishell *ms, char *var);
 char		*var_str(t_list *env, char *var);
-
-//! in env_split2.c
-char		*replace_str(t_minishell *ms, char *str);
 
 //* ---- Syntax DIR ----
 //! in syntax_err.c
@@ -292,7 +298,5 @@ int			strchr_malloc(char *s, char c);
 char		*str_front_trim(char *str, char *trim);
 int			strcmp_nochr(char *s1, char *s2, char c);
 char		*ft_strndup(char *str, int len);
-
-char		**replaced_arr(t_minishell *ms);
 
 #endif

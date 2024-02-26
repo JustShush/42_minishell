@@ -38,7 +38,7 @@ void	built_in(t_minishell *ms, char **cmd_flags)
 	else if (ft_strcmp(new_cmds[0], "echo") == 0)
 		ft_echo(new_cmds);
 	else if (ft_strcmp(new_cmds[0], "env") == 0)
-		env(ms, new_cmds);
+		env(ms);
 	else if (ft_strcmp(new_cmds[0], "exit") == 0)
 		ft_exit(ms, new_cmds);
 	else if (ft_strcmp(new_cmds[0], "export") == 0)
