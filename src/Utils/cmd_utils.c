@@ -19,10 +19,10 @@ void	print_cmdlist(t_cmdlist *cmdlist)
 
 	i = 1;
 	tmp = cmdlist;
-	printf("\nLIST:\n");
+	printf("LIST:\n");
 	while (tmp)
 	{
-		printf("	NODE%i:\n", i);
+		printf("	NODE_%i:\n", i);
 		print_arr("	Command with flags", tmp->cmds);
 		i++;
 		if (tmp->next)

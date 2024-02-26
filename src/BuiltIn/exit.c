@@ -71,6 +71,7 @@ void	ft_exit(t_minishell *ms, char **cmd_line)
 	}
 	nbr = calc_exit(nbr);
 	ms->exit = nbr;
+	free_arr(cmd_line);
 	ft_printf("exit\n");
 	free_ms(ms);
 }

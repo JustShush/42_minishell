@@ -107,6 +107,7 @@ char	*get_cmd_path(t_minishell *ms, char **paths, char *cmd)
 void	exec(t_minishell *ms, char **cmd_arr)
 {
 	char	**paths;
+	char	**new_cmds;
 	char	*cmd_path;
 	char	**env;
 
@@ -126,8 +127,8 @@ void	exec(t_minishell *ms, char **cmd_arr)
 	if (!cmd_path)
 		free_ms(ms);
 	env = list_to_array(ms, ms->env);
-	rm_all_quotes(cmd_arr);
-	execve(cmd_path, cmd_arr, env);
+	new_cmds = rm_all_quotes(cmd_arr);
+	execve(cmd_path, new_cmds, env);
 	free(cmd_path);
 	ms->exit = errno;
 	free_ms(ms);

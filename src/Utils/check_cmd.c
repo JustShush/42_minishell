@@ -29,20 +29,23 @@ int	isbuiltin(char *str)
 
 void	built_in(t_minishell *ms, char **cmd_flags)
 {
+	char	**new_cmds;
 	ms->exit = 0;
-	rm_all_quotes(cmd_flags);
-	if (ft_strcmp(cmd_flags[0], "cd") == 0)
-		cd(ms, cmd_flags);
-	else if (ft_strcmp(cmd_flags[0], "echo") == 0)
-		ft_echo(cmd_flags);
-	else if (ft_strcmp(cmd_flags[0], "env") == 0)
-		env(ms, cmd_flags);
-	else if (ft_strcmp(cmd_flags[0], "exit") == 0)
-		ft_exit(ms, cmd_flags);
-	else if (ft_strcmp(cmd_flags[0], "export") == 0)
-		ft_export(ms, cmd_flags);
-	else if (ft_strcmp(cmd_flags[0], "pwd") == 0)
+
+	new_cmds = rm_all_quotes(cmd_flags);
+	if (ft_strcmp(new_cmds[0], "cd") == 0)
+		cd(ms, new_cmds);
+	else if (ft_strcmp(new_cmds[0], "echo") == 0)
+		ft_echo(new_cmds);
+	else if (ft_strcmp(new_cmds[0], "env") == 0)
+		env(ms, new_cmds);
+	else if (ft_strcmp(new_cmds[0], "exit") == 0)
+		ft_exit(ms, new_cmds);
+	else if (ft_strcmp(new_cmds[0], "export") == 0)
+		ft_export(ms, new_cmds);
+	else if (ft_strcmp(new_cmds[0], "pwd") == 0)
 		pwd();
-	else if (ft_strcmp(cmd_flags[0], "unset") == 0)
-		unset(ms, cmd_flags);
+	else if (ft_strcmp(new_cmds[0], "unset") == 0)
+		unset(ms, new_cmds);
+	free_arr(new_cmds);
 }

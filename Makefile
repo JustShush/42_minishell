@@ -141,5 +141,5 @@ fclean: clean
 re: fclean all
 
 val:
-	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=readline.supp --log-file="val_log.txt" ./minishell
+	@valgrind --leak-check=full --track-origins=yes --show-leak-kinds=all --suppressions=readline.supp --log-file="val_log.txt" --trace-children=yes ./minishell
 # --trace-children=yes
