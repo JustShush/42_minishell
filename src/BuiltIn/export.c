@@ -100,7 +100,6 @@ int	check_identifier(t_minishell *ms, char *content)
 		free(ident);
 		free(new_con);
 	}
-	//printf("check flag: %d\n", flag);
 	return (flag);
 }
 

@@ -97,6 +97,5 @@ int	var_init(t_minishell *ms)
 	free_arr(new_arr);
 	ms->cmd_count = cmd_count(ms->main_arr);
 	ms->cmdlist = cmd_list_init(ms);
-
 	return (0);
 }

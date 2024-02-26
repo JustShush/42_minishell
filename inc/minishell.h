@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/26 00:54:05 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:52:46 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ typedef struct s_minishell
 	int			cmd_count;
 	int			fdin;
 	int			fdout;
-	int			dp[2];
 	int			cmd_fd;
 	t_list		**env;
 	t_cmdlist	*cmdlist;
@@ -112,7 +111,7 @@ void		cd(t_minishell *ms, char **path);
 int			check_option(char *opt);
 void		with_option(char **cmd_line, int i);
 void		no_option(char **cmd_line);
-void		myecho(char **cmd_line);
+void		ft_echo(char **cmd_line);
 
 //! in env.c
 void		print_lst(t_list **lst, int flag);
@@ -158,7 +157,7 @@ void		heredoc_signal(int signum);
 
 //! in heredoc.c
 
-char	*heredoc(t_minishell *ms, char *limiter, int here_num);
+char		*heredoc(t_minishell *ms, char *limiter, int here_num);
 
 //! in ms_pipex
 
@@ -295,8 +294,5 @@ int			strcmp_nochr(char *s1, char *s2, char c);
 char		*ft_strndup(char *str, int len);
 
 char		**replaced_arr(t_minishell *ms);
-
-void	ft_echo(char **cmd_line);
-//int			ft_echo(t_minishell *ms, char **cmd_args);
 
 #endif

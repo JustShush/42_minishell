@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/26 12:16:24 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:48:55 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ void	minishell(t_minishell *ms)
 	}
 	get_exit_status(ms, pid, cmds_run);
 }
-// check_cmd(ms);
 
 t_list	**env_init(char **envp)
 {
@@ -108,13 +107,3 @@ int	main(int argc, char *argv[], char **env)
 	}
 	exit(ms->exit);
 }
-
-// add single and double quotes to parser
-// fix parser error ex: ./minishell ls|echo s < a<b
-// output: ls | echo s < a<b
-// should be: ls | echo s < a < b
-
-// Add color and symbols to the prompt
-// ideas for the prompt:
-// \033[1;36mMinishell\033[0m \033[1;33m✗\033[0m
-// \033[1;33mMinishell\03[0m$>
