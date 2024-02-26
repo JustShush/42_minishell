@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/26 12:52:46 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/26 12:57:50 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,7 @@ char **paths_array);
 
 //! in exec.c
 
-void		exec(t_minishell *ms, char **cmd_arr);
+void		exec(t_minishell *ms, char **cmd_arr, char	**new_cmds);
 
 //! in hdoc_utils.c
 

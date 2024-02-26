@@ -104,10 +104,9 @@ char	*get_cmd_path(t_minishell *ms, char **paths, char *cmd)
 	return (NULL);
 }
 
-void	exec(t_minishell *ms, char **cmd_arr)
+void	exec(t_minishell *ms, char **cmd_arr, char	**new_cmds)
 {
 	char	**paths;
-	char	**new_cmds;
 	char	*cmd_path;
 	char	**env;
 
