@@ -6,7 +6,7 @@
 /*   By: mde-avel <mde-avel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:31:15 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/25 21:13:57 by mde-avel         ###   ########.fr       */
+/*   Updated: 2024/02/26 00:54:05 by mde-avel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,7 +277,8 @@ int			var_init(t_minishell *ms);
 int			skip_quotes(char *str, int pos);
 char		*add_quotes(char *str, char c);
 char		*remove_quotes(char *str);
-void		rm_all_quotes(char **cmds);
+char		**rm_all_quotes(char **cmds);
+//void		rm_all_quotes(char **cmds);
 
 //! in redirect.c
 

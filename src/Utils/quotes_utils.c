@@ -74,15 +74,26 @@ char	*remove_quotes(char *str)
 	return (buf);
 }
 
-void	rm_all_quotes(char **cmds)
+char	**rm_all_quotes(char **cmds)
 {
-	int	i;
+	int		i;
+	int		len;
+	char	**new;
 
 	i = 0;
+	len = 0;
 	while (cmds[i])
 	{
-		cmds[i] = remove_quotes(cmds[i]);
-		//free(cmds[i]);
+		len += ft_strlen(cmds[i]) - quote_num(cmds[i]) + 1;
 		i++;
 	}
+	i = 0;
+	new = (char **)malloc(sizeof(char *) * len);
+	while (cmds[i])
+	{
+		new[i] = remove_quotes(cmds[i]);
+		i++;
+	}
+	new[i] = NULL;
+	return (new);
 }
