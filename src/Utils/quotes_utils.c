@@ -74,6 +74,9 @@ char	*remove_quotes(char *str)
 	return (buf);
 }
 
+//DINIS: já reslvi os memory leaks
+//Vê o Branch leaks_2
+
 char	**rm_all_quotes(char **cmds)
 {
 	int		i;
