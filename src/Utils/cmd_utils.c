@@ -12,11 +12,9 @@
 
 #include "../../inc/minishell.h"
 
-//print_arr("	Command with flags", tmp->cmds);
 void	print_cmdlist(t_cmdlist *cmdlist)
 {
 	int			i;
-	int			j;
 	t_cmdlist	*tmp;
 
 	i = 1;
@@ -24,13 +22,8 @@ void	print_cmdlist(t_cmdlist *cmdlist)
 	printf("LIST:\n");
 	while (tmp)
 	{
-		j = 0;
 		printf("	NODE_%i:\n", i);
-		while (tmp->cmds[j] != NULL)
-		{
-			printf("		%s\n", (tmp)->cmds[j]);
-			j++;
-		}
+		print_arr("	Command with flags", tmp->cmds);
 		i++;
 		if (tmp->next)
 			tmp = tmp->next;

@@ -80,6 +80,7 @@ int	init_heredoc(t_minishell *ms, char **main_arr)
 	return (0);
 }
 
+//print_cmdlist(ms->cmdlist);
 int	var_init(t_minishell *ms)
 {
 	char	**new_arr;
@@ -96,6 +97,6 @@ int	var_init(t_minishell *ms)
 	free_arr(new_arr);
 	ms->cmd_count = cmd_count(ms->main_arr);
 	ms->cmdlist = cmd_list_init(ms);
-	print_cmdlist (ms->cmdlist);
+
 	return (0);
 }
