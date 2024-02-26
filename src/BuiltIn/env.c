@@ -12,6 +12,31 @@
 
 #include "../../inc/minishell.h"
 
+void	list_swap(t_minishell *ms, t_list *list)
+{
+	char	*ident;
+	void	*content;
+	t_list	*head;
+	t_list	*tmp;
+
+	ident = NULL;
+	content = NULL;
+	head = list;
+	if (!head && !head->next)
+	{
+		write(2, "List Swap Error\n", 16);
+		ms->exit = 1;
+		return ;
+	}
+	tmp = head;
+	ident = tmp->ident;
+	content = tmp->content;
+	head->ident = head->next->ident;
+	head->content = head->next->content;
+	head->next->ident = ident;
+	head->next->content = content;
+}
+
 void	print_lst(t_list **lst, int flag)
 {
 	t_list	*tmp;
@@ -41,14 +66,8 @@ void	print_lst(t_list **lst, int flag)
 	}
 }
 
-void	env(t_minishell *ms, char **cmd_line)
+void	env(t_minishell *ms)
 {
-	if (cmd_line[1])
-	{
-		error(ms, 1, "env: No such file or directory\n", NULL);
-		ms->exit = 127;
-		return ;
-	}
 	if (ms->env == NULL)
 	{
 		error(ms, 1, "env: No environment variables found.\n", NULL);
