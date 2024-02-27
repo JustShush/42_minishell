@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:04:11 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/26 18:54:35 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/27 22:37:14 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,35 +105,3 @@ void	free_ms(t_minishell *ms)
 	rl_clear_history();
 	exit(e);
 }
-
-/* void	free_ms(t_minishell *ms)
-{
-	int	e;
-
-	if (ms->exit < 0)
-		exit(ms->exit);
-	close(0);
-	close(1);
-	close(2);
-	if (ms->fdin != -1)
-		close(ms->fdin);
-	if (ms->fdout != -1)
-		close(ms->fdout);
-	printf("TEST\n");
-	if (ms->prompt)
-		free(ms->prompt);
-	if (ms->input)
-		free(ms->input);
-	if (ms->main_arr)
-		free_arr(ms->main_arr);
-	if (ms->cmdlist)
-		free_cmd_list(ms->cmdlist);
-	printf("TEST1\n");
-	if (ms->env)
-		free_list_malloc(ms->env);
-	//close_fd(ms->dp);
-	e = ms->exit;
-	free(ms);
-	rl_clear_history();
-	exit(e);
-} */

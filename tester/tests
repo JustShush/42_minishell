@@ -1,0 +1,8 @@
+cat | cat | cat | ls
+env | asd
+echo ola|cat
+env | sort | grep -v SHLVL | grep -v ^_
+echo *.txt
+$PWD
+$?
+cat <minishell.h|ls

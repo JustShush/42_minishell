@@ -1,13 +1,7 @@
 <h1>
 	<p align="center">42_minishell</p>
-	<img align="right" alt="Project in progress" src="https://img.shields.io/badge/-Project%20In%20Progress-red">
+	<img align="right" alt="Project in progress" src="https://img.shields.io/badge/-%2095%20%2F%20100-success">
 </h1>
-
-<!-- 
-when the project is finished
-
-<img align="right" alt="Final Grade: 100/ 100%" src="https://img.shields.io/badge/-%20100%20%2F%20100-success">
--->
 
 <p align="center">
 	<b><i>As beautiful as a shell</b></i>
@@ -21,6 +15,8 @@ when the project is finished
   <a href="#-prerequisites">Prerequisites</a>
   •
   <a href="#-getting-started">Getting Started</a>
+  •
+  <a href="#-why-we-got-95">Why we got 95/100</a>
 </p>
 
 <br>
@@ -66,3 +62,9 @@ git clone git@github.com:JustShush/42_minishell.git ; cd 42_minishell ; make ; .
 ```Shell
 $ ./minishell
 ```
+
+## ❌ Why we got 95
+
+Basically [execve](https://man7.org/linux/man-pages/man2/execve.2.html) creates a new process when when we changed the exit status in the child it doesn't get updated in the other process so when we tried the command: `env | <invalid_command>` and then `echo $?` it returns `0` instead of `127` for the command not found.
+
+[some tests to check](./zTester/tests)

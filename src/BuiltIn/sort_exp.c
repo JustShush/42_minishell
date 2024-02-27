@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 19:52:26 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/26 19:52:27 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/27 22:32:14 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void	sort_and_print(t_minishell *ms)
 	t_list	*next;
 	t_list	*current;
 
+	if ((*ms->env) == NULL || (*ms->env)->ident == NULL)
+		return ;
 	tmp_env = copy_env(*ms->env);
 	sort_env(ms, &tmp_env);
 	print_env(&tmp_env);

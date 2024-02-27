@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 11:48:28 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/13 15:46:54 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/27 22:37:38 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,3 @@ char	*set_prompt(t_minishell *ms)
 	free(dir);
 	return (prompt);
 }
-// maybe try to print the entire path until the user
-// (~/documents/42_minishell) instead of 
-// (/home/dimarque/documents/42_minishell)

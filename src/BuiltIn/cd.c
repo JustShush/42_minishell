@@ -118,5 +118,3 @@ void	cd(t_minishell *ms, char **path)
 // cd ~ -> home
 // if theres is no arg (ex: cd) just return to home
 // Use the chdir function to change the current working directory
-//* if there is no loc go back to home. DONE!
-// TODO: check if path is a valid dir
