@@ -12,12 +12,18 @@
 
 #include "../../inc/minishell.h"
 
-// 0 if not one of the options
+/**
+ * @note 1 = spaces/tabs
+ * @note 2 = < > |
+ * @note 3 = quotes
+ * @note 4 = $
+ * @note 0 if not one of the options
+*/
 int	parser_op(char c)
 {
 	if (c == ' ' || c == '\t')
 		return (1);
-	if (c == '<' || c == '>' || c == '\t')
+	if (c == '<' || c == '>' || c == '|')
 		return (2);
 	if (c == '\'' || c == '\"')
 		return (3);
@@ -53,20 +59,20 @@ int	countw(char *str)
 	return (words);
 }
 
-char	*split_temp(t_minishell *ms, char *str, int word_len)
+char	*split_tmp(t_minishell *ms, char *str, int word_len)
 {
 	int		i;
-	char	*temp;
+	char	*tmp;
 
 	i = 0;
-	temp = NULL;
-	temp = malloc(sizeof(char) * (word_len + 1));
-	if (!temp)
-		error(ms, 2, "split_temp");
+	tmp = NULL;
+	tmp = malloc(sizeof(char) * (word_len + 1));
+	if (!tmp)
+		error(ms, 2, "split_tmp", NULL);
 	while (*str && i < word_len)
-		temp[i++] = *str++;
-	temp[i] = '\0';
-	return (temp);
+		tmp[i++] = *str++;
+	tmp[i] = '\0';
+	return (tmp);
 }
 
 // Returns the length of str until the next whitespace or separating meta-char
@@ -98,13 +104,13 @@ char	**ms_split(t_minishell *ms, char *str)
 	ms_words = countw(str);
 	buff = malloc(sizeof(char *) * (ms_words + 1));
 	if (!buff)
-		error(ms, 2, "ms_split");
+		error(ms, 2, "ms_split", NULL);
 	while (i < ms_words)
 	{
 		while (*str && parser_op(*str) == 1)
 			str++;
 		word_len = get_wordl(str);
-		buff[i++] = split_temp(ms, str, word_len);
+		buff[i++] = split_tmp(ms, str, word_len);
 		str = str + word_len;
 	}
 	buff[i] = 0;

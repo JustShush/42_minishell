@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/27 16:11:59 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/24 13:15:05 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/25 14:06:22 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void	signal_d(t_minishell *ms)
 {
 	if (!(ms->input))
 	{
-		write(2, "\033[1;31mexit!\033[0m\n", 17);
+		write(1, "\033[1;31mexit!\033[0m\n", 17);
 		free_ms(ms);
 	}
 }

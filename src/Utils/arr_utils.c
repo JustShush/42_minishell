@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   arr_size.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 11:09:26 by marvin            #+#    #+#             */
-/*   Updated: 2023/11/17 11:09:26 by marvin           ###   ########.fr       */
+/*   Created: 2023/11/17 11:09:26 by dimarque          #+#    #+#             */
+/*   Updated: 2023/11/17 11:09:26 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,23 +30,44 @@ int	arr_size(char **arr)
 	return (count);
 }
 
+char	**ft_arrdup(t_minishell *ms, char **old)
+{
+	char	**new;
+	int		index;
+
+	index = 0;
+	new = malloc(sizeof(char *) * (arr_size(old) + 1));
+	if (!new)
+		error(ms, 2, NULL, NULL);
+	while (old && old[index])
+	{
+		new[index] = ft_strdup(old[index]);
+		index++;
+	}
+	new[index] = NULL;
+	return (new);
+}
+
 char	**list_to_array(t_minishell *ms, t_list **list)
 {
 	int		i;
 	int		size;
 	t_list	*tmp;
 	char	**buf;
+	char	*ident;
 
 	i = 0;
 	tmp = *list;
 	size = ft_lstsize(tmp);
 	buf = malloc(sizeof(char *) * (size + 1));
 	if (!buf)
-		error(ms, 2, NULL);
+		error(ms, 2, NULL, NULL);
 	while (tmp && i < size)
 	{
-		buf[i] = ft_strdup((char *)tmp->content);
+		ident = ft_strjoin(tmp->ident, "=");
+		buf[i] = ft_strjoin(ident, (char *)tmp->content);
 		tmp = tmp->next;
+		free(ident);
 		i++;
 	}
 	buf[i] = 0;

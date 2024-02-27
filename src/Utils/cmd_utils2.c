@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strdup.c                                        :+:      :+:    :+:   */
+/*   cmd_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/10 14:16:24 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/07 15:48:25 by dimarque         ###   ########.fr       */
+/*   Created: 2024/02/20 18:54:55 by mde-avel          #+#    #+#             */
+/*   Updated: 2024/02/20 19:55:12 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../inc/minishell.h"
 
-char	*ft_strdup(const char *str)
+t_cmdlist	*cmdlist_last(t_cmdlist *lst)
 {
-	int		strlen;
-	char	*str1;
-
-	if (!str)
-		return (NULL);
-	strlen = ft_strlen(str);
-	str1 = (char *)malloc(sizeof(char) * (strlen + 1));
-	if (!str1)
-		return (NULL);
-	ft_strlcpy(str1, str, strlen + 1);
-	return (str1);
+	while (lst)
+	{
+		if (lst->next == NULL)
+			return (lst);
+		else
+			lst = lst->next;
+	}
+	return (0);
 }
 
-/* int main() {
-
-	printf("%s",ft_strdup("leite"));
-
-	return 0;
+void	cmdlist_add_back(t_cmdlist **lst, t_cmdlist *new)
+{
+	if (cmdlist_last(*lst))
+		cmdlist_last(*lst)->next = new;
+	else
+		*lst = new;
 }
- */

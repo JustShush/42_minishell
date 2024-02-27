@@ -50,8 +50,10 @@ void	get_exit_status(t_minishell *ms, pid_t pid, int cmds_run)
 void	child(t_minishell *ms, int *pipe_fd, int cmds_run, int pos)
 {
 	t_cmdlist	*cmd;
+	char		**new_cmds;
 	int			i;
 
+	new_cmds = NULL;
 	cmd = ms->cmdlist;
 	i = cmds_run;
 	signal(SIGPIPE, signal_process_interrupt);
@@ -71,7 +73,7 @@ void	child(t_minishell *ms, int *pipe_fd, int cmds_run, int pos)
 	if (ms->cmd_count == 1 && isbuiltin(cmd->cmds[0]))
 		free_ms(ms);
 	redirect(ms, ms->main_arr, pos, 1);
-	exec(ms, cmd->cmds);
+	exec(ms, cmd->cmds, new_cmds);
 }
 
 void	parent(t_minishell *ms, int *pipe_fd, int cmds_run, int pos)
@@ -89,7 +91,7 @@ void	parent(t_minishell *ms, int *pipe_fd, int cmds_run, int pos)
 			== 0)
 		{
 			close_fd(pipe_fd);
-			built_in(ms, cmd->cmds, 1);
+			built_in(ms, cmd->cmds);
 		}
 	}
 	if (cmds_run > 0)

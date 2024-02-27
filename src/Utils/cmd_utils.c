@@ -19,10 +19,10 @@ void	print_cmdlist(t_cmdlist *cmdlist)
 
 	i = 1;
 	tmp = cmdlist;
-	printf("\nLIST:\n");
+	printf("LIST:\n");
 	while (tmp)
 	{
-		printf("	NODE%i:\n", i);
+		printf("	NODE_%i:\n", i);
 		print_arr("	Command with flags", tmp->cmds);
 		i++;
 		if (tmp->next)
@@ -89,7 +89,7 @@ char	**cmd_with_flags(t_minishell *ms, char **arr, int pos)
 	args = cmd_args(arr, pos);
 	buf = malloc(sizeof(char *) * (args + 1));
 	if (!buf)
-		error(ms, 2, NULL);
+		error(ms, 2, NULL, NULL);
 	while (arr[pos] && !arr[pos][0])
 		pos++;
 	while (i < args)

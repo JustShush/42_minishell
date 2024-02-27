@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:33:40 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/06 12:50:51 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:49:57 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,13 +142,4 @@ int	token_syntax(char *str)
 	if (c != 0)
 		return (token_message(c));
 	return (0);
-}
-
-int	token_message(char token)
-{
-	write(2, "MiniShell: syntax error near unexpected token", 45);
-	write(2, " `", 2);
-	write(2, &token, 1);
-	write(2, "\'\n", 2);
-	return (1);
 }

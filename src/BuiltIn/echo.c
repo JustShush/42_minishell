@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/17 10:46:19 by marvin            #+#    #+#             */
-/*   Updated: 2023/11/17 10:46:19 by marvin           ###   ########.fr       */
+/*   Created: 2023/11/17 10:46:19 by dimarque          #+#    #+#             */
+/*   Updated: 2023/11/17 10:46:19 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,41 +32,68 @@ int	check_option(char *opt)
 		i++;
 	}
 	if (ft_strcmp(opt, str) == 0)
+	{
+		free(str);
 		return (1);
+	}
+	free(str);
 	return (0);
 }
 
-void	command_echo(char **cmd_line, int flag, int i)
+void	with_option(char **cmd_line, int i)
 {
-	if (flag)
+	char	*new_cmd;
+
+	while (cmd_line[i])
 	{
-		while (cmd_line[i])
-		{
+		new_cmd = ft_strdup(cmd_line[i]);
+		if (new_cmd == NULL)
 			ft_printf("%s", cmd_line[i]);
-			if (cmd_line[i + 1] != NULL)
-				ft_printf(" ");
-			i++;
-		}
-	}
-	else
-	{
-		i = 1;
-		while (cmd_line[i])
+		else
 		{
-			ft_printf("%s ", cmd_line[i]);
-			i++;
+			ft_printf("%s", new_cmd);
+			free(new_cmd);
 		}
-		ft_printf("\n");
+		if (cmd_line[i + 1] != NULL)
+			ft_printf(" ");
+		i++;
 	}
 }
 
-void	echo(char **cmd_line)
+void	no_option(char **cmd_line)
+{
+	int		i;
+	char	*new_cmd;
+
+	i = 1;
+	while (cmd_line[i])
+	{
+		new_cmd = ft_strdup(cmd_line[i]);
+		if (new_cmd == NULL)
+			ft_printf("%s ", cmd_line[i]);
+		else
+		{
+			ft_printf("%s", new_cmd);
+			if (cmd_line[i + 1] != NULL)
+				ft_printf(" ");
+			free(new_cmd);
+		}
+		i++;
+	}
+	ft_printf("\n");
+}
+
+//echo -n -n -nnnnn    "banana   .  "
+void	ft_echo(char **cmd_line)
 {
 	int	i;
 	int	flag;
 
 	if (!cmd_line[1])
+	{
+		printf("\n");
 		return ;
+	}
 	flag = 0;
 	i = 1;
 	while (check_option(cmd_line[i]) == 1)
@@ -74,5 +101,8 @@ void	echo(char **cmd_line)
 		flag = 1;
 		i++;
 	}
-	command_echo(cmd_line, flag, i);
+	if (flag)
+		with_option(cmd_line, i);
+	else
+		no_option(cmd_line);
 }

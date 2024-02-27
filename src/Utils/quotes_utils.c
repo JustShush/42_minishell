@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/24 12:49:04 by dimarque          #+#    #+#             */
-/*   Updated: 2024/01/24 12:49:04 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/24 20:38:08 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char	*remove_quotes(char *str)
 
 	i = 0;
 	j = 0;
-	buf = calloc(sizeof(char), (ft_strlen(str) - quote_num(str) + 1));
+	buf = ft_calloc(sizeof(char), (ft_strlen(str) - quote_num(str) + 1));
 	while (str[i])
 	{
 		if (parser_op(str[i]) == 3)
@@ -74,20 +74,26 @@ char	*remove_quotes(char *str)
 	return (buf);
 }
 
-char	*add_quotes(char *str, char c)
+char	**rm_all_quotes(char **cmds)
 {
 	int		i;
-	int		j;
-	char	*buf;
+	int		len;
+	char	**new;
 
 	i = 0;
-	j = 0;
-	if (!str)
-		return (NULL);
-	buf = calloc(sizeof(char), ft_strlen(str) + 3);
-	buf[j++] = c;
-	while (str[i])
-		buf[j++] = str[i++];
-	buf[j] = c;
-	return (buf);
+	len = 0;
+	while (cmds[i])
+	{
+		len += ft_strlen(cmds[i]) - quote_num(cmds[i]) + 1;
+		i++;
+	}
+	i = 0;
+	new = (char **)malloc(sizeof(char *) * len);
+	while (cmds[i])
+	{
+		new[i] = remove_quotes(cmds[i]);
+		i++;
+	}
+	new[i] = NULL;
+	return (new);
 }

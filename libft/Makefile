@@ -61,7 +61,6 @@ SRC = ft_atoi.c \
 		ft_lstiter_bonus.c \
 		ft_lstmap_bonus.c \
 
-
 OBJ = $(SRC:.c=.o)
 
 MSG1 = @echo "\e[1;32m Compiled ${NAME} Successfully ✔︎ \e[0m"

@@ -6,7 +6,7 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/25 16:13:04 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/06 12:50:45 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:49:57 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,11 @@ int	end_syntax(char *str)
 
 int	syntax_error(t_minishell *ms)
 {
-	if (quote_syntax(ms->input) || pipe_syntax(ms->input) || start_syntax(ms->input) \
-		|| end_syntax(ms->input) || redir_syntax(ms->input) \
-		|| double_redir_syntax(ms->input) || dollar_syntax(ms->input) \
-		|| sucession_syntax(ms->input) || token_syntax(ms->input))
+	if (quote_syntax(ms->input) || pipe_syntax(ms->input) || \
+		start_syntax(ms->input) || end_syntax(ms->input) || \
+		redir_syntax(ms->input) || double_redir_syntax(ms->input) || \
+		dollar_syntax(ms->input) || sucession_syntax(ms->input) || \
+		token_syntax(ms->input))
 	{
 		free(ms->prompt);
 		free(ms->input);

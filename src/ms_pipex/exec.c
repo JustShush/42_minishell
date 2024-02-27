@@ -35,6 +35,18 @@ char	**special_path(const char *cmd)
 	return (paths);
 }
 
+void	list_print(t_list **list)
+{
+	t_list	*tmp;
+
+	tmp = *list;
+	while (tmp)
+	{
+		ft_putendl_fd((char *)tmp->content, 1);
+		tmp = tmp->next;
+	}
+}
+
 char	**get_paths(t_list **env, char *cmd)
 {
 	t_list	*tmp;
@@ -46,7 +58,7 @@ char	**get_paths(t_list **env, char *cmd)
 		|| cmd[0] == '/')
 		return (special_path(cmd));
 	tmp = *env;
-	while (tmp && strncmp(tmp->content, "PATH", 4) != 0)
+	while (tmp && strncmp(tmp->ident, "PATH", 4) != 0)
 		tmp = tmp->next;
 	if (!tmp)
 		return (NULL);
@@ -92,7 +104,7 @@ char	*get_cmd_path(t_minishell *ms, char **paths, char *cmd)
 	return (NULL);
 }
 
-void	exec(t_minishell *ms, char **cmd_arr)
+void	exec(t_minishell *ms, char **cmd_arr, char	**new_cmds)
 {
 	char	**paths;
 	char	*cmd_path;
@@ -101,7 +113,7 @@ void	exec(t_minishell *ms, char **cmd_arr)
 	if (!cmd_arr || !cmd_arr[0] || !cmd_arr[0][0])
 		write(STDERR_FILENO, "Minishell: '': command not found\n", 33);
 	if (isbuiltin(cmd_arr[0]))
-		built_in(ms, cmd_arr, 0);
+		built_in(ms, cmd_arr);
 	if (g_global == SIGPIPE)
 		free_ms(ms);
 	if (!cmd_arr || !cmd_arr[0] || !cmd_arr[0][0] || isbuiltin(cmd_arr[0]))
@@ -114,7 +126,8 @@ void	exec(t_minishell *ms, char **cmd_arr)
 	if (!cmd_path)
 		free_ms(ms);
 	env = list_to_array(ms, ms->env);
-	execve(cmd_path, cmd_arr, env);
+	new_cmds = rm_all_quotes(cmd_arr);
+	execve(cmd_path, new_cmds, env);
 	free(cmd_path);
 	ms->exit = errno;
 	free_ms(ms);

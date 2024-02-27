@@ -6,31 +6,13 @@
 /*   By: dimarque <dimarque@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/25 17:34:57 by dimarque          #+#    #+#             */
-/*   Updated: 2024/02/06 12:47:47 by dimarque         ###   ########.fr       */
+/*   Updated: 2024/02/26 17:28:40 by dimarque         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/minishell.h"
 
 int	g_global = 0;
-
-char	**ft_arrdup(t_minishell *ms, char **old)
-{
-	char	**new;
-	int		index;
-
-	index = 0;
-	new = malloc(sizeof(char *) * (arr_size(old) + 1));
-	if (!new)
-		error(ms, 2, NULL);
-	while (old && old[index])
-	{
-		new[index] = ft_strdup(old[index]);
-		index++;
-	}
-	new[index] = NULL;
-	return (new);
-}
 
 void	minishell(t_minishell *ms)
 {
@@ -60,7 +42,6 @@ void	minishell(t_minishell *ms)
 	}
 	get_exit_status(ms, pid, cmds_run);
 }
-// check_cmd(ms);
 
 t_list	**env_init(char **envp)
 {
@@ -75,7 +56,8 @@ t_list	**env_init(char **envp)
 	while (envp[i])
 	{
 		buf = ft_strdup(envp[i]);
-		node = ft_lstnew(buf);
+		node = ft_envnew(buf);
+		free(buf);
 		node->n = 1;
 		ft_lstadd_back(env, node);
 		i++;
@@ -87,9 +69,13 @@ void	free_main(t_minishell *ms, int argc, char *argv[])
 {
 	post_process_signal();
 	signal_d(ms);
-	free_arr(ms->main_arr);
 	free(ms->prompt);
 	free(ms->input);
+	free_arr(ms->main_arr);
+	if (ms->fdin != -1)
+		close(ms->fdin);
+	if (ms->fdout != -1)
+		close(ms->fdout);
 	(void)argc;
 	(void)argv;
 }
@@ -100,19 +86,18 @@ int	main(int argc, char *argv[], char **env)
 
 	ms = malloc(sizeof(t_minishell));
 	if (!ms)
-		error(NULL, 2, NULL);
+		error(NULL, 2, NULL, NULL);
 	ms->env = env_init(env);
 	ms->exit = 0;
 	while (1)
 	{
 		signal_init();
-		ms->prompt = ft_strdup("Minishell$> ");
+		ms->prompt = set_prompt(ms);
 		ms->input = readline(ms->prompt);
 		if (ft_strlen(ms->input) != 0)
 			add_history(ms->input);
 		if (ms->input && syntax_error(ms))
-			continue;
-		signal_d(ms);
+			continue ;
 		if (!var_init(ms))
 		{
 			minishell(ms);
@@ -122,13 +107,3 @@ int	main(int argc, char *argv[], char **env)
 	}
 	exit(ms->exit);
 }
-
-// add single and double quotes to parser
-// fix parser error ex: ./minishell ls|echo s < a<b
-// output: ls | echo s < a<b
-// should be: ls | echo s < a < b
-
-// Add color and symbols to the prompt
-// ideas for the prompt:
-// \033[1;36mMinishell\033[0m \033[1;33m✗\033[0m
-// \033[1;33mMinishell\03[0m$>
