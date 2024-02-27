@@ -67,4 +67,4 @@ $ ./minishell
 
 Basically [execve](https://man7.org/linux/man-pages/man2/execve.2.html) creates a new process when when we changed the exit status in the child it doesn't get updated in the other process so when we tried the command: `env | <invalid_command>` and then `echo $?` it returns `0` instead of `127` for the command not found.
 
-[some tests to check](./zTester/tests)
+[some tests to check](./tester/tests)
